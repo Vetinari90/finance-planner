@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String   // hash (bcrypt)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  plans     Plan[]
+  categories Category[]
+}
+
+model Plan {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String   // např. "Leden 2026"
+  year      Int
+  month     Int      // 1-12
+  currency  String   @default("CZK")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     PlannedItem[]
+
+  @@index([userId])
+  @@unique([userId, year, month]) // jeden plán na měsíc na uživatele
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     PlannedItem[]
+
+  @@index([userId])
+  @@unique([userId, name])
+}
+
+model PlannedItem {
+  id          String   @id @default(cuid())
+  planId      String
+  categoryId  String?
+  title       String
+  amountCents Int      // ukládej v centech/haléřích, ať se nehádáš s floating point peklem
+  note        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  plan        Plan     @relation(fields: [planId], references: [id], onDelete: Cascade)
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([planId])
+  @@index([categoryId])
+}
