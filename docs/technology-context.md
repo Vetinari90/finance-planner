@@ -24,35 +24,35 @@ The finance-planner application is a [Next.js](https://nextjs.org) project boots
 
 - **Framework:** Next.js, bootstrapped via `create-next-app` (`README.md`).
 - **Font optimization:** `next/font`, loading the Geist font family (`README.md`).
-- [NEEDS CLARIFICATION] The specific Next.js version, the routing mode (Pages Router vs. App Router), and the React version are not stated in `README.md` or in any of the available module technical-concerns docs (`docs/modules/auth/technical-concerns.md`, `docs/modules/plans/technical-concerns.md`).
+- Routing mode: App Router. This is evidenced by the file-system layout of the `route.ts` handlers under `src/app/api/**` (e.g. `src/app/api/auth/[...nextauth]/route.ts`, `src/app/api/auth/register/route.ts`, `src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, `src/app/api/plans/[planId]/items/route.ts`) and the root `src/app/layout.tsx` exporting a `RootLayout`, both of which are App Router conventions (a Pages Router project would instead use a `pages/` directory with `pages/api/*.ts` handlers). The specific Next.js and React package version numbers are not present in any of the files supplied to this node (no `package.json` is among them).
 
 ### Request Validation
 
 - **Library:** Zod.
   - Auth module: `RegisterSchema` validates the registration request body in `POST /api/auth/register` (`docs/modules/auth/technical-concerns.md`).
   - Plans module: `CreatePlanSchema` validates `title`, `year`, `month`, and `currency` on `POST /api/plans` (`docs/modules/plans/technical-concerns.md`).
-- [NEEDS CLARIFICATION] Whether Zod (or any other validation library) is used at the API boundary of the planned-items and web-ui modules cannot be confirmed: `docs/modules/planned-items/technical-concerns.md` and `docs/modules/web-ui/technical-concerns.md` are unfilled at the time of this generation.
+- Yes — the planned-items module's API boundary also uses Zod: `POST /api/plans/[planId]/items` defines a `CreateItemSchema` (`z.object({ title: z.string().min(1).max(120), amountCents: z.number().int().min(0), categoryId: z.string().optional().nullable(), note: z.string().max(400).optional().nullable() })`) and calls `CreateItemSchema.safeParse(body)` before persisting (`src/app/api/plans/[planId]/items/route.ts`). The web-ui module's client-side form component (`src/app/plans/[planId]/AddItemForm.tsx`) does not use Zod; it validates the amount field with a hand-written regex-based `toCents()` helper instead of a schema library.
 
 ### Persistence / Data Access
 
 - **ORM:** Prisma is used for data access in the plans module; the `POST /api/plans` handler's `409` response is described as resulting from "Prisma create failed (inferred unique constraint)" (`docs/modules/plans/technical-concerns.md`).
-- [NEEDS CLARIFICATION] The underlying database engine, connection/pooling configuration, and any backup or migration tooling cannot be confirmed here: `docs/modules/persistence/technical-concerns.md` and `docs/modules/persistence/deployment.md` are both unfilled at the time of this generation.
+- The database engine is PostgreSQL: `src/lib/db.ts` builds a `PrismaClient` using a `PrismaPg` adapter (`@prisma/adapter-pg`) constructed from a Postgres `connectionString` read from `process.env.DATABASE_URL` (the module throws `"DATABASE_URL is not set"` at load time if that variable is absent). Connection reuse across hot reloads is handled by caching the `PrismaClient` and `PrismaPg` adapter instances on `globalThis` when `NODE_ENV !== "production"`. No backup tooling or migration-runner invocation is present in the available code.
 
 ### Authentication / Session Handling
 
 - The plans module's route handlers call a `requireUserId()` helper to establish the current user and return `401 Unauthorized` when it yields no user (`docs/modules/plans/technical-concerns.md`).
 - The auth module's registration flow validates credentials via Zod and references an `authOptions` object described as containing "credential-verification logic" (`docs/modules/auth/technical-concerns.md`), but that doc explicitly notes the object itself is outside its dispatch's reviewed files.
-- [NEEDS CLARIFICATION] The specific authentication technology or library (e.g., a named session/JWT provider) backing `requireUserId()` and `authOptions` is not named in either available technical-concerns doc.
+- The authentication technology is NextAuth.js (`next-auth`): `src/lib/auth.ts` defines `authOptions: NextAuthOptions` with a `CredentialsProvider` (email/password, verified via `bcrypt.compare` against `prisma.user`) and `session: { strategy: "jwt" }`. `requireUserId()` (`src/lib/requireUser.ts`) calls `getServerSession(authOptions)` from `next-auth` to resolve the current user's id, and `src/app/api/auth/[...nextauth]/route.ts` wires `authOptions` into the `NextAuth()` handler for both `GET` and `POST`.
 
 ### Caching
 
 - Neither of the two available technical-concerns docs found a caching layer: the auth module doc states no Redis client, in-memory cache, or CDN header was found in its reviewed files, and the plans module doc likewise found no caching layer, `Cache-Control` header, or in-memory/Redis client, noting instead that `NewPlanForm.tsx` and `DeletePlanButton.tsx` call `router.refresh()` to re-fetch server data after a mutation (`docs/modules/auth/technical-concerns.md`, `docs/modules/plans/technical-concerns.md`).
-- [NEEDS CLARIFICATION] Whether the persistence or web-ui modules introduce caching cannot be confirmed: their technical-concerns docs are unfilled at the time of this generation.
+- None of the available web-ui or persistence-layer code introduces a caching layer: `src/app/plans/page.tsx`, `src/app/plans/[planId]/page.tsx`, `src/app/login/page.tsx`, `src/app/login/LoginClient.tsx`, `src/app/register/page.tsx`, `src/app/page.tsx`, and the API routes under `src/app/api/**` set no `Cache-Control` header, no Next.js `revalidate`/`fetchCache` option, and import no caching client; `src/lib/db.ts` only caches the `PrismaClient`/`PrismaPg` adapter *instance* on `globalThis` in non-production to avoid exhausting database connections across hot reloads, which is connection reuse rather than query/result caching. As with the auth and plans modules, `NewPlanForm.tsx`, `AddItemForm.tsx`, and `DeletePlanButton.tsx` call `router.refresh()` after mutations to re-fetch server data rather than relying on a cache.
 
 ### Internationalization
 
 - Both available technical-concerns docs flag inconsistent, rather than deliberate, language handling: the auth module doc notes English UI copy alongside one Czech-language server-side validation message ("Minimálně 8 znaků"), and the plans module doc similarly notes hardcoded English UI strings alongside Czech-language source comments. Neither doc found an i18n framework import (e.g. `next-intl`, `react-i18next`) (`docs/modules/auth/technical-concerns.md`, `docs/modules/plans/technical-concerns.md`).
-- [NEEDS CLARIFICATION] No default locale or i18n strategy is established in either available doc.
+- Consistent with the auth and plans modules, none of the additional available code establishes a default locale or i18n strategy: no import of an i18n library (e.g. `next-intl`, `react-i18next`) appears in any reviewed file, `src/app/layout.tsx` hardcodes `<html lang="en">`, and all user-facing UI copy in `src/app/page.tsx`, `src/app/login/LoginClient.tsx`, `src/app/register/page.tsx`, `src/app/plans/page.tsx`, `src/app/plans/[planId]/page.tsx`, `src/app/plans/NewPlanForm.tsx`, and `src/app/plans/[planId]/AddItemForm.tsx` is hardcoded English. As with the auth module's Czech validation message, scattered Czech-language source comments continue to appear (e.g. `// v UI jako text/decimal` and `// jednoduchý převod...` in `AddItemForm.tsx`, `// unikát (userId, year, month)` in `src/app/api/plans/route.ts`, and `// NextAuth signOut je klientská funkce...` in `src/app/logout/route.ts`), but these are developer comments, not a locale/i18n mechanism.
 
 ## Deployment Platform
 
@@ -61,7 +61,7 @@ The finance-planner application is a [Next.js](https://nextjs.org) project boots
 
 ## External Systems and Dependencies
 
-[NEEDS CLARIFICATION] No external system, third-party API, or managed service (other than the Vercel hosting platform and the `next/font` Geist font mentioned in `README.md`) is named in the inputs available to this node (`README.md`, `docs/modules/auth/technical-concerns.md`, `docs/modules/plans/technical-concerns.md`). Confirming any additional external dependencies would require the persistence, planned-items, and web-ui module docs, which are unfilled.
+No additional external system, third-party API, or managed service is evidenced beyond the PostgreSQL database (see the database-engine note above) and the Vercel/`next/font` items already noted: none of `src/app/api/auth/[...nextauth]/route.ts`, `src/app/api/auth/register/route.ts`, `src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, `src/app/api/plans/[planId]/items/route.ts`, `src/lib/auth.ts`, `src/lib/db.ts`, `src/lib/requireUser.ts`, or any of the reviewed client components issues an outbound `fetch()`/SDK call to a third-party service or references an external API key. The only `fetch()` calls in the reviewed client components (`AddItemForm.tsx`, `NewPlanForm.tsx`, `DeletePlanButton.tsx`) target this application's own same-origin `/api/...` routes.
 
 ## Inputs Not Yet Available
 

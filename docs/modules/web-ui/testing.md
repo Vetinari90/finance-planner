@@ -87,8 +87,8 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 | Data Type | Handling |
 |-----------|----------|
-| PII | [NEEDS CLARIFICATION] Not applicable within this module's reviewed scope — `src/app/layout.tsx` and `src/app/page.tsx` do not read or display user PII directly. |
-| Secrets | [NEEDS CLARIFICATION] Not evidenced in the reviewed scope. |
+| PII | PII (email address) is handled elsewhere in this module's reviewed scope even though `src/app/layout.tsx` and `src/app/page.tsx` do not touch it directly: `src/app/login/LoginClient.tsx` submits `email`/`password` via `signIn("credentials", ...)`, and `src/app/api/auth/register/route.ts` accepts and persists `email` (validated with `zod`) together with a bcrypt-hashed password. Tests should use synthetic, non-production email addresses and must never exercise real user credentials. |
+| Secrets | A `DATABASE_URL` environment variable (PostgreSQL connection string) is required at runtime — `src/lib/db.ts` throws an error on startup if it is unset. Test environments must supply their own `DATABASE_URL` pointing at a dedicated test database and must not reuse production secrets. |
 
 ## CI/CD Integration
 
