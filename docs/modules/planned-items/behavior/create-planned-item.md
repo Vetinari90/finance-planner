@@ -3,6 +3,10 @@ type: behavior-diagram
 audience: [developer, architect]
 language: en
 links: []
+generated_from: 39f2f753a6dbde2c5b34c6281adeeab77b7a87d5
+generated_by: sdlc-doc-toolkit@3.89.0
+generated_branch: sdlc/20260925-1148
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
 ---
 
 # Behavior: Create Planned Item
