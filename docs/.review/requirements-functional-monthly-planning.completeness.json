@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/requirements/functional-monthly-planning.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "Statement bullets assert Zod validation on both endpoints ('validating `title`, `year`, `month`, and `currency` with Zod' for POST /api/plans; 'after Zod field-level validation' for POST /api/plans/{planId}/items), but AC1-AC6 only describe the success/happy path for each endpoint; none of the six acceptance criteria specifies the expected behavior (e.g. rejection, error response) when submitted fields fail that Zod validation.",
+      "locationHint": "## Acceptance Criteria",
+      "message": "The document's Statement promises Zod validation on both POST /api/plans and POST /api/plans/{planId}/items, but the Acceptance Criteria section has no criterion covering the invalid-input/validation-failure path for either endpoint - this promised behavior is silently absent from Acceptance Criteria."
+    }
+  ]
+}

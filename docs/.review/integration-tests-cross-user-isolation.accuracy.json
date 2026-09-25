@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/integration-tests/cross-user-isolation.md",
+  "dimension": "accuracy",
+  "findings": []
+}

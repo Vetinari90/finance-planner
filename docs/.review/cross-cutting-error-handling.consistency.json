@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/error-handling.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/persistence/overview.md, Boundaries section, contains an embedded reviewer correction: \"[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc claims confirming the 401-enforcing callers is outside this module's manifest scope, but src/app/api/plans/route.ts (one of this doc's own code inputs) directly shows requireUserId() being checked and a 401 returned - the fact was verifiable from the inputs actually provided.\"",
+      "locationHint": "  persistence overview itself flags that the calling API routes which perform",
+      "message": "error-handling.md repeats the persistence overview's original claim that the callers enforcing a 401 on a missing session are 'outside that module's own dispatch scope', but the persistence overview document itself now carries a correction stating this was verifiable from its own provided inputs (src/app/api/plans/route.ts) - the two docs in the same set disagree on whether this fact is confirmed."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/persistence/overview.md, Boundaries section reviewer correction (as above) plus the Authentication row in error-handling.md's Error Classification table.",
+      "locationHint": "| Authentication | Absent or invalid session | Confirmed pattern: `requireUserId()` returns `null` rather than throwing (persistence overview); [NEEDS CLARIFICATION] the status code returned by the calling routes on `null` is outside this synthesis node's inputs. |",
+      "message": "This table cell asserts the status code returned by callers of requireUserId() is 'outside this synthesis node's inputs', but the persistence overview's own embedded correction states that one of its code inputs (src/app/api/plans/route.ts) already shows the 401 being returned, contradicting the claim that this fact is unavailable."
+    }
+  ]
+}

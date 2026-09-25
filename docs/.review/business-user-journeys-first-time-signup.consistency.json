@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/business/user-journeys/first-time-signup.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/auth/use-cases/register-account.md Main Flow Step 5 states 'System (client) | On success, router.push(\"/plans\").' and AC-1 states 'Then a new account is created and they are redirected to /plans', both grounded in the same src/app/register/page.tsx file cited by first-time-signup.md.",
+      "locationHint": "4. **Session-aware landing**: [NEEDS CLARIFICATION] The exact client-side navigation performed by `src/app/register/page.tsx` immediately after a successful `signIn` call is not established by the grounded module docs. What is established is that finance-planner's root route (`src/app/page.tsx`, `docs/modules/web-ui/overview.md`) is a server component that calls `getServerSession(authOptions)` and redirects to `/plans` when a session exists, or to `/login` otherwise — so once the new session is active, navigating to `/` (or being routed there) lands the user on `/plans`.",
+      "message": "This step asserts the post-signIn client-side navigation in src/app/register/page.tsx is unestablished, but the sibling doc docs/modules/auth/use-cases/register-account.md (Step 5 and AC-1), grounded in the same file, explicitly documents it as `router.push(\"/plans\")` - a direct contradiction between the two generated docs on the same fact."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/auth/use-cases/register-account.md's Error Handling table documents 'Invalid input (400): UI displays data.error text (or fallback \"Registration failed\")' and 'Duplicate email (409): UI displays the returned error text', with matching Alternative Flows AF-1 (validation failure) and AF-2 (email already exists) describing exactly this error-path UI behavior for POST /api/auth/register.",
+      "locationHint": "- [NEEDS CLARIFICATION] No input describes error-path UI behavior (e.g. what the user sees if `POST /api/auth/register` rejects a duplicate email or fails Zod validation).",
+      "message": "This note claims no input describes error-path UI behavior for POST /api/auth/register, but the sibling doc docs/modules/auth/use-cases/register-account.md (AF-1, AF-2, and its Error Handling table) explicitly documents the duplicate-email and validation-failure UI responses - contradicting this doc's claim that the information is unavailable."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0004-store-money-as-integer-cents.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/planned-items/domain-model.md Key Attributes table: '| amountCents | Integer | Non-negative integer, required; money stored in integer cents |' and docs/modules/plans/domain-model.md Item Key Attributes table: '| amountCents | int | Integer cents; the client computes this via a regex-validated parse ... |' both name the concrete data type used for amountCents (Integer/int) at the application layer.",
+      "locationHint": "[NEEDS CLARIFICATION] The supplied module-docs do not state whether the `Plan` entity or any other entity also stores a monetary total or amount as integer cents, nor do they name the concrete data type (e.g. integer column type) used to persist `amountCents` - the underlying Prisma schema was not among this node's inputs.",
+      "message": "This ADR claims no supplied doc names the concrete data type used for `amountCents`, but two other generated docs (docs/modules/planned-items/domain-model.md and docs/modules/plans/domain-model.md) both already state its type as Integer/int, contradicting the claim that the type is unnamed anywhere in the doc set."
+    }
+  ]
+}

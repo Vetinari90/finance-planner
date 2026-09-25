@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/overview.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, and src/app/api/plans/[planId]/items/route.ts all import `requireUserId` only from \"@/lib/requireUser\" (never from any path under src/app/api/auth, src/app/login, src/app/register, src/app/logout, or src/types). `requireUserId` (src/lib/requireUser.ts) and `authOptions` (src/lib/auth.ts) both live under `src/lib`, which this same document's Module Map table (row 4) assigns to the 'persistence' module, not 'auth'.",
+      "locationHint": "- `plans` depends on `auth` (`requireUserId()` / `getServerSession(authOptions)`) and on `persistence` (the shared Prisma client) for all plan CRUD.",
+      "message": "The claimed `plans --> auth` dependency cites `requireUserId()`/`getServerSession(authOptions)`, but both functions are physically defined in `src/lib` (requireUser.ts, auth.ts), which this document's own Module Map attributes to the 'persistence' module, not 'auth'. The plans route files import `requireUserId` only from `@/lib/requireUser` and never import from any auth-module-owned path, so the code-level dependency for this call chain is plans -> persistence, not plans -> auth."
+    }
+  ]
+}

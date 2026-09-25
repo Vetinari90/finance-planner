@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/overview.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/technology-context.md Summary states as fact: \"It is deployed on the Vercel platform (`README.md`, \\\"Deploy on Vercel\\\" section).\" This directly contradicts overview.md's own hedged claim on the same fact, and technology-context.md's own later Deployment Platform section (\"[NEEDS CLARIFICATION] Whether this project is actually deployed to Vercel in practice ... cannot be confirmed\") is also inconsistent with its own Summary.",
+      "locationHint": "`README.md`'s \"Deploy on Vercel\" section is unmodified `create-next-app` boilerplate text (\"The easiest way to deploy your Next.js app is to use the Vercel Platform\") and does not confirm that finance-planner is actually deployed on Vercel or describe any project-specific hosting configuration.",
+      "message": "docs/overview.md correctly hedges that Vercel deployment is unconfirmed, but the sibling doc docs/technology-context.md states in its Summary as a flat fact that the application \"is deployed on the Vercel platform\" - the two generated docs make contradictory claims about the same fact."
+    }
+  ]
+}

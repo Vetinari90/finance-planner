@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/integration-tests/cross-user-isolation.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "The doc's own Scope table (line: '| [plans](../modules/plans/overview.md) | Owns the plan-ownership checks exercised by \"list plans\", \"fetch plan\", and \"delete plan\" | [NEEDS CLARIFICATION] not confirmed |') and its Integration Points bullet both name GET /api/plans (list) as an ownership-scoped query in scope, and docs/modules/plans/overview.md:24 confirms 'List all plans owned by the current user, ordered by year then month descending (`GET /api/plans`).' as a real ownership-scoped endpoint. However, the Test Scenarios section only covers Scenario 1 (GET /api/plans/{P.id} fetch), Scenario 2 (POST item creation), and Scenario 3 (DELETE), and the Verification Points table likewise has no row for GET /api/plans. No scenario or verification row tests whether User B's plan list omits User A's plans.",
+      "locationHint": "| [plans](../modules/plans/overview.md) | Owns the plan-ownership checks exercised by \"list plans\", \"fetch plan\", and \"delete plan\" | [NEEDS CLARIFICATION] not confirmed |",
+      "message": "The Scope section explicitly promises this document exercises the 'list plans' ownership check (GET /api/plans), and the Integration Points section likewise lists GET /api/plans as an in-scope plan-scoped query, but no Test Scenario or Verification Points row actually tests cross-user isolation for the list-plans endpoint - only fetch (Scenario 1), create-item (Scenario 2), and delete (Scenario 3) are covered."
+    }
+  ]
+}

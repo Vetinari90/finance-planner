@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/api-conventions.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/persistence/overview.md Boundaries section contains a reviewer annotation stating 'src/app/api/plans/route.ts (one of this doc's own code inputs) directly shows requireUserId() being checked and a 401 returned', i.e. a concrete HTTP status code (401) for a specific route is already documented in one of the module overviews this cross-cutting doc synthesizes from.",
+      "locationHint": "[NEEDS CLARIFICATION] None of the synthesized module overviews states which HTTP status codes the route handlers actually return. The overviews describe validation (Zod), ownership checks (e.g., the plans module \"verifying ownership\" before delete, per [plans overview](../modules/plans/overview.md)), and duplicate-email checks (auth registration, per [auth overview](../modules/auth/overview.md)), which imply some 4xx-class responses exist for invalid or unauthorized requests, but the concrete status codes used are not established by these inputs.",
+      "message": "The HTTP Status Codes section states that no concrete status codes are established by the inputs, but docs/modules/persistence/overview.md (one of the module overviews this document synthesizes) already documents that src/app/api/plans/route.ts returns a 401 when requireUserId() fails - this concrete, input-evident fact is missing from the section."
+    }
+  ]
+}

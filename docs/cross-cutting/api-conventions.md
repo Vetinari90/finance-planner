@@ -105,6 +105,7 @@ No explicit "never log" policy is documented, but the following is grounded in t
 ### Environment Variables
 
 One required environment variable is grounded in the [persistence overview](../modules/persistence/overview.md): the module "fail[s] fast at module load if `DATABASE_URL` is not set" (`src/lib/db.ts`). [NEEDS CLARIFICATION] No naming convention for environment variables, and no other required variables (for example a NextAuth secret, which the [auth overview](../modules/auth/overview.md) separately flags as unconfirmed), are documented in the synthesized inputs.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This line attributes the 'NextAuth secret unconfirmed' flag to the auth overview (../modules/auth/overview.md), but that document never mentions a NextAuth secret; the flag actually appears in docs/modules/auth/deployment.md, a different document not linked here. Sibling cross-cutting docs (error-handling.md, configuration.md) state the opposite: that none of the five module overviews name this variable at all.
 
 ### Secrets Management
 

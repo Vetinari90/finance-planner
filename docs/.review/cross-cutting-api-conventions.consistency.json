@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/api-conventions.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/auth/overview.md contains no mention of 'secret' or 'NEXTAUTH' anywhere in its full text (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents sections). The claim actually originates in docs/modules/auth/deployment.md ('NextAuth-based credential authentication typically requires a secret ... but no environment-variable reference ... appears in any of the seven files in this dispatch's permitted read set'). Sibling cross-cutting docs docs/cross-cutting/error-handling.md ('No other environment variable names (for example a NextAuth secret) ... are confirmed in the five module overviews or README.md') and docs/cross-cutting/configuration.md ('No other environment variable (for example a NextAuth signing secret) is named in any of the five module overviews or README.md') both explicitly state that none of the five module overviews name this, directly contradicting the attribution.",
+      "locationHint": "One required environment variable is grounded in the [persistence overview](../modules/persistence/overview.md): the module \"fail[s] fast at module load if `DATABASE_URL` is not set\" (`src/lib/db.ts`). [NEEDS CLARIFICATION] No naming convention for environment variables, and no other required variables (for example a NextAuth secret, which the [auth overview](../modules/auth/overview.md) separately flags as unconfirmed), are documented in the synthesized inputs.",
+      "message": "This line attributes the 'NextAuth secret unconfirmed' flag to the auth overview (../modules/auth/overview.md), but that document never mentions a NextAuth secret; the flag actually appears in docs/modules/auth/deployment.md, a different document not linked here. Sibling cross-cutting docs (error-handling.md, configuration.md) state the opposite: that none of the five module overviews name this variable at all."
+    }
+  ]
+}

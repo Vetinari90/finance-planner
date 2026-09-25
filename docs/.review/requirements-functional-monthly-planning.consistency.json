@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/requirements/functional-monthly-planning.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "This document's own Scope/Traceability sections list docs/modules/plans/use-cases/create-monthly-plan.md and docs/modules/plans/use-cases/delete-plan.md as in-scope use-case inputs. Those two docs each explicitly document the 401 enforcement mechanism in their Error Handling tables: create-monthly-plan.md states 'No authenticated session | 401 { \"error\": \"Unauthorized\" }' for POST /api/plans, and delete-plan.md states the same '401 { \"error\": \"Unauthorized\" }' for DELETE /api/plans/{planId}, both sourced from the respective route handlers.",
+      "locationHint": "- `docs/modules/persistence/overview.md` notes that `requireUserId()` only returns `null` when no session exists and does not itself enforce authentication (enforcement, e.g. a 401 response, is left to callers); this node's inputs do not include the plans/planned-items route-handler source needed to confirm exactly how that enforcement is implemented for each of the endpoints listed under Statement above.",
+      "message": "This Notes line claims the inputs don't confirm how 401 enforcement is implemented for the Statement's endpoints, but the document's own Scope/Traceability sections list create-monthly-plan.md and delete-plan.md as in-scope use cases, and both already document the exact 401 enforcement behavior for POST /api/plans and DELETE /api/plans/{planId}."
+    }
+  ]
+}

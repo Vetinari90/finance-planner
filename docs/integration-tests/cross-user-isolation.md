@@ -30,6 +30,7 @@ generated_inputs: sha256:46d0ac250ad2a72f1e43ff8a158cd1807522a5e39dc0463b5d9d6f6
 |-----------|------|-------------|
 | [auth](../modules/auth/overview.md) | Issues the session and resolves the current user's identity (session/`requireUserId()`) that every isolation check depends on | [NEEDS CLARIFICATION] No test setup/fixture code was present in this synthesis node's inputs to confirm whether real or mocked auth is used |
 | [plans](../modules/plans/overview.md) | Owns the plan-ownership checks exercised by "list plans", "fetch plan", and "delete plan" | [NEEDS CLARIFICATION] not confirmed |
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Scope section explicitly promises this document exercises the 'list plans' ownership check (GET /api/plans), and the Integration Points section likewise lists GET /api/plans as an in-scope plan-scoped query, but no Test Scenario or Verification Points row actually tests cross-user isolation for the list-plans endpoint - only fetch (Scenario 1), create-item (Scenario 2), and delete (Scenario 3) are covered.
 | [planned-items](../modules/planned-items/overview.md) | Owns the ownership check exercised when creating a planned item under a plan | [NEEDS CLARIFICATION] not confirmed |
 | [persistence](../modules/persistence/overview.md) | Supplies the shared Prisma client and `requireUserId()` helper that all ownership checks are built on | [NEEDS CLARIFICATION] not confirmed |
 
@@ -58,6 +59,7 @@ generated_inputs: sha256:46d0ac250ad2a72f1e43ff8a158cd1807522a5e39dc0463b5d9d6f6
 
 **Then:**
 - [NEEDS CLARIFICATION] `docs/modules/plans/overview.md` states the fetch is "owned by the current user" but does not state the response code or behavior when a different, authenticated user requests a plan they do not own (e.g. 404 vs. 403). This could not be confirmed from the reviewed module-docs.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document claims the response code for a non-owner fetch of a plan is unconfirmed, but the sibling generated doc docs/modules/plans/api.md already documents it: GET /api/plans/{planId} returns 404 'Not found' when the plan does not match {id, userId}, explicitly covering the 'belongs to another user' case.
 
 ---
 
@@ -72,6 +74,7 @@ generated_inputs: sha256:46d0ac250ad2a72f1e43ff8a158cd1807522a5e39dc0463b5d9d6f6
 
 **Then:**
 - Per `docs/modules/planned-items/overview.md`, the module is described as enforcing "that a planned item can only be created under a plan owned by the authenticated user"; the item creation is therefore expected to be rejected. [NEEDS CLARIFICATION] The exact response status code and error body for this rejection are not stated in `docs/modules/planned-items/overview.md` and could not be confirmed.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document claims the status code/error body for a cross-user item-creation rejection is unconfirmed, but the sibling generated doc docs/modules/planned-items/api.md already documents it: POST /api/plans/{planId}/items returns 404 with error body {"error": "Not Found"}/{"error": "Not found"} when the plan is not owned by the authenticated user.
 
 ---
 
@@ -86,6 +89,7 @@ generated_inputs: sha256:46d0ac250ad2a72f1e43ff8a158cd1807522a5e39dc0463b5d9d6f6
 
 **Then:**
 - Per `docs/modules/plans/overview.md`, plan deletion is described as occurring "after verifying ownership". [NEEDS CLARIFICATION] The exact response when ownership verification fails (status code, whether Plan P remains undeleted) is not stated in the reviewed module-docs and could not be confirmed.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document claims the status code and undeleted-outcome for a failed ownership check on DELETE are unconfirmed, but the sibling generated doc docs/modules/plans/api.md already documents both: it returns 404 'Not found' and the delete is never attempted (i.e. the plan remains undeleted) when the ownership check finds nothing.
 
 ### Verification Points
 

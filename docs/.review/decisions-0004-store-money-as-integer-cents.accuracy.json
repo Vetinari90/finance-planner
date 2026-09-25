@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0004-store-money-as-integer-cents.md",
+  "dimension": "accuracy",
+  "findings": []
+}
