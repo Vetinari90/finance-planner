@@ -1,14 +1,59 @@
 ---
-type: documentation
+type: technical-concerns
 audience: [developer]
 language: en
 links: []
+generated_from: 39f2f753a6dbde2c5b34c6281adeeab77b7a87d5
+generated_by: sdlc-doc-toolkit@3.89.0
+generated_branch: sdlc/20260925-1148
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
 ---
 
-# Technical Concerns
+# Technical Concerns: Planned Items
 
-## technical-concerns.md
+## Caching
 
-<!-- SLOT:content brief="Document content (technical-concerns.md)" -->
-[UNFILLED]
-<!-- /SLOT:content -->
+### Overview
+
+**Caching Enabled:** No evidence of caching in the grounded code.
+
+[NEEDS CLARIFICATION] No caching layer, technology, or cached keys were observed in `src/app/api/plans/[planId]/items/route.ts`.
+
+## Data Validation
+
+### Validation Layers
+
+| Layer | Responsibility |
+|-------|----------------|
+| API | Zod schema (`CreateItemSchema`) validates request body shape and constraints before any persistence occurs |
+| Database | [NEEDS CLARIFICATION] No schema-level constraints (e.g. Prisma `@@` directives) were present in inputs |
+
+### Field Validation Rules
+
+#### PlannedItem
+
+| Field | Type | Required | Rules |
+|-------|------|----------|-------|
+| title | string | Yes | min 1, max 120 characters |
+| amountCents | number (int) | Yes | integer, minimum 0 |
+| categoryId | string | No | optional, nullable |
+| note | string | No | optional, nullable, max 400 characters |
+
+### Error Format
+
+```json
+{
+  "error": "Invalid input",
+  "details": { }
+}
+```
+
+`details` is the output of `parsed.error.flatten()` (Zod), populated when `CreateItemSchema.safeParse(body)` fails.
+
+### Common Error Codes
+
+[NEEDS CLARIFICATION] The grounded code returns a single generic `"Invalid input"` error string on validation failure (plus the Zod `details` payload); no enumerated error-code taxonomy (e.g. `REQUIRED`, `TOO_LONG`) was present in inputs.
+
+## Internationalization
+
+[NEEDS CLARIFICATION] No i18n/localization handling was observed in the grounded route handler.
