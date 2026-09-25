@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/web-ui/behavior/server-client-rendering.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/login/LoginClient.tsx line 1 is \"use client\"; and it is rendered by src/app/login/page.tsx under the /login route. src/app/plans/NewPlanForm.tsx line 1 is also \"use client\"; and is rendered by src/app/plans/page.tsx under the /plans route. Both LoginClient.tsx and NewPlanForm.tsx are listed in this dispatch's codeFiles (and in docs/.expanded-inputs.json's code[] array), so they are within scope, not outside it.",
+      "locationHint": "Neither `src/app/layout.tsx` nor `src/app/page.tsx` contains a `\"use client\"` directive, so both render as Server Components — no client-side rendering occurs in this observed flow. [NEEDS CLARIFICATION] Whether client components exist under the destination routes (`/plans`, `/login`) is outside the web-ui module's manifest scope reviewed for this document.",
+      "message": "The doc claims whether client components exist under /plans and /login is 'outside the web-ui module's manifest scope reviewed for this document', but LoginClient.tsx (used by /login) and NewPlanForm.tsx (used by /plans) are both in this dispatch's codeFiles and both begin with \"use client\" - the answer (yes, client components exist under both destination routes) is directly evidenced by inputs already in scope, not out of scope."
+    },
+    {
+      "confidence": "high",
+      "evidence": "src/lib/auth.ts is listed in this dispatch's codeFiles and in docs/.expanded-inputs.json's code[] array (role: code, sizeBytes 1293), so its content (NextAuthOptions with JWT session strategy, CredentialsProvider, pages.signIn) is directly readable and was reviewed as part of this dispatch. Additionally, src/lib/db.ts (the Prisma client) is the actual persistence module in src/lib; src/lib/auth.ts is an auth-configuration module, not 'the persistence module'.",
+      "locationHint": "| `authOptions` misconfiguration | [NEEDS CLARIFICATION] `authOptions` is defined in the persistence module (`src/lib`, via `@/lib/auth`), which is outside this dispatch's web-ui manifest scope; its content was not reviewed here. |",
+      "message": "The doc claims authOptions (src/lib/auth.ts) is 'outside this dispatch's web-ui manifest scope' and 'its content was not reviewed here', but src/lib/auth.ts is explicitly included in this dispatch's codeFiles and its full content (JWT session strategy, CredentialsProvider with bcrypt check, pages.signIn: \"/login\") is readable. The doc also mislabels src/lib as 'the persistence module' when src/lib/db.ts (the Prisma client), not src/lib/auth.ts, is the persistence code."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/security.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/auth/data-model.md documents only the `User` Prisma table (id/email/password/name columns) and never mentions `Session.user` or a session shape. The `Session.user` shape (id, optional name, optional email) is actually documented in docs/modules/auth/overview.md's Key Entities table ('Session.user | The authenticated-session projection of a user (id, optional name, optional email), as declared in src/types/next-auth.d.ts') and in docs/modules/auth/domain-model.md's SessionUser section.",
+      "locationHint": "- The `Session.user` shape (`id`, optional `name`, optional `email`) is declared via a NextAuth module augmentation in `src/types/next-auth.d.ts` (per [`docs/modules/auth/data-model.md`](../modules/auth/data-model.md)).",
+      "message": "This bullet cites data-model.md as the source for the Session.user shape, but data-model.md covers only the persisted `User` table and does not describe Session.user at all; the actual source for this fact is overview.md's Key Entities table / domain-model.md's SessionUser section, not data-model.md."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "None of the reviewed source docs (docs/modules/auth/overview.md, docs/modules/plans/overview.md) name `src/app/page.tsx` as the file that calls getServerSession(authOptions). plans/overview.md's Boundaries section only says the module 'calls ... getServerSession(authOptions) ... on the page side' without naming a specific file, and its Purpose section names src/app/plans/page.tsx and src/app/plans/[planId]/page.tsx as the module's pages, not src/app/page.tsx.",
+      "locationHint": "- Server-rendered pages resolve the current user via `getServerSession(authOptions)` (e.g. `src/app/page.tsx`, and per the `plans` module's boundaries in `docs/modules/plans/overview.md`); unauthenticated visitors are redirected to `/login`.",
+      "message": "The doc names `src/app/page.tsx` as an example file calling getServerSession(authOptions), but no reviewed source doc (docs/modules/auth/overview.md, docs/modules/plans/overview.md) attributes this call to that specific file - the cited plans/overview.md only says the page-side call happens without naming a file."
+    }
+  ]
+}

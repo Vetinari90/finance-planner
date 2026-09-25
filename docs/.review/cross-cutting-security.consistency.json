@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/security.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md is a fully generated document (not an '[UNFILLED]' sentinel) and its Responsibilities section states: 'Define `authOptions` (`NextAuthOptions`): a `CredentialsProvider` that verifies email/password against `prisma.user` with `bcrypt.compare`, a `jwt`-strategy session, `jwt`/`session` callbacks that propagate the user ID onto the session, and a custom `/login` sign-in page (`src/lib/auth.ts`).' This directly resolves the session-strategy question (JWT, not database) that security.md flags as unresolved.",
+      "locationHint": "- [NEEDS CLARIFICATION] The internal behavior of `authOptions` — provider configuration, session strategy (JWT vs. database), token lifetime, and the exact credential-verification logic — is imported from `@/lib/auth` but that file falls under the `persistence`/`src/lib` module scope, not `auth`, and is outside this dispatch's grounded read set. `docs/modules/persistence/overview.md` and `docs/modules/persistence/technical-concerns.md`, which could resolve this, are still `[UNFILLED]` skeleton documents from a not-yet-completed parallel work package at the time this document was generated.",
+      "message": "Contradicted by the current doc tree: docs/modules/persistence/overview.md is not an '[UNFILLED]' skeleton - it is a complete document that explicitly states authOptions uses a 'jwt-strategy session', directly answering the session-strategy question this line calls unresolved."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md, technical-concerns.md, and api.md are all fully generated documents, not '[UNFILLED]' sentinels. planned-items/api.md's error-code table for POST /api/plans/{planId}/items states: '404 | Not Found | No plan with the given planId exists for the authenticated user (`prisma.plan.findFirst({ where: { id: planId, userId } })` returns null)' - the same ownership-check pattern used by the plans module.",
+      "locationHint": "- [NEEDS CLARIFICATION] Whether the `planned-items` module (item CRUD under `/api/plans/{planId}/items`) applies the same user-scoping and ownership-check pattern cannot be confirmed here: `docs/modules/planned-items/overview.md`, `docs/modules/planned-items/technical-concerns.md`, and `docs/modules/planned-items/api.md` are all still `[UNFILLED]` skeleton documents at the time this document was generated.",
+      "message": "Contradicted by the current doc tree: the three named planned-items docs are not '[UNFILLED]' skeletons, and planned-items/api.md already documents the same `{ id: planId, userId }` ownership-check pattern used by the plans module - the very fact this line says cannot be confirmed."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md is a complete document (not '[UNFILLED]') whose Field Validation Rules table lists 'amountCents | number (int) | Yes | integer, minimum 0' as an API-layer (Zod `CreateItemSchema`) rule, confirming server-side re-validation of the item amount.",
+      "locationHint": "- [NEEDS CLARIFICATION] Whether the `planned-items` module re-validates the item amount server-side (the `plans` module's `technical-concerns.md` notes this \"happens in the planned-items module, outside this manifest\") could not be confirmed, since `docs/modules/planned-items/technical-concerns.md` is still an `[UNFILLED]` skeleton.",
+      "message": "Contradicted by the current doc tree: docs/modules/planned-items/technical-concerns.md is not an '[UNFILLED]' skeleton - it documents an API-layer Zod rule requiring `amountCents` to be a non-negative integer, confirming server-side re-validation of the item amount that this line says is unconfirmed."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/persistence/overview.md, technical-concerns.md, and deployment.md are all fully generated documents (deployment.md has a populated '#### Secrets' section: 'No secret is explicitly read in this module's inputs beyond `DATABASE_URL` ...'), not '[UNFILLED]' skeletons as claimed.",
+      "locationHint": "- [NEEDS CLARIFICATION] Application secrets (e.g. a NextAuth secret / signing key, database connection string, or any third-party API key) and where/how they are configured (environment variables, a secrets manager, `.env` file) are not established by this dispatch's grounded read set — no configuration or environment file was reviewed, and `docs/modules/persistence/overview.md` / `docs/modules/persistence/deployment.md`, which would likely own this concern, are still `[UNFILLED]` skeleton documents.",
+      "message": "docs/modules/persistence/overview.md and docs/modules/persistence/deployment.md are not '[UNFILLED]' skeletons - both are complete documents (deployment.md has a populated Secrets section). The specific secrets question remains genuinely unresolved in their content, but the claim that these are still-unfilled skeleton docs is stale/contradicted."
+    }
+  ]
+}

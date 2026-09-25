@@ -49,20 +49,28 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 | Layer | Responsibility |
 |-------|----------------|
 | [NEEDS CLARIFICATION] | No form inputs, request bodies, or validation logic appear in `src/app/layout.tsx` or `src/app/page.tsx`; this module's reviewed scope contains no user-input surface. |
+[NEEDS CLARIFICATION] [REVIEW] completeness: Validation Layers section restricts its scope statement to only layout.tsx/page.tsx and concludes no user-input surface exists, but this document's own codeFiles include multiple request-body zod schemas (CreatePlanSchema, RegisterSchema, CreateItemSchema) and client-side form validation (required/minLength attributes, custom amount parser) that were never covered.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: Claims the web-ui module's reviewed scope has no user-input surface, but the module's own code inputs (AddItemForm.tsx, NewPlanForm.tsx, LoginClient.tsx, and three API routes with zod schemas) contain extensive form inputs and request-body validation logic. The document only checked layout.tsx/page.tsx and ignored the rest of the module's provided code files.
 
 ### Field Validation Rules
 
 [NEEDS CLARIFICATION] No entity or field validation rules are present in the reviewed scope.
+[NEEDS CLARIFICATION] [REVIEW] completeness: Field Validation Rules section says none are present, but this document's codeFiles contain concrete zod field-level rules (email format, password min length, string length/range bounds) that are absent from the doc.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: States no field validation rules are present, but zod schemas in the module's own API route inputs define concrete field validation rules (email format, password length, numeric ranges, string length limits).
 
 ### Error Format
 
 [NEEDS CLARIFICATION] No error-response shape is evidenced in `src/app/layout.tsx` or `src/app/page.tsx`.
+[NEEDS CLARIFICATION] [REVIEW] completeness: Error Format section claims no error-response shape is evidenced, but the API route files in this document's own codeFiles show a consistent `{ error, details? }` JSON error shape used across register, plans, and items routes.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: Claims no error-response shape is evidenced, but the module's API route inputs consistently use a `{ error: string }` (optionally with `details`) JSON error shape.
 
 ### Common Error Codes
 
 | Code | Meaning |
 |------|---------|
 | [NEEDS CLARIFICATION] | Not evidenced in the reviewed scope |
+[NEEDS CLARIFICATION] [REVIEW] completeness: Common Error Codes table says nothing is evidenced, but the API route files in this document's own codeFiles evidence specific status codes (400, 401, 404, 409) with distinct meanings that are omitted from the table.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The Common Error Codes table claims no error codes are evidenced, but the module's API routes evidence concrete status codes (400, 401, 404, 409, 201) with specific error messages.
 
 ---
 

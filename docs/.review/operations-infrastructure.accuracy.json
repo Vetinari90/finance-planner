@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/operations/infrastructure.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md (one of this document's own declared inputs, per its Summary section) is fully populated, not an [UNFILLED] skeleton, and explicitly states: 'Define authOptions (NextAuthOptions): a CredentialsProvider that verifies email/password against prisma.user with bcrypt.compare, a jwt-strategy session, jwt/session callbacks that propagate the user ID onto the session...' This is corroborated by docs/decisions/0001-credentials-auth-jwt-sessions.md, which cites docs/modules/persistence/overview.md as confirming the jwt session strategy.",
+      "locationHint": "is still an unfilled skeleton, the session strategy (JWT vs. database-backed",
+      "message": "The document claims docs/modules/persistence/overview.md 'is still an unfilled skeleton' and that the session strategy 'could not be confirmed for this infrastructure document,' but persistence/overview.md (a declared input of this document) is fully populated and explicitly states the session uses a 'jwt-strategy', contradicting the claim that this could not be confirmed."
+    }
+  ]
+}

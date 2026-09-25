@@ -17,6 +17,8 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 ### Summary
 
 This document synthesizes cross-module quality-attribute findings (caching, data validation, error handling, internationalization, and deployment) from the per-module `technical-concerns.md` and `deployment.md` documents already generated for the finance-planner project. Three of the six source documents (`modules/planned-items/technical-concerns.md`, `modules/persistence/technical-concerns.md`, and `modules/persistence/deployment.md`) had not yet been authored at the time this synthesis ran — they are marked `[UNFILLED]` in the doc tree — so this document cannot yet report quality attributes for the planned-items and persistence modules. Those gaps are flagged below rather than filled with assumptions.
+[NEEDS CLARIFICATION] [REVIEW] consistency: Contradicted by the actual linked documents: docs/modules/persistence/technical-concerns.md, docs/modules/persistence/deployment.md, and docs/modules/planned-items/technical-concerns.md all contain full authored content (not '[UNFILLED]' skeletons), so this doc's premise that they were unauthored and its resulting caching/validation/i18n/deployment gaps for planned-items and persistence are stale/incorrect.
+[NEEDS CLARIFICATION] [REVIEW] completeness: Summary claims 3 of 6 source docs were not yet authored / are [UNFILLED], but docs/modules/planned-items/technical-concerns.md, docs/modules/persistence/technical-concerns.md, and docs/modules/persistence/deployment.md all exist on disk with full, non-skeleton content covering caching, data validation, i18n, and deployment - the synthesis omitted available source material for the whole document.
 
 ### Caching
 
@@ -27,6 +29,7 @@ This document synthesizes cross-module quality-attribute findings (caching, data
 | Planned-items | [NEEDS CLARIFICATION] `modules/planned-items/technical-concerns.md` is unfilled — no content available to synthesize. |
 | Web-UI | No | `modules/web-ui/technical-concerns.md`: no evidence of caching in `src/app/layout.tsx` or `src/app/page.tsx`; technology, cache keys, and monitoring are all `[NEEDS CLARIFICATION]` in that source. |
 | Persistence | [NEEDS CLARIFICATION] `modules/persistence/technical-concerns.md` is unfilled — no content available to synthesize. |
+[NEEDS CLARIFICATION] [REVIEW] completeness: Caching table row for Persistence claims the source doc is unfilled, but docs/modules/persistence/technical-concerns.md's Caching section reports 'Caching Enabled: No' and documents a client-instance caching pattern in src/lib/db.ts - this content exists and was not synthesized into the table.
 
 Across the modules with usable source content (auth, plans, web-ui), no caching layer is evidenced anywhere in the reviewed scope. Whether this reflects a deliberate no-cache architecture or simply that caching code lives outside the files each module dispatch reviewed is [NEEDS CLARIFICATION].
 
@@ -36,7 +39,9 @@ Across the modules with usable source content (auth, plans, web-ui), no caching 
 |--------|---------------------|--------|
 | Auth | Zod schema (`RegisterSchema`) validates `POST /api/auth/register` request bodies server-side; HTML5 `required`/`minLength` attributes provide client-side validation on the register and login forms. Service/domain-layer and database-constraint validation are `[NEEDS CLARIFICATION]` (out of that module's reviewed scope). | `modules/auth/technical-concerns.md` |
 | Plans | Zod schema (`CreatePlanSchema`) validates `title`, `year`, `month`, `currency` on `POST /api/plans`; `AddItemForm.tsx` validates the amount format client-side with a regex (`^(\d+)(\.(\d{1,2})?)?$`). Database-level constraint enforcement is `[NEEDS CLARIFICATION]` (inferred only from `409` handling, not from the schema itself). | `modules/plans/technical-concerns.md` |
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The quoted regex `^(\d+)(\.(\d{1,2})?)?$` misquotes the actual code. The real regex in AddItemForm.tsx is `^(\d+)(\.(\d{1,2}))?$` (no `?` after `(\d{1,2})`). The doc's version adds an extra `?` making the fractional digits themselves optional within the decimal-point group, which would incorrectly accept inputs like "123." that the real regex rejects.
 | Planned-items | [NEEDS CLARIFICATION] `modules/planned-items/technical-concerns.md` is unfilled — no content available to synthesize. | — |
+[NEEDS CLARIFICATION] [REVIEW] completeness: Data Validation table row for Planned-items claims the source doc is unfilled, but docs/modules/planned-items/technical-concerns.md documents the `CreateItemSchema` Zod validation and a full field-rules table - this content exists and was omitted from the synthesis.
 | Web-UI | [NEEDS CLARIFICATION] `modules/web-ui/technical-concerns.md` reports no form inputs, request bodies, or validation logic in its reviewed scope (`src/app/layout.tsx`, `src/app/page.tsx`). | `modules/web-ui/technical-concerns.md` |
 | Persistence | [NEEDS CLARIFICATION] `modules/persistence/technical-concerns.md` is unfilled — no content available to synthesize. | — |
 
@@ -57,6 +62,7 @@ Both source documents with usable content converge on the same observed shape:
 - **Plans** (`modules/plans/technical-concerns.md`): both plans API routes return the same flat shape rather than a generic `error.code`/`error.message`/`error.details` envelope. `details` is present only on the `400` response from `POST /api/plans`; `401`, `404`, and `409` responses return only `{ "error": "<message>" }`. The documented status/message pairs are 400 (`Invalid input`), 401 (`Unauthorized`), 404 (`Not found`), 409 (`Plan for this month already exists`).
 - **Web-UI** (`modules/web-ui/technical-concerns.md`): no error-response shape is evidenced in the reviewed scope (`src/app/layout.tsx`, `src/app/page.tsx`).
 - **Planned-items, Persistence**: [NEEDS CLARIFICATION] `modules/planned-items/technical-concerns.md` and `modules/persistence/technical-concerns.md` are unfilled — no content available to synthesize.
+[NEEDS CLARIFICATION] [REVIEW] completeness: Error Handling section claims both source docs are unfilled, but docs/modules/planned-items/technical-concerns.md documents the same flat `{ error, details }` shape (`'Invalid input'`) and docs/modules/persistence/technical-concerns.md documents that authorize() returns null with no structured error JSON - both are available and should have been synthesized, including into the 'converges on the same observed shape' analysis above it.
 
 The consistent flat `{ error, details }` shape across auth and plans suggests a project-wide convention, but with two of five backend-adjacent modules' documents still unfilled, this cannot yet be confirmed as a project-wide quality attribute.
 
@@ -75,14 +81,19 @@ A recurring pattern across the auth and plans module documents is an English/Cze
 ### Deployment & Infrastructure
 
 [NEEDS CLARIFICATION] `modules/persistence/deployment.md` is unfilled — no deployment or infrastructure content is available to synthesize a persistence-layer deployment quality attribute (e.g. database hosting, migration strategy, connection pooling, backup/restore posture).
+[NEEDS CLARIFICATION] [REVIEW] consistency: docs/modules/persistence/deployment.md is not unfilled - it documents DATABASE_URL/NODE_ENV configuration, secrets, health checks, and PostgreSQL as an external dependency - contradicting this document's claim that no persistence deployment content is available.
+[NEEDS CLARIFICATION] [REVIEW] completeness: Deployment & Infrastructure section claims modules/persistence/deployment.md is unfilled, but that file contains full Configuration (required DATABASE_URL), Health Checks, Resource Requirements, Scaling, and External Dependencies sections - this content exists and was not synthesized despite being exactly the kind of material this section requests (database hosting, connection info).
 
 ### Cross-Module Gaps
 
 The following module-output documents named as inputs to this synthesis were not yet generated (present only as `[UNFILLED]` skeleton content) at the time of this run:
+[NEEDS CLARIFICATION] [REVIEW] consistency: This Cross-Module Gaps claim is contradicted by the actual state of the three listed files, which already contain full authored content rather than '[UNFILLED]' skeletons.
+[NEEDS CLARIFICATION] [REVIEW] completeness: Cross-Module Gaps section states these three module documents were not yet generated / present only as [UNFILLED] skeleton content, but all three exist with full authored content - the premise driving this entire section (and the closing regeneration instruction) is incorrect, and the document's coverage of caching/validation/error-handling/i18n/deployment for planned-items and persistence is incomplete as a result.
 
 - `modules/planned-items/technical-concerns.md`
 - `modules/persistence/technical-concerns.md`
 - `modules/persistence/deployment.md`
 
 [NEEDS CLARIFICATION] Regenerate this quality-attributes synthesis after those three module documents are authored, so that caching, data-validation, error-handling, internationalization, and deployment attributes can be reported for the planned-items and persistence modules.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This instruction to wait for authoring is moot: the three referenced module documents are already authored with substantive content, so this synthesis is stale rather than blocked on future authoring.
 <!-- /SLOT:content -->

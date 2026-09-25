@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/web-ui/overview.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/page.module.css defines a full set of CSS module classes (.page, .main, .intro, .ctas, .primary/.secondary, hover and max-width media queries, and a prefers-color-scheme dark variant, lines 1-141). It is one of only four files named as this module's manifest scope per the doc's own Boundaries note ('the web-ui manifest for this dispatch enumerated only src/app/globals.css, src/app/layout.tsx, src/app/page.module.css, and src/app/page.tsx'), yet the Responsibilities section only describes layout.tsx, globals.css, and page.tsx - page.module.css itself has no Responsibilities entry describing its content or role.",
+      "locationHint": "- [NEEDS CLARIFICATION] Whether additional shared UI components, layout primitives, or client-side state exist elsewhere under `src/app` outside `layout.tsx`/`page.tsx` was not resolvable: the web-ui manifest for this dispatch enumerated only `src/app/globals.css`, `src/app/layout.tsx`, `src/app/page.module.css`, and `src/app/page.tsx`.",
+      "message": "src/app/page.module.css is named as in-scope input for this module (see Boundaries note) but is never described in the Responsibilities section - its CSS classes and dark-mode variant are silently omitted from the module's documented responsibilities."
+    }
+  ]
+}

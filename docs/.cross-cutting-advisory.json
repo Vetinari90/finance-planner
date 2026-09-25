@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "cc-advisory-1",
+  "projectRoot": "/opt/asr/workspace/7faee87f-8e08-4f09-844f-00a473b3b140/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner",
+  "generatedAt": "2026-09-25T21:56:34.963Z",
+  "advisories": [
+    {
+      "path": "behavior/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "use-cases/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "use-cases/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "behavior/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "use-cases/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "behavior/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "user-journeys/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "decisions/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "glossary.md",
+      "verdict": "basename"
+    },
+    {
+      "path": "runbooks/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "requirements/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "cross-cutting/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "security.md",
+      "verdict": "basename"
+    },
+    {
+      "path": "integration-tests/",
+      "verdict": "doc-only-synthesis"
+    },
+    {
+      "path": "quality-attributes.md",
+      "verdict": "basename"
+    }
+  ]
+}

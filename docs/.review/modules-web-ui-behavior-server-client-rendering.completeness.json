@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/web-ui/behavior/server-client-rendering.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "codeFiles for this dispatch include src/app/login/LoginClient.tsx, src/app/register/page.tsx, src/app/plans/NewPlanForm.tsx, src/app/plans/[planId]/AddItemForm.tsx, and src/app/plans/[planId]/DeletePlanButton.tsx, each containing a \"use client\" directive (grep-confirmed). These client components are within the web-ui module's manifest scope (module-source-map web-ui: src/app in docs/doc_struc.md) and were explicitly provided as inputs to this document.",
+      "locationHint": "Neither `src/app/layout.tsx` nor `src/app/page.tsx` contains a `\"use client\"` directive, so both render as Server Components — no client-side rendering occurs in this observed flow. [NEEDS CLARIFICATION] Whether client components exist under the destination routes (`/plans`, `/login`) is outside the web-ui module's manifest scope reviewed for this document.",
+      "message": "This behavior doc is titled 'Server Client Rendering' but covers only the trivial root-route redirect and disclaims client-side rendering as 'outside the web-ui module's manifest scope'. That claim is contradicted by the dispatch's own codeFiles, which include five 'use client' components (LoginClient.tsx, register/page.tsx, NewPlanForm.tsx, AddItemForm.tsx, DeletePlanButton.tsx) squarely inside the web-ui module. The document omits any discussion of the client-side rendering half of its own title despite that material being available in its inputs."
+    },
+    {
+      "confidence": "high",
+      "evidence": "src/lib/auth.ts is listed in this dispatch's codeFiles and defines authOptions (NextAuthOptions) with a CredentialsProvider, jwt/session callbacks, and a pages.signIn config - fully available content, not outside the dispatch's scope.",
+      "locationHint": "| `authOptions` misconfiguration | [NEEDS CLARIFICATION] `authOptions` is defined in the persistence module (`src/lib`, via `@/lib/auth`), which is outside this dispatch's web-ui manifest scope; its content was not reviewed here. |",
+      "message": "The Error Scenarios row claims authOptions content 'was not reviewed here' because it is 'outside this dispatch's web-ui manifest scope', but src/lib/auth.ts is directly listed in this document's own codeFiles input and defines authOptions in full (credentials provider, jwt/session callbacks, signIn page). The document leaves this error scenario unaddressed despite the source being available to it."
+    }
+  ]
+}

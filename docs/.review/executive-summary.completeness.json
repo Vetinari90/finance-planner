@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/executive-summary.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md exists with populated Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, and Dependents sections (e.g. 'The Planned Items module manages the individual budget line items...'; responsibilities list validate/persist via POST /api/plans/{planId}/items). No '[UNFILLED]' sentinel appears anywhere in that file. doc_struc.md (path docs/executive-summary.md, module-docs list) confirms docs/modules/planned-items/overview.md is a declared input for this node.",
+      "locationHint": "- **Plan items.** [NEEDS CLARIFICATION] `docs/modules/planned-items/overview.md` is an unfilled skeleton in this generation run, so the item-level responsibilities (creation, validation, listing under `/api/plans/{planId}/items`) cannot be summarized here beyond what the plans module overview states: that `AddItemForm.tsx` (owned by `plans`) posts to a planned-items endpoint at `/api/plans/{planId}/items`.",
+      "message": "This bullet claims docs/modules/planned-items/overview.md is an unfilled skeleton, but the file is fully populated (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents; no [UNFILLED] sentinel). The section silently omits the actual planned-items responsibilities (item creation/validation via POST /api/plans/{planId}/items, ownership enforcement) that are available in that input."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md exists with populated Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, and Dependents sections (e.g. Prisma client singleton in src/lib/db.ts, authOptions in src/lib/auth.ts, requireUserId() in src/lib/requireUser.ts). No '[UNFILLED]' sentinel appears anywhere in that file. doc_struc.md confirms docs/modules/persistence/overview.md is a declared module-docs input for docs/executive-summary.md.",
+      "locationHint": "- **Persistence.** [NEEDS CLARIFICATION] `docs/modules/persistence/overview.md` is an unfilled skeleton in this generation run. What can be inferred from the other module overviews is that a shared Prisma client (`prisma` from `@/lib/db`) is used for all plan and user CRUD queries; no further detail on the persistence module's own responsibilities is available yet.",
+      "message": "This bullet claims docs/modules/persistence/overview.md is an unfilled skeleton, but the file is fully populated with concrete responsibilities (Prisma client singleton with globalThis caching and fail-fast on missing DATABASE_URL, NextAuth credentials authOptions with bcrypt.compare, requireUserId() session helper). The Persistence bullet silently omits this available content."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Both docs/modules/planned-items/overview.md and docs/modules/persistence/overview.md contain full, non-skeleton content (Purpose/Responsibilities/Boundaries/Key Entities/Dependencies/Dependents) with no '[UNFILLED]' sentinel, contradicting the 'were unfilled' premise of this Known Gaps entry.",
+      "locationHint": "- `docs/modules/planned-items/overview.md` and `docs/modules/persistence/overview.md` were unfilled at the time this document was generated; this summary should be regenerated once those module overviews are populated.",
+      "message": "This Known Gaps entry states both module overviews were unfilled, but both files already contain complete, substantive content. The Known Gaps section is therefore inaccurate about the actual gap and the executive summary is missing the synthesis of real, available planned-items and persistence content."
+    }
+  ]
+}

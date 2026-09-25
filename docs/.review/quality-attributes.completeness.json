@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/quality-attributes.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md (full Caching/Data Validation/Internationalization sections, lines 14-59), docs/modules/persistence/technical-concerns.md (full Caching/Data Validation/Internationalization sections, lines 17-58), and docs/modules/persistence/deployment.md (full Configuration/Health Checks/External Dependencies sections, lines 17-63) all exist with authored content, not [UNFILLED] skeletons.",
+      "locationHint": "This document synthesizes cross-module quality-attribute findings (caching, data validation, error handling, internationalization, and deployment) from the per-module `technical-concerns.md` and `deployment.md` documents already generated for the finance-planner project. Three of the six source documents (`modules/planned-items/technical-concerns.md`, `modules/persistence/technical-concerns.md`, and `modules/persistence/deployment.md`) had not yet been authored at the time this synthesis ran — they are marked `[UNFILLED]` in the doc tree — so this document cannot yet report quality attributes for the planned-items and persistence modules. Those gaps are flagged below rather than filled with assumptions.",
+      "message": "Summary claims 3 of 6 source docs were not yet authored / are [UNFILLED], but docs/modules/planned-items/technical-concerns.md, docs/modules/persistence/technical-concerns.md, and docs/modules/persistence/deployment.md all exist on disk with full, non-skeleton content covering caching, data validation, i18n, and deployment - the synthesis omitted available source material for the whole document."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/technical-concerns.md lines 17-27 (Caching section: 'Caching Enabled: No', and description of the PrismaClient/PrismaPg globalForPrisma instance-caching pattern in src/lib/db.ts).",
+      "locationHint": "| Persistence | [NEEDS CLARIFICATION] `modules/persistence/technical-concerns.md` is unfilled — no content available to synthesize. |",
+      "message": "Caching table row for Persistence claims the source doc is unfilled, but docs/modules/persistence/technical-concerns.md's Caching section reports 'Caching Enabled: No' and documents a client-instance caching pattern in src/lib/db.ts - this content exists and was not synthesized into the table."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md lines 22-55 (Data Validation section with a Zod `CreateItemSchema` validation-layers table and a full Field Validation Rules table for title/amountCents/categoryId/note).",
+      "locationHint": "| Planned-items | [NEEDS CLARIFICATION] `modules/planned-items/technical-concerns.md` is unfilled — no content available to synthesize. | — |",
+      "message": "Data Validation table row for Planned-items claims the source doc is unfilled, but docs/modules/planned-items/technical-concerns.md documents the `CreateItemSchema` Zod validation and a full field-rules table - this content exists and was omitted from the synthesis."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md lines 42-55 (Error Format / Common Error Codes: the same flat `{ error, details }` shape, `'Invalid input'`); docs/modules/persistence/technical-concerns.md lines 44-50 (Error Format: authorize() returns null, no structured error JSON).",
+      "locationHint": "- **Planned-items, Persistence**: [NEEDS CLARIFICATION] `modules/planned-items/technical-concerns.md` and `modules/persistence/technical-concerns.md` are unfilled — no content available to synthesize.",
+      "message": "Error Handling section claims both source docs are unfilled, but docs/modules/planned-items/technical-concerns.md documents the same flat `{ error, details }` shape (`'Invalid input'`) and docs/modules/persistence/technical-concerns.md documents that authorize() returns null with no structured error JSON - both are available and should have been synthesized, including into the 'converges on the same observed shape' analysis above it."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/deployment.md lines 17-63: Configuration (required `DATABASE_URL` env var), Health Checks, Resource Requirements, Scaling, and External Dependencies (PostgreSQL via Prisma/PrismaPg) sections are all authored.",
+      "locationHint": "[NEEDS CLARIFICATION] `modules/persistence/deployment.md` is unfilled — no deployment or infrastructure content is available to synthesize a persistence-layer deployment quality attribute (e.g. database hosting, migration strategy, connection pooling, backup/restore posture).",
+      "message": "Deployment & Infrastructure section claims modules/persistence/deployment.md is unfilled, but that file contains full Configuration (required DATABASE_URL), Health Checks, Resource Requirements, Scaling, and External Dependencies sections - this content exists and was not synthesized despite being exactly the kind of material this section requests (database hosting, connection info)."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md, docs/modules/persistence/technical-concerns.md, and docs/modules/persistence/deployment.md all contain full authored sections (Caching, Data Validation, Internationalization, and/or Configuration/External Dependencies), not [UNFILLED] skeleton placeholders.",
+      "locationHint": "The following module-output documents named as inputs to this synthesis were not yet generated (present only as `[UNFILLED]` skeleton content) at the time of this run:",
+      "message": "Cross-Module Gaps section states these three module documents were not yet generated / present only as [UNFILLED] skeleton content, but all three exist with full authored content - the premise driving this entire section (and the closing regeneration instruction) is incorrect, and the document's coverage of caching/validation/error-handling/i18n/deployment for planned-items and persistence is incomplete as a result."
+    }
+  ]
+}

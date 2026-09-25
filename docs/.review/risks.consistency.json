@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/risks.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md and docs/modules/planned-items/testing.md contain full substantive sections (Caching, Data Validation with a Field Validation Rules table, Error Format, Common Error Codes, Internationalization; Strategy Overview, Test Levels, Test Categories, Key Test Scenarios, Test Data, CI/CD Integration, Test Environment) with per-claim [NEEDS CLARIFICATION] annotations, not a single [UNFILLED] sentinel. Likewise docs/modules/persistence/technical-concerns.md and docs/modules/persistence/testing.md contain full Caching/Data Validation/Internationalization and Strategy Overview/Test Levels/Key Test Scenarios/CI-CD/Test Environment sections. None of the four files contains the literal string \"[UNFILLED]\".",
+      "locationHint": "[NEEDS CLARIFICATION] The `technical-concerns.md` and `testing.md` documents for the **planned-items** and **persistence** modules (`docs/modules/planned-items/technical-concerns.md`, `docs/modules/planned-items/testing.md`, `docs/modules/persistence/technical-concerns.md`, `docs/modules/persistence/testing.md`) had not been authored at the time this synthesis was produced (each contains only the `[UNFILLED]` sentinel). No risk content could be derived for these two modules. This document should be regenerated once those module docs are filled in.",
+      "message": "risks.md's Documentation Coverage Gap claims the planned-items and persistence technical-concerns.md/testing.md files each contain only an `[UNFILLED]` sentinel and were not authored, but those four files (readable in docs/modules/) are fully authored with substantive Caching/Data Validation/Testing/CI-CD sections - this contradicts the other generated docs in the same doc set."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md's Field Validation Rules table documents `amountCents | number (int) | Yes | integer, minimum 0` under a Zod schema (`CreateItemSchema`), directly addressing server-side amount re-validation - contradicting the claim that this module's documentation is unavailable to confirm the point.",
+      "locationHint": "| R4 | Client-side item-amount validation in the plans module (`AddItemForm.tsx` regex `^(\\d+)(\\.(\\d{1,2})?)?$`) is stated to be re-validated server-side in the planned-items module, but the planned-items module's own technical-concerns/testing documentation is not yet available (see Documentation Coverage Gap above), so this server-side re-validation claim is unconfirmed from this synthesis's inputs. | plans, planned-items | Medium | `docs/modules/plans/technical-concerns.md`: \"This is client-side only in this module's files; server-side re-validation of the amount happens in the planned-items module, outside this manifest.\" |",
+      "message": "R4 asserts the planned-items module's technical-concerns/testing docs are unavailable to confirm server-side amount re-validation, but docs/modules/planned-items/technical-concerns.md is authored and documents an `amountCents` Zod validation rule (integer, minimum 0), contradicting the 'not yet available' premise."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/testing.md and docs/modules/persistence/testing.md are both fully authored (Strategy Overview, Test Levels, Test Categories, Key Test Scenarios, Test Data, CI/CD Integration, Test Environment sections all present with content), not unfilled.",
+      "locationHint": "- **planned-items / persistence**: [NEEDS CLARIFICATION] Testing risk cannot be assessed; `docs/modules/planned-items/testing.md` and `docs/modules/persistence/testing.md` are unfilled.",
+      "message": "This line states the planned-items and persistence testing.md files are unfilled, but both files contain full authored content (test levels, categories, key scenarios, etc.), contradicting the claim and the parallel claim in the Documentation Coverage Gap section."
+    }
+  ]
+}

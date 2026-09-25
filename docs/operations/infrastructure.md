@@ -61,6 +61,8 @@ The application is a Next.js App Router project. Per the module-source-map in
   [web-ui overview](../modules/web-ui/overview.md)).
 
 [NEEDS CLARIFICATION] `docs/modules/persistence/overview.md` and
+[NEEDS CLARIFICATION] [REVIEW] consistency: infrastructure.md asserts docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md were still unfilled skeleton documents (`[UNFILLED]` sentinel) at generation time, but both documents are fully generated with substantive content in the current docs tree, contradicting the claim and leaving stale unresolved markers for facts (database engine, session strategy) that are actually confirmed elsewhere in the tree.
+[NEEDS CLARIFICATION] [REVIEW] completeness: The doc claims docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md were 'still unfilled skeleton documents ([UNFILLED] sentinel, no generated content)', but both files are fully generated with substantive content. This false premise causes the Data Storage, Authentication Infrastructure, and Environment Configuration sections below to omit persistence-derived facts (PostgreSQL engine, JWT session strategy, DATABASE_URL requirement) that were actually available in the doc tree.
 `docs/modules/planned-items/overview.md`, both declared as inputs for this node,
 were still unfilled skeleton documents (`[UNFILLED]` sentinel, no generated
 content) at the time this file was generated, so no persistence- or
@@ -72,6 +74,7 @@ The plans, auth, and web-ui module overviews each describe reads/writes going
 through a shared Prisma client imported as `prisma` from `@/lib/db` (owned by
 the persistence module). None of the module overview docs available to this
 node state which underlying database engine Prisma is configured against.
+[NEEDS CLARIFICATION] [REVIEW] consistency: infrastructure.md claims no available module overview states the underlying database engine, but docs/modules/persistence/overview.md (which infrastructure.md itself lists as a declared input) explicitly states the Prisma client is bound to PostgreSQL via a PrismaPg adapter.
 
 A project decision record with the filename
 `0003-prisma-postgresql-with-pg-adapter.md` exists in the documentation tree
@@ -81,6 +84,7 @@ declared inputs, so this document does not assert PostgreSQL as the confirmed
 database engine.
 
 [NEEDS CLARIFICATION] The concrete database engine, hosting/managed-service
+[NEEDS CLARIFICATION] [REVIEW] completeness: The database engine is directly named as PostgreSQL in docs/modules/persistence/overview.md and docs/modules/persistence/deployment.md, contradicting the claim here that 'the concrete database engine ... [is] not confirmed by this node's inputs'.
 provider, connection-pooling configuration, and any backup/replication topology
 for the Prisma-backed data store are not confirmed by this node's inputs.
 
@@ -98,6 +102,8 @@ delegates to `NextAuth(authOptions)`. Passwords are hashed with `bcryptjs`
 `@/lib/auth`, which falls under the persistence module's source scope
 (`src/lib`) rather than the auth module's. Since `docs/modules/persistence/overview.md`
 is still an unfilled skeleton, the session strategy (JWT vs. database-backed
+[NEEDS CLARIFICATION] [REVIEW] consistency: infrastructure.md states the session strategy (JWT vs. database-backed) could not be confirmed because docs/modules/persistence/overview.md was an unfilled skeleton, but that document is not a skeleton - it explicitly states authOptions uses a jwt-strategy session, directly resolving the claimed gap.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The document claims docs/modules/persistence/overview.md 'is still an unfilled skeleton' and that the session strategy 'could not be confirmed for this infrastructure document,' but persistence/overview.md (a declared input of this document) is fully populated and explicitly states the session uses a 'jwt-strategy', contradicting the claim that this could not be confirmed.
 session) and token lifetime used in production could not be confirmed for this
 infrastructure document.
 

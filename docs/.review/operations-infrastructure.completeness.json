@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/operations/infrastructure.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md is fully generated content (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents sections all populated - e.g. 'Instantiate and cache a single PrismaClient bound to PostgreSQL through a PrismaPg adapter' and 'Fail fast at module load if DATABASE_URL is not set'), not an '[UNFILLED]' sentinel document. docs/modules/planned-items/overview.md is likewise fully populated (Purpose/Responsibilities/Boundaries/Key Entities/Dependencies/Dependents), not unfilled.",
+      "locationHint": "[NEEDS CLARIFICATION] `docs/modules/persistence/overview.md` and",
+      "message": "The doc claims docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md were 'still unfilled skeleton documents ([UNFILLED] sentinel, no generated content)', but both files are fully generated with substantive content. This false premise causes the Data Storage, Authentication Infrastructure, and Environment Configuration sections below to omit persistence-derived facts (PostgreSQL engine, JWT session strategy, DATABASE_URL requirement) that were actually available in the doc tree."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md, Responsibilities: 'Instantiate and cache a single PrismaClient bound to PostgreSQL through a PrismaPg adapter'; docs/modules/persistence/deployment.md External Dependencies table: 'PostgreSQL | Primary data store, accessed via Prisma with a PrismaPg adapter'.",
+      "locationHint": "[NEEDS CLARIFICATION] The concrete database engine, hosting/managed-service",
+      "message": "The database engine is directly named as PostgreSQL in docs/modules/persistence/overview.md and docs/modules/persistence/deployment.md, contradicting the claim here that 'the concrete database engine ... [is] not confirmed by this node's inputs'."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/persistence/overview.md, Responsibilities: 'Define `authOptions` (`NextAuthOptions`): ... a `jwt`-strategy session, `jwt`/`session` callbacks that propagate the user ID onto the session'.",
+      "locationHint": "[NEEDS CLARIFICATION] The `auth` module overview states that `authOptions`",
+      "message": "docs/modules/persistence/overview.md directly states the session strategy is JWT ('a jwt-strategy session'), answering the 'session strategy (JWT vs. database-backed session)... could not be confirmed' gap asserted in this section."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/persistence/overview.md: 'Fail fast at module load if `DATABASE_URL` is not set (`src/lib/db.ts`)'. docs/modules/persistence/deployment.md Environment Variables table lists `DATABASE_URL` as Required with description 'PostgreSQL connection string'. docs/operations/ci-cd.md (a sibling doc generated under the same input constraints) explicitly states 'The persistence module overview identifies DATABASE_URL as a required environment variable', showing this fact was reachable.",
+      "locationHint": "[NEEDS CLARIFICATION] No `.env` file, `.env.example`, or environment-variable",
+      "message": "The doc states no environment-variable documentation was present to enumerate required runtime configuration, but DATABASE_URL is documented as a required environment variable in docs/modules/persistence/overview.md and docs/modules/persistence/deployment.md, and the sibling docs/operations/ci-cd.md successfully cites this same fact - so it was available material silently omitted here."
+    }
+  ]
+}

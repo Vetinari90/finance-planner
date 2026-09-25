@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/requirements/functional-account-access.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md (Responsibilities) now states: \"Define authOptions (NextAuthOptions): a CredentialsProvider that verifies email/password against prisma.user with bcrypt.compare, a jwt-strategy session, jwt/session callbacks that propagate the user ID onto the session, and a custom /login sign-in page (src/lib/auth.ts).\" This is a filled, non-skeleton document already present in the docs tree this requirements doc synthesizes module overviews from.",
+      "locationHint": "module-source-map, and `docs/modules/persistence/overview.md` was still an",
+      "message": "FR-2's clarification claims the credential-verification logic cannot be confirmed because docs/modules/persistence/overview.md was an unfilled skeleton, but that overview is now filled and explicitly states the CredentialsProvider verifies email/password via bcrypt.compare - contradicting the 'cannot be confirmed here' claim."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md (Responsibilities) explicitly states authOptions defines \"a jwt-strategy session\", directly answering the JWT-vs-database question this requirements doc marks unconfirmed.",
+      "locationHint": "[NEEDS CLARIFICATION] The session strategy (JWT vs. database-backed) and token",
+      "message": "FR-3's clarification says the session strategy (JWT vs. database-backed) is unconfirmed because persistence's overview was unfilled, but docs/modules/persistence/overview.md is now filled and states the session uses a jwt-strategy - contradicting this doc's 'unconfirmed' claim for the strategy portion."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md (Responsibilities) states: \"Enforce that a planned item can only be created under a plan owned by the authenticated user.\" This overview is now filled and present in the docs tree, not the unfilled skeleton this requirements doc describes.",
+      "locationHint": "[NEEDS CLARIFICATION] Whether `planned-items` operations (adding/listing items",
+      "message": "FR-5's clarification says whether planned-items operations are scoped to the owning account could not be confirmed because docs/modules/planned-items/overview.md was an unfilled skeleton, but that overview is now filled and explicitly confirms planned-item creation is scoped to plans owned by the authenticated user - contradicting the claimed unconfirmed status."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md are both present in the docs tree with full non-skeleton content (Purpose/Responsibilities/Boundaries/Dependencies sections), not the `[UNFILLED]` sentinel this requirements doc's Summary describes.",
+      "locationHint": "overviews declared as inputs for this document were still unfilled skeleton",
+      "message": "The Summary states the planned-items and persistence module overviews were still unfilled `[UNFILLED]` skeletons and could not be incorporated, but both docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md are now fully filled documents elsewhere in the same docs tree, contradicting this doc's account of what was available."
+    }
+  ]
+}

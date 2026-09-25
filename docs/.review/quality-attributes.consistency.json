@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/quality-attributes.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/technical-concerns.md and docs/modules/persistence/deployment.md both contain full, substantive sections (Caching, Data Validation, Internationalization for technical-concerns.md; Environment Variables, Secrets, Health Checks, External Dependencies for deployment.md) - they are not '[UNFILLED]' skeletons. docs/modules/planned-items/technical-concerns.md likewise contains full Caching, Data Validation (with a PlannedItem field-rules table), and Internationalization sections, not an '[UNFILLED]' skeleton.",
+      "locationHint": "This document synthesizes cross-module quality-attribute findings (caching, data validation, error handling, internationalization, and deployment) from the per-module `technical-concerns.md` and `deployment.md` documents already generated for the finance-planner project. Three of the six source documents (`modules/planned-items/technical-concerns.md`, `modules/persistence/technical-concerns.md`, and `modules/persistence/deployment.md`) had not yet been authored at the time this synthesis ran — they are marked `[UNFILLED]` in the doc tree — so this document cannot yet report quality attributes for the planned-items and persistence modules. Those gaps are flagged below rather than filled with assumptions.",
+      "message": "Contradicted by the actual linked documents: docs/modules/persistence/technical-concerns.md, docs/modules/persistence/deployment.md, and docs/modules/planned-items/technical-concerns.md all contain full authored content (not '[UNFILLED]' skeletons), so this doc's premise that they were unauthored and its resulting caching/validation/i18n/deployment gaps for planned-items and persistence are stale/incorrect."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/deployment.md contains a fully populated Configuration/Environment Variables table (DATABASE_URL, NODE_ENV), a Secrets subsection, a Health Checks subsection, and an External Dependencies table listing PostgreSQL - real content, not an unfilled placeholder.",
+      "locationHint": "[NEEDS CLARIFICATION] `modules/persistence/deployment.md` is unfilled — no deployment or infrastructure content is available to synthesize a persistence-layer deployment quality attribute (e.g. database hosting, migration strategy, connection pooling, backup/restore posture).",
+      "message": "docs/modules/persistence/deployment.md is not unfilled - it documents DATABASE_URL/NODE_ENV configuration, secrets, health checks, and PostgreSQL as an external dependency - contradicting this document's claim that no persistence deployment content is available."
+    },
+    {
+      "confidence": "high",
+      "evidence": "The three named files (docs/modules/planned-items/technical-concerns.md, docs/modules/persistence/technical-concerns.md, docs/modules/persistence/deployment.md) each contain substantive authored sections rather than '[UNFILLED]' skeleton content, so they were already generated at the time this synthesis ran.",
+      "locationHint": "The following module-output documents named as inputs to this synthesis were not yet generated (present only as `[UNFILLED]` skeleton content) at the time of this run:",
+      "message": "This Cross-Module Gaps claim is contradicted by the actual state of the three listed files, which already contain full authored content rather than '[UNFILLED]' skeletons."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/technical-concerns.md, docs/modules/persistence/technical-concerns.md, and docs/modules/persistence/deployment.md already contain full authored content as read directly, so no regeneration is needed to obtain their quality-attribute content.",
+      "locationHint": "[NEEDS CLARIFICATION] Regenerate this quality-attributes synthesis after those three module documents are authored, so that caching, data-validation, error-handling, internationalization, and deployment attributes can be reported for the planned-items and persistence modules.",
+      "message": "This instruction to wait for authoring is moot: the three referenced module documents are already authored with substantive content, so this synthesis is stale rather than blocked on future authoring."
+    }
+  ]
+}

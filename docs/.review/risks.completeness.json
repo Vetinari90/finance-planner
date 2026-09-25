@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/risks.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "The codeFiles enumerated as inputs for this doc review include src/app/api/plans/[planId]/items/route.ts (the planned-items POST handler: Zod CreateItemSchema with title/amountCents/categoryId/note rules, plan-ownership check, 401/404/400/201 branches) and src/lib/db.ts plus src/lib/requireUser.ts (the persistence/session-resolution code: PrismaClient/PrismaPg singleton, DATABASE_URL-unset throw, getServerSession-based user resolution). This directly contradicts the document's own line-17 claim that 'No additional source code or reference material was read to produce this synthesis' and its line-21 claim that 'No risk content could be derived for these two modules' - source material for both planned-items and persistence was available in the review inputs.",
+      "locationHint": "[NEEDS CLARIFICATION] The `technical-concerns.md` and `testing.md` documents for the **planned-items** and **persistence** modules (`docs/modules/planned-items/technical-concerns.md`, `docs/modules/planned-items/testing.md`, `docs/modules/persistence/technical-concerns.md`, `docs/modules/persistence/testing.md`) had not been authored at the time this synthesis was produced (each contains only the `[UNFILLED]` sentinel). No risk content could be derived for these two modules. This document should be regenerated once those module docs are filled in.",
+      "message": "Risk Register omits planned-items and persistence entirely, citing missing module docs, but the actual source code for both modules (items/route.ts, db.ts, requireUser.ts) is present among this doc's own code inputs, so risk-relevant facts (e.g. no caching in db.ts, flat non-coded error shape in items/route.ts, DATABASE_URL-unset failure mode) could have been derived directly from code rather than left as an unfilled gap."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "src/app/api/plans/[planId]/items/route.ts is a provided codeFile that fully documents the planned-items module's request/response behavior (Zod schema, auth guard, ownership check, status codes), so a testing-risk assessment for planned-items specifically was derivable from inputs actually given to this review, contrary to the blanket 'cannot be assessed' claim.",
+      "locationHint": "- **planned-items / persistence**: [NEEDS CLARIFICATION] Testing risk cannot be assessed; `docs/modules/planned-items/testing.md` and `docs/modules/persistence/testing.md` are unfilled.",
+      "message": "The Testing Risk Summary declares planned-items/persistence testing risk entirely unassessable, but items/route.ts (a provided codeFile) exposes concrete testable branches (auth failure, ownership failure, validation failure, happy path) that mirror the level of detail given for auth/plans/web-ui elsewhere in this same document, so this section under-covers material that was available."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/operations/infrastructure.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md, Responsibilities section, states: \"Instantiate and cache a single `PrismaClient` bound to PostgreSQL through a `PrismaPg` adapter, reused across Next.js hot reloads via a `globalThis` cache (`src/lib/db.ts`).\" infrastructure.md itself names docs/modules/persistence/overview.md as a declared input for this node (see its own text: \"`docs/modules/persistence/overview.md` and `docs/modules/planned-items/overview.md`, both declared as inputs for this node\").",
+      "locationHint": "node state which underlying database engine Prisma is configured against.",
+      "message": "infrastructure.md claims no available module overview states the underlying database engine, but docs/modules/persistence/overview.md (which infrastructure.md itself lists as a declared input) explicitly states the Prisma client is bound to PostgreSQL via a PrismaPg adapter."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md, Responsibilities section, states: \"Define `authOptions` (`NextAuthOptions`): a `CredentialsProvider` that verifies email/password against `prisma.user` with `bcrypt.compare`, a `jwt`-strategy session, `jwt`/`session` callbacks that propagate the user ID onto the session...\"",
+      "locationHint": "is still an unfilled skeleton, the session strategy (JWT vs. database-backed",
+      "message": "infrastructure.md states the session strategy (JWT vs. database-backed) could not be confirmed because docs/modules/persistence/overview.md was an unfilled skeleton, but that document is not a skeleton - it explicitly states authOptions uses a jwt-strategy session, directly resolving the claimed gap."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md both contain full generated content (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents sections), not an `[UNFILLED]` sentinel.",
+      "locationHint": "[NEEDS CLARIFICATION] `docs/modules/persistence/overview.md` and",
+      "message": "infrastructure.md asserts docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md were still unfilled skeleton documents (`[UNFILLED]` sentinel) at generation time, but both documents are fully generated with substantive content in the current docs tree, contradicting the claim and leaving stale unresolved markers for facts (database engine, session strategy) that are actually confirmed elsewhere in the tree."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/glossary.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/domain-model.md and docs/modules/planned-items/data-model.md both contain full generated content (Overview, Class Diagram, Entities/Tables sections, etc., not an [UNFILLED] sentinel), and docs/modules/persistence/data-model.md likewise contains full generated content (PostgreSQL/Prisma overview, user table, etc.). All three share the same generated_inputs hash (sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d) as glossary.md itself, i.e. they belong to the same generation batch and are not skeleton stubs.",
+      "locationHint": "[NEEDS CLARIFICATION] The following module-output documents named as inputs to this glossary have not yet been generated (their content is the `[UNFILLED]` skeleton sentinel), so no terms could be sourced from them: `docs/modules/planned-items/domain-model.md`, `docs/modules/planned-items/data-model.md`, and `docs/modules/persistence/data-model.md`. Once those modules are generated, this glossary should be regenerated or extended to include their domain and persistence terminology (e.g. planned-item lifecycle terms and the persistence layer's shared data-access vocabulary).",
+      "message": "glossary.md claims docs/modules/planned-items/domain-model.md, docs/modules/planned-items/data-model.md, and docs/modules/persistence/data-model.md are unfilled [UNFILLED] skeleton stubs, but all three currently contain full generated content (PlannedItem entity/table definitions, the persistence module's user table, etc.) in the same generation batch - the glossary's 'Terms not yet available' claim contradicts the current state of those docs and omits terms (e.g. PlannedItem, planId, note/categoryId nullability, the persistence user table) that are now sourceable from them."
+    }
+  ]
+}

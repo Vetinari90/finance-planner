@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/requirements/functional-account-access.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md (Responsibilities): \"Define `authOptions` (`NextAuthOptions`): a `CredentialsProvider` that verifies email/password against `prisma.user` with `bcrypt.compare` ...\" - this file is present and fully filled (not an [UNFILLED] skeleton), and it directly answers the credential-verification question this doc marks unconfirmed.",
+      "locationHint": "unfilled skeleton at generation time, so this requirement's verification step",
+      "message": "FR-2's [NEEDS CLARIFICATION] says the credential-verification logic can't be confirmed because docs/modules/persistence/overview.md was 'still an unfilled skeleton at generation time'. That file is currently present and fully filled, and states the CredentialsProvider verifies the password with bcrypt.compare - this content is available and missing from FR-2."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md (Responsibilities): \"... a `jwt`-strategy session, `jwt`/`session` callbacks that propagate the user ID onto the session ...\" - present and filled, resolving the JWT-vs-database-backed session-strategy question this doc marks unconfirmed.",
+      "locationHint": "(`persistence`) has an unfilled overview document; these details are",
+      "message": "FR-3's [NEEDS CLARIFICATION] says the session strategy (JWT vs. database-backed) is unconfirmed because persistence's overview document is unfilled. docs/modules/persistence/overview.md is present and filled, and explicitly states the session uses a jwt strategy - this answer is missing from FR-3."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/planned-items/overview.md (Responsibilities): \"Enforce that a planned item can only be created under a plan owned by the authenticated user.\" - this file is present and filled, confirming per-account ownership scoping for planned-item creation, contradicting this doc's claim that the file was an unfilled skeleton.",
+      "locationHint": "document, was still an unfilled skeleton at generation time.",
+      "message": "FR-5's [NEEDS CLARIFICATION] says whether planned-items operations are scoped to the owning account is unconfirmed because docs/modules/planned-items/overview.md was 'still an unfilled skeleton at generation time'. That file is present and filled, and states planned-item creation is enforced to be scoped to a plan owned by the authenticated user - this is available content missing from FR-5 (listing is separately noted elsewhere as not yet implemented)."
+    }
+  ]
+}

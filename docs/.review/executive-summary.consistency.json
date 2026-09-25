@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/executive-summary.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md are both fully populated documents (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents sections all present with substantive content, no [UNFILLED] sentinel). docs/overview.md lines 29-51 directly cites and quotes both files (module map table with full purpose/source-path rows, dependency edges 'per persistence/overview.md' and 'per planned-items/overview.md'), showing a peer synthesis document treats both as available and populated.",
+      "locationHint": "finance-planner is a Next.js App Router web application that lets an authenticated user manage monthly financial plans: register/sign in, create a plan for a given year and month, add and list items within a plan, view a plan's detail with a running total, and delete a plan. This summary synthesizes the module-level `overview.md` documents produced for `auth`, `plans`, and `web-ui`, plus `README.md`, per the inputs declared for this node. [NEEDS CLARIFICATION] `docs/modules/planned-items/overview.md` and `docs/modules/persistence/overview.md`, both declared as inputs for this node, are still unfilled skeleton documents (`[UNFILLED]` sentinel) as of this generation run and could not be incorporated; the planned-items and persistence module summaries below are correspondingly incomplete.",
+      "message": "Contradicts docs/overview.md and the actual content of docs/modules/persistence/overview.md and docs/modules/planned-items/overview.md: this doc claims both module overviews are unfilled [UNFILLED] skeletons, but both files are fully populated (Purpose/Responsibilities/Boundaries/Key Entities/Dependencies/Dependents), and docs/overview.md's Module Map and Key Characteristics sections directly cite and quote both of them as available sources."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md contains a fully populated Purpose, Responsibilities (creation, validation via Zod, ownership enforcement via prisma.plan.findFirst), Boundaries, Key Entities, Dependencies, and Dependents sections - not an unfilled skeleton. It also explicitly flags (via its own [NEEDS CLARIFICATION]) that only a POST handler was found, i.e. it does discuss creation/validation/listing scope directly, contrary to this doc's claim that such content 'cannot be summarized here'.",
+      "locationHint": "- **Plan items.** [NEEDS CLARIFICATION] `docs/modules/planned-items/overview.md` is an unfilled skeleton in this generation run, so the item-level responsibilities (creation, validation, listing under `/api/plans/{planId}/items`) cannot be summarized here beyond what the plans module overview states: that `AddItemForm.tsx` (owned by `plans`) posts to a planned-items endpoint at `/api/plans/{planId}/items`.",
+      "message": "docs/modules/planned-items/overview.md is not an unfilled skeleton; it directly documents item creation, Zod validation, and ownership-enforcement responsibilities (and separately flags that no listing route handler was found), so this doc's claim that item-level responsibilities 'cannot be summarized here' beyond the plans-module overview is contradicted by the planned-items overview's own content."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md's Responsibilities section documents: PrismaClient singleton via PrismaPg adapter with globalThis caching, fail-fast on missing DATABASE_URL, authOptions (CredentialsProvider, bcrypt.compare, jwt-strategy session, jwt/session callbacks), and requireUserId(). This is substantially more detail than 'no further detail ... is available yet'.",
+      "locationHint": "- **Persistence.** [NEEDS CLARIFICATION] `docs/modules/persistence/overview.md` is an unfilled skeleton in this generation run. What can be inferred from the other module overviews is that a shared Prisma client (`prisma` from `@/lib/db`) is used for all plan and user CRUD queries; no further detail on the persistence module's own responsibilities is available yet.",
+      "message": "docs/modules/persistence/overview.md is fully populated and documents considerably more than 'a shared Prisma client is used for all plan and user CRUD queries' - it also covers the authOptions/CredentialsProvider configuration, the requireUserId() helper, and fail-fast DATABASE_URL behavior, contradicting this doc's claim that 'no further detail ... is available yet'."
+    }
+  ]
+}

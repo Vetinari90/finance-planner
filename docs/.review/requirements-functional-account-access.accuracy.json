@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/requirements/functional-account-access.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/plans/overview.md Boundaries section states the plans module 'calls requireUserId() (from @/lib/requireUser) and, on the page side, getServerSession(authOptions) (from @/lib/auth)' - i.e. requireUserId() is used for API routes while getServerSession(authOptions) is used only for page-side rendering, not for the API routes themselves. FR-3 in this same document correctly preserves that split ('requireUserId() (API routes) or getServerSession(authOptions) (pages)').",
+      "locationHint": "all performed against the current user resolved via `requireUserId()` /",
+      "message": "FR-5 attributes both `requireUserId()` and `getServerSession(authOptions)` to the four listed operations, all of which are API routes (POST/GET/GET/DELETE /api/plans...). Per docs/modules/plans/overview.md, getServerSession(authOptions) is used only 'on the page side', not by the API routes, so listing it alongside requireUserId() for these API-route operations is inconsistent with the source module overview."
+    }
+  ]
+}

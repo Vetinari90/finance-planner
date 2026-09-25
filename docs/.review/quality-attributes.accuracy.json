@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/quality-attributes.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/plans/[planId]/AddItemForm.tsx line 25: `const m = normalized.match(/^(\\d+)(\\.(\\d{1,2}))?$/);` - the decimal-digits group `(\\d{1,2})` is NOT itself optional; only the whole `(\\.(\\d{1,2}))` group (a literal dot followed by 1-2 digits) is optional.",
+      "locationHint": "| Plans | Zod schema (`CreatePlanSchema`) validates `title`, `year`, `month`, `currency` on `POST /api/plans`; `AddItemForm.tsx` validates the amount format client-side with a regex (`^(\\d+)(\\.(\\d{1,2})?)?$`). Database-level constraint enforcement is `[NEEDS CLARIFICATION]` (inferred only from `409` handling, not from the schema itself). | `modules/plans/technical-concerns.md` |",
+      "message": "The quoted regex `^(\\d+)(\\.(\\d{1,2})?)?$` misquotes the actual code. The real regex in AddItemForm.tsx is `^(\\d+)(\\.(\\d{1,2}))?$` (no `?` after `(\\d{1,2})`). The doc's version adds an extra `?` making the fractional digits themselves optional within the decimal-point group, which would incorrectly accept inputs like \"123.\" that the real regex rejects."
+    }
+  ]
+}

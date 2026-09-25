@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/web-ui/technical-concerns.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/route.ts defines CreatePlanSchema (zod) with year/month/currency/title rules; src/app/api/auth/register/route.ts defines RegisterSchema with email/password(min 8)/name rules; src/app/api/plans/[planId]/items/route.ts defines CreateItemSchema with title/amountCents/note rules. Client-side, src/app/register/page.tsx uses required and minLength={8} on inputs, src/app/login/LoginClient.tsx uses required email/password inputs, and src/app/plans/[planId]/AddItemForm.tsx implements a regex-based amount-to-cents validator. All of these files are listed in this document's own codeFiles input.",
+      "locationHint": "| [NEEDS CLARIFICATION] | No form inputs, request bodies, or validation logic appear in `src/app/layout.tsx` or `src/app/page.tsx`; this module's reviewed scope contains no user-input surface. |",
+      "message": "Validation Layers section restricts its scope statement to only layout.tsx/page.tsx and concludes no user-input surface exists, but this document's own codeFiles include multiple request-body zod schemas (CreatePlanSchema, RegisterSchema, CreateItemSchema) and client-side form validation (required/minLength attributes, custom amount parser) that were never covered."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Zod schemas define concrete field rules that are evidenced but omitted: RegisterSchema.email (z.string().email()), RegisterSchema.password (min 8, custom message 'Minimalne 8 znaku') in src/app/api/auth/register/route.ts; CreatePlanSchema.year/month ranges and currency length in src/app/api/plans/route.ts; CreateItemSchema.title max 120, amountCents min 0, note max 400 in src/app/api/plans/[planId]/items/route.ts.",
+      "locationHint": "[NEEDS CLARIFICATION] No entity or field validation rules are present in the reviewed scope.",
+      "message": "Field Validation Rules section says none are present, but this document's codeFiles contain concrete zod field-level rules (email format, password min length, string length/range bounds) that are absent from the doc."
+    },
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/route.ts, src/app/api/auth/register/route.ts, and src/app/api/plans/[planId]/items/route.ts all consistently return NextResponse.json({ error: string }, { status }) on failure, and { error: string, details: parsed.error.flatten() } specifically for zod validation failures - a concrete, repeated error-response shape.",
+      "locationHint": "[NEEDS CLARIFICATION] No error-response shape is evidenced in `src/app/layout.tsx` or `src/app/page.tsx`.",
+      "message": "Error Format section claims no error-response shape is evidenced, but the API route files in this document's own codeFiles show a consistent `{ error, details? }` JSON error shape used across register, plans, and items routes."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Concrete status codes with meanings appear across codeFiles: 401 'Unauthorized' (src/app/api/plans/route.ts, src/app/api/plans/[planId]/items/route.ts), 400 'Invalid input' on zod parse failure (same files plus register/route.ts), 404 'Not found' (items/route.ts), 409 'Plan for this month already exists' / 'Email already exists' (plans/route.ts, register/route.ts).",
+      "locationHint": "| [NEEDS CLARIFICATION] | Not evidenced in the reviewed scope |",
+      "message": "Common Error Codes table says nothing is evidenced, but the API route files in this document's own codeFiles evidence specific status codes (400, 401, 404, 409) with distinct meanings that are omitted from the table."
+    }
+  ]
+}

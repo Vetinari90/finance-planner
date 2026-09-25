@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/security.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/doc_struc.md lists docs/cross-cutting/threat-model.md and docs/cross-cutting/data-handling.md with recipe: docs/cross-cutting/security.md, i.e. security.md is their template. Both sibling docs contain top-level '### Audit Trail' and '### Monitoring and Observability' sections (threat-model.md lines 51 and 74; data-handling.md lines 82 and 151). security.md itself has no Audit Trail or Monitoring and Observability section anywhere in its content, and neither term appears in the document.",
+      "locationHint": "### Known Gaps and Follow-Ups",
+      "message": "security.md is the recipe/template for threat-model.md and data-handling.md, but is missing the Audit Trail and Monitoring and Observability sections that both sibling documents generated from the same recipe include as required top-level sections."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/overview.md (not an UNFILLED skeleton) states under Responsibilities: 'Define authOptions (NextAuthOptions): a CredentialsProvider that verifies email/password against prisma.user with bcrypt.compare, a jwt-strategy session, jwt/session callbacks that propagate the user ID onto the session, and a custom /login sign-in page (src/lib/auth.ts).' This answers the 'session strategy (JWT vs. database)' question the line raises. Sibling docs generated later (docs/cross-cutting/threat-model.md line 21, docs/cross-cutting/data-handling.md lines 43-45) already cite this same source successfully.",
+      "locationHint": "- [NEEDS CLARIFICATION] The internal behavior of `authOptions` — provider configuration, session strategy (JWT vs. database), token lifetime, and the exact credential-verification logic — is imported from `@/lib/auth` but that file falls under the `persistence`/`src/lib` module scope, not `auth`, and is outside this dispatch's grounded read set. `docs/modules/persistence/overview.md` and `docs/modules/persistence/technical-concerns.md`, which could resolve this, are still `[UNFILLED]` skeleton documents from a not-yet-completed parallel work package at the time this document was generated.",
+      "message": "This line claims docs/modules/persistence/overview.md is still an UNFILLED skeleton and could resolve the session-strategy question, but that document is now fully populated and states the session strategy is jwt-based - material available in the current input set was not incorporated into security.md's answer."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/api.md (not an UNFILLED skeleton) documents, in its Error Codes table for POST /api/plans/{planId}/items: '404 | Not Found | No plan with the given planId exists for the authenticated user (prisma.plan.findFirst({ where: { id: planId, userId } }) returns null)' - the same userId-scoped ownership-check pattern used by the plans module.",
+      "locationHint": "- [NEEDS CLARIFICATION] Whether the `planned-items` module (item CRUD under `/api/plans/{planId}/items`) applies the same user-scoping and ownership-check pattern cannot be confirmed here: `docs/modules/planned-items/overview.md`, `docs/modules/planned-items/technical-concerns.md`, and `docs/modules/planned-items/api.md` are all still `[UNFILLED]` skeleton documents at the time this document was generated.",
+      "message": "This line claims docs/modules/planned-items/api.md is still an UNFILLED skeleton, but that document is now fully populated and shows planned-items uses the same prisma.plan.findFirst({ id: planId, userId }) ownership-check pattern as plans - material available in the current input set that answers this gap was not incorporated."
+    }
+  ]
+}

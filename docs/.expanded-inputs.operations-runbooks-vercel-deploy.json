@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "2.4.0",
+  "projectRoot": "/opt/asr/workspace/7faee87f-8e08-4f09-844f-00a473b3b140/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner",
+  "generatedAt": "2026-09-25T21:56:34.863Z",
+  "moduleId": "operations-runbooks-vercel-deploy",
+  "isCrossCutting": false,
+  "files": [
+    {
+      "path": "/opt/asr/workspace/7faee87f-8e08-4f09-844f-00a473b3b140/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner/README.md",
+      "role": "reference",
+      "sizeBytes": 1450,
+      "estimatedTokens": 316
+    }
+  ],
+  "totalEstimatedTokens": 316,
+  "thresholdUsed": 100000,
+  "analyzedCommit": "7e6f2e917482ba7eeb52aa7c8337382110f20ac7",
+  "analyzedBranch": "sdlc/20260925-1148",
+  "isSynthesis": true
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/web-ui/technical-concerns.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/plans/[planId]/AddItemForm.tsx, src/app/plans/NewPlanForm.tsx, src/app/login/LoginClient.tsx all render <form> elements with controlled inputs; src/app/api/auth/register/route.ts defines a zod RegisterSchema, src/app/api/plans/route.ts defines a zod CreatePlanSchema, and src/app/api/plans/[planId]/items/route.ts defines a zod CreateItemSchema, each validated via safeParse on request bodies.",
+      "locationHint": "| [NEEDS CLARIFICATION] | No form inputs, request bodies, or validation logic appear in `src/app/layout.tsx` or `src/app/page.tsx`; this module's reviewed scope contains no user-input surface. |",
+      "message": "Claims the web-ui module's reviewed scope has no user-input surface, but the module's own code inputs (AddItemForm.tsx, NewPlanForm.tsx, LoginClient.tsx, and three API routes with zod schemas) contain extensive form inputs and request-body validation logic. The document only checked layout.tsx/page.tsx and ignored the rest of the module's provided code files."
+    },
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/auth/register/route.ts RegisterSchema (email format, password min(8), name min/max); src/app/api/plans/route.ts CreatePlanSchema (title max(80), year 2000-2100, month 1-12, currency exactly 3 chars); src/app/api/plans/[planId]/items/route.ts CreateItemSchema (title min/max, amountCents int min(0), note max(400)).",
+      "locationHint": "[NEEDS CLARIFICATION] No entity or field validation rules are present in the reviewed scope.",
+      "message": "States no field validation rules are present, but zod schemas in the module's own API route inputs define concrete field validation rules (email format, password length, numeric ranges, string length limits)."
+    },
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/auth/register/route.ts, src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, and src/app/api/plans/[planId]/items/route.ts all return NextResponse.json({ error: string, ...}) with status codes 400/401/404/409/201.",
+      "locationHint": "[NEEDS CLARIFICATION] No error-response shape is evidenced in `src/app/layout.tsx` or `src/app/page.tsx`.",
+      "message": "Claims no error-response shape is evidenced, but the module's API route inputs consistently use a `{ error: string }` (optionally with `details`) JSON error shape."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Observed status codes across the module's API routes: 400 'Invalid input' (register, plans, items routes), 401 'Unauthorized' (plans, plans/[planId], items routes), 404 'Not found' (plans/[planId], items routes), 409 'Email already exists' / 'Plan for this month already exists' (register, plans routes), 201 Created (register, plans, items routes).",
+      "locationHint": "| [NEEDS CLARIFICATION] | Not evidenced in the reviewed scope |",
+      "message": "The Common Error Codes table claims no error codes are evidenced, but the module's API routes evidence concrete status codes (400, 401, 404, 409, 201) with specific error messages."
+    }
+  ]
+}
