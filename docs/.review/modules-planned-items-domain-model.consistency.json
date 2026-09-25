@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/domain-model.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/plans/domain-model.md class diagram and Entities section name the same cross-module entity `Item` (fields id, planId, title, amountCents, note, categoryId) and states 'Full domain rules for Item belong to the planned-items module's own domain-model.md' - i.e. it is describing the entity this document defines as `PlannedItem`. The Prisma model is `plannedItem` (per src/app/api/plans/[planId]/items/route.ts's `prisma.plannedItem.create()`), matching this document's naming, not the sibling doc's 'Item'.",
+      "locationHint": "### PlannedItem",
+      "message": "This document names the entity `PlannedItem` (matching the `prisma.plannedItem` model), but the linked plans module doc (docs/modules/plans/domain-model.md) names the identical cross-module entity `Item` throughout its class diagram and Entities table. The two docs disagree on the entity's name."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/plans/domain-model.md's Item entity table lists `id` as a present attribute (row: '| id | [NEEDS CLARIFICATION - type not established] | Unique identifier |'), treating the field's existence as given and only its type as unconfirmed, whereas this document says the field's very existence is 'presumed but not confirmed'.",
+      "locationHint": "[NEEDS CLARIFICATION] `PlannedItem.id` and timestamp fields are presumed but not confirmed; no Prisma schema was present in this module's inputs.",
+      "message": "This document treats the existence of an `id` field on the entity as unconfirmed/presumed, while the sibling plans module doc (docs/modules/plans/domain-model.md) lists `id` as a confirmed attribute of the same cross-module entity (only its type is flagged as unconfirmed there)."
+    }
+  ]
+}

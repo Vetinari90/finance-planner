@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/technical-concerns.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/[planId]/items/route.ts returns NextResponse.json({ error: \"Unauthorized\" }, { status: 401 }) at line 19 and NextResponse.json({ error: \"Not found\" }, { status: 404 }) at line 30, in the same route file this document cites elsewhere (e.g. line 20's reference to this route).",
+      "locationHint": "[NEEDS CLARIFICATION] The grounded code returns a single generic `\"Invalid input\"` error string on validation failure (plus the Zod `details` payload); no enumerated error-code taxonomy (e.g. `REQUIRED`, `TOO_LONG`) was present in inputs.",
+      "message": "The Common Error Codes section covers only the 400 'Invalid input' validation error and omits the 401 'Unauthorized' and 404 'Not found' error responses that are evidenced in the same route file (src/app/api/plans/[planId]/items/route.ts, lines 19 and 30) this document is grounded in."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/auth/technical-concerns.md shares this document's exact frontmatter type ('type: technical-concerns', unlike the SLOT-wrapped 'type: documentation' plans/web-ui/persistence variants) and, for the same 'Caching' section, includes a '### Cached Data' table and a '### Monitoring' table in addition to '### Overview'. This document's Caching section contains only an '### Overview' subsection.",
+      "locationHint": "## Caching",
+      "message": "The Caching section is missing 'Cached Data' and 'Monitoring' subsections that the same-type sibling doc docs/modules/auth/technical-concerns.md includes, suggesting expected subsections for this document type were dropped."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/auth/technical-concerns.md (same 'type: technical-concerns' as this document) structures Internationalization with '### Overview' (bold **i18n Required:** / **Default Locale:** fields), '### Supported Locales', '### Translatable Content', and '### Locale-Specific Formatting' subsections. This document's Internationalization section is a single unstructured sentence with none of those subsections or fields.",
+      "locationHint": "## Internationalization",
+      "message": "The Internationalization section lacks the Overview (i18n Required / Default Locale), Supported Locales, Translatable Content, and Locale-Specific Formatting subsections present in the same-type sibling doc docs/modules/auth/technical-concerns.md, indicating expected content is missing."
+    }
+  ]
+}

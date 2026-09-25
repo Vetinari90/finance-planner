@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/data-model.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/lib/db.ts imports `PrismaPg` from `@prisma/adapter-pg` and constructs the Prisma client with `new PrismaPg({ connectionString })`; this file is one of the codeFiles for this dispatch (the module's own inputs) and directly names the Postgres adapter.",
+      "locationHint": "**Database:** [NEEDS CLARIFICATION] The Prisma schema file was not present in inputs.code for this dispatch; the database engine (e.g. PostgreSQL) could not be confirmed from this module's own inputs. The `plannedItem` model is accessed through a shared Prisma client (`@/lib/db`), which per `generation.module-source-map` is owned by the persistence module.",
+      "message": "The Overview claims the database engine could not be confirmed from the module's inputs, but src/lib/db.ts (listed in this dispatch's codeFiles) imports `PrismaPg` from `@prisma/adapter-pg` and uses it to construct the Prisma client, directly confirming PostgreSQL. This available input evidence was not incorporated into the section."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "src/app/plans/[planId]/page.tsx renders `plan.items.map((it) => ... key={it.id} ...)`, reading an `id` property off each plannedItem instance returned by `prisma.plan.findFirst({ include: { items: ... } })`.",
+      "locationHint": "| id | [NEEDS CLARIFICATION] | [NEEDS CLARIFICATION] | Not written explicitly in the observed `create()` call; presumed primary key but not confirmed |",
+      "message": "The doc scopes its column evidence to only src/app/api/plans/[planId]/items/route.ts's create() call, but src/app/plans/[planId]/page.tsx (also in codeFiles) reads `it.id` off plannedItem records, which is available evidence of the `id` field's existence that the row does not mention."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "src/app/plans/[planId]/page.tsx and src/app/api/plans/[planId]/route.ts both call `include: { items: { orderBy: { createdAt: \"asc\" } } }`, referencing a `createdAt` field on the plannedItem model.",
+      "locationHint": "| created_at | [NEEDS CLARIFICATION] | [NEEDS CLARIFICATION] | Not observed in the grounded code |",
+      "message": "The row states the created_at column was 'not observed in the grounded code', but two other codeFiles for this dispatch (src/app/plans/[planId]/page.tsx and src/app/api/plans/[planId]/route.ts) order plannedItem records by `createdAt`, which is available evidence of the field's existence that was not incorporated."
+    }
+  ]
+}

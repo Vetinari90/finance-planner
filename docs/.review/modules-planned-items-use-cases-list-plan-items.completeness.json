@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/use-cases/list-plan-items.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/plans/[planId]/page.tsx lines 18-21 fetch `prisma.plan.findFirst({ where: { id: params.planId, userId }, include: { items: { orderBy: { createdAt: \"asc\" } } } })` and lines 63-108 render each item's title, note, and amount in a list, with a total computed on line 25. This is input-evident material for how plan items are listed and displayed, even though it is a server component read rather than a dedicated GET route handler.",
+      "locationHint": "[NEEDS CLARIFICATION] Not grounded in inputs.",
+      "message": "The Main Flow (and similarly Preconditions/Postconditions/Alternative Flows/Error Handling) sections are left as bare 'not grounded' placeholders, but src/app/plans/[planId]/page.tsx contains a grounded listing flow: it queries the plan with its items (ordered by createdAt asc) scoped to the authenticated userId, returns 404 via notFound() if the plan isn't found/owned, and renders the items (title, note, amount) with a computed total. This input-evident material is absent from the documented flow sections despite being available in codeFiles."
+    }
+  ]
+}

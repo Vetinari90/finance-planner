@@ -24,6 +24,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 ## Preconditions
 
 [NEEDS CLARIFICATION] Not grounded in inputs.
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Main Flow (and similarly Preconditions/Postconditions/Alternative Flows/Error Handling) sections are left as bare 'not grounded' placeholders, but src/app/plans/[planId]/page.tsx contains a grounded listing flow: it queries the plan with its items (ordered by createdAt asc) scoped to the authenticated userId, returns 404 via notFound() if the plan isn't found/owned, and renders the items (title, note, amount) with a computed total. This input-evident material is absent from the documented flow sections despite being available in codeFiles.
 
 ## Postconditions
 

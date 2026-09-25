@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/use-cases/add-planned-item.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/cross-cutting/error-handling.md states under HTTP Status Codes: 'None of the five module overview documents state which HTTP status codes individual finance-planner routes actually return (for example ... what POST /api/plans/{planId}/items returns when the plan is not owned by the caller)' and under Error Classification / Not Found: 'No overview states how a not-found plan, planned item, or user is reported to the caller.' docs/cross-cutting/api-conventions.md makes the same claim under HTTP Status Codes: 'None of the synthesized module overviews states which HTTP status codes the route handlers actually return.'",
+      "locationHint": "| Plan not found / not owned by user | `404` `{\"error\": \"Not found\"}` |",
+      "message": "This use-case doc documents the exact status codes and error body for POST /api/plans/{planId}/items (401, 404 with {\"error\":\"Not found\"}, 400 with details, 201 on success), directly contradicting docs/cross-cutting/error-handling.md and docs/cross-cutting/api-conventions.md, both of which assert that no document states which HTTP status codes this route returns, including specifically the not-owned/not-found case."
+    }
+  ]
+}

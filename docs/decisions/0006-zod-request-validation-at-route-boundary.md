@@ -63,6 +63,7 @@ shared Prisma client. This pattern is evidenced consistently across three module
   `POST /api/plans/{planId}/items`.
 
 [NEEDS CLARIFICATION] The exact Zod schema definitions (field constraints, error
+[NEEDS CLARIFICATION] [REVIEW] consistency: This ADR states the exact Zod schema field constraints and error messages 'were not available in the module-overview documents ... used to synthesize this decision', but the sibling api.md documents for auth, plans, and planned-items (same generated doc set) each spell out the precise field constraints - and auth/api.md even quotes the exact server-side error message - directly contradicting the claim that this information was unavailable.
 messages) and whether schemas are shared/reused across these three route handlers
 or defined independently per route were not available in the module-overview
 documents or `README.md` used to synthesize this decision; confirming this

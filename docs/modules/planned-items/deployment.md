@@ -24,6 +24,8 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 #### Required
 
 [NEEDS CLARIFICATION] No environment variable references appear in `route.ts`; the underlying `@/lib/db` and `@/lib/requireUser` modules (not included in this dispatch's inputs) likely require configuration (e.g. a database connection string), but this could not be confirmed from the inputs available to this module.
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Required Environment Variables subsection is left as unresolved [NEEDS CLARIFICATION] on the premise that `@/lib/db` was not provided as an input, but `src/lib/db.ts` was in fact part of this dispatch's codeFiles and explicitly requires `DATABASE_URL` (throws if unset). This is input-evident material that the Configuration > Environment Variables > Required section should have captured but omitted.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc claims `@/lib/db` and `@/lib/requireUser` were 'not included in this dispatch's inputs' and that a required env var 'could not be confirmed', but src/lib/db.ts is in this dispatch's codeFiles and explicitly requires and validates `DATABASE_URL` (throwing if unset), so this is directly confirmable rather than unconfirmed.
 
 #### Optional
 

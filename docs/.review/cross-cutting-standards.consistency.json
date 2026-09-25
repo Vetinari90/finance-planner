@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/standards.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/auth/overview.md line 27 documents a 'Provide a convenience GET /logout route (src/app/logout/route.ts) that redirects to NextAuth's built-in /api/auth/signout endpoint.' This route is included in the parallel cross-cutting route enumerations in docs/cross-cutting/api-conventions.md ('| GET | `/logout` (redirects to `/api/auth/signout`) | auth |'), docs/cross-cutting/configuration.md ('| `/logout` | GET | auth |'), and docs/cross-cutting/error-handling.md ('`GET /logout`, a convenience route redirecting to NextAuth's `/api/auth/signout` (auth overview)'), all sourced from the same auth overview.",
+      "locationHint": "- Server-side behavior is implemented as Next.js App Router Route Handlers under `src/app/api/**`, one directory per resource: `POST /api/auth/register` and the NextAuth catch-all `/api/auth/[...nextauth]` (per [auth overview](../modules/auth/overview.md)); `GET`/`POST /api/plans` and `GET`/`DELETE /api/plans/{planId}` (per [plans overview](../modules/plans/overview.md)); `POST /api/plans/{planId}/items` (per [planned-items overview](../modules/planned-items/overview.md)).",
+      "message": "standards.md's API Conventions route enumeration omits the `GET /logout` route, while the sibling cross-cutting synthesis docs (api-conventions.md, configuration.md, error-handling.md), drawing on the same auth module overview, all list it - an inconsistent route surface across parallel docs covering the same topic."
+    }
+  ]
+}

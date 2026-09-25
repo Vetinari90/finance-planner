@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/configuration.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/auth/overview.md states: \"Provide a convenience `GET /logout` route (`src/app/logout/route.ts`) that redirects to NextAuth's built-in `/api/auth/signout` endpoint.\" - the logout handler's file path is src/app/logout/route.ts, not under src/app/api/. configuration.md's own REST Standards table (immediately below the Design Principles claim) lists `/logout` as one of the endpoints named in the module overviews.",
+      "locationHint": "Every endpoint named across the module overviews is implemented as a Next.js App Router route handler under `src/app/api/` and is unversioned (no `/api/v1`",
+      "message": "Design Principles claims every endpoint named across the module overviews is implemented under `src/app/api/`, but this contradicts both auth/overview.md (which places the `/logout` route at `src/app/logout/route.ts`, outside `src/app/api/`) and configuration.md's own REST Standards table, which lists `/logout` among the named endpoints."
+    }
+  ]
+}

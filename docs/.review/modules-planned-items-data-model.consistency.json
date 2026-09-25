@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/data-model.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/persistence/data-model.md line 19 states: \"**Database:** PostgreSQL, accessed through Prisma ORM. `src/lib/db.ts` constructs a `PrismaPg` adapter from `DATABASE_URL`...\" - grounded in the same src/lib/db.ts file, which is also listed among this planned-items doc's own code inputs, and both docs share the identical generated_inputs hash (sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d).",
+      "locationHint": "**Database:** [NEEDS CLARIFICATION] The Prisma schema file was not present in inputs.code for this dispatch; the database engine (e.g. PostgreSQL) could not be confirmed from this module's own inputs. The `plannedItem` model is accessed through a shared Prisma client (`@/lib/db`), which per `generation.module-source-map` is owned by the persistence module.",
+      "message": "This doc claims the database engine 'could not be confirmed', but the sibling persistence/data-model.md (same generated_inputs hash) directly confirms PostgreSQL from src/lib/db.ts's PrismaPg adapter - a fact grounded in an input this doc's own module also has access to (src/lib/db.ts is in this doc's code inputs)."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/plans/data-model.md's `item` table row states: \"createdAt | timestamp | NO | Used to order items ascending\", grounded in `include: { items: { orderBy: { createdAt: \"asc\" } } }` from src/app/api/plans/[planId]/route.ts - a file also listed in this planned-items doc's own code inputs.",
+      "locationHint": "| created_at | [NEEDS CLARIFICATION] | [NEEDS CLARIFICATION] | Not observed in the grounded code |",
+      "message": "This doc states created_at 'not observed in the grounded code', contradicting the sibling docs/modules/plans/data-model.md, which documents the same plannedItem/item table's createdAt column as a confirmed timestamp field used for ordering, grounded in code (src/app/api/plans/[planId]/route.ts) that is also among this doc's own inputs."
+    }
+  ]
+}

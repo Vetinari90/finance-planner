@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0006-zod-request-validation-at-route-boundary.md",
+  "dimension": "accuracy",
+  "findings": []
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/api.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/[planId]/items/route.ts line 53: `return NextResponse.json({ item }, { status: 201 });` - the POST handler's success response status code is grounded in the code, but the doc's Error Codes table (and the rest of the Key Endpoints section) only lists 400/401/404 and never states the 201 success status anywhere in the document.",
+      "locationHint": "| Status | Code | When |",
+      "message": "The POST /api/plans/{planId}/items success response status code (201, per `route.ts` line 53) is never documented; the Error Codes table and Response Example section cover only error statuses, silently omitting the success status."
+    }
+  ]
+}

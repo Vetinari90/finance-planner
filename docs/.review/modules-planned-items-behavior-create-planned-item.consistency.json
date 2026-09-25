@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/behavior/create-planned-item.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "Counting the mermaid sequenceDiagram's autonumbered messages in doc lines 41-58 in source order (autonumber assigns one number per arrow regardless of alt/else branch): 1 Client->>Route, 2 Route->>Auth, 3 Auth-->>Route, 4 Route-->>Client:401, 5 Route->>DB:plan.findFirst, 6 DB-->>Route:plan-or-null, 7 Route-->>Client:404, 8 Route->>Route:CreateItemSchema.safeParse, 9 Route-->>Client:400, 10 Route->>DB:plannedItem.create, 11 DB-->>Route:item, 12 Route-->>Client:201. The CreateItemSchema.safeParse arrow is step 8, not step 7 (step 7 is the 404 response).",
+      "locationHint": "### 3. Input validation (Step 7)",
+      "message": "Internal inconsistency between the mermaid diagram's autonumbered steps and the Flow Description: the input-validation arrow (CreateItemSchema.safeParse) is step 8 in the diagram, but this heading labels it 'Step 7', which is actually the preceding 404 Not Found response arrow."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Same autonumbering derivation as above: the persistence-related arrows (plannedItem.create, DB-->>Route: item, 201 Created response) are steps 10, 11, and 12 in the diagram, not 9-11. Step 9 is the 400 Invalid input response arrow, which belongs to the input-validation alt branch, not persistence.",
+      "locationHint": "### 4. Persistence (Steps 9-11)",
+      "message": "Internal inconsistency between the mermaid diagram's autonumbered steps and the Flow Description: the persistence arrows (plannedItem.create / DB response / 201 Created) are steps 10-12 in the diagram, but this heading labels them 'Steps 9-11', which incorrectly includes the unrelated step 9 (400 Invalid input response) and omits the actual final step 12 (201 Created)."
+    }
+  ]
+}

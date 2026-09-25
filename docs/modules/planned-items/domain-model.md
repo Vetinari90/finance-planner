@@ -35,6 +35,8 @@ classDiagram
 ```
 
 [NEEDS CLARIFICATION] `PlannedItem.id` and timestamp fields are presumed but not confirmed; no Prisma schema was present in this module's inputs.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document treats the existence of an `id` field on the entity as unconfirmed/presumed, while the sibling plans module doc (docs/modules/plans/domain-model.md) lists `id` as a confirmed attribute of the same cross-module entity (only its type is flagged as unconfirmed there).
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Key Attributes table and class diagram omit `id` and `createdAt`, and this line claims they are 'presumed but not confirmed' with no Prisma schema available, but other codeFiles in this dispatch (plans/[planId]/page.tsx and api/plans/[planId]/route.ts) already reference `it.id` and order items by `createdAt`, evidencing both fields. The Entities section is incomplete because it does not capture this input-evident attribute.
 
 ## Entities
 
@@ -49,6 +51,7 @@ classDiagram
 ---
 
 ### PlannedItem
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document names the entity `PlannedItem` (matching the `prisma.plannedItem` model), but the linked plans module doc (docs/modules/plans/domain-model.md) names the identical cross-module entity `Item` throughout its class diagram and Entities table. The two docs disagree on the entity's name.
 
 **Purpose:** A single budgeted line item (e.g. an expense) within a plan.
 

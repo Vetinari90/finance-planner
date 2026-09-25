@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/api.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/lib/auth.ts is included in codeFiles and directly implements the authentication mechanism: `session: { strategy: \"jwt\" }` with a `CredentialsProvider` (bcrypt password check against `prisma.user`), plus `jwt`/`session` callbacks that copy `token.sub` onto `session.user.id`.",
+      "locationHint": "| Method | Session-derived user id resolved via `requireUserId()` (imported from `@/lib/requireUser`); requests without a resolvable user id receive `401 Unauthorized`. [NEEDS CLARIFICATION] The concrete authentication mechanism (e.g. JWT session cookie) is implemented outside the files available to this dispatch. |",
+      "message": "The doc claims the concrete auth mechanism is 'implemented outside the files available to this dispatch', but src/lib/auth.ts is in codeFiles and shows exactly this: NextAuth JWT session strategy with a CredentialsProvider. The claim contradicts an available input."
+    },
+    {
+      "confidence": "high",
+      "evidence": "src/lib/requireUser.ts is included in codeFiles and its full implementation is visible: `requireUserId()` calls `getServerSession(authOptions)` and returns `session?.user?.id ?? null`.",
+      "locationHint": "[NEEDS CLARIFICATION] Authorization header/cookie mechanics were not present in the grounded route code; `requireUserId()` reads them internally but its implementation is outside this dispatch's inputs.",
+      "message": "The doc claims requireUserId()'s implementation is 'outside this dispatch's inputs', but src/lib/requireUser.ts is in codeFiles and fully shows the implementation (getServerSession(authOptions) reading the NextAuth JWT session). The claim contradicts an available input."
+    }
+  ]
+}

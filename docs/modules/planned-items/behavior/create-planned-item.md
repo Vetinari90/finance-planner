@@ -72,10 +72,12 @@ The handler resolves the current user id via `requireUserId()`. If no user id is
 The handler queries `prisma.plan.findFirst({ where: { id: planId, userId }, select: { id: true } })`. This both confirms the plan exists AND that it belongs to the authenticated user; if no matching plan is found, the handler returns `404 Not Found`.
 
 ### 3. Input validation (Step 7)
+[NEEDS CLARIFICATION] [REVIEW] consistency: Internal inconsistency between the mermaid diagram's autonumbered steps and the Flow Description: the input-validation arrow (CreateItemSchema.safeParse) is step 8 in the diagram, but this heading labels it 'Step 7', which is actually the preceding 404 Not Found response arrow.
 
 The JSON request body is parsed and validated against `CreateItemSchema` (Zod): `title` (string, 1-120 chars), `amountCents` (non-negative integer), `categoryId` (optional, nullable string), `note` (optional, nullable string, max 400 chars). A failed request body parse (`req.json().catch(() => null)`) is treated the same as a schema failure.
 
 ### 4. Persistence (Steps 9-11)
+[NEEDS CLARIFICATION] [REVIEW] consistency: Internal inconsistency between the mermaid diagram's autonumbered steps and the Flow Description: the persistence arrows (plannedItem.create / DB response / 201 Created) are steps 10-12 in the diagram, but this heading labels them 'Steps 9-11', which incorrectly includes the unrelated step 9 (400 Invalid input response) and omits the actual final step 12 (201 Created).
 
 On successful validation, the handler calls `prisma.plannedItem.create()` with `planId`, `title`, `amountCents`, `categoryId` (defaulted to `null`), and `note` (defaulted to `null`), then returns the created `item` with `201 Created`.
 

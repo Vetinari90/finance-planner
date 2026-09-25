@@ -53,6 +53,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 ### Common Error Codes
 
 [NEEDS CLARIFICATION] The grounded code returns a single generic `"Invalid input"` error string on validation failure (plus the Zod `details` payload); no enumerated error-code taxonomy (e.g. `REQUIRED`, `TOO_LONG`) was present in inputs.
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Common Error Codes section covers only the 400 'Invalid input' validation error and omits the 401 'Unauthorized' and 404 'Not found' error responses that are evidenced in the same route file (src/app/api/plans/[planId]/items/route.ts, lines 19 and 30) this document is grounded in.
 
 ## Internationalization
 

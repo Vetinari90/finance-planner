@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/use-cases/add-planned-item.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/plans/[planId]/AddItemForm.tsx (an enumerated codeFile for this doc) implements toCents() with regex /^(\\d+)(\\.(\\d{1,2}))?$/; when the entered amount does not match, onSubmit sets err to \"Amount must be a number with max 2 decimals (e.g. 1200 or 1200.50)\" and returns before calling fetch - i.e. a genuine client-side rejection branch that never reaches the POST /api/plans/{planId}/items route handler.",
+      "locationHint": "[NEEDS CLARIFICATION] No alternative (non-error) flows were evidenced in the grounded code; the handler has a single linear success path.",
+      "message": "The Alternative Flows section claims no alternative/error flows were evidenced, but the codeFiles for this doc include AddItemForm.tsx, whose toCents() client-side validation rejects malformed amount input (blocking submission with an inline error) before any request is sent - this evidenced flow is absent from both Alternative Flows and Error Handling."
+    }
+  ]
+}

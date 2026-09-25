@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/overview.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/plans/overview.md Dependencies table states: 'auth | Resolves the current user for both API routes (requireUserId()) and the server-rendered pages (getServerSession(authOptions)); redirects to /login when unauthenticated' - confidently attributing requireUserId() to the auth module. docs/modules/persistence/overview.md Responsibilities section also claims requireUserId() as its own: 'Expose requireUserId(), an async helper that calls getServerSession(authOptions) ... (src/lib/requireUser.ts)'.",
+      "locationHint": "[NEEDS CLARIFICATION] `requireUserId()` (`@/lib/requireUser`) performs session/user resolution; per `generation.module-source-map` this file path falls under the `persistence` module (`src/lib`), though functionally it is an authentication concern; the true owning module could not be confirmed from this dispatch's inputs.",
+      "message": "This doc hedges that the module owning requireUserId() 'could not be confirmed', but sibling doc docs/modules/plans/overview.md confidently attributes requireUserId()/authOptions to the 'auth' module in its Dependencies table, while docs/modules/persistence/overview.md separately claims requireUserId() as its own responsibility - the doc set already contains conflicting confident answers to the question this doc presents as unresolved."
+    }
+  ]
+}

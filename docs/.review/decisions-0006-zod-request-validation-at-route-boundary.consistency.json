@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0006-zod-request-validation-at-route-boundary.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/auth/api.md documents the register Zod schema (`email`: z.string().email(); `password`: min 8 chars, server message \"Minimalne 8 znaku\"; `name`: optional 1-80 chars). docs/modules/plans/api.md documents CreatePlanSchema field-by-field (title 1-80 chars, year 2000-2100, month 1-12, currency exactly 3 chars) with defaults. docs/modules/planned-items/api.md documents CreateItemSchema (title 1-120 chars, amountCents non-negative integer, note max 400 chars). All three are part of the same generated docs tree this ADR links to.",
+      "locationHint": "[NEEDS CLARIFICATION] The exact Zod schema definitions (field constraints, error",
+      "message": "This ADR states the exact Zod schema field constraints and error messages 'were not available in the module-overview documents ... used to synthesize this decision', but the sibling api.md documents for auth, plans, and planned-items (same generated doc set) each spell out the precise field constraints - and auth/api.md even quotes the exact server-side error message - directly contradicting the claim that this information was unavailable."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "Frontmatter (line 5): links: [../modules/auth/overview.md, ../modules/plans/overview.md, ../modules/planned-items/overview.md]. Body (line 27) links to ../modules/persistence/overview.md via '(owned by the [persistence module](../modules/persistence/overview.md))', a link not present in the frontmatter links list.",
+      "locationHint": "shared Prisma client (owned by the [persistence module](../modules/persistence/overview.md)):",
+      "message": "The document body links to the persistence module overview, but the frontmatter's declared `links` array only lists auth, plans, and planned-items overviews - the declared link set is inconsistent with the links actually used in the document body."
+    }
+  ]
+}

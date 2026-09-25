@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/planned-items/api.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/[planId]/items/route.ts line 30 returns NextResponse.json({ error: \"Not found\" }, { status: 404 }) (lowercase 'found'). Sibling docs docs/modules/planned-items/use-cases/add-planned-item.md ('Plan not found / not owned by user | `404` `{\"error\": \"Not found\"}`') and docs/modules/planned-items/behavior/create-planned-item.md ('else plan found ... Route-->>Client: 404 Not Found' section text plus AC wording) quote the error string consistently as 'Not found', matching the code, while api.md's Error Codes table gives the Code column as 'Not Found' (capital F), inconsistent with both the code and the sibling docs.",
+      "locationHint": "| 404 | Not Found | No plan with the given `planId` exists for the authenticated user (`prisma.plan.findFirst({ where: { id: planId, userId } })` returns null) |",
+      "message": "The 404 'Code' column reads 'Not Found' (capitalized) but the actual error string returned by the route (and quoted correctly by docs/modules/planned-items/use-cases/add-planned-item.md as `{\"error\": \"Not found\"}`) is 'Not found' (lowercase f) - this table cell is inconsistent with the sibling use-case doc and the underlying code's exact string, unlike the 400/401 rows which match the code verbatim."
+    }
+  ]
+}
