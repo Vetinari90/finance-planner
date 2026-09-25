@@ -1,0 +1,2201 @@
+{
+  "planSchemaVersion": "1.5",
+  "generatedAt": "2026-09-25T12:18:46.012Z",
+  "plannerVersion": "3.89.0",
+  "model": "sonnet",
+  "tokenizer": "bytes-v1",
+  "docStrucSha256": "acc6959d81be1ba8a433a545f8ac93c6c4b0a0eb68c5ff85c8e6272eade824ec",
+  "manifestRefs": [
+    "docs/.expanded-inputs.__cross_cutting__.json",
+    "docs/.expanded-inputs.auth.json",
+    "docs/.expanded-inputs.business.json",
+    "docs/.expanded-inputs.cross-cutting.json",
+    "docs/.expanded-inputs.decisions.json",
+    "docs/.expanded-inputs.docs.json",
+    "docs/.expanded-inputs.integration-tests.json",
+    "docs/.expanded-inputs.json",
+    "docs/.expanded-inputs.operations.json",
+    "docs/.expanded-inputs.persistence.json",
+    "docs/.expanded-inputs.planned-items.json",
+    "docs/.expanded-inputs.plans.json",
+    "docs/.expanded-inputs.requirements.json",
+    "docs/.expanded-inputs.web-ui.json"
+  ],
+  "workPackages": [
+    {
+      "id": "wp-business-business-context",
+      "kind": "synthesis",
+      "nodePath": "docs/business/business-context.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/business/business-context.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "91334c651bfeda19687acd9316e505e9b7f33dac3416301d095e3f370f2bb013",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (business-context.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-business-user-journeys-first-time-signup",
+      "kind": "synthesis",
+      "nodePath": "docs/business/user-journeys/first-time-signup.md",
+      "moduleId": null,
+      "recipe": "docs/business/user-journeys/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/business/user-journeys/first-time-signup.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "afe023d421c98a85ba0069149f0c942e24e9c0b805e50c6ef836bab0bf62286f",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-business-user-journeys-plan-a-month",
+      "kind": "synthesis",
+      "nodePath": "docs/business/user-journeys/plan-a-month.md",
+      "moduleId": null,
+      "recipe": "docs/business/user-journeys/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/business/user-journeys/plan-a-month.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "62d97e12dc77c251573a92e27917559142af2069f14c418c2a27d269d60623b3",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-cross-cutting-api-conventions",
+      "kind": "synthesis",
+      "nodePath": "docs/cross-cutting/api-conventions.md",
+      "moduleId": null,
+      "recipe": "docs/cross-cutting/standards.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/cross-cutting/api-conventions.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "61ee1fb08cf25db1653edfc5f8889efe8da7f0052b8c478ab5ca7a7be1793439",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (standards.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-cross-cutting-configuration",
+      "kind": "synthesis",
+      "nodePath": "docs/cross-cutting/configuration.md",
+      "moduleId": null,
+      "recipe": "docs/cross-cutting/standards.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/cross-cutting/configuration.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "421af909b829e5ebeb4048b8088c973338bcaf539fe65d4579b51fbe9e2830e5",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (standards.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-cross-cutting-data-handling",
+      "kind": "synthesis",
+      "nodePath": "docs/cross-cutting/data-handling.md",
+      "moduleId": null,
+      "recipe": "docs/cross-cutting/security.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/cross-cutting/data-handling.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "21bac7e5edde12fbb1a37250d2f3e865551dd65a6c4a46bfbacc7571b541af6f",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (security.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-cross-cutting-error-handling",
+      "kind": "synthesis",
+      "nodePath": "docs/cross-cutting/error-handling.md",
+      "moduleId": null,
+      "recipe": "docs/cross-cutting/standards.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/cross-cutting/error-handling.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "02cbc5078c2779be782bac168592fec5afdd5068a0a89119b5a5dd58162ba2f7",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (standards.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-cross-cutting-security",
+      "kind": "cross-cutting",
+      "nodePath": "docs/cross-cutting/security.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/api.md",
+        "docs/modules/auth/behavior/credentials-sign-in.md",
+        "docs/modules/auth/data-model.md",
+        "docs/modules/auth/deployment.md",
+        "docs/modules/auth/domain-model.md",
+        "docs/modules/auth/technical-concerns.md",
+        "docs/modules/auth/testing.md",
+        "docs/modules/auth/use-cases/register-account.md",
+        "docs/modules/auth/use-cases/sign-in.md",
+        "docs/modules/auth/use-cases/sign-out.md",
+        "docs/modules/persistence/api.md",
+        "docs/modules/persistence/behavior/",
+        "docs/modules/persistence/data-model.md",
+        "docs/modules/persistence/deployment.md",
+        "docs/modules/persistence/domain-model.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/persistence/technical-concerns.md",
+        "docs/modules/persistence/testing.md",
+        "docs/modules/persistence/use-cases/",
+        "docs/modules/planned-items/api.md",
+        "docs/modules/planned-items/behavior/",
+        "docs/modules/planned-items/data-model.md",
+        "docs/modules/planned-items/deployment.md",
+        "docs/modules/planned-items/domain-model.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/planned-items/technical-concerns.md",
+        "docs/modules/planned-items/testing.md",
+        "docs/modules/planned-items/use-cases/add-planned-item.md",
+        "docs/modules/planned-items/use-cases/list-plan-items.md",
+        "docs/modules/plans/api.md",
+        "docs/modules/plans/behavior/plan-lifecycle.md",
+        "docs/modules/plans/data-model.md",
+        "docs/modules/plans/deployment.md",
+        "docs/modules/plans/domain-model.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/plans/technical-concerns.md",
+        "docs/modules/plans/testing.md",
+        "docs/modules/plans/use-cases/create-monthly-plan.md",
+        "docs/modules/plans/use-cases/delete-plan.md",
+        "docs/modules/plans/use-cases/list-plans.md",
+        "docs/modules/plans/use-cases/view-plan-detail.md",
+        "docs/modules/web-ui/behavior/server-client-rendering.md",
+        "docs/modules/web-ui/overview.md",
+        "docs/modules/web-ui/technical-concerns.md",
+        "docs/modules/web-ui/testing.md"
+      ],
+      "readSetOrigin": "module-outputs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/cross-cutting/security.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "e8631ac0985bd8d3d43632beb0ab6fd6f1113a12b6b4a0e108af486f9793907e",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (security.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-cross-cutting-standards",
+      "kind": "synthesis",
+      "nodePath": "docs/cross-cutting/standards.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/cross-cutting/standards.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "54c9ec0f255aca4427dd7cb78fc49e6805b7dde69869a7c337716fc9a70d0487",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (standards.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-cross-cutting-threat-model",
+      "kind": "synthesis",
+      "nodePath": "docs/cross-cutting/threat-model.md",
+      "moduleId": null,
+      "recipe": "docs/cross-cutting/security.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/cross-cutting/threat-model.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "de565285c4694c979adb085f4304fbfed3784d934d9f31362492f5ae56fdb8d4",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (security.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0001-credentials-auth-jwt-sessions",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0001-credentials-auth-jwt-sessions.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0001-credentials-auth-jwt-sessions.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "746ed0d025d09d42419f5021f4a8b85b146b672f020e644d7b1d417b01cacca7",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0001-nextjs-app-router-fullstack-monolith",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0001-nextjs-app-router-fullstack-monolith.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0001-nextjs-app-router-fullstack-monolith.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "d75a1a467745a40e2bf4ffef89ddb92779e7405a005d812651b1fc565604141c",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0002-credentials-provider-with-jwt-sessions",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0002-credentials-provider-with-jwt-sessions.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0002-credentials-provider-with-jwt-sessions.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "655927dc639e5e5be126c4b8e2d5a6ae51aee5a78e3c975e3420e51bef954aef",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0003-prisma-postgresql-with-pg-adapter",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0003-prisma-postgresql-with-pg-adapter.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0003-prisma-postgresql-with-pg-adapter.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "73cbf0ca7345d3ab98f24e3170c7908205462f361285c1c339b2dd2452dfffe7",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0004-store-money-as-integer-cents",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0004-store-money-as-integer-cents.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0004-store-money-as-integer-cents.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "64027bd3f92ce0665a2f3f08c9ce527da3702d92615106e8668e25ab183fcd9f",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0005-scope-all-queries-by-session-user",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0005-scope-all-queries-by-session-user.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0005-scope-all-queries-by-session-user.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "5ba01bb5fc4dd1689870154111a9905ec613e0d0881a81dfabff10bd9011458f",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0006-zod-request-validation-at-route-boundary",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0006-zod-request-validation-at-route-boundary.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0006-zod-request-validation-at-route-boundary.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "bc5b41224deadcbb6c514ef91b5a2aff0ab04c15e11734ed75018ae6dc4f1829",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-executive-summary",
+      "kind": "synthesis",
+      "nodePath": "docs/executive-summary.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/executive-summary.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "f8419b93b8d37ed60c8cce69ce4faba274230d7250e1a1ad585af172fd68f76f",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (executive-summary.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-glossary",
+      "kind": "synthesis",
+      "nodePath": "docs/glossary.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/domain-model.md",
+        "docs/modules/persistence/data-model.md",
+        "docs/modules/planned-items/data-model.md",
+        "docs/modules/planned-items/domain-model.md",
+        "docs/modules/plans/data-model.md",
+        "docs/modules/plans/domain-model.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/glossary.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "617e4d69ba77e995f1fd9bd8b1b5a119fb2103f64b77c6858e5033d3955824cf",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (glossary.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-integration-tests-auth-to-plans-flow",
+      "kind": "synthesis",
+      "nodePath": "docs/integration-tests/auth-to-plans-flow.md",
+      "moduleId": null,
+      "recipe": "docs/integration-tests/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/integration-tests/auth-to-plans-flow.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "55b64d28868a61b7d2b5d091dd52a561958f569819fd69c85c68e9bc045edde6",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-integration-tests-authorization-isolation",
+      "kind": "synthesis",
+      "nodePath": "docs/integration-tests/authorization-isolation.md",
+      "moduleId": null,
+      "recipe": "docs/integration-tests/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/integration-tests/authorization-isolation.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "e9e4b093bd9a509523f4680af68be2ce494c5761b724c91e612d890c56ae89d6",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-integration-tests-cross-user-isolation",
+      "kind": "synthesis",
+      "nodePath": "docs/integration-tests/cross-user-isolation.md",
+      "moduleId": null,
+      "recipe": "docs/integration-tests/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/integration-tests/cross-user-isolation.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "560bef6cb7429e226d913a3b1b7e6dd7a14d5ce85ce29ff38d2a9bfe2850c2ff",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-integration-tests-plan-item-lifecycle",
+      "kind": "synthesis",
+      "nodePath": "docs/integration-tests/plan-item-lifecycle.md",
+      "moduleId": null,
+      "recipe": "docs/integration-tests/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/integration-tests/plan-item-lifecycle.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "c896f973b5b32caef450b987d2cd2a6edd1995fd3b9b180f72597b67d6c2cc1d",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-auth",
+      "kind": "module",
+      "nodePath": "docs/modules/auth/",
+      "moduleId": "auth",
+      "recipe": "unknown",
+      "readSet": [
+        "src/app/api/auth/[...nextauth]/route.ts",
+        "src/app/api/auth/register/route.ts",
+        "src/app/login/LoginClient.tsx",
+        "src/app/login/page.tsx",
+        "src/app/logout/route.ts",
+        "src/app/register/page.tsx"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/auth/api.md",
+        "docs/modules/auth/behavior/credentials-sign-in.md",
+        "docs/modules/auth/data-model.md",
+        "docs/modules/auth/deployment.md",
+        "docs/modules/auth/domain-model.md",
+        "docs/modules/auth/technical-concerns.md",
+        "docs/modules/auth/testing.md",
+        "docs/modules/auth/use-cases/register-account.md",
+        "docs/modules/auth/use-cases/sign-in.md",
+        "docs/modules/auth/use-cases/sign-out.md"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "76f6f0e616b63da5cf452ac3ef92a37330b81b98213b07f8a496843da1b12aed",
+      "tokenBudget": {
+        "estimatedInputTokens": 1832,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (api.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (data-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Deployment of the auth module. (deployment.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (domain-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (technical-concerns.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (testing.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-auth-overview",
+      "kind": "synthesis",
+      "nodePath": "docs/modules/auth/overview.md",
+      "moduleId": null,
+      "recipe": "docs/modules/_template/overview.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/auth/overview.md"
+      ],
+      "dependsOn": [
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "8b05ce7f9ad71f966457001eb3bfe4aff2dffc405edf9c04c8687957e29bed73",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (overview.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-persistence",
+      "kind": "module",
+      "nodePath": "docs/modules/persistence/",
+      "moduleId": "persistence",
+      "recipe": "unknown",
+      "readSet": [
+        "src/lib/auth.ts",
+        "src/lib/db.ts",
+        "src/lib/requireUser.ts"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/persistence/api.md",
+        "docs/modules/persistence/behavior/",
+        "docs/modules/persistence/data-model.md",
+        "docs/modules/persistence/deployment.md",
+        "docs/modules/persistence/domain-model.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/persistence/technical-concerns.md",
+        "docs/modules/persistence/testing.md",
+        "docs/modules/persistence/use-cases/"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "07c5ede9c9c1c519267034d1baf65fd83286503d0b52a26cbf619043daf1e3b5",
+      "tokenBudget": {
+        "estimatedInputTokens": 559,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Api of the persistence module. (api.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (data-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (deployment.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Domain Model of the persistence module. (domain-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (overview.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (technical-concerns.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (testing.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-planned-items",
+      "kind": "module",
+      "nodePath": "docs/modules/planned-items/",
+      "moduleId": "planned-items",
+      "recipe": "unknown",
+      "readSet": [
+        "src/app/api/plans/[planId]/items/route.ts"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/planned-items/api.md",
+        "docs/modules/planned-items/behavior/",
+        "docs/modules/planned-items/data-model.md",
+        "docs/modules/planned-items/deployment.md",
+        "docs/modules/planned-items/domain-model.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/planned-items/technical-concerns.md",
+        "docs/modules/planned-items/testing.md",
+        "docs/modules/planned-items/use-cases/add-planned-item.md",
+        "docs/modules/planned-items/use-cases/list-plan-items.md"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "1e77539485e8fa6aaf45f2b0474d697749ca13ab43df63089f358a9ca868c491",
+      "tokenBudget": {
+        "estimatedInputTokens": 355,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (api.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (data-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Deployment of the planned-items module. (deployment.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (domain-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (overview.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (technical-concerns.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (testing.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-plans",
+      "kind": "module",
+      "nodePath": "docs/modules/plans/",
+      "moduleId": "plans",
+      "recipe": "unknown",
+      "readSet": [
+        "src/app/api/plans/[planId]/route.ts",
+        "src/app/api/plans/route.ts",
+        "src/app/plans/[planId]/AddItemForm.tsx",
+        "src/app/plans/[planId]/DeletePlanButton.tsx",
+        "src/app/plans/[planId]/page.tsx",
+        "src/app/plans/NewPlanForm.tsx",
+        "src/app/plans/page.tsx"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/plans/api.md",
+        "docs/modules/plans/behavior/plan-lifecycle.md",
+        "docs/modules/plans/data-model.md",
+        "docs/modules/plans/deployment.md",
+        "docs/modules/plans/domain-model.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/plans/technical-concerns.md",
+        "docs/modules/plans/testing.md",
+        "docs/modules/plans/use-cases/create-monthly-plan.md",
+        "docs/modules/plans/use-cases/delete-plan.md",
+        "docs/modules/plans/use-cases/list-plans.md",
+        "docs/modules/plans/use-cases/view-plan-detail.md"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "68d754d0e271c4ae5e1e1c0bcc339d4ea150405f2abfb3d1f2dcad3d2b553250",
+      "tokenBudget": {
+        "estimatedInputTokens": 4020,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (api.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (data-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Deployment of the plans module. (deployment.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (domain-model.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (overview.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (technical-concerns.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (testing.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-web-ui",
+      "kind": "module",
+      "nodePath": "docs/modules/web-ui/",
+      "moduleId": "web-ui",
+      "recipe": "unknown",
+      "readSet": [
+        "src/app/globals.css",
+        "src/app/layout.tsx",
+        "src/app/page.module.css",
+        "src/app/page.tsx"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/web-ui/behavior/server-client-rendering.md",
+        "docs/modules/web-ui/overview.md",
+        "docs/modules/web-ui/technical-concerns.md",
+        "docs/modules/web-ui/testing.md"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "a19327f691121a9284b5acf9e71cd043dafe554f2e8d972420d0f50af116b179",
+      "tokenBudget": {
+        "estimatedInputTokens": 994,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (overview.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (technical-concerns.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Document content (testing.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-ci-cd",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/ci-cd.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/ci-cd.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "c2294fc823048e80a49405e5325226e365ef94ec9c1b4d3d52ffd2de7ae6d675",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (ci-cd.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-incident-response",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/incident-response.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/incident-response.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "deed05bb174052f586317d10d3d475cdca85720f0ad26d337145476ec6a4e39a",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (incident-response.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-infrastructure",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/infrastructure.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/infrastructure.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "863e4d5323c0ad9ed2517753efbc42ee6209dd64abd4a2b18cf8da367b1eadc5",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (infrastructure.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-runbooks-backup-restore",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/runbooks/backup-restore.md",
+      "moduleId": null,
+      "recipe": "docs/operations/runbooks/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/runbooks/backup-restore.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "be0c7545eb9de4bf1684732228d8d0f0f4418f07bffcbbb99482e014423d2c97",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-runbooks-database-migration",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/runbooks/database-migration.md",
+      "moduleId": null,
+      "recipe": "docs/operations/runbooks/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/runbooks/database-migration.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "b560e251f515d24aa872555b449982e7effb3595322d77fb0a2dbe5b7414e887",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-runbooks-local-environment-setup",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/runbooks/local-environment-setup.md",
+      "moduleId": null,
+      "recipe": "docs/operations/runbooks/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/runbooks/local-environment-setup.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "da39e80cd7c8b500a65edcd228cafc4695f5dabf4bfbdb856e5d1d5774dc3858",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-runbooks-rotate-auth-secret",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/runbooks/rotate-auth-secret.md",
+      "moduleId": null,
+      "recipe": "docs/operations/runbooks/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/runbooks/rotate-auth-secret.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "656d91c7fa60fd2a7967a2d6cef92cf570229284328398073d0594430fafbdba",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-runbooks-secret-rotation",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/runbooks/secret-rotation.md",
+      "moduleId": null,
+      "recipe": "docs/operations/runbooks/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/runbooks/secret-rotation.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "dbc385e71fc216079d092486b37ffe95ec72f52772aab333065ec60d1b65804c",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-operations-runbooks-vercel-deploy",
+      "kind": "synthesis",
+      "nodePath": "docs/operations/runbooks/vercel-deploy.md",
+      "moduleId": null,
+      "recipe": "docs/operations/runbooks/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/operations/runbooks/vercel-deploy.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "f33432e0a1fa360b30868023048889afa293ec70f9aad7c0ccabb092d60dabb6",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-overview",
+      "kind": "synthesis",
+      "nodePath": "docs/overview.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/overview.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "138921093ae246a5971876a3587e42784d4c1cc747c2878772ecdb9e1d653564",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (overview.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-quality-attributes",
+      "kind": "synthesis",
+      "nodePath": "docs/quality-attributes.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/technical-concerns.md",
+        "docs/modules/persistence/deployment.md",
+        "docs/modules/persistence/technical-concerns.md",
+        "docs/modules/planned-items/technical-concerns.md",
+        "docs/modules/plans/technical-concerns.md",
+        "docs/modules/web-ui/technical-concerns.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/quality-attributes.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "6f4d079050aae5209665985d2aea59fd5ecb35a85633f3c6cb92e8b761e99d99",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (quality-attributes.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-requirements-business-rules",
+      "kind": "synthesis",
+      "nodePath": "docs/requirements/business-rules.md",
+      "moduleId": null,
+      "recipe": "docs/requirements/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/requirements/business-rules.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "2263f8424fe044945240e12e78ffac6abff1969b208d5fd5886d3ca2e7322661",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-requirements-functional-account-access",
+      "kind": "synthesis",
+      "nodePath": "docs/requirements/functional-account-access.md",
+      "moduleId": null,
+      "recipe": "docs/requirements/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/requirements/functional-account-access.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "977a1d6d2a992730c1c0b3080e22c5c56ff1c7c7521269bcb3667405fb0d0f90",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-requirements-functional-monthly-planning",
+      "kind": "synthesis",
+      "nodePath": "docs/requirements/functional-monthly-planning.md",
+      "moduleId": null,
+      "recipe": "docs/requirements/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/requirements/functional-monthly-planning.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "4152e0296ac959ac33eb35523ff0b21c5849962baf77ee3ba01fe6f73874a08d",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-requirements-non-functional",
+      "kind": "synthesis",
+      "nodePath": "docs/requirements/non-functional.md",
+      "moduleId": null,
+      "recipe": "docs/requirements/_template.md",
+      "readSet": [
+        "docs/modules/auth/overview.md",
+        "docs/modules/persistence/overview.md",
+        "docs/modules/planned-items/overview.md",
+        "docs/modules/plans/overview.md",
+        "docs/modules/web-ui/overview.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/requirements/non-functional.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth-overview",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 2,
+      "parallelGroup": 2,
+      "actionKey": "94229da72a433246f4636f6c045f2909dbdf8876cff809ab57b320de48ca34ee",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-risks",
+      "kind": "synthesis",
+      "nodePath": "docs/risks.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/technical-concerns.md",
+        "docs/modules/auth/testing.md",
+        "docs/modules/persistence/technical-concerns.md",
+        "docs/modules/persistence/testing.md",
+        "docs/modules/planned-items/technical-concerns.md",
+        "docs/modules/planned-items/testing.md",
+        "docs/modules/plans/technical-concerns.md",
+        "docs/modules/plans/testing.md",
+        "docs/modules/web-ui/technical-concerns.md",
+        "docs/modules/web-ui/testing.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/risks.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "d2ee4a5c5f33c797727851a7900d7f9eb03f1cf93a75478202c2b2599fe53ba3",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (risks.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-technology-context",
+      "kind": "synthesis",
+      "nodePath": "docs/technology-context.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/auth/technical-concerns.md",
+        "docs/modules/persistence/deployment.md",
+        "docs/modules/persistence/technical-concerns.md",
+        "docs/modules/planned-items/technical-concerns.md",
+        "docs/modules/plans/technical-concerns.md",
+        "docs/modules/web-ui/technical-concerns.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/technology-context.md"
+      ],
+      "dependsOn": [
+        "wp-modules-auth",
+        "wp-modules-persistence",
+        "wp-modules-planned-items",
+        "wp-modules-plans",
+        "wp-modules-web-ui"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "eff93653c080395d3a0d676ca59f1a7f701629cfd0d423e8f3e4c9ed377451ea",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (technology-context.md)"
+          }
+        ]
+      }
+    }
+  ],
+  "diagnostics": {
+    "cycleFreeProof": "kahn-ok",
+    "writeSetDisjointProof": "lossless-ok",
+    "warnings": []
+  },
+  "planSelfSha256": "e92ab09efa3ef2720b898b93189bf6208694596d3bbfbcb47681297e91eaaca6"
+}

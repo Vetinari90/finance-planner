@@ -23,7 +23,8 @@ generation:
       - src/app/api/plans
       - src/app/plans
     planned-items: src/app/api/plans/[planId]/items
-    persistence: src/lib/db.ts
+    persistence: src/lib
+    web-ui: src/app
 recipe-library:
   source: /opt/asr/workspace/364ff20d-60d0-41bc-a402-b80ba345622e/831187c8-70c2-4406-a502-a4dbe477b170/sdlc-artifact-templates/templates/mid
 tree:
@@ -231,11 +232,38 @@ tree:
                 children: []
               - path: plan-a-month.md
                 recipe: docs/business/user-journeys/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
               - path: first-time-signup.md
                 recipe: docs/business/user-journeys/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
           - path: business-context.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
       - path: decisions/
         children:
@@ -243,24 +271,87 @@ tree:
             children: []
           - path: 0004-store-money-as-integer-cents.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: 0001-credentials-auth-jwt-sessions.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: 0003-prisma-postgresql-with-pg-adapter.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: 0005-scope-all-queries-by-session-user.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: 0001-nextjs-app-router-fullstack-monolith.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: 0002-credentials-provider-with-jwt-sessions.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: 0006-zod-request-validation-at-route-boundary.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
       - path: glossary.md
         inputs:
@@ -276,6 +367,15 @@ tree:
       - path: operations/
         children:
           - path: ci-cd.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: runbooks/
             children:
@@ -283,27 +383,108 @@ tree:
                 children: []
               - path: vercel-deploy.md
                 recipe: docs/operations/runbooks/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
               - path: backup-restore.md
                 recipe: docs/operations/runbooks/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
               - path: secret-rotation.md
                 recipe: docs/operations/runbooks/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
               - path: database-migration.md
                 recipe: docs/operations/runbooks/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
               - path: rotate-auth-secret.md
                 recipe: docs/operations/runbooks/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
               - path: local-environment-setup.md
                 recipe: docs/operations/runbooks/_template.md
+                inputs:
+                  references:
+                    - README.md
+                  module-docs:
+                    - docs/modules/auth/overview.md
+                    - docs/modules/plans/overview.md
+                    - docs/modules/planned-items/overview.md
+                    - docs/modules/persistence/overview.md
+                    - docs/modules/web-ui/overview.md
                 children: []
           - path: infrastructure.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: incident-response.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
       - path: overview.md
+        inputs:
+          references:
+            - README.md
+          module-docs:
+            - docs/modules/auth/overview.md
+            - docs/modules/plans/overview.md
+            - docs/modules/planned-items/overview.md
+            - docs/modules/persistence/overview.md
+            - docs/modules/web-ui/overview.md
         children: []
       - path: requirements/
         children:
@@ -311,36 +492,126 @@ tree:
             children: []
           - path: business-rules.md
             recipe: docs/requirements/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: non-functional.md
             recipe: docs/requirements/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: functional-account-access.md
             recipe: docs/requirements/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: functional-monthly-planning.md
             recipe: docs/requirements/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
       - path: cross-cutting/
         children:
           - path: security.md
             children: []
           - path: standards.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: threat-model.md
             recipe: docs/cross-cutting/security.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: configuration.md
             recipe: docs/cross-cutting/standards.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: data-handling.md
             recipe: docs/cross-cutting/security.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: error-handling.md
             recipe: docs/cross-cutting/standards.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: api-conventions.md
             recipe: docs/cross-cutting/standards.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
       - path: integration-tests/
         children:
@@ -348,15 +619,51 @@ tree:
             children: []
           - path: auth-to-plans-flow.md
             recipe: docs/integration-tests/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: plan-item-lifecycle.md
             recipe: docs/integration-tests/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: cross-user-isolation.md
             recipe: docs/integration-tests/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
           - path: authorization-isolation.md
             recipe: docs/integration-tests/_template.md
+            inputs:
+              references:
+                - README.md
+              module-docs:
+                - docs/modules/auth/overview.md
+                - docs/modules/plans/overview.md
+                - docs/modules/planned-items/overview.md
+                - docs/modules/persistence/overview.md
+                - docs/modules/web-ui/overview.md
             children: []
       - path: executive-summary.md
         inputs:
