@@ -69,10 +69,12 @@ sequenceDiagram
 `src/lib/db.ts` reads `process.env.DATABASE_URL` at module load and throws `"DATABASE_URL is not set"` immediately if it is missing, before any client is constructed.
 
 ### 2. Adapter/client reuse (Steps 3-8)
+[NEEDS CLARIFICATION] [REVIEW] consistency: The step range 'Steps 3-8' is internally inconsistent with the document's own mermaid diagram: step 3 is actually the DATABASE_URL-unset throw (belongs to the 'Environment check' section, not adapter/client reuse), while step 9 - the 'construct a new [client] otherwise' case this section's text describes - is excluded from the cited range.
 
 The module casts `globalThis` to a typed `{ prisma?: PrismaClient; prismaAdapter?: PrismaPg }` shape (`globalForPrisma`) and uses the nullish-coalescing operator to reuse an existing adapter/client if one was cached on a previous module evaluation, or construct a new one otherwise.
 
 ### 3. Conditional caching (Step 9)
+[NEEDS CLARIFICATION] [REVIEW] consistency: Section 3 labels the conditional cache write-back as 'Step 9', but by the diagram's own autonumbering the cache-write message ('DB->>Global: cache prisma & prismaAdapter') is step 10, not step 9 (step 9 is the 'new PrismaClient(...)' construction message).
 
 Only when `process.env.NODE_ENV !== "production"` does the module write the client and adapter back onto `globalForPrisma`. This is the guard against creating a new Prisma client (and new DB connections) on every Next.js dev-mode hot reload.
 

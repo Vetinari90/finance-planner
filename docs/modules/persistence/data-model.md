@@ -25,6 +25,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 [NEEDS CLARIFICATION] Cannot be constructed - the Prisma schema file that defines tables and relations is not part of this module's inputs.
 
 ### Tables
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Tables section only documents the `user` accessor and states the module's inputs are limited to src/lib/auth.ts, src/lib/db.ts, and src/lib/requireUser.ts. It omits the `plan` and `plannedItem` Prisma model accessors, which are directly evidenced in this doc's own code inputs (prisma.plan.findMany/create/findFirst/delete in plans routes, prisma.plannedItem.create in the items route) with concrete fields (userId, year, month, currency, title, createdAt for plan; planId, title, amountCents, categoryId, note for plannedItem). This input-evident material is silently missing from the Tables section.
 
 #### user (inferred accessor name, unconfirmed schema)
 

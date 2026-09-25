@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/data-handling.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md is fully populated (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies sections all have concrete content, e.g. Key Entities table lists PlannedItem with fields, and Responsibilities names title/amountCents/categoryId/note), not an unfilled skeleton. It is also one of the designated module-docs inputs for docs/cross-cutting/data-handling.md per docs/doc_struc.md.",
+      "locationHint": "(`docs/modules/planned-items/overview.md`) was still an unfilled skeleton document at",
+      "message": "The document's stated premise that the planned-items module overview was still an unfilled skeleton and could not be incorporated is stale: docs/modules/planned-items/overview.md is fully populated. Multiple downstream subsections (Authorization Model, Data Sensitivity, Data Classification) that depend on this premise omit information that is actually available in that document."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/api.md documents the POST /api/plans/{planId}/items endpoint's 404 error code as 'No plan with the given planId exists for the authenticated user (prisma.plan.findFirst({ where: { id: planId, userId } }) returns null)', which is the same ownership-check pattern used by the plans module.",
+      "locationHint": "[NEEDS CLARIFICATION] Whether the planned-items module (item-level CRUD under",
+      "message": "This section says whether planned-items re-verifies plan ownership 'could not be confirmed' because the planned-items overview was treated as an unfilled skeleton, but docs/modules/planned-items/api.md (a populated document) already documents the ownership check (prisma.plan.findFirst({ id: planId, userId } })) for the POST endpoint - material available in the input set was not incorporated."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/planned-items/overview.md's Key Entities table names PlannedItem with fields; docs/modules/planned-items/api.md's CreateItemSchema and Response Example confirm the concrete fields title, amountCents, categoryId, and note.",
+      "locationHint": "[NEEDS CLARIFICATION] Item-level financial data (e.g., individual planned-item amount,",
+      "message": "This section states item-level financial data (amount, category, description fields) could not be confirmed because the planned-items overview was an unfilled skeleton, but the populated docs/modules/planned-items/overview.md and api.md already name the concrete fields (title, amountCents, categoryId, note) - this material exists in the input set and was not incorporated into the Data Sensitivity table."
+    }
+  ]
+}

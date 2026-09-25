@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/use-cases/resolve-session-user.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/route.ts calls `const userId = await requireUserId();` in both GET and POST and returns `NextResponse.json({ error: \"Unauthorized\" }, { status: 401 })` when falsy; the same pattern appears in src/app/api/plans/[planId]/route.ts and src/app/api/plans/[planId]/items/route.ts. All three files are listed in this doc's codeFiles input.",
+      "locationHint": "| Server-side caller | Primary | Any server code that calls `await requireUserId()`; concrete callers are outside this module's inputs |",
+      "message": "The doc states concrete callers of requireUserId() are 'outside this module's inputs', but the module's own codeFiles list includes three route handlers (plans/route.ts, plans/[planId]/route.ts, plans/[planId]/items/route.ts) that call requireUserId() directly, contradicting this claim."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "The same three route.ts files respond to a falsy requireUserId() with `return NextResponse.json({ error: \"Unauthorized\" }, { status: 401 })`, which is exactly the caller behavior described as speculative/outside-scope.",
+      "locationHint": "**Continues at:** ends - caller must decide how to respond (e.g. return HTTP 401); that logic is outside this module's inputs",
+      "message": "The doc frames the HTTP 401 response as a hypothetical example 'outside this module's inputs', but this exact behavior is concretely implemented in codeFiles (e.g. src/app/api/plans/route.ts), so the caveat is inaccurate given the available inputs."
+    }
+  ]
+}

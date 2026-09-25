@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0003-prisma-postgresql-with-pg-adapter.md",
+  "dimension": "accuracy",
+  "findings": []
+}

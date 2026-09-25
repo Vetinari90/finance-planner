@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/use-cases/resolve-session-user.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/route.ts (GET/POST, lines 13-16 and 26-29), src/app/api/plans/[planId]/route.ts, and src/app/api/plans/[planId]/items/route.ts are all in this doc's codeFiles and each imports requireUserId and, on a falsy userId, returns NextResponse.json({ error: \"Unauthorized\" }, { status: 401 }) - i.e. concrete callers and the exact HTTP-401 handling the doc hedges about are present in the module's inputs.",
+      "locationHint": "| Server-side caller | Primary | Any server code that calls `await requireUserId()`; concrete callers are outside this module's inputs |",
+      "message": "The Actors table claims concrete callers of requireUserId() are outside this module's inputs, but three callers (src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, src/app/api/plans/[planId]/items/route.ts) are in the provided codeFiles and each call requireUserId() directly - this input-evident material is omitted from the Actors description."
+    },
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/route.ts lines 14-16 and 27-29 (`if (!userId) return NextResponse.json({ error: \"Unauthorized\" }, { status: 401 });`), mirrored in src/app/api/plans/[planId]/route.ts and src/app/api/plans/[planId]/items/route.ts, all listed in codeFiles.",
+      "locationHint": "**Continues at:** ends - caller must decide how to respond (e.g. return HTTP 401); that logic is outside this module's inputs",
+      "message": "The Alternative Flow states the HTTP-401 handling logic is 'outside this module's inputs', but the exact 401 response pattern is implemented in three caller files that are part of this doc's codeFiles (src/app/api/plans/route.ts, [planId]/route.ts, [planId]/items/route.ts) - the doc omits this readily available, input-evident detail."
+    }
+  ]
+}

@@ -40,10 +40,12 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 **Field Validation Rules**
 
 [NEEDS CLARIFICATION] Beyond the presence check described above, no field-level rules (format, length, range) are present in this module's inputs.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: Claim is contradicted by the inputs: register/route.ts, plans/route.ts and items/route.ts all use Zod schemas with explicit length/format/range constraints (email(), min/max on strings and numbers), so field-level validation rules beyond the auth presence check do exist in this module's inputs.
 
 **Error Format**
 
 [NEEDS CLARIFICATION] `authorize()` communicates validation failure only by returning `null` (which NextAuth surfaces as a generic sign-in failure); no structured error-response JSON is constructed in this module.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The claim that 'no structured error-response JSON is constructed in this module' is incorrect: multiple API routes in this module's codeFiles (register, plans, plans/[planId], items) construct structured `{ error, details? }` JSON responses with explicit HTTP status codes.
 
 **Common Error Codes**
 

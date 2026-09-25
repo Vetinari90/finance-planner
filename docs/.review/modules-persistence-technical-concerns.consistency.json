@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/technical-concerns.md",
+  "dimension": "consistency",
+  "findings": []
+}

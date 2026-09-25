@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/overview.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/auth/overview.md Dependencies table: '| persistence (`@/lib/db` / `prisma`) | User lookup (`prisma.user.findUnique`) and creation (`prisma.user.create`) during registration. |'; docs/modules/plans/overview.md Dependencies table: '| persistence | Provides the Prisma client (`@/lib/db`) used for all plan CRUD queries |' and '| auth | Resolves the current user for both API routes (`requireUserId()`) ... |'; docs/modules/planned-items/overview.md Dependencies table: '| persistence | Database access via the shared Prisma client (`@/lib/db`) |'.",
+      "locationHint": "| [NEEDS CLARIFICATION] | This module's inputs (`src/lib/auth.ts`, `src/lib/db.ts`, `src/lib/requireUser.ts`) give no visibility into which other modules import `authOptions`, `prisma`, or `requireUserId` - confirming consumers requires inspecting `src/app/api/**` and other modules' source, which is outside this module's manifest scope. |",
+      "message": "The Dependents row claims no visibility into which modules consume `authOptions`/`prisma`/`requireUserId`, but the auth, plans, and planned-items module overviews (visible in the same doc set) each explicitly list `persistence` as a dependency and name exactly what they use it for (Prisma client for CRUD, `requireUserId()`/`authOptions` for session resolution), so the consumer information this row says is unavailable is already documented elsewhere in the generated docs."
+    }
+  ]
+}

@@ -38,6 +38,7 @@ boilerplate (from `create-next-app`) and contains no finance-planner-specific
 deployment, hosting, or backup information.
 
 [NEEDS CLARIFICATION] `docs/modules/planned-items/overview.md`, named as a module-doc
+[NEEDS CLARIFICATION] [REVIEW] consistency: The document states that docs/modules/planned-items/overview.md 'is still an unfilled skeleton (`[UNFILLED]`) as of this generation run and could not be incorporated', but that file is in fact fully filled out with populated Purpose/Responsibilities/Boundaries/Dependencies sections and contains no [UNFILLED] marker - contradicting this claim.
 input for this node, is still an unfilled skeleton (`[UNFILLED]`) as of this generation
 run and could not be incorporated.
 

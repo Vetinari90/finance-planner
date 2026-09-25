@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/threat-model.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md is a fully populated document (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents sections all filled), not an '[UNFILLED]' skeleton. Its Responsibilities section states: 'Enforce that a planned item can only be created under a plan owned by the authenticated user', which speaks directly to the enforcement-pattern question this line calls unconfirmed.",
+      "locationHint": "**Threat (authorization-bypass-by-omission):** `docs/modules/persistence/overview.md` explicitly documents that `requireUserId()` does **not** itself throw or redirect when no session is present - it only returns `null`, \"leaving enforcement (e.g. returning a 401) to its callers.\" A route handler that fails to check for a `null` return would silently proceed without an authenticated user. [NEEDS CLARIFICATION] Whether every route handler across the auth, plans, and planned-items modules consistently checks for a `null` `requireUserId()` result could not be confirmed: the calling route implementations are outside this synthesis node's inputs (it draws only on module-level overview docs, not raw route source), and `docs/modules/planned-items/overview.md` - one of the module-docs named as input to this node - is still an unfilled skeleton (`[UNFILLED]`) in this generation run, so the planned-items module's enforcement pattern in particular is unconfirmed.",
+      "message": "This line claims docs/modules/planned-items/overview.md is still an UNFILLED skeleton and therefore the planned-items enforcement pattern is unconfirmed, but that document is now fully populated and describes an ownership-enforcement rule for planned-item creation - material available in the current input set was not incorporated into this threat entry."
+    }
+  ]
+}

@@ -49,6 +49,7 @@ authorization or security requirement that could corroborate or refine this desc
 | [persistence](../modules/persistence/overview.md) | Owns `authOptions` (JWT-strategy session, credential verification against `prisma.user`) and the `requireUserId()` helper used to resolve the current user | [NEEDS CLARIFICATION] Real/Mocked not established by inputs |
 | [plans](../modules/plans/overview.md) | Owns the ownership-scoped plan endpoints (`GET/POST /api/plans`, `GET/DELETE /api/plans/{planId}`) that this test exercises | [NEEDS CLARIFICATION] Real/Mocked not established by inputs |
 | planned-items | [NEEDS CLARIFICATION] `docs/modules/planned-items/overview.md`, named as a module-doc input for this node, is still an unfilled skeleton document (`[UNFILLED]`) as of this generation run; whether/how item-level endpoints (`/api/plans/{planId}/items`) enforce plan ownership could not be confirmed here. |
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document asserts docs/modules/planned-items/overview.md is an unfilled skeleton and that ownership enforcement for item-level endpoints could not be confirmed, but that referenced document is fully filled and explicitly states 'Enforce that a planned item can only be created under a plan owned by the authenticated user' - directly contradicting the claim.
 | [web-ui](../modules/web-ui/overview.md) | Root route (`/`) redirects to `/login` or `/plans` based on session presence; not itself part of the API authorization path exercised by this test | [NEEDS CLARIFICATION] Real/Mocked not established by inputs |
 
 ### Integration Points
@@ -179,6 +180,7 @@ node does not read source code directly.
 - This node is a synthesis document: per its `doc_struc.md` entry it is authored from
   `README.md` and the five module `overview.md` documents only, not from source code.
 - `docs/modules/planned-items/overview.md` is still an unfilled skeleton
+[NEEDS CLARIFICATION] [REVIEW] consistency: The Notes section repeats the stale claim that docs/modules/planned-items/overview.md is an unfilled skeleton limiting this document's authorization-behavior coverage, but that module doc is fully populated and already documents ownership enforcement for planned-item creation.
   (`[UNFILLED]`) as of this generation run, which limits this document's ability to
   describe authorization behavior for the plan-items endpoints.
 - `README.md` contains no finance-planner-specific content (it is unmodified

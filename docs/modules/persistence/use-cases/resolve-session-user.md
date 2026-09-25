@@ -20,6 +20,8 @@ A server-side caller (e.g. an API route handler) needs to know which user is mak
 | Actor | Type | Description |
 |-------|------|--------------|
 | Server-side caller | Primary | Any server code that calls `await requireUserId()`; concrete callers are outside this module's inputs |
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Actors table claims concrete callers of requireUserId() are outside this module's inputs, but three callers (src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, src/app/api/plans/[planId]/items/route.ts) are in the provided codeFiles and each call requireUserId() directly - this input-evident material is omitted from the Actors description.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc states concrete callers of requireUserId() are 'outside this module's inputs', but the module's own codeFiles list includes three route handlers (plans/route.ts, plans/[planId]/route.ts, plans/[planId]/items/route.ts) that call requireUserId() directly, contradicting this claim.
 | NextAuth session store | Secondary | Backs `getServerSession(authOptions)` |
 
 ## Preconditions
@@ -51,6 +53,8 @@ A server-side caller (e.g. an API route handler) needs to know which user is mak
 | 2.1 | `session` or `session.user.id` is falsy | `requireUserId()` returns `null` |
 
 **Continues at:** ends - caller must decide how to respond (e.g. return HTTP 401); that logic is outside this module's inputs
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Alternative Flow states the HTTP-401 handling logic is 'outside this module's inputs', but the exact 401 response pattern is implemented in three caller files that are part of this doc's codeFiles (src/app/api/plans/route.ts, [planId]/route.ts, [planId]/items/route.ts) - the doc omits this readily available, input-evident detail.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc frames the HTTP 401 response as a hypothetical example 'outside this module's inputs', but this exact behavior is concretely implemented in codeFiles (e.g. src/app/api/plans/route.ts), so the caveat is inaccurate given the available inputs.
 
 ## Error Handling
 

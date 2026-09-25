@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0003-prisma-postgresql-with-pg-adapter.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "This same document's Context/Decision/Consequences sections quote and cite docs/modules/persistence/overview.md extensively as source material (e.g. 'Per docs/modules/persistence/overview.md, the project uses Prisma as its ORM...' and the References section lists it as 'primary source for the Prisma/PostgreSQL/PrismaPg-adapter implementation described in this decision'). That same referenced file, docs/modules/persistence/overview.md, states in its Dependencies section: 'their imports resolve to external packages (next-auth, bcryptjs, @/generated/prisma/client, @prisma/adapter-pg)' - i.e. it does name the adapter package.",
+      "locationHint": "[NEEDS CLARIFICATION] The exact adapter package name (e.g. `@prisma/adapter-pg`) and the Prisma / adapter version in use are not confirmed: no `package.json` or other build manifest was present in this synthesis node's inputs (`inputs.references` = `README.md` only), and per the dependency-grounding rule a dependency must be confirmed against a manifest, not prose, before being asserted as a version-specific fact.",
+      "message": "Internal inconsistency: this line claims 'inputs.references = README.md only' and that the adapter package name is unconfirmed, yet the rest of this same document (Context, Decision, Consequences, References) relies heavily on docs/modules/persistence/overview.md as its primary source - and that very file's Dependencies section already names the adapter package as `@prisma/adapter-pg`. The document contradicts itself about which inputs were available and what they establish."
+    }
+  ]
+}

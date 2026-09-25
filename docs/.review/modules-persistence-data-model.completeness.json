@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/data-model.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/route.ts uses prisma.plan.findMany/create with fields userId, year, month, currency, title; src/app/api/plans/[planId]/route.ts uses prisma.plan.findFirst/delete with an `items` relation ordered by createdAt; src/app/api/plans/[planId]/items/route.ts uses prisma.plannedItem.create with fields planId, title, amountCents, categoryId, note. These are part of this dispatch's codeFiles but no plan/plannedItem table is documented.",
+      "locationHint": "### Tables",
+      "message": "The Tables section only documents the `user` accessor and states the module's inputs are limited to src/lib/auth.ts, src/lib/db.ts, and src/lib/requireUser.ts. It omits the `plan` and `plannedItem` Prisma model accessors, which are directly evidenced in this doc's own code inputs (prisma.plan.findMany/create/findFirst/delete in plans routes, prisma.plannedItem.create in the items route) with concrete fields (userId, year, month, currency, title, createdAt for plan; planId, title, amountCents, categoryId, note for plannedItem). This input-evident material is silently missing from the Tables section."
+    }
+  ]
+}

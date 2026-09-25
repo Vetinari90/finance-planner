@@ -22,6 +22,8 @@ synthesized from the already-generated module overviews for
 [persistence](../modules/persistence/overview.md), and
 [web-ui](../modules/web-ui/overview.md); the planned-items module overview
 (`docs/modules/planned-items/overview.md`) was still an unfilled skeleton document at
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document asserts the planned-items module overview was an unfilled skeleton and could not be incorporated, but docs/modules/planned-items/overview.md (in the same docs tree) is fully populated with Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, and Dependents content, contradicting this claim.
+[NEEDS CLARIFICATION] [REVIEW] completeness: The document's stated premise that the planned-items module overview was still an unfilled skeleton and could not be incorporated is stale: docs/modules/planned-items/overview.md is fully populated. Multiple downstream subsections (Authorization Model, Data Sensitivity, Data Classification) that depend on this premise omit information that is actually available in that document.
 the time this file was generated and could not be incorporated (see the relevant
 subsections below). `README.md` is generic Next.js boilerplate with no
 finance-planner-specific data-handling content and contributes no facts to this
@@ -59,6 +61,7 @@ via `requireUserId()` (persistence module) for API routes, and via
 `getServerSession(authOptions)` for server-rendered pages (auth and web-ui modules).
 
 [NEEDS CLARIFICATION] Whether the planned-items module (item-level CRUD under
+[NEEDS CLARIFICATION] [REVIEW] completeness: This section says whether planned-items re-verifies plan ownership 'could not be confirmed' because the planned-items overview was treated as an unfilled skeleton, but docs/modules/planned-items/api.md (a populated document) already documents the ownership check (prisma.plan.findFirst({ id: planId, userId } })) for the POST endpoint - material available in the input set was not incorporated.
 `/api/plans/{planId}/items`, per the plans module overview) re-verifies plan
 ownership before returning or mutating items could not be confirmed - its module
 overview (`docs/modules/planned-items/overview.md`) is an unfilled skeleton document
@@ -105,6 +108,7 @@ The following data elements were confirmed across the module overviews:
 [NEEDS CLARIFICATION] Item-level financial data (e.g., individual planned-item amount,
 category, or description fields) could not be confirmed: the planned-items module
 overview is an unfilled skeleton document in this generation run.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This document claims item-level financial data could not be confirmed because the planned-items module overview is an unfilled skeleton, but that overview document actually names the concrete fields (title, amountCents, categoryId, note), contradicting the premise.
 
 [NEEDS CLARIFICATION] Whether logs, error messages, or any other output mask
 passwords, session tokens, or other sensitive fields is not established by any

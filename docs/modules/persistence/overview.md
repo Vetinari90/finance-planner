@@ -31,6 +31,7 @@ The `persistence` module (`src/lib/`) provides the shared data-access and sessio
 
 - Define any HTTP route handlers or API endpoints itself - see [api.md](api.md).
 - Throw or redirect when no session is present; `requireUserId()` only returns `null`, leaving enforcement (e.g. returning a 401) to its callers. [NEEDS CLARIFICATION] The calling API routes that enforce this are outside this module's manifest scope.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc claims confirming the 401-enforcing callers is outside this module's manifest scope, but src/app/api/plans/route.ts (one of this doc's own code inputs) directly shows requireUserId() being checked and a 401 returned - the fact was verifiable from the inputs actually provided.
 - Include the Prisma schema in the files available to this module; `src/lib/db.ts` imports the generated client from `@/generated/prisma/client` but the schema source (`schema.prisma`) is not part of this module's inputs. [NEEDS CLARIFICATION] Confirm the location of `schema.prisma` and include it in a future documentation pass.
 
 ### Key Entities
@@ -52,4 +53,6 @@ See: [domain-model.md](domain-model.md)
 | Module | Uses For |
 |--------|----------|
 | [NEEDS CLARIFICATION] | This module's inputs (`src/lib/auth.ts`, `src/lib/db.ts`, `src/lib/requireUser.ts`) give no visibility into which other modules import `authOptions`, `prisma`, or `requireUserId` - confirming consumers requires inspecting `src/app/api/**` and other modules' source, which is outside this module's manifest scope. |
+[NEEDS CLARIFICATION] [REVIEW] consistency: The Dependents row claims no visibility into which modules consume `authOptions`/`prisma`/`requireUserId`, but the auth, plans, and planned-items module overviews (visible in the same doc set) each explicitly list `persistence` as a dependency and name exactly what they use it for (Prisma client for CRUD, `requireUserId()`/`authOptions` for session resolution), so the consumer information this row says is unavailable is already documented elsewhere in the generated docs.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc asserts it has no visibility into consumers of authOptions/prisma/requireUserId and that inspecting src/app/api/** is out of scope, but src/app/api/** and src/app/**/page.tsx files were themselves provided among this doc's code inputs and plainly show these imports - the Dependents table is inaccurate about its own available evidence.
 <!-- /SLOT:content -->

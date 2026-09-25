@@ -17,6 +17,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 ### Overview
 
 This module (`src/lib/`) does not include its own Prisma schema among the files available to it; it wires a shared database client and authentication configuration for the rest of the application. The one domain concept it references directly is the authenticated **User**, via `prisma.user` lookups in `src/lib/auth.ts` and the session identity resolved by `src/lib/requireUser.ts`.
+[NEEDS CLARIFICATION] [REVIEW] completeness: The Entities section documents only User, and the Overview asserts User is 'the one domain concept it references directly'. But the input set given to this doc includes src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, and src/app/api/plans/[planId]/items/route.ts, which use prisma.plan and prisma.plannedItem extensively (fields userId, year, month, currency, title / planId, title, amountCents, categoryId, note). Plan and PlannedItem (and a categoryId-referenced Category) are domain entities evidenced by these inputs but are entirely missing from the Entities section.
 
 ### Class Diagram
 

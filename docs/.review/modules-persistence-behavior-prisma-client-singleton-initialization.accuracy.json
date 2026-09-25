@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/behavior/prisma-client-singleton-initialization.md",
+  "dimension": "accuracy",
+  "findings": []
+}

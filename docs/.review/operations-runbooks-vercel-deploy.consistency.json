@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/operations/runbooks/vercel-deploy.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md is a fully-populated module overview (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents sections all contain concrete content, no [UNFILLED] sentinel present anywhere in the file).",
+      "locationHint": "- [ ] [NEEDS CLARIFICATION] The [planned-items module overview](../../modules/planned-items/overview.md) named as an input to this node is, as of this generation run, an unfilled skeleton document (`[UNFILLED]`), so no plan-item-related verification step could be grounded here.",
+      "message": "This doc claims docs/modules/planned-items/overview.md is 'an unfilled skeleton document ([UNFILLED])', but that file is actually fully populated with a Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, and Dependents section describing the POST /api/plans/{planId}/items handler - contradicting the claim and leaving a verification step unresolved that could actually be grounded from that overview."
+    }
+  ]
+}

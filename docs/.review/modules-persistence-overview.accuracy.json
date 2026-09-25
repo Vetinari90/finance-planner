@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/overview.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/app/api/plans/route.ts GET/POST both call `const userId = await requireUserId(); if (!userId) return NextResponse.json({ error: \"Unauthorized\" }, { status: 401 });` - this exact enforcement pattern is directly visible in a file listed among this doc's own code inputs, contradicting the claim that confirming it is out of scope.",
+      "locationHint": "- Throw or redirect when no session is present; `requireUserId()` only returns `null`, leaving enforcement (e.g. returning a 401) to its callers. [NEEDS CLARIFICATION] The calling API routes that enforce this are outside this module's manifest scope.",
+      "message": "The doc claims confirming the 401-enforcing callers is outside this module's manifest scope, but src/app/api/plans/route.ts (one of this doc's own code inputs) directly shows requireUserId() being checked and a 401 returned - the fact was verifiable from the inputs actually provided."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Grep over the code inputs shows authOptions imported in src/app/page.tsx, src/app/plans/page.tsx, src/app/plans/[planId]/page.tsx, src/app/api/auth/[...nextauth]/route.ts; prisma imported in src/app/api/auth/register/route.ts, src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, src/app/api/plans/[planId]/items/route.ts, src/app/plans/page.tsx, src/app/plans/[planId]/page.tsx; requireUserId imported in src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, src/app/api/plans/[planId]/items/route.ts. All of these files are among this doc's own code inputs.",
+      "locationHint": "| [NEEDS CLARIFICATION] | This module's inputs (`src/lib/auth.ts`, `src/lib/db.ts`, `src/lib/requireUser.ts`) give no visibility into which other modules import `authOptions`, `prisma`, or `requireUserId` - confirming consumers requires inspecting `src/app/api/**` and other modules' source, which is outside this module's manifest scope. |",
+      "message": "The doc asserts it has no visibility into consumers of authOptions/prisma/requireUserId and that inspecting src/app/api/** is out of scope, but src/app/api/** and src/app/**/page.tsx files were themselves provided among this doc's code inputs and plainly show these imports - the Dependents table is inaccurate about its own available evidence."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/data-handling.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md is fully populated (Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, Dependents sections all present with concrete content), not an unfilled skeleton, contradicting this doc's claim.",
+      "locationHint": "(`docs/modules/planned-items/overview.md`) was still an unfilled skeleton document at",
+      "message": "This document asserts the planned-items module overview was an unfilled skeleton and could not be incorporated, but docs/modules/planned-items/overview.md (in the same docs tree) is fully populated with Purpose, Responsibilities, Boundaries, Key Entities, Dependencies, and Dependents content, contradicting this claim."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md Responsibilities section states: 'Validate and persist new planned items (`title`, `amountCents`, optional `categoryId`, optional `note`) under a given plan, via POST /api/plans/{planId}/items.' - concrete field names are available.",
+      "locationHint": "overview is an unfilled skeleton document in this generation run.",
+      "message": "This document claims item-level financial data could not be confirmed because the planned-items module overview is an unfilled skeleton, but that overview document actually names the concrete fields (title, amountCents, categoryId, note), contradicting the premise."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "docs/modules/planned-items/overview.md names concrete planned-item fields (title, amountCents, categoryId, note) rather than being an unfilled skeleton, so the classification table's basis for leaving this row unconfirmed no longer matches the referenced document's actual content.",
+      "locationHint": "| [NEEDS CLARIFICATION] | Planned-item fields (amount, category, description, etc.) | Not confirmed - planned-items module overview is an unfilled skeleton document. |",
+      "message": "The data classification table leaves planned-item fields unclassified because the planned-items module overview is described as an unfilled skeleton, but that document is populated and names concrete fields, so the stated basis for this table row is inconsistent with the referenced document's current content."
+    }
+  ]
+}

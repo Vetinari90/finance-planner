@@ -33,6 +33,7 @@ Per `docs/modules/persistence/overview.md`, the project uses Prisma as its ORM, 
 - The generated Prisma client is imported from `@/generated/prisma/client` (a custom generated-client output path) rather than the default `@prisma/client` package path, per `docs/modules/persistence/overview.md`'s Boundaries section.
 
 [NEEDS CLARIFICATION] The exact adapter package name (e.g. `@prisma/adapter-pg`) and the Prisma / adapter version in use are not confirmed: no `package.json` or other build manifest was present in this synthesis node's inputs (`inputs.references` = `README.md` only), and per the dependency-grounding rule a dependency must be confirmed against a manifest, not prose, before being asserted as a version-specific fact.
+[NEEDS CLARIFICATION] [REVIEW] consistency: Internal inconsistency: this line claims 'inputs.references = README.md only' and that the adapter package name is unconfirmed, yet the rest of this same document (Context, Decision, Consequences, References) relies heavily on docs/modules/persistence/overview.md as its primary source - and that very file's Dependencies section already names the adapter package as `@prisma/adapter-pg`. The document contradicts itself about which inputs were available and what they establish.
 
 ### Consequences
 

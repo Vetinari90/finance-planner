@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/threat-model.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md, as it currently exists in the docs tree, contains full Purpose/Responsibilities/Boundaries/Key Entities/Dependencies/Dependents content (e.g. 'The Planned Items module manages the individual budget line items ... it currently provides creation of a planned item scoped to a specific plan and user.') - it is not an '[UNFILLED]' skeleton document.",
+      "locationHint": "**Threat (authorization-bypass-by-omission):** `docs/modules/persistence/overview.md` explicitly documents that `requireUserId()` does **not** itself throw or redirect when no session is present - it only returns `null`, \"leaving enforcement (e.g. returning a 401) to its callers.\" A route handler that fails to check for a `null` return would silently proceed without an authenticated user. [NEEDS CLARIFICATION] Whether every route handler across the auth, plans, and planned-items modules consistently checks for a `null` `requireUserId()` result could not be confirmed: the calling route implementations are outside this synthesis node's inputs (it draws only on module-level overview docs, not raw route source), and `docs/modules/planned-items/overview.md` - one of the module-docs named as input to this node - is still an unfilled skeleton (`[UNFILLED]`) in this generation run, so the planned-items module's enforcement pattern in particular is unconfirmed.",
+      "message": "This line asserts docs/modules/planned-items/overview.md is 'still an unfilled skeleton ([UNFILLED])', but that document (readable alongside this one) is fully populated with Purpose, Responsibilities, Boundaries, Key Entities, Dependencies and Dependents content - the claim contradicts the current state of the cross-referenced document."
+    }
+  ]
+}

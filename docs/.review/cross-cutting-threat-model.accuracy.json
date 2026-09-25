@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/cross-cutting/threat-model.md",
+  "dimension": "accuracy",
+  "findings": []
+}

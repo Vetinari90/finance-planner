@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/persistence/use-cases/resolve-session-user.md",
+  "dimension": "consistency",
+  "findings": []
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/integration-tests/authorization-isolation.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md is not an unfilled skeleton: it contains full Purpose, Responsibilities ('Enforce that a planned item can only be created under a plan owned by the authenticated user.'), Boundaries, Key Entities, Dependencies, and Dependents sections.",
+      "locationHint": "| planned-items | [NEEDS CLARIFICATION] `docs/modules/planned-items/overview.md`, named as a module-doc input for this node, is still an unfilled skeleton document (`[UNFILLED]`) as of this generation run; whether/how item-level endpoints (`/api/plans/{planId}/items`) enforce plan ownership could not be confirmed here. |",
+      "message": "This document asserts docs/modules/planned-items/overview.md is an unfilled skeleton and that ownership enforcement for item-level endpoints could not be confirmed, but that referenced document is fully filled and explicitly states 'Enforce that a planned item can only be created under a plan owned by the authenticated user' - directly contradicting the claim."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/planned-items/overview.md's Responsibilities section states plan-ownership enforcement is implemented for item creation, contradicting the claim that this document's ability to describe authorization behavior for plan-items endpoints is limited by an unfilled planned-items overview.",
+      "locationHint": "- `docs/modules/planned-items/overview.md` is still an unfilled skeleton",
+      "message": "The Notes section repeats the stale claim that docs/modules/planned-items/overview.md is an unfilled skeleton limiting this document's authorization-behavior coverage, but that module doc is fully populated and already documents ownership enforcement for planned-item creation."
+    }
+  ]
+}

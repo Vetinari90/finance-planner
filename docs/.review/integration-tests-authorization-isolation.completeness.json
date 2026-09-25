@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/integration-tests/authorization-isolation.md",
+  "dimension": "completeness",
+  "findings": []
+}
