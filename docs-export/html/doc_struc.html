@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>doc_struc</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<p>schema-version: &#39;3.0&#39;
+project: finance-planner
+language: en
+inputs:
+  code:
+    - src/app
+    - src/lib
+    - src/types
+  references:
+    - README.md
+generation:
+  ai-mode: autonomous
+  audience-default: developer
+  per-node-scoping: true
+  module-source-map:
+    auth:
+      - src/app/api/auth
+      - src/app/login
+      - src/app/register
+      - src/app/logout
+    plans:
+      - src/app/api/plans
+      - src/app/plans
+    planned-items: src/app/api/plans/[planId]/items
+    persistence: src/lib
+    web-ui: src/app
+recipe-library:
+  source: /opt/asr/workspace/364ff20d-60d0-41bc-a402-b80ba345622e/831187c8-70c2-4406-a502-a4dbe477b170/sdlc-artifact-templates/templates/mid
+tree:</p>
+<ul>
+<li>path: docs/
+children:<ul>
+<li>path: modules/
+children:<ul>
+<li>path: auth/
+children:<ul>
+<li>path: api.md
+recipe: docs/modules/_template/api.md
+children: []</li>
+<li>path: behavior/
+children:<ul>
+<li>path: credentials-sign-in.md
+recipe: docs/modules/_template/behavior/_template.md
+children: []</li>
+</ul>
+</li>
+<li>path: data-model.md
+recipe: docs/modules/_template/data-model.md
+children: []</li>
+<li>path: deployment.md
+description: Deployment of the auth module.
+recipe: docs/modules/_template/deployment.md
+children: []</li>
+<li>path: domain-model.md
+recipe: docs/modules/_template/domain-model.md
+children: []</li>
+<li>path: overview.md
+recipe: docs/modules/_template/overview.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/web-ui/overview.md
+- docs/modules/persistence/overview.md
+children: []</li>
+<li>path: technical-concerns.md
+recipe: docs/modules/_template/technical-concerns.md
+children: []</li>
+<li>path: testing.md
+recipe: docs/modules/_template/testing.md
+children: []</li>
+<li>path: use-cases/
+children:<ul>
+<li>path: register-account.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+<li>path: sign-in.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+<li>path: sign-out.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>path: persistence/
+children:<ul>
+<li>path: api.md
+description: Api of the persistence module.
+recipe: docs/modules/_template/api.md
+children: []</li>
+<li>path: behavior/
+description: Behavior instances of the persistence module.
+recipe: docs/modules/_template/behavior/_template.md
+children: []</li>
+<li>path: data-model.md
+recipe: docs/modules/_template/data-model.md
+children: []</li>
+<li>path: deployment.md
+recipe: docs/modules/_template/deployment.md
+children: []</li>
+<li>path: domain-model.md
+description: Domain Model of the persistence module.
+recipe: docs/modules/_template/domain-model.md
+children: []</li>
+<li>path: overview.md
+recipe: docs/modules/_template/overview.md
+children: []</li>
+<li>path: technical-concerns.md
+recipe: docs/modules/_template/technical-concerns.md
+children: []</li>
+<li>path: testing.md
+recipe: docs/modules/_template/testing.md
+children: []</li>
+<li>path: use-cases/
+description: Use Cases instances of the persistence module.
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+</ul>
+</li>
+<li>path: planned-items/
+children:<ul>
+<li>path: api.md
+recipe: docs/modules/_template/api.md
+children: []</li>
+<li>path: behavior/
+description: Behavior instances of the planned-items module.
+recipe: docs/modules/_template/behavior/_template.md
+children: []</li>
+<li>path: data-model.md
+recipe: docs/modules/_template/data-model.md
+children: []</li>
+<li>path: deployment.md
+description: Deployment of the planned-items module.
+recipe: docs/modules/_template/deployment.md
+children: []</li>
+<li>path: domain-model.md
+recipe: docs/modules/_template/domain-model.md
+children: []</li>
+<li>path: overview.md
+recipe: docs/modules/_template/overview.md
+children: []</li>
+<li>path: technical-concerns.md
+recipe: docs/modules/_template/technical-concerns.md
+children: []</li>
+<li>path: testing.md
+recipe: docs/modules/_template/testing.md
+children: []</li>
+<li>path: use-cases/
+children:<ul>
+<li>path: add-planned-item.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+<li>path: list-plan-items.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>path: plans/
+children:<ul>
+<li>path: api.md
+recipe: docs/modules/_template/api.md
+children: []</li>
+<li>path: behavior/
+children:<ul>
+<li>path: plan-lifecycle.md
+recipe: docs/modules/_template/behavior/_template.md
+children: []</li>
+</ul>
+</li>
+<li>path: data-model.md
+recipe: docs/modules/_template/data-model.md
+children: []</li>
+<li>path: deployment.md
+description: Deployment of the plans module.
+recipe: docs/modules/_template/deployment.md
+children: []</li>
+<li>path: domain-model.md
+recipe: docs/modules/_template/domain-model.md
+children: []</li>
+<li>path: overview.md
+recipe: docs/modules/_template/overview.md
+children: []</li>
+<li>path: technical-concerns.md
+recipe: docs/modules/_template/technical-concerns.md
+children: []</li>
+<li>path: testing.md
+recipe: docs/modules/_template/testing.md
+children: []</li>
+<li>path: use-cases/
+children:<ul>
+<li>path: create-monthly-plan.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+<li>path: delete-plan.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+<li>path: list-plans.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+<li>path: view-plan-detail.md
+recipe: docs/modules/_template/use-cases/_template.md
+children: []</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>path: web-ui/
+children:<ul>
+<li>path: testing.md
+recipe: docs/modules/_template/testing.md
+children: []</li>
+<li>path: overview.md
+recipe: docs/modules/_template/overview.md
+children: []</li>
+<li>path: technical-concerns.md
+recipe: docs/modules/_template/technical-concerns.md
+children: []</li>
+<li>path: behavior/
+children:<ul>
+<li>path: server-client-rendering.md
+recipe: docs/modules/_template/behavior/_template.md
+children: []</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>path: risks.md
+inputs:
+  references: []
+  module-docs:
+- docs/modules/auth/technical-concerns.md
+- docs/modules/plans/technical-concerns.md
+- docs/modules/planned-items/technical-concerns.md
+- docs/modules/web-ui/technical-concerns.md
+- docs/modules/persistence/technical-concerns.md
+- docs/modules/auth/testing.md
+- docs/modules/plans/testing.md
+- docs/modules/planned-items/testing.md
+- docs/modules/web-ui/testing.md
+- docs/modules/persistence/testing.md
+children: []</li>
+<li>path: business/
+children:<ul>
+<li>path: user-journeys/
+children:<ul>
+<li>path: _template.md
+children: []</li>
+<li>path: plan-a-month.md
+recipe: docs/business/user-journeys/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: first-time-signup.md
+recipe: docs/business/user-journeys/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: business-context.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: decisions/
+children:<ul>
+<li>path: _template.md
+children: []</li>
+<li>path: 0004-store-money-as-integer-cents.md
+recipe: docs/decisions/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: 0001-credentials-auth-jwt-sessions.md
+recipe: docs/decisions/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: 0003-prisma-postgresql-with-pg-adapter.md
+recipe: docs/decisions/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: 0005-scope-all-queries-by-session-user.md
+recipe: docs/decisions/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: 0001-nextjs-app-router-fullstack-monolith.md
+recipe: docs/decisions/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: 0002-credentials-provider-with-jwt-sessions.md
+recipe: docs/decisions/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: 0006-zod-request-validation-at-route-boundary.md
+recipe: docs/decisions/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: glossary.md
+inputs:
+  references: []
+  module-docs:
+- docs/modules/plans/domain-model.md
+- docs/modules/plans/data-model.md
+- docs/modules/planned-items/domain-model.md
+- docs/modules/planned-items/data-model.md
+- docs/modules/auth/domain-model.md
+- docs/modules/persistence/data-model.md
+children: []</li>
+<li>path: operations/
+children:<ul>
+<li>path: ci-cd.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: runbooks/
+children:<ul>
+<li>path: _template.md
+children: []</li>
+<li>path: vercel-deploy.md
+recipe: docs/operations/runbooks/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: backup-restore.md
+recipe: docs/operations/runbooks/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: secret-rotation.md
+recipe: docs/operations/runbooks/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: database-migration.md
+recipe: docs/operations/runbooks/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: rotate-auth-secret.md
+recipe: docs/operations/runbooks/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: local-environment-setup.md
+recipe: docs/operations/runbooks/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: infrastructure.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: incident-response.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: overview.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: requirements/
+children:<ul>
+<li>path: _template.md
+children: []</li>
+<li>path: business-rules.md
+recipe: docs/requirements/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: non-functional.md
+recipe: docs/requirements/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: functional-account-access.md
+recipe: docs/requirements/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: functional-monthly-planning.md
+recipe: docs/requirements/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: cross-cutting/
+children:<ul>
+<li>path: security.md
+children: []</li>
+<li>path: standards.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: threat-model.md
+recipe: docs/cross-cutting/security.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: configuration.md
+recipe: docs/cross-cutting/standards.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: data-handling.md
+recipe: docs/cross-cutting/security.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: error-handling.md
+recipe: docs/cross-cutting/standards.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: api-conventions.md
+recipe: docs/cross-cutting/standards.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: integration-tests/
+children:<ul>
+<li>path: _template.md
+children: []</li>
+<li>path: auth-to-plans-flow.md
+recipe: docs/integration-tests/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: plan-item-lifecycle.md
+recipe: docs/integration-tests/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: cross-user-isolation.md
+recipe: docs/integration-tests/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+<li>path: authorization-isolation.md
+recipe: docs/integration-tests/_template.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/persistence/overview.md
+- docs/modules/web-ui/overview.md
+children: []</li>
+</ul>
+</li>
+<li>path: executive-summary.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/auth/overview.md
+- docs/modules/plans/overview.md
+- docs/modules/planned-items/overview.md
+- docs/modules/web-ui/overview.md
+- docs/modules/persistence/overview.md
+children: []</li>
+<li>path: quality-attributes.md
+inputs:
+  references: []
+  module-docs:
+- docs/modules/auth/technical-concerns.md
+- docs/modules/plans/technical-concerns.md
+- docs/modules/planned-items/technical-concerns.md
+- docs/modules/web-ui/technical-concerns.md
+- docs/modules/persistence/technical-concerns.md
+- docs/modules/persistence/deployment.md
+children: []</li>
+<li>path: technology-context.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/web-ui/technical-concerns.md
+- docs/modules/persistence/technical-concerns.md
+- docs/modules/persistence/deployment.md
+- docs/modules/auth/technical-concerns.md
+- docs/modules/plans/technical-concerns.md
+- docs/modules/planned-items/technical-concerns.md
+children: []</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+  </article>
+</body>
+</html>
