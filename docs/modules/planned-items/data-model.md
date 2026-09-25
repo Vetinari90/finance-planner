@@ -13,10 +13,10 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 ## Overview
 
-**Database:** [NEEDS CLARIFICATION] The Prisma schema file was not present in inputs.code for this dispatch; the database engine (e.g. PostgreSQL) could not be confirmed from this module's own inputs. The `plannedItem` model is accessed through a shared Prisma client (`@/lib/db`), which per `generation.module-source-map` is owned by the persistence module.
-[NEEDS CLARIFICATION] [REVIEW] consistency: This doc claims the database engine 'could not be confirmed', but the sibling persistence/data-model.md (same generated_inputs hash) directly confirms PostgreSQL from src/lib/db.ts's PrismaPg adapter - a fact grounded in an input this doc's own module also has access to (src/lib/db.ts is in this doc's code inputs).
+**Database:** The database engine is PostgreSQL, confirmed via `src/lib/db.ts`, which constructs the Prisma client using the `PrismaPg` adapter from `@prisma/adapter-pg` (Prisma's PostgreSQL adapter). The Prisma schema file itself was not present in inputs.code for this dispatch, so table/column definitions beyond what is observed in application code are not directly confirmed. The `plannedItem` model is accessed through a shared Prisma client (`@/lib/db`), which per `generation.module-source-map` is owned by the persistence module.
+Resolved: the database engine is PostgreSQL. `src/lib/db.ts` constructs the Prisma client with `new PrismaPg(...)` from `@prisma/adapter-pg`, Prisma's PostgreSQL driver adapter, directly confirming the engine from this module's own code inputs.
 [NEEDS CLARIFICATION] [REVIEW] completeness: The Overview claims the database engine could not be confirmed from the module's inputs, but src/lib/db.ts (listed in this dispatch's codeFiles) imports `PrismaPg` from `@prisma/adapter-pg` and uses it to construct the Prisma client, directly confirming PostgreSQL. This available input evidence was not incorporated into the section.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc claims the database engine could not be confirmed from inputs, but `src/lib/db.ts` (an input to this dispatch, and the very file cited in this sentence) constructs the Prisma client with `new PrismaPg(...)` from `@prisma/adapter-pg`, which is Prisma's PostgreSQL adapter - directly indicating PostgreSQL rather than an unconfirmable engine.
+Resolved: PostgreSQL. `src/lib/db.ts` constructs the Prisma client via `new PrismaPg(...)` from `@prisma/adapter-pg`, which is Prisma's PostgreSQL driver adapter, directly confirming the database engine.
 
 **Schema:** [NEEDS CLARIFICATION] Not present in inputs.
 
@@ -51,7 +51,7 @@ erDiagram
 | categoryId | string | YES | Optional, nullable; defaults to `null` when omitted |
 | note | string | YES | Optional, nullable, max 400 characters; defaults to `null` when omitted |
 | created_at | [NEEDS CLARIFICATION] | [NEEDS CLARIFICATION] | Not observed in the grounded code |
-[NEEDS CLARIFICATION] [REVIEW] consistency: This doc states created_at 'not observed in the grounded code', contradicting the sibling docs/modules/plans/data-model.md, which documents the same plannedItem/item table's createdAt column as a confirmed timestamp field used for ordering, grounded in code (src/app/api/plans/[planId]/route.ts) that is also among this doc's own inputs.
+Resolved: `createdAt` is confirmed to exist on the `plannedItem` model. Both `src/app/api/plans/[planId]/route.ts` and `src/app/plans/[planId]/page.tsx` fetch a plan's items via `include: { items: { orderBy: { createdAt: "asc" } } }`, directly referencing the `createdAt` field; its exact SQL type/nullability is still not directly observable without the Prisma schema.
 [NEEDS CLARIFICATION] [REVIEW] completeness: The row states the created_at column was 'not observed in the grounded code', but two other codeFiles for this dispatch (src/app/plans/[planId]/page.tsx and src/app/api/plans/[planId]/route.ts) order plannedItem records by `createdAt`, which is available evidence of the field's existence that was not incorporated.
 | updated_at | [NEEDS CLARIFICATION] | [NEEDS CLARIFICATION] | Not observed in the grounded code |
 

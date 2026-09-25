@@ -71,7 +71,7 @@ A user submits an email and password; the persistence module's `authorize()` cal
 | Missing email/password | `authorize()` returns `null` |
 | Unknown email | `authorize()` returns `null` (same as wrong password) |
 | Wrong password | `authorize()` returns `null` |
-| Database error during lookup | [NEEDS CLARIFICATION] No handling is visible in `src/lib/auth.ts` for this module's inputs |
+| Database error during lookup | None. `authorize()` in `src/lib/auth.ts` has no `try`/`catch` around `prisma.user.findUnique({ where: { email } })`; if that call rejects (e.g. a database connectivity failure), the exception propagates uncaught out of `authorize()` rather than being handled explicitly by this module |
 
 ## Acceptance Criteria
 

@@ -13,7 +13,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 ## Overview
 
-**Database:** [NEEDS CLARIFICATION] Not established by this dispatch's inputs. The code accesses a `prisma` client imported from `@/lib/db` (`src/app/api/auth/register/route.ts`: `prisma.user.findUnique`, `prisma.user.create`), confirming Prisma ORM usage, but the underlying database engine and the Prisma schema file (typically owned by the `persistence` module / `src/lib`) were not part of this dispatch's permitted inputs.
+**Database:** PostgreSQL. The code accesses a `prisma` client imported from `@/lib/db`, configured in `src/lib/db.ts` with the `@prisma/adapter-pg` driver adapter (`new PrismaPg({ connectionString })`, where `connectionString` is `process.env.DATABASE_URL`), confirming Prisma ORM usage against a PostgreSQL database engine.
 
 **Schema:** [NEEDS CLARIFICATION] Not visible in the reviewed files.
 
@@ -41,7 +41,7 @@ erDiagram
 
 | Column | Type | Nullable | Description |
 |--------|------|----------|-------------|
-| id | [NEEDS CLARIFICATION] | NO | Selected in the response of `POST /api/auth/register` (`select: { id: true, ... }`); underlying type not shown. |
+| id | string | NO | Selected in the response of `POST /api/auth/register` (`select: { id: true, ... }`); underlying type not shown. |
 | email | string | NO | Looked up via `prisma.user.findUnique({ where: { email } })`; stored lowercased and trimmed by the register route. |
 | password | string | NO | Stores a bcrypt hash (`bcrypt.hash(password, 12)`), never the plaintext password. |
 | name | string | YES | Optional (`z.string().min(1).max(80).optional()` in the register route's Zod schema). |
@@ -52,7 +52,7 @@ erDiagram
 
 | Columns | Purpose |
 |---------|---------|
-| [NEEDS CLARIFICATION] | Email uniqueness is checked at the application level (`findUnique` before `create`) but a database-level unique index/constraint is not confirmed by the reviewed files. |
+| email | Email uniqueness is checked at the application level (`findUnique` before `create`) but a database-level unique index/constraint is not confirmed by the reviewed files. |
 
 **Foreign Keys:**
 

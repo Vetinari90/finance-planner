@@ -17,21 +17,21 @@ The auth API provides account registration and a NextAuth-managed session lifecy
 
 **Base Path:** Not applicable — endpoints are `/api/auth/register`, `/api/auth/[...nextauth]` (NextAuth's own sub-routes), and `/logout`.
 
-**OpenAPI Spec:** [NEEDS CLARIFICATION] No OpenAPI spec file was present in this dispatch's inputs.
+**OpenAPI Spec:** Not applicable — no OpenAPI/Swagger specification file exists for this module; none was found among the reviewed source files or `README.md`.
 
 ## Authentication
 
 | Requirement | Details |
 |-------------|---------|
 | Method | Session-based, via the NextAuth `credentials` provider. The provider id `"credentials"` is confirmed by the two call sites `signIn("credentials", ...)` in `src/app/login/LoginClient.tsx` and `src/app/register/page.tsx`. |
-| Required Scopes | [NEEDS CLARIFICATION] No scope/role model was found in the reviewed files; `authOptions` (the file that would configure this) is out of scope for this dispatch. |
+| Required Scopes | None. `authOptions` (`src/lib/auth.ts`) defines a single `credentials` provider whose `authorize()` callback returns only `{ id, email, name }`; the augmented `Session`/JWT types (`src/types/next-auth.d.ts`) likewise carry only `id`/`name`/`email`, and `requireUserId()` (`src/lib/requireUser.ts`) only checks that a session exists. There is no `role`/`scope` field anywhere in the auth stack, so every authenticated user has the same access level. |
 
 ## Endpoints
 
 | Method | Path | Description | Auth Required |
 |--------|------|-------------|---------------|
 | POST | `/api/auth/register` | Create a new user account | No |
-| GET, POST | `/api/auth/[...nextauth]` | NextAuth catch-all: sign-in, sign-out, session, CSRF, callback, etc. (handled by `NextAuth(authOptions)`) | Varies per NextAuth sub-route; [NEEDS CLARIFICATION] exact per-sub-route behavior is defined inside `authOptions`, which is out of scope here |
+| GET, POST | `/api/auth/[...nextauth]` | NextAuth catch-all: sign-in, sign-out, session, CSRF, callback, etc. (handled by `NextAuth(authOptions)`) | Varies per NextAuth sub-route; auth requirement depends on the specific NextAuth sub-route (e.g. `/api/auth/session`, `/api/auth/signin`, `/api/auth/csrf`, `/api/auth/callback/credentials`, `/api/auth/signout`); most require no prior session. `authOptions` (`src/lib/auth.ts`) configures a JWT session strategy, a single `credentials` provider, `jwt`/`session` callbacks that copy the user id onto the token/session, and a custom `pages.signIn: "/login"` |
 | GET | `/logout` | Redirects to NextAuth's built-in `/api/auth/signout?callbackUrl=/login` | No |
 
 ## Common Patterns

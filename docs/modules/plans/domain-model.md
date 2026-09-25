@@ -93,13 +93,13 @@ classDiagram
 
 **Lifecycle:**
 - Created when: the user submits `AddItemForm.tsx` (`POST /api/plans/{planId}/items`, implemented outside this module)
-- Deleted when: [NEEDS CLARIFICATION] No item-deletion or plan-cascade-delete behavior is observed in this module's inputs
+- Deleted when: never directly - no dedicated `DELETE` endpoint exists for individual items; items are removed only as a side effect of deleting their parent plan via `DELETE /api/plans/{planId}` (`src/app/api/plans/[planId]/route.ts`, triggered from the UI by `DeletePlanButton.tsx`), which calls `prisma.plan.delete({ where: { id: planId } })` - whether this cascades to delete the plan's items depends on the Prisma schema's relation configuration, which is not included among this module's inputs
 
 ### Value Objects
 
-[NEEDS CLARIFICATION] No dedicated value-object types (e.g., a `Money` or `MonthYear` wrapper class) were found in the plans module's files; amounts and year/month are passed as plain `Int`/`String` values with the cents conversion done inline in `AddItemForm.tsx`.
+No dedicated value-object types (e.g., a `Money` or `MonthYear` wrapper class) were found in the plans module's files; amounts and year/month are passed as plain `Int`/`String` values, with the cents conversion done inline in `AddItemForm.tsx`'s `toCents()` function and validated server-side via `z.number().int()` in `CreateItemSchema` (`items/route.ts`) and `CreatePlanSchema` (`plans/route.ts`).
 
 ### Domain Events
 
-[NEEDS CLARIFICATION] No domain event emission was observed in `src/app/api/plans/route.ts` or `src/app/api/plans/[planId]/route.ts`.
+No domain event emission was observed in `src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, or `src/app/api/plans/[planId]/items/route.ts` - all three route handlers perform direct Prisma CRUD calls (`prisma.plan.create`/`delete`/`findFirst`/`findMany`, `prisma.plannedItem.create`) with no event bus, pub/sub, or webhook dispatch.
 <!-- /SLOT:content -->

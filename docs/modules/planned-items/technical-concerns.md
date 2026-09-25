@@ -17,7 +17,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 **Caching Enabled:** No evidence of caching in the grounded code.
 
-[NEEDS CLARIFICATION] No caching layer, technology, or cached keys were observed in `src/app/api/plans/[planId]/items/route.ts`.
+No caching layer, technology, or cached keys are present. Each request queries the database directly through the shared Prisma client (`src/lib/db.ts`); the route handler (`src/app/api/plans/[planId]/items/route.ts`) sets no HTTP cache headers and uses no in-memory or external cache store (e.g. Redis).
 
 ## Data Validation
 
@@ -52,9 +52,9 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 ### Common Error Codes
 
-[NEEDS CLARIFICATION] The grounded code returns a single generic `"Invalid input"` error string on validation failure (plus the Zod `details` payload); no enumerated error-code taxonomy (e.g. `REQUIRED`, `TOO_LONG`) was present in inputs.
+The grounded route handler (`src/app/api/plans/[planId]/items/route.ts`) does not use a structured error-code taxonomy (e.g. `REQUIRED`, `TOO_LONG`). It returns one of three fixed error strings tied to HTTP status: `401` `"Unauthorized"` (no authenticated session, from `requireUserId()`, line 19), `404` `"Not found"` (the plan does not exist or is not owned by the authenticated user, line 30), and `400` `"Invalid input"` (Zod validation failure via `CreateItemSchema.safeParse(body)`, with a `details` payload from `parsed.error.flatten()`, lines 36-40).
 [NEEDS CLARIFICATION] [REVIEW] completeness: The Common Error Codes section covers only the 400 'Invalid input' validation error and omits the 401 'Unauthorized' and 404 'Not found' error responses that are evidenced in the same route file (src/app/api/plans/[planId]/items/route.ts, lines 19 and 30) this document is grounded in.
 
 ## Internationalization
 
-[NEEDS CLARIFICATION] No i18n/localization handling was observed in the grounded route handler.
+No i18n/localization handling is present. The root layout hardcodes `lang="en"` (`src/app/layout.tsx`) and the grounded route handler (`src/app/api/plans/[planId]/items/route.ts`) returns fixed English error strings (`"Unauthorized"`, `"Not found"`, `"Invalid input"`) with no locale negotiation, translation catalog, or i18n library in use.

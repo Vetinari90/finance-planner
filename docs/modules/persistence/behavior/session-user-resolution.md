@@ -62,5 +62,5 @@ sequenceDiagram
 
 | Failure Point | Handling |
 |----------------|----------|
-| No active session | `requireUserId()` returns `null`; it does not throw or redirect. [NEEDS CLARIFICATION] Enforcement (e.g. returning HTTP 401) is left to the caller, which is outside this module's inputs. |
+| No active session | `requireUserId()` returns `null`; it does not throw or redirect. Enforcement is handled by callers in this module's inputs: `src/app/api/plans/route.ts` (GET/POST), `src/app/api/plans/[planId]/route.ts` (GET/DELETE), and `src/app/api/plans/[planId]/items/route.ts` (POST) each check `if (!userId)` immediately after calling `requireUserId()` and return `NextResponse.json({ error: "Unauthorized" }, { status: 401 })`. |
 | `getServerSession` throws | [NEEDS CLARIFICATION] No try/catch is present in `requireUserId()`; propagation is not confirmed in this module's inputs. |

@@ -27,7 +27,7 @@ The plans module exposes REST endpoints for creating, listing, viewing, and dele
 | Requirement | Details |
 |-------------|---------|
 | Method | Every handler calls `requireUserId()` (imported from `@/lib/requireUser`) before doing any work. If it returns a falsy value, the handler responds `401 { "error": "Unauthorized" }` and stops. |
-| Required Scopes | [NEEDS CLARIFICATION] No scope/permission model was observed in `src/app/api/plans/route.ts` or `src/app/api/plans/[planId]/route.ts`; access is only gated by "is this an authenticated user" plus row-level ownership filtering (`userId`). |
+| Required Scopes | None. Access is gated solely by authentication (`requireUserId()` must resolve a valid user id) plus row-level ownership filtering on `userId`; no scope or permission model exists in `src/app/api/plans/route.ts` or `src/app/api/plans/[planId]/route.ts`. |
 
 ### Endpoints
 

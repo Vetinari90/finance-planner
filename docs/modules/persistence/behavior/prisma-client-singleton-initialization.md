@@ -69,12 +69,12 @@ sequenceDiagram
 `src/lib/db.ts` reads `process.env.DATABASE_URL` at module load and throws `"DATABASE_URL is not set"` immediately if it is missing, before any client is constructed.
 
 ### 2. Adapter/client reuse (Steps 3-8)
-[NEEDS CLARIFICATION] [REVIEW] consistency: The step range 'Steps 3-8' is internally inconsistent with the document's own mermaid diagram: step 3 is actually the DATABASE_URL-unset throw (belongs to the 'Environment check' section, not adapter/client reuse), while step 9 - the 'construct a new [client] otherwise' case this section's text describes - is excluded from the cited range.
+The correct step range for this section is Steps 4-9: step 3 is the DATABASE_URL-unset throw covered in the Environment check section above, and step 9 (`DB->>Client: new PrismaClient({ adapter, log: ["error","warn"] })`) is the 'construct a new client otherwise' case this section describes.
 
 The module casts `globalThis` to a typed `{ prisma?: PrismaClient; prismaAdapter?: PrismaPg }` shape (`globalForPrisma`) and uses the nullish-coalescing operator to reuse an existing adapter/client if one was cached on a previous module evaluation, or construct a new one otherwise.
 
 ### 3. Conditional caching (Step 9)
-[NEEDS CLARIFICATION] [REVIEW] consistency: Section 3 labels the conditional cache write-back as 'Step 9', but by the diagram's own autonumbering the cache-write message ('DB->>Global: cache prisma & prismaAdapter') is step 10, not step 9 (step 9 is the 'new PrismaClient(...)' construction message).
+The correct step for this section is Step 10: by the diagram's autonumbering, the cache write-back message (`DB->>Global: cache prisma & prismaAdapter`) is step 10, while step 9 is the `new PrismaClient(...)` construction message covered in Section 2 above.
 
 Only when `process.env.NODE_ENV !== "production"` does the module write the client and adapter back onto `globalForPrisma`. This is the guard against creating a new Prisma client (and new DB connections) on every Next.js dev-mode hot reload.
 
@@ -82,5 +82,5 @@ Only when `process.env.NODE_ENV !== "production"` does the module write the clie
 
 | Failure Point | Handling |
 |----------------|----------|
-| `DATABASE_URL` unset at module load | `src/lib/db.ts` throws `new Error("DATABASE_URL is not set")`, which propagates to whatever imported the module. [NEEDS CLARIFICATION] No explicit catch/handling for this is visible in this module's inputs. |
-| Database unreachable at query time | [NEEDS CLARIFICATION] Not handled in `src/lib/db.ts`; only `log: ["error", "warn"]` is configured on the client. |
+| `DATABASE_URL` unset at module load | `src/lib/db.ts` throws `new Error("DATABASE_URL is not set")`, which propagates to whatever imported the module. No catch or handling exists in `src/lib/db.ts` itself, and because every consumer (`src/lib/auth.ts` and the API route/page modules) uses a static `import { prisma } from "@/lib/db"`, the thrown error cannot be caught at the import site either — it surfaces as an unhandled exception that fails the importing module's evaluation. |
+| Database unreachable at query time | Not handled in `src/lib/db.ts`; only `log: ["error", "warn"]` is configured on the client, so connection or query errors are not caught within this module and propagate as unhandled promise rejections to whichever caller invoked the Prisma client method. |

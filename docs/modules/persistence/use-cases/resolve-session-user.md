@@ -21,13 +21,13 @@ A server-side caller (e.g. an API route handler) needs to know which user is mak
 |-------|------|--------------|
 | Server-side caller | Primary | Any server code that calls `await requireUserId()`; concrete callers are outside this module's inputs |
 [NEEDS CLARIFICATION] [REVIEW] completeness: The Actors table claims concrete callers of requireUserId() are outside this module's inputs, but three callers (src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, src/app/api/plans/[planId]/items/route.ts) are in the provided codeFiles and each call requireUserId() directly - this input-evident material is omitted from the Actors description.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc states concrete callers of requireUserId() are 'outside this module's inputs', but the module's own codeFiles list includes three route handlers (plans/route.ts, plans/[planId]/route.ts, plans/[planId]/items/route.ts) that call requireUserId() directly, contradicting this claim.
+Concrete callers of `requireUserId()` present in this module's inputs are `src/app/api/plans/route.ts` (GET, POST), `src/app/api/plans/[planId]/route.ts` (GET, DELETE), and `src/app/api/plans/[planId]/items/route.ts` (POST) - each awaits `requireUserId()` directly and returns HTTP 401 when the result is `null`.
 | NextAuth session store | Secondary | Backs `getServerSession(authOptions)` |
 
 ## Preconditions
 
 - [ ] `authOptions` is correctly configured (`src/lib/auth.ts`) so that `getServerSession` can decode a valid session.
-- [ ] [NEEDS CLARIFICATION] Whether a session cookie/token is present depends on a prior sign-in, which is outside this module's inputs.
+- [ ] The caller has previously authenticated through the credentials sign-in flow (`src/app/login/LoginClient.tsx` invoking NextAuth's `signIn("credentials", ...)`, handled by `src/app/api/auth/[...nextauth]/route.ts` using `authOptions` in `src/lib/auth.ts`), which establishes the JWT-backed session (`session: { strategy: "jwt" }`) that `getServerSession` reads.
 
 ## Postconditions
 
@@ -54,14 +54,14 @@ A server-side caller (e.g. an API route handler) needs to know which user is mak
 
 **Continues at:** ends - caller must decide how to respond (e.g. return HTTP 401); that logic is outside this module's inputs
 [NEEDS CLARIFICATION] [REVIEW] completeness: The Alternative Flow states the HTTP-401 handling logic is 'outside this module's inputs', but the exact 401 response pattern is implemented in three caller files that are part of this doc's codeFiles (src/app/api/plans/route.ts, [planId]/route.ts, [planId]/items/route.ts) - the doc omits this readily available, input-evident detail.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc frames the HTTP 401 response as a hypothetical example 'outside this module's inputs', but this exact behavior is concretely implemented in codeFiles (e.g. src/app/api/plans/route.ts), so the caveat is inaccurate given the available inputs.
+Concretely implemented: each caller returns `NextResponse.json({ error: "Unauthorized" }, { status: 401 })` when `requireUserId()` resolves to `null`, in `src/app/api/plans/route.ts` (GET, POST), `src/app/api/plans/[planId]/route.ts` (GET, DELETE), and `src/app/api/plans/[planId]/items/route.ts` (POST).
 
 ## Error Handling
 
 | Error Condition | System Response |
 |------------------|-------------------|
 | No session / unauthenticated | Returns `null` (not an exception) |
-| `getServerSession` throws | [NEEDS CLARIFICATION] No try/catch is present in `requireUserId()`; propagation is not confirmed in this module's inputs |
+| `getServerSession` throws | Propagates uncaught: `requireUserId()` (`src/lib/requireUser.ts`) has no try/catch around `getServerSession`, and none of its callers (`src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, `src/app/api/plans/[planId]/items/route.ts`) wrap the `await requireUserId()` call either, so an exception from `getServerSession` propagates unhandled to the Next.js route handler. |
 
 ## Acceptance Criteria
 

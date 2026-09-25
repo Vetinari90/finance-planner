@@ -20,14 +20,14 @@ The `persistence` module (`src/lib/`) is an internal infrastructure module, not 
 
 ### Base Path
 
-[NEEDS CLARIFICATION] Not applicable - this module defines no HTTP routes. No `/api/...` base path is declared in `src/lib/auth.ts`, `src/lib/db.ts`, or `src/lib/requireUser.ts`.
+Not applicable - this module defines no HTTP routes. No `/api/...` base path is declared in `src/lib/auth.ts`, `src/lib/db.ts`, or `src/lib/requireUser.ts`.
 
 ### Authentication
 
 | Requirement | Details |
 |-------------|---------|
 | Method | Credentials (email + password) via NextAuth `CredentialsProvider`, session strategy `jwt` (`src/lib/auth.ts`) |
-| Required Scopes | [NEEDS CLARIFICATION] No scope/permission model was found in `src/lib/auth.ts`, `src/lib/db.ts`, or `src/lib/requireUser.ts` |
+| Required Scopes | No scope/permission model was found in `src/lib/auth.ts`, `src/lib/db.ts`, or `src/lib/requireUser.ts` |
 
 `src/lib/auth.ts` defines `authOptions: NextAuthOptions` with a single `CredentialsProvider` whose `authorize(credentials)` callback:
 1. Lower-cases and trims the submitted email.
@@ -41,11 +41,11 @@ The `jwt` callback copies `user.id` onto `token.sub`; the `session` callback cop
 
 ### Endpoints
 
-This module declares no HTTP endpoints in `src/lib/auth.ts`, `src/lib/db.ts`, or `src/lib/requireUser.ts`. [NEEDS CLARIFICATION] The route handlers that consume this module's exports live outside this module's manifest scope (e.g. under `src/app/api/auth`, per the project's module-source-map) and are out of scope for this document.
+This module declares no HTTP endpoints in `src/lib/auth.ts`, `src/lib/db.ts`, or `src/lib/requireUser.ts`. The route handlers that consume this module's exports live outside this module's manifest scope (e.g. under `src/app/api/auth`, per the project's module-source-map) and are out of scope for this document.
 
 ### Common Patterns
 
-[NEEDS CLARIFICATION] No pagination or error-response envelope is defined in this module's code; these concepts do not apply to a module with no HTTP surface.
+No pagination or error-response envelope is defined in this module's code; these concepts do not apply to a module with no HTTP surface.
 
 ### Key Exports
 
@@ -59,5 +59,5 @@ Instead of HTTP endpoints, this module's "API" is a set of exported symbols cons
 
 **Error Codes:**
 
-[NEEDS CLARIFICATION] No error-code taxonomy is defined by this module; `requireUserId()` communicates the absence of a session only via a `null` return value, not a thrown error or code, and `authorize()` communicates failure only via a `null` return.
+No error-code taxonomy is defined by this module; `requireUserId()` communicates the absence of a session only via a `null` return value, not a thrown error or code, and `authorize()` communicates failure only via a `null` return.
 <!-- /SLOT:content -->

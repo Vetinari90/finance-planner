@@ -71,7 +71,7 @@ Email is lower-cased and trimmed; a missing password defaults to an empty string
 If either `email` or `password` is falsy, `authorize()` returns `null` immediately without querying the database.
 
 ### 3. User lookup and password check (Steps 5-11)
-[NEEDS CLARIFICATION] [REVIEW] consistency: Internal inconsistency: the section heading cites 'Steps 5-11' but the section's own prose describes the successful bcrypt-match/return-user-object path, which is steps 12-13 in the autonumbered sequence diagram above - the step range should extend to 13 to cover the content actually described.
+This section actually spans Steps 5-13 of the sequence diagram above: Steps 5-11 cover the user lookup and the not-found/wrong-password paths, while Steps 12-13 cover the successful bcrypt-match and return-user-object path described below (per `authorize()` in `src/lib/auth.ts`).
 
 The user is looked up by exact (post-normalization) email match. If found, the submitted password is compared against the stored `user.password` hash with `bcrypt.compare`. Only a `true` result returns a user object (`id`, `email`, `name ?? undefined`) to NextAuth; every other path returns `null`.
 

@@ -43,7 +43,7 @@ An authenticated user adds a new budget line item (planned item) to one of their
 
 ## Alternative Flows
 
-[NEEDS CLARIFICATION] No alternative (non-error) flows were evidenced in the grounded code; the handler has a single linear success path.
+This use case has no alternative (non-error) flows. The `POST /api/plans/{planId}/items` route handler follows a single linear success path: resolve the user id, look up the owned plan, validate the request body, and persist the item (see Main Flow, steps 1-5). All branching in the handler is error handling, covered in the Error Handling section below.
 
 ## Error Handling
 

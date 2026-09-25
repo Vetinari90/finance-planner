@@ -33,7 +33,7 @@ The web-ui module provides the Next.js App Router root shell for the finance-pla
 - Implement the `/login`, `/register`, or `/logout` pages themselves. Per `doc_struc.md` `generation.module-source-map`, `src/app/login`, `src/app/register`, and `src/app/logout` are owned by the auth module.
 - Implement the `/plans` pages or plan-related UI. `src/app/plans` is owned by the plans module.
 - Implement any API route handlers. `src/app/api/*` is split across the auth, plans, and planned-items modules per the module-source-map.
-- [NEEDS CLARIFICATION] Whether additional shared UI components, layout primitives, or client-side state exist elsewhere under `src/app` outside `layout.tsx`/`page.tsx` was not resolvable: the web-ui manifest for this dispatch enumerated only `src/app/globals.css`, `src/app/layout.tsx`, `src/app/page.module.css`, and `src/app/page.tsx`.
+- No additional shared UI components, layout primitives, or client-side state exist under `src/app` outside `layout.tsx`/`page.tsx`. The rest of the `src/app` tree is fully accounted for by the auth, plans, and API-route modules already listed above: `src/app/login/LoginClient.tsx`, `src/app/login/page.tsx`, `src/app/logout/route.ts`, `src/app/register/page.tsx` (auth); `src/app/plans/page.tsx`, `src/app/plans/NewPlanForm.tsx`, `src/app/plans/[planId]/page.tsx`, `src/app/plans/[planId]/AddItemForm.tsx`, `src/app/plans/[planId]/DeletePlanButton.tsx` (plans); and `src/app/api/*` (auth/plans/planned-items API routes). There is no separate shared-components directory under `src/app`.
 
 ## Key Entities
 
@@ -41,7 +41,7 @@ No domain entities are defined or owned by this module within the reviewed scope
 
 | Entity | Description |
 |--------|-------------|
-| [NEEDS CLARIFICATION] | No domain entity is declared in `src/app/layout.tsx`, `src/app/page.tsx`, `src/app/globals.css`, or `src/app/page.module.css`. |
+| None | No domain entity is declared in `src/app/layout.tsx`, `src/app/page.tsx`, `src/app/globals.css`, or `src/app/page.module.css`. |
 
 ## Dependencies
 
@@ -54,5 +54,5 @@ No domain entities are defined or owned by this module within the reviewed scope
 
 | Module | Uses For |
 |--------|----------|
-| [NEEDS CLARIFICATION] | No module-source-map entry or reviewed code shows another module importing from `src/app/layout.tsx` or `src/app/page.tsx`. As Next.js App Router convention files, they are invoked by the framework's file-based router rather than imported directly by other module code. |
+| None | No module-source-map entry or reviewed code shows another module importing from `src/app/layout.tsx` or `src/app/page.tsx`. As Next.js App Router convention files, they are invoked by the framework's file-based router rather than imported directly by other module code. |
 <!-- /SLOT:content -->

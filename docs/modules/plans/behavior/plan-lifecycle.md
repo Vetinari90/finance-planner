@@ -50,7 +50,7 @@ stateDiagram-v2
 
 **Exit:** `DELETE /api/plans/{planId}` succeeds, after an ownership check (`findFirst({ where: { id: planId, userId } })`).
 
-[NEEDS CLARIFICATION] There is no observed "update" endpoint (no `PUT`/`PATCH` handler in `src/app/api/plans/[planId]/route.ts`) for editing an existing plan's title, year, month, or currency after creation; please confirm whether edit is intentionally unsupported or out of scope for this manifest.
+Editing is not supported by the current implementation: `src/app/api/plans/[planId]/route.ts` defines only `GET` and `DELETE` handlers, with no `PUT`/`PATCH` handler for updating an existing plan. A plan's title, year, month, and currency are therefore immutable once created; the only supported lifecycle transitions are create (`POST /api/plans`) and delete (`DELETE /api/plans/{planId}`).
 
 ### Transition Matrix
 
@@ -61,5 +61,5 @@ stateDiagram-v2
 
 ### Events Emitted
 
-[NEEDS CLARIFICATION] No domain event emission (message bus, webhook, or similar) is present in `src/app/api/plans/route.ts` or `src/app/api/plans/[planId]/route.ts`.
+No domain events are emitted during plan lifecycle transitions. Neither `src/app/api/plans/route.ts` (create) nor `src/app/api/plans/[planId]/route.ts` (delete) invokes a message bus, webhook, or any other event-emission mechanism; both handlers perform only a Prisma call and return a JSON response.
 <!-- /SLOT:content -->

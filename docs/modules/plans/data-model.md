@@ -51,8 +51,8 @@ erDiagram
 
 | Column | Type | Nullable | Description |
 |--------|------|----------|--------------|
-| id | [NEEDS CLARIFICATION] | NO | Primary key, referenced as `plan.id` / `planId` string values in route handlers |
-| userId | [NEEDS CLARIFICATION] | NO | Owner of the plan; used in every `where` clause (`src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`) to scope reads/writes to the authenticated user |
+| id | string | NO | Primary key, referenced as `plan.id` / `planId` string values in route handlers |
+| userId | string | NO | Owner of the plan; used in every `where` clause (`src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`) to scope reads/writes to the authenticated user |
 | title | string | YES (server defaults to `${month}.${year}` when omitted, per `CreatePlanSchema` in `src/app/api/plans/route.ts`) | Display title, 1-80 chars when supplied |
 | year | int | NO | 2000-2100, validated by Zod |
 | month | int | NO | 1-12, validated by Zod |
@@ -80,11 +80,11 @@ Referenced here only because `GET /api/plans/{planId}` includes it (`include: { 
 | Column | Type | Nullable | Description |
 |--------|------|----------|--------------|
 | id | [NEEDS CLARIFICATION] | NO | Primary key |
-| planId | [NEEDS CLARIFICATION] | NO | Foreign key back to Plan |
+| planId | string | NO | Foreign key back to Plan |
 | title | string | NO | Required in `AddItemForm.tsx` |
 | amountCents | int | NO | Integer cents, computed client-side by `AddItemForm.tsx`'s `toCents()` helper |
 | note | string | YES | Optional free text |
-| categoryId | [NEEDS CLARIFICATION] | YES | Always sent as `null` by `AddItemForm.tsx`; no category selection UI observed in this module |
+| categoryId | string | YES | Always sent as `null` by `AddItemForm.tsx`; no category selection UI observed in this module |
 | createdAt | timestamp | NO | Used to order items ascending |
 
 Full column definitions for `item` belong to the planned-items module's data-model.md; this table is included only for the relationship it has to `Plan`.

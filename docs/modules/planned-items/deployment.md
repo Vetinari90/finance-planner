@@ -23,9 +23,9 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 #### Required
 
-[NEEDS CLARIFICATION] No environment variable references appear in `route.ts`; the underlying `@/lib/db` and `@/lib/requireUser` modules (not included in this dispatch's inputs) likely require configuration (e.g. a database connection string), but this could not be confirmed from the inputs available to this module.
+`src/lib/db.ts` requires `DATABASE_URL`, a PostgreSQL connection string consumed by the Prisma `@prisma/adapter-pg` adapter; the module throws `"DATABASE_URL is not set"` at import time if the variable is absent. This is a required environment variable, since `route.ts` handlers rely on `@/lib/requireUser` and `@/lib/auth.ts`, both of which import `prisma` from `@/lib/db`.
 [NEEDS CLARIFICATION] [REVIEW] completeness: The Required Environment Variables subsection is left as unresolved [NEEDS CLARIFICATION] on the premise that `@/lib/db` was not provided as an input, but `src/lib/db.ts` was in fact part of this dispatch's codeFiles and explicitly requires `DATABASE_URL` (throws if unset). This is input-evident material that the Configuration > Environment Variables > Required section should have captured but omitted.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc claims `@/lib/db` and `@/lib/requireUser` were 'not included in this dispatch's inputs' and that a required env var 'could not be confirmed', but src/lib/db.ts is in this dispatch's codeFiles and explicitly requires and validates `DATABASE_URL` (throwing if unset), so this is directly confirmable rather than unconfirmed.
+`src/lib/db.ts` explicitly requires and validates `DATABASE_URL`: it reads `process.env.DATABASE_URL` and throws `"DATABASE_URL is not set"` at import time if the value is absent, before constructing the Prisma `@prisma/adapter-pg` connection used by the exported `prisma` client. This confirms `DATABASE_URL` as a required environment variable for this module, since `@/lib/auth.ts` and the planned-items API routes all depend on `@/lib/db`.
 
 #### Optional
 

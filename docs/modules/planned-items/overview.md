@@ -21,7 +21,7 @@ The Planned Items module manages the individual budget line items ("planned item
 - Enforce that a planned item can only be created under a plan owned by the authenticated user.
 - Apply field-level validation (via Zod) before persistence.
 
-[NEEDS CLARIFICATION] Responsibilities such as listing, updating, or deleting planned items are implied by the doc tree (a sibling `use-cases/list-plan-items.md` node is declared) but no corresponding route handler was present in this module's inputs (`src/app/api/plans/[planId]/items` contained only `route.ts` with a `POST` handler).
+Only creation is currently implemented. `src/app/api/plans/[planId]/items/route.ts` exposes solely a `POST` handler; listing, updating, and deleting individual planned items have no dedicated route handlers in this codebase. Existing planned items are instead read indirectly via the `Plan.items` relation returned by `GET /api/plans/{planId}` (`src/app/api/plans/[planId]/route.ts`).
 
 ## Boundaries
 
@@ -50,4 +50,6 @@ See: [domain-model.md](domain-model.md)
 
 ## Dependents
 
-[NEEDS CLARIFICATION] No code outside this module's own route handler was available in this dispatch's inputs, so modules that depend on Planned Items could not be confirmed.
+| Module | Purpose |
+|--------|---------|
+| plans | The plan detail page (`src/app/plans/[planId]/page.tsx`) reads planned items via the `Plan.items` relation (also returned by `GET /api/plans/{planId}`) and renders `AddItemForm.tsx`, which creates planned items via `POST /api/plans/{planId}/items`. |

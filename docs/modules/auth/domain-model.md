@@ -35,7 +35,7 @@ classDiagram
     User ..> SessionUser : projected into (session)
 ```
 
-[NEEDS CLARIFICATION] The `id` attribute's concrete type is not shown by the reviewed files (it is only ever passed through, e.g. in the `select: { id: true, ... }` clause of `prisma.user.create`).
+The `id` attribute's concrete type is `string`: NextAuth's `CredentialsProvider.authorize` callback in `src/lib/auth.ts` returns `{ id: user.id, ... }`, which is assigned to `token.sub` in the `jwt` callback and then to `session.user.id`, declared as `string` in the `next-auth` module augmentation in `src/types/next-auth.d.ts`.
 
 ## Entities
 
@@ -47,7 +47,7 @@ classDiagram
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| id | [NEEDS CLARIFICATION] | Unique identifier; type not shown. |
+| id | string | Unique identifier. |
 | email | string | Lowercased and trimmed before lookup/creation (`parsed.data.email.toLowerCase().trim()`). |
 | password | string | Stores a bcrypt hash with cost factor 12 (`bcrypt.hash(parsed.data.password, 12)`); never the plaintext password. |
 | name | string (optional) | 1–80 characters when provided (`z.string().min(1).max(80).optional()`). |
@@ -80,7 +80,7 @@ classDiagram
 
 **Lifecycle:**
 - Created when: a session is established after a successful `signIn("credentials", ...)` call.
-- Deleted when: [NEEDS CLARIFICATION] the exact session-invalidation mechanism (cookie expiry, explicit sign-out) depends on `authOptions`, which is outside this dispatch's permitted read set.
+- Deleted when: the user explicitly signs out via `GET /logout` (`src/app/logout/route.ts`), which redirects to NextAuth's built-in `/api/auth/signout` endpoint to clear the session cookie, or the JWT session cookie naturally expires (session strategy is `jwt`, per `session: { strategy: "jwt" }` in `src/lib/auth.ts`, with no explicit `maxAge` override shown).
 
 ## Value Objects
 
@@ -101,4 +101,4 @@ SessionUser {
 
 | Event | Triggered When | Key Data |
 |-------|----------------|----------|
-| [NEEDS CLARIFICATION] | No explicit domain-event emission (e.g. a pub/sub call or event log write) was found in any of the reviewed files. | — |
+| — | No explicit domain-event emission (e.g. a pub/sub call or event log write) was found in any of the reviewed files (`src/app/api/auth/register/route.ts`, `src/app/api/auth/[...nextauth]/route.ts`, `src/lib/auth.ts`). | — |

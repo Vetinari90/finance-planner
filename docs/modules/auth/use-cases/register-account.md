@@ -24,7 +24,7 @@ A visitor creates a new account by supplying an email, an optional display name,
 ## Preconditions
 
 - [ ] The visitor can reach `/register`.
-- [ ] [NEEDS CLARIFICATION] Whether an already-authenticated visitor is redirected away from `/register` is not established by the reviewed code.
+- [ ] No. `src/app/register/page.tsx` is a plain client component that performs no server-side session check (it never calls `getServerSession`/`requireUserId` and has no redirect logic), so an already-authenticated visitor who navigates to `/register` still sees and can submit the registration form.
 
 ## Postconditions
 

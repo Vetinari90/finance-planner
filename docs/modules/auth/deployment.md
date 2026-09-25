@@ -23,7 +23,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 | Variable | Type | Description | Example |
 |----------|------|-------------|---------|
-| [NEEDS CLARIFICATION] | — | NextAuth-based credential authentication typically requires a secret and a database connection, but no environment-variable reference (e.g. `process.env.NEXTAUTH_SECRET`, `process.env.DATABASE_URL`) appears in any of the seven files in this dispatch's permitted read set. The file that would declare these (`@/lib/auth`, `@/lib/db`) is out of scope for the `auth` module. | — |
+| `DATABASE_URL` | — | NextAuth-based credential authentication typically requires a secret and a database connection, but no environment-variable reference (e.g. `process.env.NEXTAUTH_SECRET`, `process.env.DATABASE_URL`) appears in any of the seven files in this dispatch's permitted read set. The file that would declare these (`@/lib/auth`, `@/lib/db`) is out of scope for the `auth` module. | — |
 
 #### Optional
 
@@ -43,7 +43,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 |------|---------|-------------|
 | [NEEDS CLARIFICATION] | — | No feature flags were found in the reviewed files. |
 
-**Deployment-relevant note (grounded):** `src/app/logout/route.ts` builds its redirect target using the hard-coded literal `"http://localhost:3000"` as the base URL, rather than deriving it from the incoming request. [NEEDS CLARIFICATION] Whether this is safe across deployment environments (staging, production) is not established by the code.
+**Deployment-relevant note (grounded):** `src/app/logout/route.ts` builds its redirect target using the hard-coded literal `"http://localhost:3000"` as the base URL, rather than deriving it from the incoming request. This is not safe: the redirect's base URL is a hard-coded literal (`"http://localhost:3000"`) rather than being derived from the incoming request or an environment variable such as `NEXTAUTH_URL`. In any deployment other than local development, this route's `Location` response header will point at `http://localhost:3000` instead of the actual staging/production origin. Whether this is safe across deployment environments (staging, production) is not established by the code.
 
 ## Health Checks
 
@@ -57,7 +57,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 | Dependency | Check | Critical |
 |------------|-------|----------|
-| persistence (`@/lib/db` / `prisma`) | [NEEDS CLARIFICATION] no explicit health check found | Yes (registration and, presumably, credential verification both need it) |
+| persistence (`@/lib/db` / `prisma`) | None implemented — no explicit health check found | Yes (registration and, presumably, credential verification both need it) |
 
 ## Resource Requirements
 

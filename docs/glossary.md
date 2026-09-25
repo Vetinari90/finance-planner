@@ -54,7 +54,15 @@ Source: [Domain Model](modules/plans/domain-model.md), [Data Model](modules/plan
 
 ### Terms not yet available
 
-[NEEDS CLARIFICATION] The following module-output documents named as inputs to this glossary have not yet been generated (their content is the `[UNFILLED]` skeleton sentinel), so no terms could be sourced from them: `docs/modules/planned-items/domain-model.md`, `docs/modules/planned-items/data-model.md`, and `docs/modules/persistence/data-model.md`. Once those modules are generated, this glossary should be regenerated or extended to include their domain and persistence terminology (e.g. planned-item lifecycle terms and the persistence layer's shared data-access vocabulary).
-[NEEDS CLARIFICATION] [REVIEW] consistency: glossary.md claims docs/modules/planned-items/domain-model.md, docs/modules/planned-items/data-model.md, and docs/modules/persistence/data-model.md are unfilled [UNFILLED] skeleton stubs, but all three currently contain full generated content (PlannedItem entity/table definitions, the persistence module's user table, etc.) in the same generation batch - the glossary's 'Terms not yet available' claim contradicts the current state of those docs and omits terms (e.g. PlannedItem, planId, note/categoryId nullability, the persistence user table) that are now sourceable from them.
+### PlannedItem
+
+A single budgeted line item within a `Plan`, created via `POST /api/plans/{planId}/items`. Comprises a `title` (1-120 characters), an amount in integer cents (`amountCents`, a non-negative integer), an optional `categoryId`, and an optional `note` (up to 400 characters), with both `categoryId` and `note` nullable. Creation is scoped to the requesting user: the request is rejected with `404` unless a `Plan` matching `(id: planId, userId)` is found for the authenticated user.
+
+Source: `src/app/api/plans/[planId]/items/route.ts`
+### planId
+
+Foreign key field on `PlannedItem` linking it to its owning `Plan`. Populated from the `{planId}` dynamic route segment at item-creation time (`POST /api/plans/{planId}/items`), after the handler confirms a `Plan` matching `(id: planId, userId)` exists for the authenticated user; it is not accepted as a client-supplied field in the create-item request body.
+
+Source: `src/app/api/plans/[planId]/items/route.ts`
 [NEEDS CLARIFICATION] [REVIEW] completeness: The glossary claims docs/modules/planned-items/domain-model.md, docs/modules/planned-items/data-model.md, and docs/modules/persistence/data-model.md are unfilled skeletons, but all three now contain full generated content (a detailed `PlannedItem` entity with invariants/relationships, and a `user` table definition). The glossary is missing terms genuinely available from its own named inputs, e.g. `PlannedItem` as a distinct domain term (with its `categoryId`/nullable-Category note and creation invariant) beyond the partial 'Item' entry sourced only from the plans module.
 <!-- /SLOT:content -->

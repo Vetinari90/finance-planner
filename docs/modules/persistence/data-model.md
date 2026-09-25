@@ -42,7 +42,7 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 **Key Indexes:**
 
-[NEEDS CLARIFICATION] Not declared in this module's inputs.
+Not formally declared without `schema.prisma`, but Prisma's typed `findUnique({ where: { email } })` calls in `src/lib/auth.ts` and `src/app/api/auth/register/route.ts` require `email` to carry a unique constraint at the schema level; `id` functions as the primary key, the sole non-null identifier copied to `token.sub` / `session.user.id`.
 
 **Foreign Keys:**
 

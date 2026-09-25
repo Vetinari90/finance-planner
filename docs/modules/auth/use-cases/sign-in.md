@@ -24,7 +24,7 @@ A registered user authenticates with email and password on the `/login` page to 
 ## Preconditions
 
 - [ ] The user has previously registered an account (see [register-account.md](register-account.md)).
-- [ ] [NEEDS CLARIFICATION] Whether email verification is required before sign-in is possible is not established by the reviewed files — no verification step was found.
+- [ ] No email verification step exists. `authorize()` in `src/lib/auth.ts` only checks that a user with the given email exists and that the submitted password matches via `bcrypt.compare`; it contains no check of an `emailVerified` field or similar flag. `POST /api/auth/register` (`src/app/api/auth/register/route.ts`) creates the user directly with `prisma.user.create` and returns 201, with no verification email or verification step. A user can therefore sign in immediately after registering.
 
 ## Postconditions
 
@@ -37,7 +37,7 @@ A registered user authenticates with email and password on the `/login` page to 
 |------|-------|--------|-----------------|
 | 1 | User | Navigates to `/login`. | `LoginPage` renders `LoginClient` inside a `Suspense` boundary. |
 | 2 | User | Enters email and password, submits the form. | `LoginClient.onSubmit` calls `signIn("credentials", {email, password, redirect: false, callbackUrl})`. |
-| 3 | System | — | [NEEDS CLARIFICATION] Credential verification is performed inside `authOptions` (`@/lib/auth`), which is outside this dispatch's permitted read set. |
+| 3 | System | — | `authOptions.providers[0].authorize` (`src/lib/auth.ts`) normalizes the email (`toLowerCase().trim()`), looks up the user via `prisma.user.findUnique({ where: { email } })`, and compares the submitted password against the stored hash with `bcrypt.compare`. If the user is not found or the password does not match, `authorize` returns `null` (NextAuth then reports this via `res.error`); on success it returns `{ id, email, name }`, which the `jwt` callback places on the token (`token.sub = user.id`). |
 | 4 | System (client) | — | On success, `router.push(callbackUrl)` (default `/plans`). |
 
 ## Alternative Flows
@@ -57,7 +57,7 @@ A registered user authenticates with email and password on the `/login` page to 
 | Error Condition | System Response |
 |-----------------|-----------------|
 | Wrong email/password | UI shows "Invalid email or password" (`LoginClient.tsx`). |
-| Network/unexpected failure during `signIn` | [NEEDS CLARIFICATION] `LoginClient.tsx`'s `onSubmit` has no `try/catch` around the `signIn` call, unlike `register/page.tsx`; resulting behavior on a thrown error is not established. |
+| Network/unexpected failure during `signIn` | Because `onSubmit` in `LoginClient.tsx` has no `try/catch` around `await signIn(...)`, a thrown error (e.g. a network failure) becomes an unhandled promise rejection: `setLoading(false)` is never reached, so the submit button stays disabled showing "Signing in..." indefinitely, and no error message is shown to the user. |
 
 ## Acceptance Criteria
 

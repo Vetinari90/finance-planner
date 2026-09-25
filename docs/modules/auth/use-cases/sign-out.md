@@ -46,7 +46,7 @@ None found — `src/app/logout/route.ts` contains a single unconditional redirec
 
 | Error Condition | System Response |
 |-----------------|-----------------|
-| [NEEDS CLARIFICATION] | No error-handling branches exist in `src/app/logout/route.ts`; it is an unconditional redirect. |
+| None | No error-handling branches exist in `src/app/logout/route.ts`; it is an unconditional redirect. |
 
 **Grounded note:** the redirect's base URL is the hard-coded literal `"http://localhost:3000"`, not derived from the incoming request. [NEEDS CLARIFICATION] Whether this is correct outside local development is not established by the code.
 

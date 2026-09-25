@@ -48,29 +48,34 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 | Layer | Responsibility |
 |-------|----------------|
-| [NEEDS CLARIFICATION] | No form inputs, request bodies, or validation logic appear in `src/app/layout.tsx` or `src/app/page.tsx`; this module's reviewed scope contains no user-input surface. |
+| Server-side | Zod schemas validate API request bodies via `safeParse` in `src/app/api/auth/register/route.ts` (`RegisterSchema`), `src/app/api/plans/route.ts` (`CreatePlanSchema`), and `src/app/api/plans/[planId]/items/route.ts` (`CreateItemSchema`), returning HTTP 400 with `{ error, details }` on failure. |
+| Client-side | HTML5 `required` attributes on form inputs in `AddItemForm.tsx`, `NewPlanForm.tsx`, and `LoginClient.tsx`, plus a custom `toCents` decimal-amount parser in `AddItemForm.tsx` that rejects malformed input before submission. |
 [NEEDS CLARIFICATION] [REVIEW] completeness: Validation Layers section restricts its scope statement to only layout.tsx/page.tsx and concludes no user-input surface exists, but this document's own codeFiles include multiple request-body zod schemas (CreatePlanSchema, RegisterSchema, CreateItemSchema) and client-side form validation (required/minLength attributes, custom amount parser) that were never covered.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: Claims the web-ui module's reviewed scope has no user-input surface, but the module's own code inputs (AddItemForm.tsx, NewPlanForm.tsx, LoginClient.tsx, and three API routes with zod schemas) contain extensive form inputs and request-body validation logic. The document only checked layout.tsx/page.tsx and ignored the rest of the module's provided code files.
+Corrected: the web-ui module's reviewed scope does contain a user-input surface. Server-side zod schemas (`RegisterSchema`, `CreatePlanSchema`, `CreateItemSchema`) validate API request bodies in `src/app/api/auth/register/route.ts`, `src/app/api/plans/route.ts`, and `src/app/api/plans/[planId]/items/route.ts`, and client-side HTML `required` attributes plus a custom amount parser validate form input in `AddItemForm.tsx`, `NewPlanForm.tsx`, and `LoginClient.tsx` before submission.
 
 ### Field Validation Rules
 
-[NEEDS CLARIFICATION] No entity or field validation rules are present in the reviewed scope.
+Concrete field-level validation rules are defined via zod schemas in the API routes: `RegisterSchema` (email must be a valid email address; password minimum 8 characters; optional name 1-80 characters) in `src/app/api/auth/register/route.ts`; `CreatePlanSchema` (optional title 1-80 characters; year integer 2000-2100; month integer 1-12; currency exactly 3 characters, defaulting to "CZK") in `src/app/api/plans/route.ts`; and `CreateItemSchema` (title required 1-120 characters; amountCents integer >= 0; optional/nullable categoryId; optional/nullable note up to 400 characters) in `src/app/api/plans/[planId]/items/route.ts`.
 [NEEDS CLARIFICATION] [REVIEW] completeness: Field Validation Rules section says none are present, but this document's codeFiles contain concrete zod field-level rules (email format, password min length, string length/range bounds) that are absent from the doc.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: States no field validation rules are present, but zod schemas in the module's own API route inputs define concrete field validation rules (email format, password length, numeric ranges, string length limits).
+Corrected: zod schemas do define concrete field validation rules. `RegisterSchema` in `src/app/api/auth/register/route.ts` requires a valid email format and a password of at least 8 characters (optional name 1-80 characters). `CreatePlanSchema` in `src/app/api/plans/route.ts` requires an integer year between 2000-2100, an integer month between 1-12, an optional title of 1-80 characters, and a 3-character currency code (default "CZK"). `CreateItemSchema` in `src/app/api/plans/[planId]/items/route.ts` requires a title of 1-120 characters, an integer `amountCents` >= 0, an optional/nullable `categoryId`, and an optional/nullable note up to 400 characters.
 
 ### Error Format
 
-[NEEDS CLARIFICATION] No error-response shape is evidenced in `src/app/layout.tsx` or `src/app/page.tsx`.
+API routes consistently return a JSON error shape of `{ error: string, details?: object }`, e.g. `{ error: "Invalid input", details: parsed.error.flatten() }` on zod validation failures in `src/app/api/auth/register/route.ts`, `src/app/api/plans/route.ts`, and `src/app/api/plans/[planId]/items/route.ts`, and `{ error: "Unauthorized" }` / `{ error: "Not found" }` for auth/lookup failures in `src/app/api/plans/[planId]/route.ts`.
 [NEEDS CLARIFICATION] [REVIEW] completeness: Error Format section claims no error-response shape is evidenced, but the API route files in this document's own codeFiles show a consistent `{ error, details? }` JSON error shape used across register, plans, and items routes.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: Claims no error-response shape is evidenced, but the module's API route inputs consistently use a `{ error: string }` (optionally with `details`) JSON error shape.
+Corrected: the module's API routes consistently use a `{ error: string, details?: object }` JSON error shape, e.g. `{ error: "Invalid input", details: parsed.error.flatten() }` on zod validation failures in `src/app/api/auth/register/route.ts`, `src/app/api/plans/route.ts`, and `src/app/api/plans/[planId]/items/route.ts`, and `{ error: "Unauthorized" }` / `{ error: "Not found" }` for auth/lookup failures in `src/app/api/plans/[planId]/route.ts`.
 
 ### Common Error Codes
 
 | Code | Meaning |
 |------|---------|
-| [NEEDS CLARIFICATION] | Not evidenced in the reviewed scope |
+| 400 | Invalid input — request body failed zod schema validation (`{ error: "Invalid input", details }`) |
+| 401 | Unauthorized — no valid session (`requireUserId()` returned null) |
+| 404 | Not found — plan does not exist or does not belong to the authenticated user |
+| 409 | Conflict — e.g. email already registered (register route) or a plan already exists for that year/month (plans route) |
+| 201 | Created — resource (user, plan, or item) successfully created |
 [NEEDS CLARIFICATION] [REVIEW] completeness: Common Error Codes table says nothing is evidenced, but the API route files in this document's own codeFiles evidence specific status codes (400, 401, 404, 409) with distinct meanings that are omitted from the table.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The Common Error Codes table claims no error codes are evidenced, but the module's API routes evidence concrete status codes (400, 401, 404, 409, 201) with specific error messages.
+Corrected: the module's API routes evidence concrete status codes — 400 (invalid input, failed zod validation), 401 (unauthorized, no valid session), 404 (not found, plan missing or not owned by the user), 409 (conflict, e.g. duplicate email in register route or duplicate plan for a year/month in plans route), and 201 (created, on successful user/plan/item creation) — each with a `{ error: string }` JSON body, as seen in `src/app/api/auth/register/route.ts`, `src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, and `src/app/api/plans/[planId]/items/route.ts`.
 
 ---
 

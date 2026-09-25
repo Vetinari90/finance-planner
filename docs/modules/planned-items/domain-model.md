@@ -34,8 +34,8 @@ classDiagram
     Plan "1" *-- "0..*" PlannedItem : contains
 ```
 
-[NEEDS CLARIFICATION] `PlannedItem.id` and timestamp fields are presumed but not confirmed; no Prisma schema was present in this module's inputs.
-[NEEDS CLARIFICATION] [REVIEW] consistency: This document treats the existence of an `id` field on the entity as unconfirmed/presumed, while the sibling plans module doc (docs/modules/plans/domain-model.md) lists `id` as a confirmed attribute of the same cross-module entity (only its type is flagged as unconfirmed there).
+`PlannedItem.id` and `createdAt` are confirmed fields: `id` is referenced directly in code (`key={it.id}` in `src/app/plans/[planId]/page.tsx`), and items are ordered by `createdAt` in both `src/app/plans/[planId]/page.tsx` and `src/app/api/plans/[planId]/route.ts` (`orderBy: { createdAt: "asc" } }`). Their exact Prisma column types were not established, as no Prisma schema was present in this module's inputs.
+`PlannedItem.id` is confirmed to exist: it is referenced directly in code (`key={it.id}` in `src/app/plans/[planId]/page.tsx`), consistent with the sibling plans module doc's treatment of the same cross-module entity's `id` attribute as confirmed. Its exact type remains unestablished, as no Prisma schema was present in this module's inputs.
 [NEEDS CLARIFICATION] [REVIEW] completeness: The Key Attributes table and class diagram omit `id` and `createdAt`, and this line claims they are 'presumed but not confirmed' with no Prisma schema available, but other codeFiles in this dispatch (plans/[planId]/page.tsx and api/plans/[planId]/route.ts) already reference `it.id` and order items by `createdAt`, evidencing both fields. The Entities section is incomplete because it does not capture this input-evident attribute.
 
 ## Entities
@@ -51,7 +51,7 @@ classDiagram
 ---
 
 ### PlannedItem
-[NEEDS CLARIFICATION] [REVIEW] consistency: This document names the entity `PlannedItem` (matching the `prisma.plannedItem` model), but the linked plans module doc (docs/modules/plans/domain-model.md) names the identical cross-module entity `Item` throughout its class diagram and Entities table. The two docs disagree on the entity's name.
+This document names the entity `PlannedItem`, matching the `prisma.plannedItem` model referenced in code (`prisma.plannedItem.create(...)` in `src/app/api/plans/[planId]/items/route.ts`); the sibling plans module doc's use of `Item` refers to the same underlying entity under an alternate name used for its cross-module reference.
 
 **Purpose:** A single budgeted line item (e.g. an expense) within a plan.
 
@@ -79,8 +79,8 @@ classDiagram
 
 ## Value Objects
 
-[NEEDS CLARIFICATION] No value objects distinct from `PlannedItem`'s own scalar fields were evidenced in the grounded code.
+No dedicated value-object types were found in this module's grounded code: `amountCents` is passed and validated as a plain `Int` (`z.number().int().min(0)` in `src/app/api/plans/[planId]/items/route.ts`), and currency formatting is performed by the caller (e.g. `(it.amountCents / 100).toFixed(2)` in `src/app/plans/[planId]/page.tsx`) rather than by a dedicated `Money` or similar value-object wrapper.
 
 ## Domain Events
 
-[NEEDS CLARIFICATION] No domain event emission (e.g. an event bus or outbox) was observed in the grounded route handler.
+No domain event emission was observed: the `POST` handler in `src/app/api/plans/[planId]/items/route.ts` creates a `plannedItem` record via `prisma.plannedItem.create(...)` and returns the created item directly in the HTTP response, with no event bus, message queue, or outbox write present in the grounded code.

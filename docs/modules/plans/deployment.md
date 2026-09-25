@@ -22,19 +22,19 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 #### Environment Variables
 
-[NEEDS CLARIFICATION] No environment variable reads (`process.env.*`) appear in the plans module's own files (`src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, and the UI components under `src/app/plans`). Database connection and auth secret configuration, if any, live in the persistence and auth modules, which are outside this manifest.
+The plans module's own route/page files contain no `process.env.*` reads. It depends transitively on `DATABASE_URL`, read in `src/lib/db.ts` (`process.env.DATABASE_URL`; the process throws at startup if it is unset) to configure the Prisma/PostgreSQL connection used by every `/api/plans/**` route via `@/lib/db`. `src/lib/db.ts` also reads `NODE_ENV` to decide whether to cache the Prisma client/adapter across hot reloads in non-production environments. No other environment variables are read across the reviewed auth (`src/lib/auth.ts`, `src/app/api/auth/**`) or plans files.
 
 #### Secrets
 
-[NEEDS CLARIFICATION] None observed in this module's files.
+No secret-bearing environment variables (API keys, signing keys, encryption keys) are read via `process.env.*` anywhere in the reviewed plans, auth, and persistence files; the only environment variables referenced in the reviewed code are `DATABASE_URL` and `NODE_ENV`, both read in `src/lib/db.ts` (see Environment Variables above). User credentials are verified with `bcryptjs.compare` against the stored password hash in `src/lib/auth.ts`'s `authorize` callback, which needs no externally configured secret.
 
 #### Feature Flags
 
-[NEEDS CLARIFICATION] None observed in this module's files.
+No feature-flag mechanism (environment-variable-gated conditional, flag library, or config service) is present anywhere in the reviewed plans, auth, and persistence files; every route under `src/app/api/plans/**` and `src/app/api/auth/**` executes unconditionally once the caller is authenticated, with no conditional gating by flag.
 
 ### Health Checks
 
-[NEEDS CLARIFICATION] No `/health/live` or `/health/ready` endpoint, or any health-check route, is defined under `src/app/api/plans`.
+No health-check endpoint (e.g. `/health/live`, `/health/ready`, `/api/health`) exists anywhere in the reviewed codebase, not only under `src/app/api/plans` - confirmed across every reviewed API route (`src/app/api/auth/[...nextauth]/route.ts`, `src/app/api/auth/register/route.ts`, `src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, `src/app/api/plans/[planId]/items/route.ts`). In practice, readiness for this module reduces to the persistence module's database connectivity (`src/lib/db.ts`), since every plans route queries Prisma immediately after authenticating the caller.
 
 ### Resource Requirements
 

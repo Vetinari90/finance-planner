@@ -125,4 +125,4 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 | Requirement | Solution |
 |-------------|----------|
 | Database | [NEEDS CLARIFICATION] The register route depends on a Prisma-backed database (`@/lib/db`), but the specific test-environment setup (e.g. containerized Postgres) is owned by the `persistence` module, out of scope for this dispatch. |
-| External services | [NEEDS CLARIFICATION] |
+| External services | None — the auth module's only provider is NextAuth's `CredentialsProvider`, which validates email/password locally against the Prisma `User` table (`src/lib/auth.ts`); no external OAuth providers or third-party service calls appear anywhere in the reviewed auth-module files (`src/app/api/auth/[...nextauth]/route.ts`, `src/app/api/auth/register/route.ts`, `src/lib/auth.ts`), so no external service test doubles are required. |

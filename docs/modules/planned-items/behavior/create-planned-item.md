@@ -72,12 +72,12 @@ The handler resolves the current user id via `requireUserId()`. If no user id is
 The handler queries `prisma.plan.findFirst({ where: { id: planId, userId }, select: { id: true } })`. This both confirms the plan exists AND that it belongs to the authenticated user; if no matching plan is found, the handler returns `404 Not Found`.
 
 ### 3. Input validation (Step 7)
-[NEEDS CLARIFICATION] [REVIEW] consistency: Internal inconsistency between the mermaid diagram's autonumbered steps and the Flow Description: the input-validation arrow (CreateItemSchema.safeParse) is step 8 in the diagram, but this heading labels it 'Step 7', which is actually the preceding 404 Not Found response arrow.
+Correction: this section corresponds to Step 8 in the diagram (`CreateItemSchema.safeParse`), not Step 7. Step 7 is the preceding `404 Not Found` response returned when the plan lookup in `src/app/api/plans/[planId]/items/route.ts` finds no matching plan.
 
 The JSON request body is parsed and validated against `CreateItemSchema` (Zod): `title` (string, 1-120 chars), `amountCents` (non-negative integer), `categoryId` (optional, nullable string), `note` (optional, nullable string, max 400 chars). A failed request body parse (`req.json().catch(() => null)`) is treated the same as a schema failure.
 
 ### 4. Persistence (Steps 9-11)
-[NEEDS CLARIFICATION] [REVIEW] consistency: Internal inconsistency between the mermaid diagram's autonumbered steps and the Flow Description: the persistence arrows (plannedItem.create / DB response / 201 Created) are steps 10-12 in the diagram, but this heading labels them 'Steps 9-11', which incorrectly includes the unrelated step 9 (400 Invalid input response) and omits the actual final step 12 (201 Created).
+Correction: this section corresponds to Steps 10-12 in the diagram (`plannedItem.create`, the DB response, and `201 Created`), not Steps 9-11. Step 9 is the preceding `400 Invalid input` response returned when `CreateItemSchema.safeParse` fails, in `src/app/api/plans/[planId]/items/route.ts`.
 
 On successful validation, the handler calls `prisma.plannedItem.create()` with `planId`, `title`, `amountCents`, `categoryId` (defaulted to `null`), and `note` (defaulted to `null`), then returns the created `item` with `201 Created`.
 
@@ -90,4 +90,4 @@ On successful validation, the handler calls `prisma.plannedItem.create()` with `
 | Request body missing/malformed JSON | Body is coerced to `null`, which fails Zod validation, producing `400 Invalid input` |
 | Request body fails `CreateItemSchema` | `400 Invalid input` with `parsed.error.flatten()` details |
 
-[NEEDS CLARIFICATION] Behavior when `prisma.plannedItem.create()` itself throws (e.g. a foreign-key violation on an invalid `categoryId`) is not handled in the grounded code (no try/catch around the create call); confirm whether this is deliberate or an omission.
+Undocumented failure mode: `prisma.plannedItem.create()` is not wrapped in a try/catch in `src/app/api/plans/[planId]/items/route.ts`. If it throws (e.g. a foreign-key violation on an invalid `categoryId`), the error propagates uncaught and results in Next.js's default `500 Internal Server Error` response rather than a handled `4xx` response.

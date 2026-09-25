@@ -55,7 +55,7 @@ flowchart LR
 ### Deployment Overview
 
 `README.md`'s "Deploy on Vercel" section is unmodified `create-next-app` boilerplate text ("The easiest way to deploy your Next.js app is to use the Vercel Platform") and does not confirm that finance-planner is actually deployed on Vercel or describe any project-specific hosting configuration.
-[NEEDS CLARIFICATION] [REVIEW] consistency: docs/overview.md correctly hedges that Vercel deployment is unconfirmed, but the sibling doc docs/technology-context.md states in its Summary as a flat fact that the application "is deployed on the Vercel platform" - the two generated docs make contradictory claims about the same fact.
+This hedge is deliberate: `README.md`'s only Vercel-related content is the unmodified `create-next-app` boilerplate ("Deploy on Vercel" section, plus a stray reference to Vercel's font in the "Getting Started" section) and does not describe finance-planner-specific hosting configuration. Where `docs/technology-context.md` states as a flat fact that the application "is deployed on the Vercel platform," that claim is not independently grounded in this dispatch's inputs and should be read with the same caveat expressed here, not as a confirmed deployment target.
 
 The [persistence overview](modules/persistence/overview.md) notes that `src/lib/db.ts` fails fast at module load if the `DATABASE_URL` environment variable is not set, and that the Prisma client is bound to PostgreSQL through a `PrismaPg` adapter - so the application requires a reachable PostgreSQL database at runtime.
 

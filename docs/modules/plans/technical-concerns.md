@@ -67,9 +67,9 @@ Both plans API routes return a flat error shape, not the recipe's generic `error
 
 ### Internationalization
 
-**i18n Required:** [NEEDS CLARIFICATION] No i18n framework (e.g. `next-intl`, `react-i18next`) is imported by any file in this module. All user-facing UI strings observed (`"Your plans"`, `"Create new plan"`, `"Add item"`, `"Delete plan"`, `"No plans yet. Create one above."`, etc., in `src/app/plans/page.tsx`, `NewPlanForm.tsx`, `AddItemForm.tsx`) are hardcoded English literals.
+**i18n Required:** No. No i18n framework (e.g. `next-intl`, `react-i18next`) is imported by any file in this module. All user-facing UI strings (`"Your plans"`, `"Create new plan"`, `"Add item"`, `"Delete plan"`, `"No plans yet. Create one above."`, etc., in `src/app/plans/page.tsx`, `NewPlanForm.tsx`, `AddItemForm.tsx`) are hardcoded English literals with no translation mechanism present.
 
-**Default Locale:** [NEEDS CLARIFICATION] Not configured in this module; only inferred from the hardcoded English strings.
+**Default Locale:** `en` (English), set explicitly via the `lang="en"` attribute on the `<html>` element in `src/app/layout.tsx`, consistent with the hardcoded English UI strings observed throughout this module.
 
 Note: several source code comments in this module are written in Czech (e.g. `AddItemForm.tsx`: `// jednoduchý převod: "123.45" -> 12345 (bez magických floatů)`; `src/app/api/plans/route.ts`: `// unikát (userId, year, month)`). These are developer-facing comments, not user-facing translated strings, and do not indicate an i18n mechanism.
 <!-- /SLOT:content -->

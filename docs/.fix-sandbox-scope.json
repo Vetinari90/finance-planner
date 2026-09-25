@@ -1,0 +1,32 @@
+{
+  "id": "sdlc-fix",
+  "readSet": [
+    "README.md",
+    "src/app/api/auth/[...nextauth]/route.ts",
+    "src/app/api/auth/register/route.ts",
+    "src/app/api/plans/[planId]/items/route.ts",
+    "src/app/api/plans/[planId]/route.ts",
+    "src/app/api/plans/route.ts",
+    "src/app/globals.css",
+    "src/app/layout.tsx",
+    "src/app/login/LoginClient.tsx",
+    "src/app/login/page.tsx",
+    "src/app/logout/route.ts",
+    "src/app/page.module.css",
+    "src/app/page.tsx",
+    "src/app/plans/NewPlanForm.tsx",
+    "src/app/plans/[planId]/AddItemForm.tsx",
+    "src/app/plans/[planId]/DeletePlanButton.tsx",
+    "src/app/plans/[planId]/page.tsx",
+    "src/app/plans/page.tsx",
+    "src/app/register/page.tsx",
+    "src/lib/auth.ts",
+    "src/lib/db.ts",
+    "src/lib/requireUser.ts",
+    "src/types/next-auth.d.ts"
+  ],
+  "writeSet": [
+    "docs/.fix"
+  ],
+  "manifestPath": "/opt/asr/workspace/2a83ba14-772e-454e-96e2-3f26c74e96f9/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner/docs/.expanded-inputs.business.json"
+}

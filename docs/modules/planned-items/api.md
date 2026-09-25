@@ -25,9 +25,9 @@ Based on the sole route handler found (`src/app/api/plans/[planId]/items/route.t
 
 | Requirement | Details |
 |-------------|---------|
-| Method | Session-derived user id resolved via `requireUserId()` (imported from `@/lib/requireUser`); requests without a resolvable user id receive `401 Unauthorized`. [NEEDS CLARIFICATION] The concrete authentication mechanism (e.g. JWT session cookie) is implemented outside the files available to this dispatch. |
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc claims the concrete auth mechanism is 'implemented outside the files available to this dispatch', but src/lib/auth.ts is in codeFiles and shows exactly this: NextAuth JWT session strategy with a CredentialsProvider. The claim contradicts an available input.
-| Required Scopes | [NEEDS CLARIFICATION] No scope/role model was found in the available inputs. |
+| Method | Session-derived user id resolved via `requireUserId()` (imported from `@/lib/requireUser`); requests without a resolvable user id receive `401 Unauthorized`. The concrete authentication mechanism is NextAuth.js with a JWT session strategy (`session: { strategy: "jwt" }` in `src/lib/auth.ts`), backed by a `CredentialsProvider` that verifies email/password against `prisma.user` records via `bcrypt.compare()`. |
+The concrete authentication mechanism is NextAuth.js configured for a JWT session strategy (`session: { strategy: "jwt" }` in `src/lib/auth.ts`), backed by a `CredentialsProvider` that authenticates email/password against `prisma.user` records via `bcrypt.compare()`; the resulting user id is stored on the token via the `jwt` callback and exposed on `session.user.id` via the `session` callback.
+| Required Scopes | None. The session (`src/types/next-auth.d.ts`) carries only `id`, `name`, and `email` — there is no role or scope field. Authorization is enforced by data ownership rather than roles: every query scopes results to the authenticated user's own records (e.g. `prisma.plan.findFirst({ where: { id: planId, userId } })`). |
 
 ## Endpoints
 
@@ -78,8 +78,8 @@ curl -X POST https://[NEEDS CLARIFICATION-host]/api/plans/{planId}/items \
   -d '{"title": "Groceries", "amountCents": 5000, "categoryId": null, "note": null}'
 ```
 
-[NEEDS CLARIFICATION] Authorization header/cookie mechanics were not present in the grounded route code; `requireUserId()` reads them internally but its implementation is outside this dispatch's inputs.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The doc claims requireUserId()'s implementation is 'outside this dispatch's inputs', but src/lib/requireUser.ts is in codeFiles and fully shows the implementation (getServerSession(authOptions) reading the NextAuth JWT session). The claim contradicts an available input.
+Authorization is derived from the NextAuth JWT session cookie, not a manually-set header: `requireUserId()` (`src/lib/requireUser.ts`) calls `getServerSession(authOptions)`, which reads and validates the session cookie set by NextAuth at login and returns `session?.user?.id` (or `null` if absent/invalid).
+`requireUserId()` (`src/lib/requireUser.ts`) calls `getServerSession(authOptions)` — the NextAuth server helper — which reads and validates the JWT session cookie set by NextAuth at login and returns `session?.user?.id`, or `null` if no valid session exists. No Authorization header is read directly; the session cookie is parsed internally by NextAuth.
 
 **Response Example:**
 
@@ -105,6 +105,6 @@ curl -X POST https://[NEEDS CLARIFICATION-host]/api/plans/{planId}/items \
 | 400 | Invalid input | Request body fails the `CreateItemSchema` Zod validation (`title` 1-120 chars, `amountCents` non-negative integer, `note` max 400 chars) |
 | 401 | Unauthorized | `requireUserId()` resolves no user |
 | 404 | Not Found | No plan with the given `planId` exists for the authenticated user (`prisma.plan.findFirst({ where: { id: planId, userId } })` returns null) |
-[NEEDS CLARIFICATION] [REVIEW] consistency: The 404 'Code' column reads 'Not Found' (capitalized) but the actual error string returned by the route (and quoted correctly by docs/modules/planned-items/use-cases/add-planned-item.md as `{"error": "Not found"}`) is 'Not found' (lowercase f) - this table cell is inconsistent with the sibling use-case doc and the underlying code's exact string, unlike the 400/401 rows which match the code verbatim.
+The 404 row's Code value should read `Not found` (lowercase f), matching the exact error string returned by the route: `return NextResponse.json({ error: "Not found" }, { status: 404 })`.
 
 ---
