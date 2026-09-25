@@ -19,6 +19,7 @@ generation:
       - src/app/login
       - src/app/register
       - src/app/logout
+      - src/types
     plans:
       - src/app/api/plans
       - src/app/plans

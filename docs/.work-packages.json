@@ -1,10 +1,10 @@
 {
   "planSchemaVersion": "1.5",
-  "generatedAt": "2026-09-25T12:18:46.012Z",
+  "generatedAt": "2026-09-25T17:49:35.556Z",
   "plannerVersion": "3.89.0",
   "model": "sonnet",
   "tokenizer": "bytes-v1",
-  "docStrucSha256": "acc6959d81be1ba8a433a545f8ac93c6c4b0a0eb68c5ff85c8e6272eade824ec",
+  "docStrucSha256": "a47c5fd986eae007b20b8151218ed1d21fdcd633de86f2b54b187cc5b698ef29",
   "manifestRefs": [
     "docs/.expanded-inputs.__cross_cutting__.json",
     "docs/.expanded-inputs.auth.json",
@@ -50,9 +50,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "91334c651bfeda19687acd9316e505e9b7f33dac3416301d095e3f370f2bb013",
+      "actionKey": "b4e1f114fc64a52ae7b899af242e84fef4761f4b4f54b1832fd9c1b512d74746",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -93,9 +93,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "afe023d421c98a85ba0069149f0c942e24e9c0b805e50c6ef836bab0bf62286f",
+      "actionKey": "99d49a226ec758e660be07ae916443907267199d3a76751f24ca0a79c8578e05",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -136,9 +136,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "62d97e12dc77c251573a92e27917559142af2069f14c418c2a27d269d60623b3",
+      "actionKey": "a3f87d4f2be0016a45021aea549059665d836c860074211153193d4c60791976",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -179,9 +179,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "61ee1fb08cf25db1653edfc5f8889efe8da7f0052b8c478ab5ca7a7be1793439",
+      "actionKey": "72e3fe617403093e9ff0693e840cc924ea672ac1ec90530caf99cb58305969f3",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -222,9 +222,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "421af909b829e5ebeb4048b8088c973338bcaf539fe65d4579b51fbe9e2830e5",
+      "actionKey": "196bc23b3bba9325665c6ab8f5faf636c9f4bb78245dd2c23839e6d29f386d11",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -265,9 +265,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "21bac7e5edde12fbb1a37250d2f3e865551dd65a6c4a46bfbacc7571b541af6f",
+      "actionKey": "f1abd2f25da52a6f412ae18c7204f08926cdf40bcd0c8adc0e2cf4b858de648c",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -308,9 +308,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "02cbc5078c2779be782bac168592fec5afdd5068a0a89119b5a5dd58162ba2f7",
+      "actionKey": "a6767fd68efd5f8121c17baf19ff33cf045cc196da3a22829b7ceb81a9e50853",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -433,9 +433,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "54c9ec0f255aca4427dd7cb78fc49e6805b7dde69869a7c337716fc9a70d0487",
+      "actionKey": "aafa1c3f466b866a0f63f1b50f99f8d021d9ce6557469dba0b4e9814ffb9d07c",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -476,9 +476,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "de565285c4694c979adb085f4304fbfed3784d934d9f31362492f5ae56fdb8d4",
+      "actionKey": "f9b1be35b9aad0616a066b86c82bc8572d44cd3060c1f2d4dd37bc0fff184e83",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -519,9 +519,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "746ed0d025d09d42419f5021f4a8b85b146b672f020e644d7b1d417b01cacca7",
+      "actionKey": "44b6bc024858e725cd35bc994dfb0f0896bdbace138d2b39b5371ecd6c788c88",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -562,9 +562,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "d75a1a467745a40e2bf4ffef89ddb92779e7405a005d812651b1fc565604141c",
+      "actionKey": "8b04ab46a5399c471b6d51135a95a665f460e070229aee166d8383b1fb569c86",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -605,9 +605,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "655927dc639e5e5be126c4b8e2d5a6ae51aee5a78e3c975e3420e51bef954aef",
+      "actionKey": "2e13bbeac2bac652daac6477f3f19decd4226ed85e23736e4467e08284b7be75",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -648,9 +648,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "73cbf0ca7345d3ab98f24e3170c7908205462f361285c1c339b2dd2452dfffe7",
+      "actionKey": "f2c93504d27ce8febe3c4a9ebb26c75ce18c23efca20a0de6128fa150d6a3fab",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -691,9 +691,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "64027bd3f92ce0665a2f3f08c9ce527da3702d92615106e8668e25ab183fcd9f",
+      "actionKey": "ed9d9818de8bbac83db0b13c01daba0106d9f8271c497b81e6a772826d7e9235",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -734,9 +734,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "5ba01bb5fc4dd1689870154111a9905ec613e0d0881a81dfabff10bd9011458f",
+      "actionKey": "527059868f2a0af8a15e96c4ea038acf652a050254371fb1b5746b061136a4ca",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -777,9 +777,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "bc5b41224deadcbb6c514ef91b5a2aff0ab04c15e11734ed75018ae6dc4f1829",
+      "actionKey": "afb776ddfc458bbf6967cdb9ae72079d1dc09092e6ff59aad6d6125f5d98f497",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -820,9 +820,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "f8419b93b8d37ed60c8cce69ce4faba274230d7250e1a1ad585af172fd68f76f",
+      "actionKey": "87f9f2aab22ddaa4be3f705e26b0a3d4a504079bac95dfb63213ccf0719f6f4d",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -905,9 +905,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "55b64d28868a61b7d2b5d091dd52a561958f569819fd69c85c68e9bc045edde6",
+      "actionKey": "8ed895428a81955516fd7379182ce9c4f6daffe77b30cbf89e7c92b2135a2f30",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -948,9 +948,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "e9e4b093bd9a509523f4680af68be2ce494c5761b724c91e612d890c56ae89d6",
+      "actionKey": "84c8877a194d6a907b3467dbf12a0be58ad1b47a3a435926d233df2c8622a129",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -991,9 +991,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "560bef6cb7429e226d913a3b1b7e6dd7a14d5ce85ce29ff38d2a9bfe2850c2ff",
+      "actionKey": "3c5a1912731f7763d39e0bb92739bbc3f981240909790cb3475516a71e6fb5d0",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1034,9 +1034,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "c896f973b5b32caef450b987d2cd2a6edd1995fd3b9b180f72597b67d6c2cc1d",
+      "actionKey": "15e3e64939b90a1fa0c6c937e7aededa02d8f61feba5efe0f0973d2c1c357460",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1061,7 +1061,8 @@
         "src/app/login/LoginClient.tsx",
         "src/app/login/page.tsx",
         "src/app/logout/route.ts",
-        "src/app/register/page.tsx"
+        "src/app/register/page.tsx",
+        "src/types/next-auth.d.ts"
       ],
       "readSetOrigin": "source-map",
       "isBroadReadFallback": false,
@@ -1080,9 +1081,9 @@
       "dependsOn": [],
       "order": 0,
       "parallelGroup": 0,
-      "actionKey": "76f6f0e616b63da5cf452ac3ef92a37330b81b98213b07f8a496843da1b12aed",
+      "actionKey": "6acd0f15e30e783c36853dd4645ad409cba94d81d3d7383b40c45d5055668b34",
       "tokenBudget": {
-        "estimatedInputTokens": 1832,
+        "estimatedInputTokens": 1951,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1158,9 +1159,9 @@
       ],
       "order": 1,
       "parallelGroup": 1,
-      "actionKey": "8b05ce7f9ad71f966457001eb3bfe4aff2dffc405edf9c04c8687957e29bed73",
+      "actionKey": "3a81a53173a60dcf5ddeea1f0931642c087f622047cbf203b7fba2c5ab0befe2",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1200,9 +1201,9 @@
       "dependsOn": [],
       "order": 0,
       "parallelGroup": 0,
-      "actionKey": "07c5ede9c9c1c519267034d1baf65fd83286503d0b52a26cbf619043daf1e3b5",
+      "actionKey": "d7cf481fdb555bbad03102403d5f7dcd10cc2d10d09f82e636e5f07b6974980e",
       "tokenBudget": {
-        "estimatedInputTokens": 559,
+        "estimatedInputTokens": 579,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1265,9 +1266,9 @@
       "dependsOn": [],
       "order": 0,
       "parallelGroup": 0,
-      "actionKey": "1e77539485e8fa6aaf45f2b0474d697749ca13ab43df63089f358a9ca868c491",
+      "actionKey": "71edb9553153084630318ddc011788102a4c3bc591e9b3092223a2d708cfe76e",
       "tokenBudget": {
-        "estimatedInputTokens": 355,
+        "estimatedInputTokens": 368,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1346,9 +1347,9 @@
       "dependsOn": [],
       "order": 0,
       "parallelGroup": 0,
-      "actionKey": "68d754d0e271c4ae5e1e1c0bcc339d4ea150405f2abfb3d1f2dcad3d2b553250",
+      "actionKey": "4be053f3ae47e16c343e152120ecda277bc58bd1635ac3d152bf4d26656c9678",
       "tokenBudget": {
-        "estimatedInputTokens": 4020,
+        "estimatedInputTokens": 4169,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1428,9 +1429,9 @@
       "dependsOn": [],
       "order": 0,
       "parallelGroup": 0,
-      "actionKey": "a19327f691121a9284b5acf9e71cd043dafe554f2e8d972420d0f50af116b179",
+      "actionKey": "297321a602f64018001bee7c85c40ba3831beca7a94d77c1b173160b23223f5f",
       "tokenBudget": {
-        "estimatedInputTokens": 994,
+        "estimatedInputTokens": 1050,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1483,9 +1484,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "c2294fc823048e80a49405e5325226e365ef94ec9c1b4d3d52ffd2de7ae6d675",
+      "actionKey": "5f32e2b70bd96c604ab2ad82204b2387b20901b6b74df6d5d04ee2efb1f54c2d",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1526,9 +1527,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "deed05bb174052f586317d10d3d475cdca85720f0ad26d337145476ec6a4e39a",
+      "actionKey": "07e3e25f867a51e1bbd96b92ea070bb79568df7bf2cea195f5ba64563df51488",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1569,9 +1570,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "863e4d5323c0ad9ed2517753efbc42ee6209dd64abd4a2b18cf8da367b1eadc5",
+      "actionKey": "6923583b960eb49622756357ac9177dcb8d0ba9b8cd92b55bbe225719a68dfbd",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1612,9 +1613,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "be0c7545eb9de4bf1684732228d8d0f0f4418f07bffcbbb99482e014423d2c97",
+      "actionKey": "33078c860b5b1b0663eefaaf500585222749acfd39fdfdeb40fc46ee77f5cb48",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1655,9 +1656,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "b560e251f515d24aa872555b449982e7effb3595322d77fb0a2dbe5b7414e887",
+      "actionKey": "4311b6c48c031a73be89c317044e7eea46f00aa6d89418c0d7169ba8bfebb4cf",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1698,9 +1699,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "da39e80cd7c8b500a65edcd228cafc4695f5dabf4bfbdb856e5d1d5774dc3858",
+      "actionKey": "ef6ba2136fbacfb93a87080012e84f091b2e0c9d47e46f6e9789d5fd6865efbe",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1741,9 +1742,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "656d91c7fa60fd2a7967a2d6cef92cf570229284328398073d0594430fafbdba",
+      "actionKey": "4e1decfb8e792e24ba6464dff92cd1e8cdbb1481736cf31b8a964eeabc33e603",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1784,9 +1785,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "dbc385e71fc216079d092486b37ffe95ec72f52772aab333065ec60d1b65804c",
+      "actionKey": "8e859269b2ba677e7b9deab70fdadf6a4952f9302328ea57237a034505b54a41",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1827,9 +1828,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "f33432e0a1fa360b30868023048889afa293ec70f9aad7c0ccabb092d60dabb6",
+      "actionKey": "4b08d5a0e5d5adc7579bd89fcc2a35286166ba4e8f8709cc2e842b5f7e5996c1",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1870,9 +1871,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "138921093ae246a5971876a3587e42784d4c1cc747c2878772ecdb9e1d653564",
+      "actionKey": "a228ef592c6a3d13ee13bd71abd48926f8cb108baa044f8b20170df6abccb4ee",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1956,9 +1957,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "2263f8424fe044945240e12e78ffac6abff1969b208d5fd5886d3ca2e7322661",
+      "actionKey": "53d88c85ffe137fc586cf93775f781a611d06391f419ac88349a7d5b7c2b3eec",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -1999,9 +2000,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "977a1d6d2a992730c1c0b3080e22c5c56ff1c7c7521269bcb3667405fb0d0f90",
+      "actionKey": "29acc5749a09c6d164021e2b76794764cdacf5f498276b7102d43cc87d0bde40",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -2042,9 +2043,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "4152e0296ac959ac33eb35523ff0b21c5849962baf77ee3ba01fe6f73874a08d",
+      "actionKey": "1635afa01339e00516026298c398c50052f381e1c0899ec48f41548be8ace0cb",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -2085,9 +2086,9 @@
       ],
       "order": 2,
       "parallelGroup": 2,
-      "actionKey": "94229da72a433246f4636f6c045f2909dbdf8876cff809ab57b320de48ca34ee",
+      "actionKey": "4c553b3d5cb8a47143e85c898c18a7194005690d7e61974308a2a97fc2d16de9",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -2176,9 +2177,9 @@
       ],
       "order": 1,
       "parallelGroup": 1,
-      "actionKey": "eff93653c080395d3a0d676ca59f1a7f701629cfd0d423e8f3e4c9ed377451ea",
+      "actionKey": "714628405dafc9db8999736f070bf82c1c89e9dabd835dd4f731a2e727b8282e",
       "tokenBudget": {
-        "estimatedInputTokens": 316,
+        "estimatedInputTokens": 324,
         "budgetCeil": 100000,
         "withinBudget": true
       },
@@ -2197,5 +2198,5 @@
     "writeSetDisjointProof": "lossless-ok",
     "warnings": []
   },
-  "planSelfSha256": "e92ab09efa3ef2720b898b93189bf6208694596d3bbfbcb47681297e91eaaca6"
+  "planSelfSha256": "ab784f49056ecf9f670971ce08aad2ccd7165bfe700a178ec01d955ccbd8161f"
 }
