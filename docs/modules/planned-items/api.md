@@ -15,11 +15,11 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 Based on the sole route handler found (`src/app/api/plans/[planId]/items/route.ts`), the Planned Items API currently exposes creation of a planned item (a budget line item) within a specific monthly plan.
 
-[NEEDS CLARIFICATION] No route handlers for listing, updating, or deleting individual planned items were present in the inputs provided to this dispatch (only `route.ts` with a `POST` handler was included, per `generation.module-source-map` scoping this module to `src/app/api/plans/[planId]/items`); confirm whether such endpoints exist elsewhere in the codebase.
+Confirmed: no additional route handlers for listing, updating, or deleting individual planned items exist within the codebase available to this module. `src/app/api/plans/[planId]/items/route.ts` exports only `POST`. `src/app/api/plans/[planId]/route.ts` exposes a plan-level `GET` (returns the plan together with its `items`, ordered by `createdAt`) and a plan-level `DELETE` (removes the entire plan), but neither operates on an individual planned item.
 
 **Base Path:** `/api/plans/{planId}/items` (derived directly from the Next.js App Router file path `src/app/api/plans/[planId]/items/route.ts`, where `[planId]` is a dynamic route segment).
 
-**OpenAPI Spec:** [NEEDS CLARIFICATION] No OpenAPI specification file was present in inputs.code or inputs.references.
+**OpenAPI Spec:** Not applicable — no OpenAPI specification file is present among this module's inputs (`inputs.code` / `inputs.references`).
 
 ## Authentication
 
@@ -35,13 +35,13 @@ The concrete authentication mechanism is NextAuth.js configured for a JWT sessio
 |--------|------|-------------|---------------|
 | POST | `/api/plans/{planId}/items` | Create a planned item under the given plan | Yes |
 
-[NEEDS CLARIFICATION] No GET (list/detail), PUT, PATCH, or DELETE handlers for planned items were present in the inputs available to this dispatch.
+Confirmed: no GET (list/detail), PUT, PATCH, or DELETE handlers for planned items exist anywhere in this module's available inputs. `src/app/api/plans/[planId]/items/route.ts` exports only `POST`; the only other handlers touching plans are the plan-level `GET`/`DELETE` in `src/app/api/plans/[planId]/route.ts` (which return/delete an entire plan, not an individual item) and the plan-level `GET`/`POST` in `src/app/api/plans/route.ts` (which list/create plans, not items).
 
 ## Common Patterns
 
 ### Pagination
 
-[NEEDS CLARIFICATION] The single grounded endpoint does not return a paginated collection; no pagination pattern is evidenced in inputs.
+No pagination pattern is implemented in this codebase: `GET /api/plans` (`src/app/api/plans/route.ts`) returns the full result of `prisma.plan.findMany({ where: { userId }, orderBy: [...] })` with no `skip`/`take`/cursor arguments, and `GET /api/plans/{planId}` (`src/app/api/plans/[planId]/route.ts`) returns all of a plan's `items` via `include: { items: { orderBy: { createdAt: "asc" } } }`, likewise without pagination.
 
 ### Error Response
 

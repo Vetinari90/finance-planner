@@ -26,7 +26,7 @@ No caching layer, technology, or cached keys are present. Each request queries t
 | Layer | Responsibility |
 |-------|----------------|
 | API | Zod schema (`CreateItemSchema`) validates request body shape and constraints before any persistence occurs |
-| Database | [NEEDS CLARIFICATION] No schema-level constraints (e.g. Prisma `@@` directives) were present in inputs |
+| Database | No schema-level constraints (e.g. Prisma `@@` directives) were confirmed: the grounded inputs contain no Prisma schema file, and `src/lib/db.ts` only imports the generated Prisma client (`@/generated/prisma/client`) rather than a schema source; `prisma.plannedItem.create` in `src/app/api/plans/[planId]/items/route.ts` relies solely on the Zod schema above for validation |
 
 ### Field Validation Rules
 

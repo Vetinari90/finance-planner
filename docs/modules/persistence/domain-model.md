@@ -33,7 +33,7 @@ A full class/entity diagram requires the Prisma schema (`schema.prisma`), which 
 
 | Attribute | Type | Description |
 |-----------|------|--------------|
-| id | [NEEDS CLARIFICATION] | Unique identifier; propagated to the NextAuth JWT (`token.sub`) and session (`session.user.id`) in `src/lib/auth.ts` |
+| id | string | Unique identifier; propagated to the NextAuth JWT (`token.sub`) and session (`session.user.id`) in `src/lib/auth.ts` |
 | email | string | Login identifier; looked up case-insensitively (lower-cased/trimmed before query) |
 | password | string | Stored as a bcrypt hash - compared via `bcrypt.compare(password, user.password)`, never compared in plaintext |
 | name | string (optional) | Optional; falls back to `undefined` if absent (`user.name ?? undefined`) |
