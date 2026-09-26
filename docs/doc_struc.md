@@ -27,7 +27,7 @@ generation:
     persistence: src/lib
     web-ui: src/app
 recipe-library:
-  source: /opt/asr/workspace/bebb9ecb-ef49-464f-be32-3ed6ba36bf61/831187c8-70c2-4406-a502-a4dbe477b170/sdlc-artifact-templates/templates/mid
+  source: /opt/asr/workspace/fc11fea0-1344-435d-943b-760c76aea6a1/831187c8-70c2-4406-a502-a4dbe477b170/sdlc-artifact-templates/templates/mid
 tree:
   - path: docs/
     children:
