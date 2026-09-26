@@ -1,12 +1,12 @@
 {
   "schemaVersion": "2.4.0",
-  "projectRoot": "/opt/asr/workspace/fc11fea0-1344-435d-943b-760c76aea6a1/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner",
+  "projectRoot": "/opt/asr/workspace/45e68690-e3d1-427c-8c97-7edca1d7238c/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner",
   "generatedAt": "2026-09-25T22:49:33.558Z",
   "moduleId": "integration-tests-cross-user-isolation",
   "isCrossCutting": false,
   "files": [
     {
-      "path": "/opt/asr/workspace/fc11fea0-1344-435d-943b-760c76aea6a1/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner/README.md",
+      "path": "/opt/asr/workspace/45e68690-e3d1-427c-8c97-7edca1d7238c/831187c8-70c2-4406-a502-a4dbe477b170/finance-planner/README.md",
       "role": "reference",
       "sizeBytes": 1450,
       "estimatedTokens": 316
