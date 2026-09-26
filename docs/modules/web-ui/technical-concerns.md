@@ -22,23 +22,23 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 
 **Caching Enabled:** No evidence of caching in the reviewed scope.
 
-**Technology:** [NEEDS CLARIFICATION] No caching technology (Redis, in-memory, CDN configuration, `revalidate`/`fetchCache` export, or cache-control header code) appears in `src/app/layout.tsx` or `src/app/page.tsx`.
+**Technology:** N/A. No caching technology (Redis, in-memory, CDN configuration, `revalidate`/`fetchCache` export, or cache-control header code) appears in `src/app/layout.tsx` or `src/app/page.tsx`.
 
 ### Cached Data
 
 | Data | Cache Type | TTL | Invalidation |
 |------|------------|-----|--------------|
-| [NEEDS CLARIFICATION] | Not evidenced | Not evidenced | Not evidenced |
+| N/A | Not evidenced | Not evidenced | Not evidenced |
 
 ### Cache Keys
 
-[NEEDS CLARIFICATION] No cache-key scheme is evidenced in the reviewed code.
+N/A. No cache-key scheme is evidenced in the reviewed code.
 
 ### Monitoring
 
 | Metric | Alert Threshold |
 |--------|-----------------|
-| [NEEDS CLARIFICATION] | No caching/monitoring configuration observed in inputs |
+| N/A | No caching/monitoring configuration observed in inputs |
 
 ---
 
@@ -99,11 +99,11 @@ Corrected: the module's API routes evidence concrete status codes — 400 (inval
 
 ### Key Naming
 
-[NEEDS CLARIFICATION] Not evidenced.
+N/A -- no translation key naming convention exists, as no i18n library or message catalog is present in the reviewed code. Not evidenced.
 
 ### Locale-Specific Formatting
 
 | Type | Varies By Locale |
 |------|------------------|
-| [NEEDS CLARIFICATION] | No date, number, or currency formatting code is present in `src/app/layout.tsx` or `src/app/page.tsx` |
+| N/A | No date, number, or currency formatting code is present in `src/app/layout.tsx` or `src/app/page.tsx` |
 <!-- /SLOT:content -->
