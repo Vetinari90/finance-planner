@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import AddItemForm from "./AddItemForm";
 import DeletePlanButton from "./DeletePlanButton";
+import ExportCsvButton from "./ExportCsvButton";
 
 export default async function PlanDetailPage({
   params,
@@ -48,9 +49,34 @@ export default async function PlanDetailPage({
         </div>
 
         <div style={{ textAlign: "right" }}>
-          <div style={{ fontWeight: 900, fontSize: 20 }}>
-            {total} {plan.currency}
+          <div
+            style={{
+              border: "1px solid #ddd",
+              borderRadius: 12,
+              padding: "10px 14px",
+              background: "#fafafa",
+            }}
+          >
+            <div style={{ fontSize: 12, opacity: 0.7, letterSpacing: 0.5 }}>
+              TOTAL
+            </div>
+            <div style={{ fontWeight: 900, fontSize: 24 }}>
+              {total} {plan.currency}
+            </div>
+            <div style={{ fontSize: 12, opacity: 0.7 }}>
+              {plan.items.length}{" "}
+              {plan.items.length === 1 ? "item" : "items"}
+            </div>
           </div>
+          <ExportCsvButton
+            planTitle={plan.title}
+            currency={plan.currency}
+            items={plan.items.map((it) => ({
+              title: it.title,
+              note: it.note,
+              amountCents: it.amountCents,
+            }))}
+          />
           <DeletePlanButton planId={plan.id} />
         </div>
       </div>
