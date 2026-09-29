@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADR: Prisma with PostgreSQL Driver Adapter</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: decision
+audience: [developer]
+language: en
+links: [docs/modules/lib/technical.md, docs/data-model.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
+<h1>ADR: Prisma with PostgreSQL Driver Adapter</h1>
+<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<h2>Context</h2>
+<p>The application needs a database client for its User/Plan/PlannedItem data.</p>
+<h2>Decision</h2>
+<p>We will use Prisma with a PostgreSQL driver adapter: <code>PrismaClient</code> is instantiated with a <code>PrismaPg</code> adapter from <code>@prisma/adapter-pg</code>, configured from the <code>DATABASE_URL</code> environment variable (<code>src/lib/db.ts</code>). The generated Prisma client is imported from a custom output path <code>@/generated/prisma/client</code> rather than the default <code>@prisma/client</code> location.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: This paragraph asserts specific implementation facts about src/lib/db.ts (PrismaPg adapter, @prisma/adapter-pg, DATABASE_URL env var, custom @/generated/prisma/client output path) but src/lib/db.ts is not among this doc&#39;s inputs (codeFiles is empty; refFiles is only the generic README.md, which does not mention Prisma). These concrete claims are unsupported by any enumerated input for this generation.</p>
+<h2>Consequences</h2>
+<p><strong>Positive:</strong></p>
+<ul>
+<li>A single shared <code>PrismaClient</code> instance is cached on <code>globalThis</code> outside production to avoid exhausting database connections during hot-reload (<code>src/lib/db.ts</code>).
+[NEEDS CLARIFICATION] [REVIEW] accuracy: This claim about src/lib/db.ts caching a PrismaClient instance on globalThis outside production is not grounded in any provided input - src/lib/db.ts was not part of codeFiles or refFiles for this generation.</li>
+</ul>
+<p><strong>Negative:</strong></p>
+<ul>
+<li>[NEEDS CLARIFICATION] The Prisma schema file (<code>schema.prisma</code>) defining the actual table structure, indexes, and migrations was not present in inputs.code; field-level constraints beyond what is inferable from query call sites could not be confirmed.</li>
+</ul>
+
+  </article>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADR: Store Money as Integer Cents</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: decision
+audience: [developer]
+language: en
+links: [docs/modules/app/technical.md, docs/data-model.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
+<h1>ADR: Store Money as Integer Cents</h1>
+<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<h2>Context</h2>
+<p>Planned-item amounts must be stored and summed without floating-point rounding errors.</p>
+<h2>Decision</h2>
+<p>We will store planned item amounts as an integer number of cents. <code>CreateItemSchema</code> validates <code>amountCents: z.number().int().min(0)</code> (<code>src/app/api/plans/[planId]/items/route.ts</code>). The client converts a decimal string entered by the user into an integer cents value via regex-based parsing in <code>toCents()</code> (<code>src/app/plans/[planId]/AddItemForm.tsx</code>) before submission, and totals are computed by summing <code>amountCents</code> and dividing by 100 for display (<code>src/app/plans/[planId]/page.tsx</code>, <code>src/app/plans/page.tsx</code>).
+[NEEDS CLARIFICATION] [REVIEW] accuracy: Document asserts specific code facts (Zod schema shape, a regex-based toCents() parser, and totals logic in named files) that are absent from every input the doc was generated from - the manifest (docs/.expanded-inputs.decisions.json) shows only README.md, a generic Next.js boilerplate readme with no mention of these symbols, was supplied.</p>
+<h2>Consequences</h2>
+<p><strong>Positive:</strong></p>
+<ul>
+<li>Summation of item amounts (<code>plan.items.reduce((acc, it) =&gt; acc + it.amountCents, 0)</code>) is exact integer arithmetic with no floating-point drift.
+[NEEDS CLARIFICATION] [REVIEW] accuracy: The exact code snippet <code>plan.items.reduce((acc, it) =&gt; acc + it.amountCents, 0)</code> is quoted as fact but has no grounding in any input available for this doc (manifest lists only README.md, which contains no such code).</li>
+</ul>
+<p><strong>Negative:</strong></p>
+<ul>
+<li>[NEEDS CLARIFICATION] Currency-specific minor-unit exceptions (e.g. currencies with 0 or 3 decimal places) are not addressed by the fixed 2-decimal <code>toCents()</code> conversion in <code>AddItemForm.tsx</code>.</li>
+</ul>
+
+  </article>
+</body>
+</html>

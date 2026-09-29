@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADR: Per-User Tenant Isolation</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: decision
+audience: [developer]
+language: en
+links: [docs/modules/app/technical.md, docs/security.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
+<h1>ADR: Per-User Tenant Isolation</h1>
+<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<h2>Context</h2>
+<p>Multiple users share the same application and database; each user&#39;s plans and planned items must not be visible or mutable by other users.</p>
+<h2>Decision</h2>
+<p>We will scope all plan reads/writes by both the resource id and the authenticated <code>userId</code>. <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> is used in <code>src/app/api/plans/[planId]/route.ts</code> and <code>src/app/api/plans/[planId]/items/route.ts</code>; plan creation in <code>src/app/api/plans/route.ts</code> always sets <code>userId</code> from the session; plan listing filters <code>where: { userId }</code>.</p>
+<h2>Consequences</h2>
+<p><strong>Positive:</strong></p>
+<ul>
+<li>A user cannot read, modify, or delete another user&#39;s plan or items, even by guessing another plan&#39;s id, because the ownership filter is part of the query itself.</li>
+</ul>
+<p><strong>Negative:</strong></p>
+<ul>
+<li>[NEEDS CLARIFICATION] No database-level row-level-security or authorization audit logging was found in inputs.code; isolation currently relies entirely on application-layer query filtering.</li>
+</ul>
+
+  </article>
+</body>
+</html>

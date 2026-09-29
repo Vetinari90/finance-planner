@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0005-per-user-tenant-isolation.md",
+  "dimension": "consistency",
+  "findings": []
+}

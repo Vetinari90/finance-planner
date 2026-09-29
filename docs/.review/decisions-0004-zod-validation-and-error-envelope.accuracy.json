@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0004-zod-validation-and-error-envelope.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/.expanded-inputs.decisions.json lists only README.md (a generic create-next-app boilerplate file with no mention of zod, schemas, validation, or API routes) as the input for this doc; codeFiles is empty, so no source file for src/app/api/auth/register/route.ts, src/app/api/plans/route.ts, or src/app/api/plans/[planId]/items/route.ts is present in any enumerated input.",
+      "locationHint": "We will parse the request body of every mutating API route with a `zod` schema via `.safeParse()`: `RegisterSchema` in `src/app/api/auth/register/route.ts`, `CreatePlanSchema` in `src/app/api/plans/route.ts`, and `CreateItemSchema` in `src/app/api/plans/[planId]/items/route.ts`. On failure, the route returns HTTP 400 with `{ error: \"Invalid input\", details: parsed.error.flatten() }`.",
+      "message": "The decision's core factual claims (specific schema names, route file paths, and the exact 400 error-response shape) are concrete facts not present in any enumerated input - the manifest shows only README.md (generic Next.js boilerplate, no code content) was used as input for this doc, and codeFiles is empty."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0001-security-baseline.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "codeFiles for this dispatch is empty and refFiles contains only README.md (generic create-next-app boilerplate text with no mention of bcrypt, cost factors, auth routes, or requireUserId). None of the specific implementation facts in this sentence - the bcrypt cost factor of 12, the file paths src/app/api/auth/register/route.ts, src/lib/auth.ts, src/lib/requireUser.ts, or the function name requireUserId() - appear in any provided input.",
+      "locationHint": "We will hash passwords with bcrypt (cost factor 12) before storage (`src/app/api/auth/register/route.ts`) and verify credentials with `bcrypt.compare` on login (`src/lib/auth.ts`). We will require every plan- and item-related API route to call `requireUserId()` (`src/lib/requireUser.ts`) and return HTTP 401 Unauthorized before executing any business logic when no authenticated session exists (see `docs/security.md`).",
+      "message": "The decision cites specific implementation facts (bcrypt cost factor 12, exact file paths, and the requireUserId() function) that are not present in any provided codeFiles or refFiles for this review, so these concrete claims cannot be verified against the given inputs."
+    }
+  ]
+}

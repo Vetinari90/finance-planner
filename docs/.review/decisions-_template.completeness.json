@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/_template.md",
+  "dimension": "completeness",
+  "findings": []
+}

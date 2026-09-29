@@ -1,0 +1,1797 @@
+{
+  "schemaVersion": "1",
+  "docs": {
+    "docs/data-model.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "d6531deb6677615a929fa3e16e19632767dc591ccc14125d89c36653555ab6cf",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/data-protection.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "d07c1cf7c0504195505703dc57d328ded3e1352a294a54b9d2b73bd175811f31",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/decisions/0001-prisma-driver-adapter-postgresql.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "07bbc58e4788b345c134dd4e21d95a8d7b8badbc5101ad8d56a8b87d155cb06e",
+      "isBroadFallback": false,
+      "readSet": [
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/decisions/0001-security-baseline.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "428e3738785bdadfb33c7573090dedac89291753edf38b55e0f53f889bac1a65",
+      "isBroadFallback": false,
+      "readSet": [
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/decisions/0002-credentials-auth-with-jwt-sessions.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "f496496495a16b438d1083a65fef5d506c553e0005a625edb7c851c4a7b45cd7",
+      "isBroadFallback": false,
+      "readSet": [
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/decisions/0003-store-money-as-integer-cents.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "282e5ee6d68a21a9f786e30a459e25f5d9a91d51e3f070337911f42fc39d30f7",
+      "isBroadFallback": false,
+      "readSet": [
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/decisions/0004-zod-validation-and-error-envelope.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "84ff201ceb029909ea9f84a2fb2386ed00304e01b2bf9ae4351a982bf4385302",
+      "isBroadFallback": false,
+      "readSet": [
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/decisions/0005-per-user-tenant-isolation.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "dc650e322a6a6d588cd88edbebb9dc6feb1cced4c14736bccd66de1ae14e1419",
+      "isBroadFallback": false,
+      "readSet": [
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/decisions/_template.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "3e46f90bb6cd6bd6f9848f270c6dcfea4a29963a0c066bb407671ade59ffc6b3",
+      "isBroadFallback": false,
+      "readSet": [
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/app/README.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "3d9dc599f1747af45b9680f51454d7ed332fc329507b8ae8fdf390c5c3bb88ee",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/app/technical.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "a3f285c1ef99aa4e49bd86ac4bd1aa6594c6870dfaa7731932fd9a16a5be24f7",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/app/use-cases.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "6037606341ccb1b29248dd11584988013c686155160617d36cbfb286391ccee2",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/lib/README.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "f32882ee956b54e54e712197bf665bf23e47be464b3f3e552b901810c41cbee9",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/lib/technical.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "46799be77b1998d8c9f42ad6848601da84088a08009b8812e558575c5351197d",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/lib/use-cases.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "2a32f0b4f51aa7b5844d23d95df736e6153228c62c293d3338573a3f77d241f6",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/types/README.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "4cc75b2935c909715b70fa5926793210d2343324944b90f35553ff62e4aef343",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/types/technical.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "358cdccb6280b9c78305d49d7c36f08d6418045cfcd1e0366d36f344dd296942",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/modules/types/use-cases.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "4c47f59f5a72c9bfbac12ff380ee964695dacb96810c5d7207d7883ee43ca04b",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/overview.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "31308e0600581a017c6128c79dfcc1090d298d2c80f1eba1a8a6fe4947147185",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/security.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "13a1eee8b1553496772e8ce354c3cd6b83e4c2a52b3088118b75494c2bf35be7",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    },
+    "docs/standards.md": {
+      "generatedFrom": "c0f516fbb011babec018d5dc5191924f7ca3fed2",
+      "outputSha256": "453c3350ff651017e5050e5979df773d8d5641080790ec75c3e7b7767d341ebe",
+      "isBroadFallback": true,
+      "readSet": [
+        {
+          "path": "src/app/api/auth/[...nextauth]/route.ts",
+          "role": "code",
+          "sha256": "ff42dc4fa935d9dafecffef6dc225f559a3b51c98e3c788735f0609e85966971"
+        },
+        {
+          "path": "src/app/api/auth/register/route.ts",
+          "role": "code",
+          "sha256": "094eda1ba0987e7f37b67b4f401e75dba3044d334d78791bf133b78856660731"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/items/route.ts",
+          "role": "code",
+          "sha256": "971bf2564d470dd191ec0c3d485959fd44b9afb75f7e224e7a2c7df2921239f5"
+        },
+        {
+          "path": "src/app/api/plans/[planId]/route.ts",
+          "role": "code",
+          "sha256": "adda7747d9488d8d5b7f2a15f24a69f53497646609a5f81ee38bc4132bbe7a98"
+        },
+        {
+          "path": "src/app/api/plans/route.ts",
+          "role": "code",
+          "sha256": "20f66f3c1a3d176f70167287a8561b56bb1e2e79401e9cf0a78b7c85cb7cd376"
+        },
+        {
+          "path": "src/app/globals.css",
+          "role": "code",
+          "sha256": "82c39fcc9632c0daab7c53a8c6c4946c0da049b13a6deb8e67a8548a182c14b4"
+        },
+        {
+          "path": "src/app/layout.tsx",
+          "role": "code",
+          "sha256": "7fbf037d99eb5fca12269c3d452767144fc48cadc418f1037446b7187934dee4"
+        },
+        {
+          "path": "src/app/login/LoginClient.tsx",
+          "role": "code",
+          "sha256": "ea116dbf89773a2d69188a4722d2e010a16321b47b214244dc0c71afd24c10cb"
+        },
+        {
+          "path": "src/app/login/page.tsx",
+          "role": "code",
+          "sha256": "83b5239234f5939432ab5816f02a6210bdebe2cd4d0017dd43e9cb6bce09d826"
+        },
+        {
+          "path": "src/app/logout/route.ts",
+          "role": "code",
+          "sha256": "3cee82729835bad8054ada22fbbbc5be2de9769addda1b8e0d5c0fce54e104b6"
+        },
+        {
+          "path": "src/app/page.module.css",
+          "role": "code",
+          "sha256": "8529c4894dbefa30848e7ad724ae63abcd63deb9d8b40b0d1b4aa33e5db6a40f"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "role": "code",
+          "sha256": "a34bcc0c0631b0f38047d9584e5138ede65c6932ffd4d760dccf6bee7b3b0c93"
+        },
+        {
+          "path": "src/app/plans/NewPlanForm.tsx",
+          "role": "code",
+          "sha256": "da8d3f998862cd6b8bf35a5c11d70130b7c0417f24dec46d8e1a46a38ab7ef55"
+        },
+        {
+          "path": "src/app/plans/[planId]/AddItemForm.tsx",
+          "role": "code",
+          "sha256": "a92838478ac9ced9f2e456bc7771dbcd380865bb90f89494d059ff83807a47c2"
+        },
+        {
+          "path": "src/app/plans/[planId]/DeletePlanButton.tsx",
+          "role": "code",
+          "sha256": "18219cf7a0cfe35ff08ac897c3a93f79695f269a460ef9f9414d9a26fd17d0b2"
+        },
+        {
+          "path": "src/app/plans/[planId]/page.tsx",
+          "role": "code",
+          "sha256": "39d72a269182013d85dad272e1e8432af7c550266f1f79eefcc741511d7b0bd1"
+        },
+        {
+          "path": "src/app/plans/page.tsx",
+          "role": "code",
+          "sha256": "8971d6759f03d0a0644cddf48e6738ee20ceb76db480a24a64378900534accc3"
+        },
+        {
+          "path": "src/app/register/page.tsx",
+          "role": "code",
+          "sha256": "aa455a9900afc91072b7bd9e9da68b20b7b8fc2b6186097146dab1581b8f9ebd"
+        },
+        {
+          "path": "src/lib/auth.ts",
+          "role": "code",
+          "sha256": "1eb34bd5ba14675c80e83cd9d2e325d327c0e1729ffb5c7b1bc16ed5befe2189"
+        },
+        {
+          "path": "src/lib/db.ts",
+          "role": "code",
+          "sha256": "10ba397afbc97b70750d13ed077e8e7becba60f8a130dfd4fd08786d9eb5da1a"
+        },
+        {
+          "path": "src/lib/requireUser.ts",
+          "role": "code",
+          "sha256": "9f4835db220865045457a481a09561473126777d8e937b2ba65ffa1e9cf06d8d"
+        },
+        {
+          "path": "src/types/next-auth.d.ts",
+          "role": "code",
+          "sha256": "4a89baf83a73548ab67370678a6e573be9d4211a87f2f16cbbff31cd77a52b3d"
+        },
+        {
+          "path": "README.md",
+          "role": "reference",
+          "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+        }
+      ]
+    }
+  }
+}

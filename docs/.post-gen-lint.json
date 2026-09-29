@@ -1,0 +1,275 @@
+{
+  "defects": [
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/data-model.md",
+      "line": 32,
+      "message": "[NEEDS CLARIFICATION] marker found: | [NEEDS CLARIFICATION] | Exact table names, column types, and constraints requi"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/data-protection.md",
+      "line": 20,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] No API-level data-classification or PII-tagging convention"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/data-protection.md",
+      "line": 24,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] No data-protection-specific status code handling (e.g. a d"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/data-protection.md",
+      "line": 28,
+      "message": "[NEEDS CLARIFICATION] marker found: Validation error responses include the raw zod `flatten()` output (`{ error: \"In"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/data-protection.md",
+      "line": 32,
+      "message": "[NEEDS CLARIFICATION] marker found: `src/lib/db.ts` restricts Prisma logging to `[\"error\", \"warn\"]` (not `\"query\"`),"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0001-prisma-driver-adapter-postgresql.md",
+      "line": 30,
+      "message": "[NEEDS CLARIFICATION] marker found: - [NEEDS CLARIFICATION] The Prisma schema file (`schema.prisma`) defining the ac"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0001-security-baseline.md",
+      "line": 31,
+      "message": "[NEEDS CLARIFICATION] marker found: - [NEEDS CLARIFICATION] No rate-limiting, CSRF protection, or transport-security"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0002-credentials-auth-with-jwt-sessions.md",
+      "line": 31,
+      "message": "[NEEDS CLARIFICATION] marker found: - [NEEDS CLARIFICATION] No explicit `NEXTAUTH_SECRET` (or equivalent JWT signing"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0003-store-money-as-integer-cents.md",
+      "line": 30,
+      "message": "[NEEDS CLARIFICATION] marker found: - [NEEDS CLARIFICATION] Currency-specific minor-unit exceptions (e.g. currencies"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0004-zod-validation-and-error-envelope.md",
+      "line": 30,
+      "message": "[NEEDS CLARIFICATION] marker found: - [NEEDS CLARIFICATION] No shared/reusable error-envelope helper or centralized "
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0005-per-user-tenant-isolation.md",
+      "line": 30,
+      "message": "[NEEDS CLARIFICATION] marker found: - [NEEDS CLARIFICATION] No database-level row-level-security or authorization au"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/app/README.md",
+      "line": 28,
+      "message": "[NEEDS CLARIFICATION] marker found: **Database:** [NEEDS CLARIFICATION] No `schema.prisma` file was present in input"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/app/README.md",
+      "line": 40,
+      "message": "[NEEDS CLARIFICATION] marker found: | types | [NEEDS CLARIFICATION] No explicit import of `src/types/next-auth.d.ts`"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/app/technical.md",
+      "line": 37,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] No `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, or similar NextAuth "
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/app/technical.md",
+      "line": 47,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] No test files (e.g. `*.test.ts`, `*.spec.ts`) and no `pack"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/README.md",
+      "line": 31,
+      "message": "[NEEDS CLARIFICATION] marker found: | [NEEDS CLARIFICATION] | No `schema.prisma` file was present in inputs.code; ta"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/README.md",
+      "line": 37,
+      "message": "[NEEDS CLARIFICATION] marker found: | [NEEDS CLARIFICATION] | No import of the `types` or `app` modules was found in"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/technical.md",
+      "line": 16,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] The lib module exposes no HTTP endpoints of its own; it is"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/technical.md",
+      "line": 31,
+      "message": "[NEEDS CLARIFICATION] marker found: | [NEEDS CLARIFICATION] | No JWT/session signing secret (e.g. `NEXTAUTH_SECRET`)"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/technical.md",
+      "line": 35,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] No test files for `src/lib/*` were present in inputs.code."
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/README.md",
+      "line": 26,
+      "message": "[NEEDS CLARIFICATION] marker found: **Database:** [NEEDS CLARIFICATION] Not applicable - this module declares only T"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/README.md",
+      "line": 36,
+      "message": "[NEEDS CLARIFICATION] marker found: | [NEEDS CLARIFICATION] | No module imports `src/types/next-auth.d.ts` directly "
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/technical.md",
+      "line": 16,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] Not applicable - this module contains only TypeScript type"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/technical.md",
+      "line": 22,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] Not applicable - no environment variables are read in `src"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/technical.md",
+      "line": 26,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] Not applicable - this module declares no secrets."
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/technical.md",
+      "line": 30,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] No test files for `src/types/*` were present in inputs.cod"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/overview.md",
+      "line": 20,
+      "message": "[NEEDS CLARIFICATION] marker found: [NEEDS CLARIFICATION] `README.md` is the generic `create-next-app` boilerplate r"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/overview.md",
+      "line": 40,
+      "message": "[NEEDS CLARIFICATION] marker found: PostgreSQL via Prisma with a `PrismaPg` driver adapter, configured from `DATABAS"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/security.md",
+      "line": 16,
+      "message": "[NEEDS CLARIFICATION] marker found: The application uses NextAuth's `CredentialsProvider` (email + password) with `s"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/security.md",
+      "line": 35,
+      "message": "[NEEDS CLARIFICATION] marker found: API routes return errors as JSON with an `error` field and, for validation failu"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/security.md",
+      "line": 39,
+      "message": "[NEEDS CLARIFICATION] marker found: `src/lib/db.ts` configures Prisma logging for `[\"error\", \"warn\"]` only. [NEEDS C"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/standards.md",
+      "line": 20,
+      "message": "[NEEDS CLARIFICATION] marker found: API routes are grouped under `/api` (`/api/auth/register`, `/api/plans`, `/api/p"
+    },
+    {
+      "code": "NEEDS_CLARIFICATION",
+      "severity": "INFO",
+      "path": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/standards.md",
+      "line": 39,
+      "message": "[NEEDS CLARIFICATION] marker found: `src/lib/db.ts` configures Prisma client logging for `error` and `warn` levels o"
+    },
+    {
+      "code": "CITED_ENTITY_NOT_FOUND",
+      "severity": "WARNING",
+      "path": "docs/modules/app/technical.md",
+      "line": 20,
+      "message": "Cited code entity 'nextauth.js' is not found in the project's enumerated code corpus (no matching inputs.code path or manifest entry)."
+    },
+    {
+      "code": "CITED_ENTITY_NOT_FOUND",
+      "severity": "WARNING",
+      "path": "docs/modules/app/technical.md",
+      "line": 47,
+      "message": "Cited code entity 'package.json' is not found in the project's enumerated code corpus (no matching inputs.code path or manifest entry)."
+    },
+    {
+      "code": "BROKEN_LINK",
+      "severity": "ERROR",
+      "path": "docs/standards.md",
+      "line": 16,
+      "message": "Broken link: 'docs/security.md' (target '/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/docs/security.md' does not exist)"
+    }
+  ],
+  "phase": "post-gen",
+  "projectPath": ".",
+  "postGenLaneStatus": {
+    "FRONTMATTER_LINK_NOT_FOUND": true,
+    "FRONTMATTER_LINK_ANCHOR_BROKEN": true,
+    "CZECH_TYPOGRAPHY": true,
+    "CZECH_DIACRITICS_DEGRADED": true,
+    "SECTION_EMPTY": true,
+    "DEPENDENCY_GRAPH_MISMATCH": false,
+    "REVIEW_DISCREPANCY": false,
+    "CITED_ENTITY_NOT_FOUND": true,
+    "QUANTITATIVE_CLAIM_MISMATCH": false,
+    "CROSS_INPUT_CONTRADICTION": false,
+    "COMMENT_BODY_MISMATCH": false,
+    "WORKSPACE_PROSE_LEAK": false,
+    "DEPENDENCY_PROSE_MISMATCH": false,
+    "PIPELINE_JARGON_LEAK": true,
+    "GENERATED_FROM_MISSING": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0001-prisma-driver-adapter-postgresql.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "codeFiles for this doc is empty and refFiles contains only README.md (generic create-next-app boilerplate with no mention of Prisma, database clients, or src/lib/db.ts). No input provided to this generation confirms that src/lib/db.ts instantiates PrismaClient with a PrismaPg adapter from @prisma/adapter-pg, reads DATABASE_URL, or imports the generated client from @/generated/prisma/client.",
+      "locationHint": "We will use Prisma with a PostgreSQL driver adapter: `PrismaClient` is instantiated with a `PrismaPg` adapter from `@prisma/adapter-pg`, configured from the `DATABASE_URL` environment variable (`src/lib/db.ts`). The generated Prisma client is imported from a custom output path `@/generated/prisma/client` rather than the default `@prisma/client` location.",
+      "message": "This paragraph asserts specific implementation facts about src/lib/db.ts (PrismaPg adapter, @prisma/adapter-pg, DATABASE_URL env var, custom @/generated/prisma/client output path) but src/lib/db.ts is not among this doc's inputs (codeFiles is empty; refFiles is only the generic README.md, which does not mention Prisma). These concrete claims are unsupported by any enumerated input for this generation."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Same input gap as above: codeFiles is empty and refFiles (README.md) contains no reference to a shared PrismaClient instance, globalThis caching, or hot-reload connection handling.",
+      "locationHint": "- A single shared `PrismaClient` instance is cached on `globalThis` outside production to avoid exhausting database connections during hot-reload (`src/lib/db.ts`).",
+      "message": "This claim about src/lib/db.ts caching a PrismaClient instance on globalThis outside production is not grounded in any provided input - src/lib/db.ts was not part of codeFiles or refFiles for this generation."
+    }
+  ]
+}

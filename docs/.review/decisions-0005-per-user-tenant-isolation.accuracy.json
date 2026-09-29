@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0005-per-user-tenant-isolation.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "codeFiles provided for this review is an empty list ([]); the only refFile is README.md, which contains no mention of Prisma, plans, userId, or any route files.",
+      "locationHint": "We will scope all plan reads/writes by both the resource id and the authenticated `userId`. `prisma.plan.findFirst({ where: { id: planId, userId } })` is used in `src/app/api/plans/[planId]/route.ts` and `src/app/api/plans/[planId]/items/route.ts`; plan creation in `src/app/api/plans/route.ts` always sets `userId` from the session; plan listing filters `where: { userId }`.",
+      "message": "The decision cites specific source paths (src/app/api/plans/[planId]/route.ts, src/app/api/plans/[planId]/items/route.ts, src/app/api/plans/route.ts) and an exact Prisma query shape (prisma.plan.findFirst({ where: { id: planId, userId } })), but no code files were supplied as input for this review to ground these claims - the enumerated codeFiles list is empty and the sole refFile (README.md) is a generic Next.js bootstrap README with no relevant content."
+    }
+  ]
+}

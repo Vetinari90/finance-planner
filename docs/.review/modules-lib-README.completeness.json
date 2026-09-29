@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/lib/README.md",
+  "dimension": "completeness",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "src/lib/requireUser.ts exports `requireUserId`, an async function documented in the doc's own Purpose sentence as \"a helper to resolve the current authenticated user's id on the server (src/lib/requireUser.ts)\", but the Key Entities table only lists `authOptions` and `prisma`; `requireUserId` does not appear anywhere else in the document.",
+      "locationHint": "| authOptions | `NextAuthOptions` object configuring the credentials provider, JWT session strategy, and callbacks (`src/lib/auth.ts`). |",
+      "message": "The Key Entities table omits `requireUserId` (src/lib/requireUser.ts), even though the Purpose section explicitly names it as one of the three things the lib module provides. Only 2 of the 3 promised entities are documented in the table."
+    }
+  ]
+}

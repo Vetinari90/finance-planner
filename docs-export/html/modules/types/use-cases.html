@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Use Cases</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: use-cases
+audience: [developer]
+language: en
+links: [docs/modules/types/README.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Use Cases</h1>
+<h2>UC-001: Type-Safe Session User Id Access</h2>
+<p><strong>Actor:</strong> Developer / TypeScript compiler</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>The module augments <code>next-auth</code>&#39;s <code>Session</code> interface via <code>declare module &quot;next-auth&quot;</code> (<code>src/types/next-auth.d.ts</code>), adding <code>user: { id: string; name?: string | null; email?: string | null }</code>.</li>
+<li>Code across the app and lib modules (e.g. <code>src/lib/auth.ts</code>, <code>src/lib/requireUser.ts</code>, <code>src/app/plans/page.tsx</code>) reads <code>session.user.id</code> and <code>session.user.email</code>.</li>
+<li>The TypeScript compiler type-checks these reads against the augmented interface rather than the base <code>next-auth</code> <code>Session</code> type.</li>
+</ol>
+<p><strong>Expected Result:</strong> Any code that reads <code>session.user.id</code> is type-checked at compile time, without needing a manual type assertion or <code>any</code> cast.</p>
+
+  </article>
+</body>
+</html>

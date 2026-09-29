@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADR: Security Baseline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: decision
+audience: [developer]
+language: en
+links: [docs/modules/lib/technical.md, docs/modules/app/technical.md, docs/security.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
+<h1>ADR: Security Baseline</h1>
+<p>[NEEDS CLARIFICATION] [REVIEW] consistency: ADR numbering collision: this decision is numbered 0001, the same number used by docs/decisions/0001-prisma-driver-adapter-postgresql.md. Every other decision in the set (0002-0005) has a unique number, so two ADRs sharing 0001 is an inconsistency in the decision-record numbering scheme.</p>
+<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<h2>Context</h2>
+<p>The application handles user credentials and per-user financial plan data and needs baseline security practices around credential storage and route protection.</p>
+<h2>Decision</h2>
+<p>We will hash passwords with bcrypt (cost factor 12) before storage (<code>src/app/api/auth/register/route.ts</code>) and verify credentials with <code>bcrypt.compare</code> on login (<code>src/lib/auth.ts</code>). We will require every plan- and item-related API route to call <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>) and return HTTP 401 Unauthorized before executing any business logic when no authenticated session exists (see <code>docs/security.md</code>).</p>
+<h2>Consequences</h2>
+<p><strong>Positive:</strong></p>
+<ul>
+<li>Plaintext passwords are never persisted.</li>
+<li>Unauthenticated requests are rejected uniformly across all protected API routes.</li>
+</ul>
+<p><strong>Negative:</strong></p>
+<ul>
+<li>[NEEDS CLARIFICATION] No rate-limiting, CSRF protection, or transport-security (HTTPS enforcement) configuration was found in inputs.code; these baseline hardening measures are unconfirmed.</li>
+</ul>
+
+  </article>
+</body>
+</html>
