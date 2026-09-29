@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/app/technical.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/modules/lib/technical.md line 24 states the Required column for DATABASE_URL is 'Yes' with a citable reason ('src/lib/db.ts throws \"DATABASE_URL is not set\" at import time if it is missing'), directly resolving the question that this doc's Required column defers.",
+      "locationHint": "| DATABASE_URL | [NEEDS CLARIFICATION - see `docs/modules/lib/technical.md`] | Consumed indirectly via `src/lib/db.ts`; the app module does not read it directly. |",
+      "message": "This doc marks DATABASE_URL's Required status as unresolved and points readers to docs/modules/lib/technical.md for the answer, but that linked doc already states plainly 'Yes' (with citable evidence from src/lib/db.ts). The two docs are inconsistent: one flags the fact as needing clarification while the other has already resolved it."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Overview</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: overview
+audience: [developer]
+language: en
+links: [docs/modules/app/README.md, docs/modules/lib/README.md, docs/modules/types/README.md, docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0003-store-money-as-integer-cents.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Project Overview</h1>
+<h2>Summary</h2>
+<p>Finance Planner is a Next.js (App Router) web application that lets an authenticated user create monthly financial plans (identified by year, month, and currency) and add planned items (title, amount, optional note/category) to each plan (<code>src/app/plans/*</code>, <code>src/app/api/plans/*</code>; see <code>docs/modules/app/README.md</code>).</p>
+<h2>Purpose</h2>
+<p>Finance Planner is a single-tenant personal budgeting tool: each authenticated individual manages only their own data. A user registers with an email and password (<code>src/app/register/page.tsx</code>) or logs in, then creates monthly plans identified by year, month, and currency, scoped strictly to that user (<code>src/app/api/plans/route.ts</code>, <code>src/lib/requireUser.ts</code>). Within a plan, the user records planned items (title, amount in cents, optional category and note) via <code>src/app/api/plans/[planId]/items/route.ts</code>, and views a running total per plan on <code>src/app/plans/[planId]/page.tsx</code>. There is no cross-user sharing, invitation, or collaboration logic anywhere in the code; the plan currency defaults to CZK (<code>src/app/api/plans/route.ts</code>), indicating the target users are individuals tracking their own monthly budget, primarily in Czech koruna.</p>
+<h2>Modules</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>app (<code>src/app</code>)</td>
+<td>Pages and API routes: registration, login/logout, plan list, plan detail, item creation (see <code>docs/modules/app/README.md</code>).</td>
+</tr>
+<tr>
+<td>lib (<code>src/lib</code>)</td>
+<td>Shared infrastructure: NextAuth configuration, Prisma client, <code>requireUserId()</code> helper (see <code>docs/modules/lib/README.md</code>).</td>
+</tr>
+<tr>
+<td>types (<code>src/types</code>)</td>
+<td>TypeScript ambient type augmentation for the NextAuth <code>Session</code> type (see <code>docs/modules/types/README.md</code>).</td>
+</tr>
+</tbody></table>
+<h2>Key User Flows</h2>
+<p>[NEEDS CLARIFICATION] [REVIEW] completeness: The Key User Flows section enumerates only 5 flows (register, login, create plan, add item, delete plan) and silently omits the Logout flow (UC-006), even though the source use-cases.md documents it and the doc&#39;s own Modules table already credits the app module with &#39;login/logout&#39;.</p>
+<ol>
+<li>Register (<code>/register</code>) then auto-login then redirect to <code>/plans</code> (see <code>docs/modules/app/use-cases.md</code>, UC-001).</li>
+<li>Login (<code>/login</code>) then redirect to <code>/plans</code> (see <code>docs/modules/app/use-cases.md</code>, UC-002).</li>
+<li>Create a monthly plan on <code>/plans</code> (see <code>docs/modules/app/use-cases.md</code>, UC-003).</li>
+<li>Open a plan and add planned items on <code>/plans/{planId}</code> (see <code>docs/modules/app/use-cases.md</code>, UC-004).</li>
+<li>Delete a plan (see <code>docs/modules/app/use-cases.md</code>, UC-005).</li>
+</ol>
+<h2>Data Storage</h2>
+<p>PostgreSQL via Prisma with a <code>PrismaPg</code> driver adapter, configured from <code>DATABASE_URL</code> (see <code>docs/modules/lib/technical.md</code>). [NEEDS CLARIFICATION] No <code>schema.prisma</code> was present in inputs.code; the full data model (constraints, indexes, migrations) could not be confirmed (see <code>docs/data-model.md</code>).</p>
+
+  </article>
+</body>
+</html>

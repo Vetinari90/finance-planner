@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/decisions/0003-store-money-as-integer-cents.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/.expanded-inputs.decisions.json lists only README.md (role: reference) as the input file for this doc; codeFiles supplied for this review is an empty array. README.md contains no mention of CreateItemSchema, amountCents, route.ts, or any Zod validation. The claim that `CreateItemSchema` validates `amountCents: z.number().int().min(0)` in `src/app/api/plans/[planId]/items/route.ts` is a concrete factual assertion with no supporting input.",
+      "locationHint": "We will store planned item amounts as an integer number of cents. `CreateItemSchema` validates `amountCents: z.number().int().min(0)` (`src/app/api/plans/[planId]/items/route.ts`). The client converts a decimal string entered by the user into an integer cents value via regex-based parsing in `toCents()` (`src/app/plans/[planId]/AddItemForm.tsx`) before submission, and totals are computed by summing `amountCents` and dividing by 100 for display (`src/app/plans/[planId]/page.tsx`, `src/app/plans/page.tsx`).",
+      "message": "Document asserts specific code facts (Zod schema shape, a regex-based toCents() parser, and totals logic in named files) that are absent from every input the doc was generated from - the manifest (docs/.expanded-inputs.decisions.json) shows only README.md, a generic Next.js boilerplate readme with no mention of these symbols, was supplied."
+    },
+    {
+      "confidence": "high",
+      "evidence": "docs/.expanded-inputs.decisions.json confirms README.md (generic create-next-app boilerplate) is the only input file for this doc; it contains no code snippets or reduce logic. No codeFiles were supplied.",
+      "locationHint": "- Summation of item amounts (`plan.items.reduce((acc, it) => acc + it.amountCents, 0)`) is exact integer arithmetic with no floating-point drift.",
+      "message": "The exact code snippet `plan.items.reduce((acc, it) => acc + it.amountCents, 0)` is quoted as fact but has no grounding in any input available for this doc (manifest lists only README.md, which contains no such code)."
+    }
+  ]
+}

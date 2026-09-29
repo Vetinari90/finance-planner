@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module: Types (src/types)</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: readme
+audience: [developer]
+language: en
+links: [docs/modules/types/technical.md, docs/modules/types/use-cases.md, docs/modules/lib/README.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Module: Types (src/types)</h1>
+<h2>Purpose</h2>
+<p>The types module contains a single TypeScript ambient declaration file (<code>src/types/next-auth.d.ts</code>) that augments the <code>next-auth</code> <code>Session</code> type so that <code>session.user.id</code> is a typed, required <code>string</code> field, alongside the existing <code>name</code>/<code>email</code> fields.</p>
+<h2>Key Entities</h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Session (augmented)</td>
+<td>Module augmentation of <code>next-auth</code>&#39;s <code>Session</code> interface, adding <code>user.id: string</code> alongside the existing <code>name</code>/<code>email</code> fields (<code>src/types/next-auth.d.ts</code>).</td>
+</tr>
+</tbody></table>
+<h2>Data Storage</h2>
+<p><strong>Database:</strong> Not applicable - this module declares only TypeScript compile-time types and performs no data storage.</p>
+<table>
+<thead>
+<tr>
+<th>Table/Collection</th>
+<th>Stores</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Dependencies</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>None</td>
+<td>No module imports <code>src/types/next-auth.d.ts</code> directly (TypeScript ambient declaration files are picked up automatically by the compiler); its effect is consumed indirectly wherever <code>session.user.id</code> is read, e.g. <code>src/lib/auth.ts</code> and <code>src/lib/requireUser.ts</code>.</td>
+</tr>
+</tbody></table>
+
+  </article>
+</body>
+</html>

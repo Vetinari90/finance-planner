@@ -1,0 +1,576 @@
+[
+  {
+    "nodePath": "data-model",
+    "rel": "docs/data-model.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/data-model.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/data-model",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "data-protection",
+    "rel": "docs/data-protection.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/data-protection.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/data-protection",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "decisions/_template",
+    "rel": "docs/decisions/_template.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/_template.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/decisions-_template",
+    "codeFiles": [],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": false
+  },
+  {
+    "nodePath": "decisions/0001-prisma-driver-adapter-postgresql",
+    "rel": "docs/decisions/0001-prisma-driver-adapter-postgresql.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0001-prisma-driver-adapter-postgresql.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/decisions-0001-prisma-driver-adapter-postgresql",
+    "codeFiles": [],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": false
+  },
+  {
+    "nodePath": "decisions/0001-security-baseline",
+    "rel": "docs/decisions/0001-security-baseline.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0001-security-baseline.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/decisions-0001-security-baseline",
+    "codeFiles": [],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": false
+  },
+  {
+    "nodePath": "decisions/0002-credentials-auth-with-jwt-sessions",
+    "rel": "docs/decisions/0002-credentials-auth-with-jwt-sessions.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0002-credentials-auth-with-jwt-sessions.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/decisions-0002-credentials-auth-with-jwt-sessions",
+    "codeFiles": [],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": false
+  },
+  {
+    "nodePath": "decisions/0003-store-money-as-integer-cents",
+    "rel": "docs/decisions/0003-store-money-as-integer-cents.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0003-store-money-as-integer-cents.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/decisions-0003-store-money-as-integer-cents",
+    "codeFiles": [],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": false
+  },
+  {
+    "nodePath": "decisions/0004-zod-validation-and-error-envelope",
+    "rel": "docs/decisions/0004-zod-validation-and-error-envelope.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0004-zod-validation-and-error-envelope.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/decisions-0004-zod-validation-and-error-envelope",
+    "codeFiles": [],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": false
+  },
+  {
+    "nodePath": "decisions/0005-per-user-tenant-isolation",
+    "rel": "docs/decisions/0005-per-user-tenant-isolation.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/decisions/0005-per-user-tenant-isolation.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/decisions-0005-per-user-tenant-isolation",
+    "codeFiles": [],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": false
+  },
+  {
+    "nodePath": "modules/app/README",
+    "rel": "docs/modules/app/README.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/app/README.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-app-README",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/app/technical",
+    "rel": "docs/modules/app/technical.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/app/technical.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-app-technical",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/app/use-cases",
+    "rel": "docs/modules/app/use-cases.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/app/use-cases.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-app-use-cases",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/lib/README",
+    "rel": "docs/modules/lib/README.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/README.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-lib-README",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/lib/technical",
+    "rel": "docs/modules/lib/technical.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/technical.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-lib-technical",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/lib/use-cases",
+    "rel": "docs/modules/lib/use-cases.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/lib/use-cases.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-lib-use-cases",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/types/README",
+    "rel": "docs/modules/types/README.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/README.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-types-README",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/types/technical",
+    "rel": "docs/modules/types/technical.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/technical.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-types-technical",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "modules/types/use-cases",
+    "rel": "docs/modules/types/use-cases.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/modules/types/use-cases.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/modules-types-use-cases",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "overview",
+    "rel": "docs/overview.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/overview.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/overview",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "security",
+    "rel": "docs/security.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/security.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/security",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  },
+  {
+    "nodePath": "standards",
+    "rel": "docs/standards.md",
+    "abs": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/standards.md",
+    "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json",
+    "sidecarPathPrefix": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.review/standards",
+    "codeFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/[...nextauth]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/auth/register/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/items/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/[planId]/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/api/plans/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/globals.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/layout.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/LoginClient.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/login/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/logout/route.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.module.css",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/AddItemForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/DeletePlanButton.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/[planId]/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/NewPlanForm.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/plans/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/app/register/page.tsx",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/auth.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/db.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/lib/requireUser.ts",
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/src/types/next-auth.d.ts"
+    ],
+    "refFiles": [
+      "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/README.md"
+    ],
+    "isBroadFallback": true
+  }
+]

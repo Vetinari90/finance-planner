@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/data-protection.md",
+  "dimension": "consistency",
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "docs/data-protection.md front matter links to docs/decisions/0003-store-money-as-integer-cents.md and docs/decisions/0001-prisma-driver-adapter-postgresql.md (topics: money storage and DB driver selection, unrelated to authentication/PII), while the topically matching decisions docs/decisions/0001-security-baseline.md, docs/decisions/0002-credentials-auth-with-jwt-sessions.md, and docs/decisions/0005-per-user-tenant-isolation.md (which cover the exact bcrypt hashing, auth, and per-user data-isolation content this document discusses) are not linked at all. docs/security.md, by contrast, links to 0001-security-baseline.md, 0002-credentials-auth-with-jwt-sessions.md, and 0005-per-user-tenant-isolation.md.",
+      "locationHint": "links: [docs/modules/lib/technical.md, docs/modules/app/technical.md, docs/decisions/0003-store-money-as-integer-cents.md, docs/decisions/0001-prisma-driver-adapter-postgresql.md]",
+      "message": "The front-matter links list cites unrelated ADRs (money-as-cents, Prisma driver adapter) instead of the security/auth-related ADRs (0001-security-baseline, 0002-credentials-auth-with-jwt-sessions, 0005-per-user-tenant-isolation) that docs/security.md links and that directly match this document's authentication/hashing content, an inconsistent cross-reference set relative to the sibling security.md document."
+    }
+  ]
+}

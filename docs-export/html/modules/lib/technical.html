@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technical: Lib (src/lib)</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: technical
+audience: [developer]
+language: en
+links: [docs/modules/lib/README.md, docs/modules/app/technical.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Technical: Lib (src/lib)</h1>
+<h2>API Endpoints</h2>
+<p>The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module&#39;s API routes (see <code>docs/modules/app/technical.md</code>). The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module&#39;s API routes (see <code>docs/modules/app/technical.md</code>).</p>
+<h2>Configuration</h2>
+<h3>Environment Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DATABASE_URL</td>
+<td>Yes</td>
+<td>PostgreSQL connection string; <code>src/lib/db.ts</code> throws <code>&quot;DATABASE_URL is not set&quot;</code> at import time if it is missing.</td>
+</tr>
+</tbody></table>
+<h3>Secrets</h3>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DATABASE_URL</td>
+<td>Database connection string, read from <code>process.env.DATABASE_URL</code> (<code>src/lib/db.ts</code>).</td>
+</tr>
+<tr>
+<td>[NEEDS CLARIFICATION]</td>
+<td>No JWT/session signing secret (e.g. <code>NEXTAUTH_SECRET</code>) read was found in <code>src/lib/auth.ts</code>.</td>
+</tr>
+</tbody></table>
+<h2>Testing</h2>
+<p>No test files for <code>src/lib/*</code> were present in inputs.code. No test files for <code>src/lib/*</code> were present in inputs.code.</p>
+
+  </article>
+</body>
+</html>

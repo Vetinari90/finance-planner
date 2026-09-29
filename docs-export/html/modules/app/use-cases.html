@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Use Cases</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: use-cases
+audience: [developer]
+language: en
+links: [docs/modules/app/README.md, docs/modules/lib/use-cases.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Use Cases</h1>
+<h2>UC-001: User Registration</h2>
+<p><strong>Actor:</strong> Visitor (unauthenticated)</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Visitor opens <code>/register</code> (<code>src/app/register/page.tsx</code>) and enters email, optional name, and password.</li>
+<li>Client submits <code>POST /api/auth/register</code> with the form data.</li>
+<li>The API validates the body against <code>RegisterSchema</code> (email format, password min 8 characters, name max 80 characters), returning 400 on failure.</li>
+<li>The API checks for an existing user with that email, returning 409 if one exists.</li>
+<li>The API hashes the password with bcrypt and creates the user, returning 201 with the new user record.</li>
+<li>The client then calls <code>signIn(&quot;credentials&quot;, ...)</code> to log the new user in automatically and redirects to <code>/plans</code>.</li>
+</ol>
+<p><strong>Expected Result:</strong> A new user account exists and the visitor is signed in and redirected to <code>/plans</code> (<code>src/app/register/page.tsx</code>).</p>
+<hr>
+<h2>UC-002: User Login</h2>
+<p><strong>Actor:</strong> Registered User</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>User opens <code>/login</code> (<code>src/app/login/page.tsx</code> + <code>LoginClient.tsx</code>) and enters email and password.</li>
+<li>Client calls <code>signIn(&quot;credentials&quot;, { email, password, redirect: false, callbackUrl })</code>.</li>
+<li>NextAuth&#39;s <code>authorize()</code> callback (<code>src/lib/auth.ts</code>) verifies the credentials against the stored bcrypt hash.</li>
+<li>On success, the client redirects to the <code>callbackUrl</code> (default <code>/plans</code>); on failure, an &quot;Invalid email or password&quot; message is shown (<code>src/app/login/LoginClient.tsx</code>).</li>
+</ol>
+<p><strong>Expected Result:</strong> User is redirected to <code>/plans</code> on success, or sees an inline error message on failure.</p>
+<hr>
+<h2>UC-003: Create a Monthly Plan</h2>
+<p><strong>Actor:</strong> Authenticated User</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>User opens <code>/plans</code> (<code>src/app/plans/page.tsx</code>), which lists their existing plans.</li>
+<li>User fills in year, month, currency, and optional title in <code>NewPlanForm</code> and submits.</li>
+<li>Client calls <code>POST /api/plans</code>; the API validates the body and creates the plan for <code>userId</code> from the session.</li>
+<li>If a plan already exists for that user/year/month, the API returns 409 &quot;Plan for this month already exists&quot; (<code>src/app/api/plans/route.ts</code>).</li>
+</ol>
+<p><strong>Expected Result:</strong> A new plan appears in the user&#39;s plan list, or an inline error is shown on conflict/validation failure (<code>src/app/plans/NewPlanForm.tsx</code>).</p>
+<hr>
+<h2>UC-004: View Plan Detail and Add a Planned Item</h2>
+<p><strong>Actor:</strong> Authenticated User</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>User opens <code>/plans/{planId}</code> from the plan list (<code>src/app/plans/[planId]/page.tsx</code>); the server loads the plan and its items, scoped to the authenticated <code>userId</code>.</li>
+<li>User enters a title and an amount (e.g. <code>1200.50</code>) in <code>AddItemForm</code>; the client converts the decimal string to integer cents via <code>toCents()</code> before submitting (<code>src/app/plans/[planId]/AddItemForm.tsx</code>).</li>
+<li>Client calls <code>POST /api/plans/{planId}/items</code>; the API re-verifies plan ownership, validates the body with <code>CreateItemSchema</code>, and creates the item.</li>
+<li>The page refreshes and shows the updated item list and running total (<code>totalCents</code> summed and divided by 100).</li>
+</ol>
+<p><strong>Expected Result:</strong> The new item appears in the plan&#39;s item list and the displayed total updates accordingly.</p>
+<hr>
+<h2>UC-005: Delete a Plan</h2>
+<p><strong>Actor:</strong> Authenticated User</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>On <code>/plans/{planId}</code>, the user clicks &quot;Delete plan&quot; (<code>DeletePlanButton.tsx</code>), confirming via a browser <code>confirm()</code> dialog.</li>
+<li>Client calls <code>DELETE /api/plans/{planId}</code>.</li>
+<li>The API re-verifies plan ownership before deleting the plan (<code>src/app/api/plans/[planId]/route.ts</code>).</li>
+<li>On success, the client navigates back to <code>/plans</code>.</li>
+</ol>
+<p><strong>Expected Result:</strong> The plan is removed and the user is returned to the plan list.</p>
+<hr>
+<h2>UC-006: Logout</h2>
+<p><strong>Actor:</strong> Authenticated User</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>User clicks &quot;Logout&quot; on <code>/plans</code> (<code>src/app/plans/page.tsx</code>), which links to <code>/api/auth/signout?callbackUrl=/login</code>, or the app&#39;s <code>/logout</code> route redirects to the same NextAuth sign-out URL (<code>src/app/logout/route.ts</code>).</li>
+<li>NextAuth clears the session.</li>
+</ol>
+<p><strong>Expected Result:</strong> User&#39;s session is cleared and they are redirected to <code>/login</code>.</p>
+
+  </article>
+</body>
+</html>

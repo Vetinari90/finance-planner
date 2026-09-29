@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module: App (src/app)</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: readme
+audience: [developer]
+language: en
+links: [docs/modules/app/technical.md, docs/modules/app/use-cases.md, docs/modules/lib/README.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Module: App (src/app)</h1>
+<h2>Purpose</h2>
+<p>The app module is the Next.js App Router application: it renders all user-facing pages (login, register, plan list, plan detail) and exposes the HTTP API routes consumed by those pages and by NextAuth (<code>src/app/api/auth/[...nextauth]/route.ts</code>, <code>src/app/api/auth/register/route.ts</code>, <code>src/app/api/plans/route.ts</code>, <code>src/app/api/plans/[planId]/route.ts</code>, <code>src/app/api/plans/[planId]/items/route.ts</code>, <code>src/app/logout/route.ts</code>). It lets an authenticated user create monthly financial plans and add planned items to them.</p>
+<h2>Key Entities</h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Plan</td>
+<td>A monthly financial plan owned by a user, identified by year, month, and currency (<code>src/app/api/plans/route.ts</code>, <code>src/app/plans/[planId]/page.tsx</code>).</td>
+</tr>
+<tr>
+<td>Note: the Plan&#39;s actual unique identifying key is (<code>userId</code>, <code>year</code>, <code>month</code>), enforced by a database uniqueness constraint in <code>src/app/api/plans/route.ts</code> (comment: &quot;unikát (userId, year, month)&quot;; a conflicting create returns HTTP 409). <code>currency</code> is a stored attribute of the Plan and is not part of what identifies/distinguishes it - two plans for the same user/year/month cannot coexist even with different currencies.</td>
+<td></td>
+</tr>
+<tr>
+<td>Correction: <code>src/app/api/plans/route.ts</code> enforces a unique constraint on (<code>userId</code>, <code>year</code>, <code>month</code>) - see the code comment &quot;unikát (userId, year, month)&quot; - so the Plan&#39;s actual identifying combination is (userId, year, month), not year/month/currency; <code>currency</code> is merely a stored field on the Plan record.</td>
+<td></td>
+</tr>
+<tr>
+<td>PlannedItem</td>
+<td>A single planned expense/income line on a Plan, with a title, an integer <code>amountCents</code>, an optional category, and an optional note (<code>src/app/api/plans/[planId]/items/route.ts</code>).</td>
+</tr>
+<tr>
+<td>User (session)</td>
+<td>The authenticated principal, identified by <code>session.user.id</code>, resolved on every protected route via <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>, used throughout <code>src/app/api/...</code> and <code>src/app/plans/...</code>).</td>
+</tr>
+<tr>
+<td>Correction: <code>requireUserId()</code> is used throughout the API routes under <code>src/app/api/...</code>, but the protected pages <code>src/app/plans/page.tsx</code> and <code>src/app/plans/[planId]/page.tsx</code> resolve the session directly via <code>getServerSession(authOptions)</code> and do not call <code>requireUserId()</code>.</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Data Storage</h2>
+<p><strong>Database:</strong> PostgreSQL (inferred from the <code>@prisma/adapter-pg</code> driver adapter instantiated in <code>src/lib/db.ts</code>); no <code>schema.prisma</code> file was present in the app module&#39;s inputs, and the app module itself contains no direct database configuration of its own.</p>
+<table>
+<thead>
+<tr>
+<th>Table/Collection</th>
+<th>Stores</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Plan (via Prisma)</td>
+<td>Plan records read/written by <code>src/app/api/plans/route.ts</code> and <code>src/app/api/plans/[planId]/route.ts</code> (<code>year</code>, <code>month</code>, <code>currency</code>, <code>title</code>, <code>userId</code>).</td>
+</tr>
+<tr>
+<td>PlannedItem (via Prisma)</td>
+<td>Planned items read/written by <code>src/app/api/plans/[planId]/items/route.ts</code> (<code>title</code>, <code>amountCents</code>, <code>categoryId</code>, <code>note</code>, <code>planId</code>).</td>
+</tr>
+<tr>
+<td>[NEEDS CLARIFICATION] [REVIEW] completeness: The Data Storage table lists only Plan and PlannedItem but omits the User table, even though <code>src/app/api/auth/register/route.ts</code> (a listed input) directly reads and writes <code>prisma.user</code> records (email, password, name).</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Dependencies</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lib</td>
+<td>Provides the Prisma client (<code>@/lib/db</code>), the NextAuth configuration (<code>@/lib/auth</code>), and the <code>requireUserId()</code> session helper (<code>@/lib/requireUser</code>) used by every API route and protected page in this module.</td>
+</tr>
+<tr>
+<td>Correction: <code>requireUserId()</code> (<code>@/lib/requireUser</code>) is used by every API route in this module, but the two protected pages - <code>src/app/plans/page.tsx</code> and <code>src/app/plans/[planId]/page.tsx</code> - resolve the session directly via <code>getServerSession(authOptions)</code> rather than calling <code>requireUserId()</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>types</td>
+<td>Provides the <code>next-auth</code> <code>Session.user</code> type augmentation (adds a required <code>id: string</code> field) via <code>src/types/next-auth.d.ts</code>; as a TypeScript ambient declaration file it is applied automatically by the compiler across <code>src/app/*</code> without any explicit import statement.</td>
+</tr>
+</tbody></table>
+
+  </article>
+</body>
+</html>

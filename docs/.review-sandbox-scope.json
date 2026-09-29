@@ -1,0 +1,32 @@
+{
+  "id": "sdlc-review",
+  "readSet": [
+    "README.md",
+    "src/app/api/auth/[...nextauth]/route.ts",
+    "src/app/api/auth/register/route.ts",
+    "src/app/api/plans/[planId]/items/route.ts",
+    "src/app/api/plans/[planId]/route.ts",
+    "src/app/api/plans/route.ts",
+    "src/app/globals.css",
+    "src/app/layout.tsx",
+    "src/app/login/LoginClient.tsx",
+    "src/app/login/page.tsx",
+    "src/app/logout/route.ts",
+    "src/app/page.module.css",
+    "src/app/page.tsx",
+    "src/app/plans/NewPlanForm.tsx",
+    "src/app/plans/[planId]/AddItemForm.tsx",
+    "src/app/plans/[planId]/DeletePlanButton.tsx",
+    "src/app/plans/[planId]/page.tsx",
+    "src/app/plans/page.tsx",
+    "src/app/register/page.tsx",
+    "src/lib/auth.ts",
+    "src/lib/db.ts",
+    "src/lib/requireUser.ts",
+    "src/types/next-auth.d.ts"
+  ],
+  "writeSet": [
+    "docs/.review"
+  ],
+  "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.json"
+}

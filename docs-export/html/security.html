@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: cross-cutting
+audience: [developer]
+language: en
+links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/modules/app/technical.md, docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0001-security-baseline.md, docs/decisions/0005-per-user-tenant-isolation.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Security</h1>
+<h2>Authentication</h2>
+<p>The application uses NextAuth&#39;s <code>CredentialsProvider</code> (email + password) with <code>session: { strategy: &quot;jwt&quot; }</code> (<code>src/lib/auth.ts</code>, see <code>docs/modules/lib/technical.md</code>). Passwords are hashed with bcrypt at cost factor 12 on registration and verified with <code>bcrypt.compare</code> on login (<code>src/app/api/auth/register/route.ts</code>, <code>src/lib/auth.ts</code>; see <code>docs/decisions/0002-credentials-auth-with-jwt-sessions.md</code>). No <code>secret</code> option is set explicitly in <code>authOptions</code> (<code>src/lib/auth.ts</code>); NextAuth&#39;s JWT session strategy requires a signing secret, conventionally supplied via the <code>NEXTAUTH_SECRET</code> environment variable at deploy time, which is not part of <code>inputs.code</code>.</p>
+<h2>API Conventions</h2>
+<p>Every protected API route calls <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>) before performing any read or write, and returns HTTP 401 if no authenticated session exists. Plan and item queries are additionally scoped by both resource id and <code>userId</code> (e.g. <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> in <code>src/app/api/plans/[planId]/route.ts</code>), enforcing per-user data isolation (see <code>docs/decisions/0005-per-user-tenant-isolation.md</code>).</p>
+<h3>HTTP Status Codes</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning (as used in this project)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>Successful GET (e.g. <code>src/app/api/plans/route.ts</code>)</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Resource created (register, plan, item)</td>
+</tr>
+<tr>
+<td>400</td>
+<td>zod validation failure (<code>parsed.error.flatten()</code>)</td>
+</tr>
+<tr>
+<td>401</td>
+<td>No authenticated session (<code>requireUserId()</code> returned <code>null</code>)</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Resource not found or not owned by the requesting user</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict (duplicate email on register; duplicate plan for user/year/month)</td>
+</tr>
+</tbody></table>
+<h2>Error Handling</h2>
+<p>API routes return errors as JSON with an <code>error</code> field and, for validation failures, a <code>details</code> field containing the zod flattened error (<code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code>, e.g. <code>src/app/api/auth/register/route.ts</code>). The project&#39;s error envelope is limited to <code>{ error: string }</code> (with an additional <code>details</code> field carrying the zod flattened error on validation failures); no <code>code</code> or <code>requestId</code> field appears in any API response (e.g. <code>src/app/api/plans/route.ts</code>, <code>src/app/api/plans/[planId]/route.ts</code>).</p>
+<h2>Logging</h2>
+<p><code>src/lib/db.ts</code> configures Prisma logging for <code>[&quot;error&quot;, &quot;warn&quot;]</code> only. [NEEDS CLARIFICATION] No explicit statement confirming that passwords, tokens, or PII are excluded from these Prisma error/warn logs was found in inputs.code.</p>
+
+  </article>
+</body>
+</html>

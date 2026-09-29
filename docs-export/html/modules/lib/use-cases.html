@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Use Cases</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: use-cases
+audience: [developer]
+language: en
+links: [docs/modules/lib/README.md, docs/modules/app/use-cases.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Use Cases</h1>
+<h2>UC-001: Authorize Credentials Login</h2>
+<p><strong>Actor:</strong> NextAuth (Credentials Provider)</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>NextAuth invokes <code>authorize({ email, password })</code> in <code>src/lib/auth.ts</code>.</li>
+<li>The function lowercases/trims the email and looks up the user via <code>prisma.user.findUnique({ where: { email } })</code>.</li>
+<li>If a user is found, <code>bcrypt.compare(password, user.password)</code> verifies the password.</li>
+<li>If either step fails, <code>authorize()</code> returns <code>null</code>.</li>
+</ol>
+<p><strong>Expected Result:</strong> Returns <code>{ id, email, name }</code> on success, or <code>null</code> on any failure, which NextAuth surfaces to the client as a login error (see <code>docs/modules/app/use-cases.md</code>, UC-002).</p>
+<hr>
+<h2>UC-002: Establish JWT Session</h2>
+<p><strong>Actor:</strong> NextAuth (JWT session strategy)</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>On successful <code>authorize()</code>, the <code>jwt</code> callback sets <code>token.sub = user.id</code> (<code>src/lib/auth.ts</code>).</li>
+<li>On each request, the <code>session</code> callback copies <code>token.sub</code> into <code>session.user.id</code>.</li>
+</ol>
+<p><strong>Expected Result:</strong> <code>session.user.id</code> is available to every server component and API route without a server-side session store, since <code>session: { strategy: &quot;jwt&quot; }</code> is configured.</p>
+<hr>
+<h2>UC-003: Resolve Current User Id for a Protected Route</h2>
+<p><strong>Actor:</strong> App module API route or server page</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Caller invokes <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>).</li>
+<li>The function calls <code>getServerSession(authOptions)</code> and reads <code>session?.user?.id</code>.</li>
+<li>If no id is present, it returns <code>null</code>.</li>
+</ol>
+<p><strong>Expected Result:</strong> Callers (e.g. <code>src/app/api/plans/route.ts</code>) receive either the authenticated user&#39;s id or <code>null</code>, and respond with 401 Unauthorized when <code>null</code> is returned.</p>
+
+  </article>
+</body>
+</html>

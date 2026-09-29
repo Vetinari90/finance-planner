@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module: Data Model</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: data-model
+audience: [developer]
+language: en
+links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/decisions/0001-prisma-driver-adapter-postgresql.md, docs/decisions/0003-store-money-as-integer-cents.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Module: Data Model</h1>
+<h2>Purpose</h2>
+<p>This document consolidates the data entities inferred from Prisma query call sites across the app module, since no <code>schema.prisma</code> file was present in inputs.code.</p>
+<h2>Key Entities</h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User</td>
+<td><code>id</code>, <code>email</code>, <code>password</code> (bcrypt hash), <code>name</code> (optional) - inferred from <code>prisma.user.create</code>/<code>findUnique</code> calls in <code>src/app/api/auth/register/route.ts</code> and <code>src/lib/auth.ts</code>.</td>
+</tr>
+<tr>
+<td>Plan</td>
+<td><code>id</code>, <code>userId</code>, <code>year</code>, <code>month</code>, <code>currency</code>, <code>title</code> - inferred from <code>prisma.plan.create</code>/<code>findFirst</code>/<code>findMany</code> calls in <code>src/app/api/plans/route.ts</code> and <code>src/app/api/plans/[planId]/route.ts</code>. A unique constraint on <code>(userId, year, month)</code> is implied by the 409 conflict handling in <code>src/app/api/plans/route.ts</code>, but the constraint itself could not be confirmed without <code>schema.prisma</code>.</td>
+</tr>
+<tr>
+<td>PlannedItem</td>
+<td><code>id</code>, <code>planId</code>, <code>title</code>, <code>amountCents</code> (integer), <code>categoryId</code> (optional), <code>note</code> (optional), <code>createdAt</code> - inferred from <code>prisma.plannedItem.create</code> in <code>src/app/api/plans/[planId]/items/route.ts</code> and the <code>orderBy: { createdAt: &quot;asc&quot; }</code> read in <code>src/app/api/plans/[planId]/route.ts</code>.</td>
+</tr>
+</tbody></table>
+<h2>Data Storage</h2>
+<p><strong>Database:</strong> PostgreSQL, accessed through Prisma with the <code>PrismaPg</code> driver adapter (<code>@prisma/adapter-pg</code>), configured from <code>DATABASE_URL</code> (<code>src/lib/db.ts</code>; see <code>docs/decisions/0001-prisma-driver-adapter-postgresql.md</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Table/Collection</th>
+<th>Stores</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[NEEDS CLARIFICATION]</td>
+<td>Exact table names, column types, and constraints require <code>schema.prisma</code>, which was not present in inputs.code; the entities above are inferred solely from Prisma client call sites.</td>
+</tr>
+</tbody></table>
+<h2>Dependencies</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>app</td>
+<td>Every Prisma call site that establishes the data model above lives in <code>src/app/api/*</code> (see <code>docs/modules/app/README.md</code>).</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>Provides the shared <code>prisma</code> client instance used by all of the above call sites (<code>src/lib/db.ts</code>, see <code>docs/modules/lib/README.md</code>).</td>
+</tr>
+</tbody></table>
+
+  </article>
+</body>
+</html>

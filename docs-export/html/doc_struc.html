@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>doc_struc</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<p>schema-version: &#39;3.0&#39;
+project: finance-planner
+language: en
+inputs:
+  code:
+    - src/app
+    - src/lib
+    - src/types
+  references:
+    - README.md
+generation:
+  ai-mode: autonomous
+  audience-default: developer
+  per-node-scoping: true
+  module-source-map:
+    app: src/app
+    lib: src/lib
+    types: src/types
+recipe-library:
+  source: /opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/sdlc-artifact-templates/templates/min
+tree:</p>
+<ul>
+<li>path: docs/
+children:<ul>
+<li>path: modules/
+children:<ul>
+<li>path: app/
+description: Documentation for the app module.
+children:<ul>
+<li>path: README.md
+description: README of the app module.
+recipe: docs/modules/_template/README.md
+children: []</li>
+<li>path: technical.md
+description: Technical of the app module.
+recipe: docs/modules/_template/technical.md
+children: []</li>
+<li>path: use-cases.md
+description: Use Cases of the app module.
+recipe: docs/modules/_template/use-cases.md
+children: []</li>
+</ul>
+</li>
+<li>path: lib/
+description: Documentation for the lib module.
+children:<ul>
+<li>path: README.md
+description: README of the lib module.
+recipe: docs/modules/_template/README.md
+children: []</li>
+<li>path: technical.md
+description: Technical of the lib module.
+recipe: docs/modules/_template/technical.md
+children: []</li>
+<li>path: use-cases.md
+description: Use Cases of the lib module.
+recipe: docs/modules/_template/use-cases.md
+children: []</li>
+</ul>
+</li>
+<li>path: types/
+description: Documentation for the types module.
+children:<ul>
+<li>path: README.md
+description: README of the types module.
+recipe: docs/modules/_template/README.md
+children: []</li>
+<li>path: technical.md
+description: Technical of the types module.
+recipe: docs/modules/_template/technical.md
+children: []</li>
+<li>path: use-cases.md
+description: Use Cases of the types module.
+recipe: docs/modules/_template/use-cases.md
+children: []</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>path: decisions/
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/app/README.md
+- docs/modules/app/technical.md
+- docs/modules/lib/README.md
+- docs/modules/lib/technical.md
+children:<ul>
+<li>path: _template.md
+children: []</li>
+<li>path: 0001-security-baseline.md
+recipe: docs/decisions/_template.md
+children: []</li>
+<li>path: 0005-per-user-tenant-isolation.md
+recipe: docs/decisions/_template.md
+children: []</li>
+<li>path: 0003-store-money-as-integer-cents.md
+recipe: docs/decisions/_template.md
+children: []</li>
+<li>path: 0001-prisma-driver-adapter-postgresql.md
+recipe: docs/decisions/_template.md
+children: []</li>
+<li>path: 0004-zod-validation-and-error-envelope.md
+recipe: docs/decisions/_template.md
+children: []</li>
+<li>path: 0002-credentials-auth-with-jwt-sessions.md
+recipe: docs/decisions/_template.md
+children: []</li>
+</ul>
+</li>
+<li>path: overview.md
+inputs:
+  references:
+- README.md
+  module-docs:
+- docs/modules/app/README.md
+- docs/modules/app/technical.md
+- docs/modules/app/use-cases.md
+- docs/modules/lib/README.md
+- docs/modules/lib/technical.md
+- docs/modules/types/README.md
+children: []</li>
+<li>path: security.md
+recipe: docs/standards.md
+inputs:
+  references: []
+  module-docs:
+- docs/modules/lib/README.md
+- docs/modules/lib/technical.md
+- docs/modules/app/README.md
+- docs/modules/app/technical.md
+children: []</li>
+<li>path: standards.md
+inputs:
+  references: []
+  module-docs:
+- docs/modules/app/technical.md
+- docs/modules/lib/README.md
+- docs/modules/lib/technical.md
+- docs/modules/app/README.md
+children: []</li>
+<li>path: data-model.md
+recipe: docs/modules/_template/README.md
+inputs:
+  references: []
+  module-docs:
+- docs/modules/lib/README.md
+- docs/modules/lib/technical.md
+- docs/modules/app/README.md
+children: []</li>
+<li>path: data-protection.md
+recipe: docs/standards.md
+inputs:
+  references: []
+  module-docs:
+- docs/modules/lib/technical.md
+- docs/modules/app/technical.md
+children: []</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+  </article>
+</body>
+</html>

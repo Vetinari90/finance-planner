@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1",
+  "rel": "docs/modules/app/README.md",
+  "dimension": "accuracy",
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "grep for `requireUserId` across src shows it is only called in src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, and src/app/api/plans/[planId]/items/route.ts (plus its own definition in src/lib/requireUser.ts). The protected pages src/app/plans/page.tsx (line 8: `const session = await getServerSession(authOptions);`) and src/app/plans/[planId]/page.tsx (line 13: same) resolve the session directly via `getServerSession(authOptions)`, never importing or calling `requireUserId()`.",
+      "locationHint": "| User (session) | The authenticated principal, identified by `session.user.id`, resolved on every protected route via `requireUserId()` (`src/lib/requireUser.ts`, used throughout `src/app/api/...` and `src/app/plans/...`). |",
+      "message": "Claims `requireUserId()` is used throughout `src/app/plans/...`, but the protected pages src/app/plans/page.tsx and src/app/plans/[planId]/page.tsx call `getServerSession(authOptions)` directly and never import `requireUserId` - it is only used in the three API route files."
+    },
+    {
+      "confidence": "high",
+      "evidence": "Same as above: requireUserId is only imported/called in src/app/api/plans/route.ts, src/app/api/plans/[planId]/route.ts, and src/app/api/plans/[planId]/items/route.ts. src/app/plans/page.tsx and src/app/plans/[planId]/page.tsx use `getServerSession(authOptions)` directly instead, so the helper is not used by the module's protected pages.",
+      "locationHint": "| lib | Provides the Prisma client (`@/lib/db`), the NextAuth configuration (`@/lib/auth`), and the `requireUserId()` session helper (`@/lib/requireUser`) used by every API route and protected page in this module. |",
+      "message": "Claims `requireUserId()` is used by 'every ... protected page in this module', but the two protected pages (src/app/plans/page.tsx, src/app/plans/[planId]/page.tsx) resolve the session via `getServerSession(authOptions)` directly, not via `requireUserId()`."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "src/app/api/plans/route.ts POST handler catch block comment reads '// unikát (userId, year, month)' immediately after the `prisma.plan.create` call, indicating the enforced unique constraint is on (userId, year, month) only - currency is not part of it.",
+      "locationHint": "| Plan | A monthly financial plan owned by a user, identified by year, month, and currency (`src/app/api/plans/route.ts`, `src/app/plans/[planId]/page.tsx`). |",
+      "message": "Describes a Plan as 'identified by year, month, and currency', but the code comment in src/app/api/plans/route.ts ('unikát (userId, year, month)') indicates the actual identifying/unique combination is (userId, year, month) - currency is a stored attribute, not part of what identifies/distinguishes a Plan."
+    }
+  ]
+}

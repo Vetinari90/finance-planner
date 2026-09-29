@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Standards</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <article class="markdown-body">
+<hr>
+<h2>type: cross-cutting
+audience: [developer]
+language: en
+links: [docs/modules/app/technical.md, docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/decisions/0004-zod-validation-and-error-envelope.md, docs/security.md]
+generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
+generated_branch: main
+generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+<h1>Standards</h1>
+<h2>Authentication</h2>
+<p>Token-based authentication is implemented via NextAuth <code>CredentialsProvider</code> with JWT sessions (<code>src/lib/auth.ts</code>, see <code>docs/modules/lib/technical.md</code>); see <a href="docs/security.html">Security</a> for full detail.</p>
+<h2>API Conventions</h2>
+<p>API routes are grouped under <code>/api</code> (<code>/api/auth/register</code>, <code>/api/plans</code>, <code>/api/plans/{planId}</code>, <code>/api/plans/{planId}/items</code>, <code>/api/auth/[...nextauth]</code>) - see <code>docs/modules/app/technical.md</code> for the full endpoint table. Note: Routes are not versioned in the URL path (no <code>/api/v1/...</code> prefix); no versioning scheme was found in inputs.code.</p>
+<h3>HTTP Status Codes</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>Success (GET)</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created (register, plan, item)</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Invalid input (zod validation failure)</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized (no session)</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not found (resource missing or not owned)</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict (duplicate email or duplicate plan)</td>
+</tr>
+</tbody></table>
+<h2>Error Handling</h2>
+<p>Mutating routes validate input with <code>zod</code> <code>.safeParse()</code> and return <code>{ error, details }</code> JSON with HTTP 400 on failure (see <code>docs/decisions/0004-zod-validation-and-error-envelope.md</code>). Ownership/not-found failures return <code>{ error: &quot;Not found&quot; }</code> with 404; unauthenticated requests return <code>{ error: &quot;Unauthorized&quot; }</code> with 401.</p>
+<h2>Logging</h2>
+<p><code>src/lib/db.ts</code> configures Prisma client logging for <code>error</code> and <code>warn</code> levels only. Note: No application-level logging framework (beyond Prisma&#39;s own <code>log</code> option) was found in <code>src/app/*</code> or <code>src/lib/*</code>.</p>
+
+  </article>
+</body>
+</html>
