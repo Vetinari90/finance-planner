@@ -2,12 +2,5 @@
   "schemaVersion": "1",
   "rel": "docs/modules/app/README.md",
   "dimension": "consistency",
-  "findings": [
-    {
-      "confidence": "medium",
-      "evidence": "docs/modules/app/use-cases.md UC-003 step 4 states: \"If a plan already exists for that user/year/month, the API returns 409 'Plan for this month already exists'\", and src/app/api/plans/route.ts contains the comment \"unikát (userId, year, month)\" on the catch block that maps a unique-constraint violation to that 409 - i.e. the plan's identifying key is (userId, year, month), with currency excluded.",
-      "locationHint": "| Plan | A monthly financial plan owned by a user, identified by year, month, and currency (`src/app/api/plans/route.ts`, `src/app/plans/[planId]/page.tsx`). |",
-      "message": "This Key Entities row says a Plan is identified by \"year, month, and currency\", but the sibling doc docs/modules/app/use-cases.md (UC-003) and the code comment in src/app/api/plans/route.ts (\"unikát (userId, year, month)\") indicate the plan's actual identifying/unique key is (userId, year, month) - currency does not distinguish plans, so two plans differing only in currency for the same user/year/month would conflict (409), contradicting the implication here that currency is part of what identifies a plan."
-    }
-  ]
+  "findings": []
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Module: Lib (src/lib)</title>
+  <title>Module: lib</title>
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
@@ -12,15 +12,16 @@
 <h2>type: readme
 audience: [developer]
 language: en
-links: [docs/modules/lib/technical.md, docs/modules/lib/use-cases.md, docs/modules/app/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/modules/app/README.md, docs/modules/types/README.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Module: Lib (src/lib)</h1>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Module: lib</h1>
 <h2>Purpose</h2>
-<p>The lib module provides the shared infrastructure used by the app module: the NextAuth configuration (<code>src/lib/auth.ts</code>), the Prisma database client singleton (<code>src/lib/db.ts</code>), and a helper to resolve the current authenticated user&#39;s id on the server (<code>src/lib/requireUser.ts</code>).</p>
+<p>The <code>lib</code> module (<code>src/lib</code>) provides shared server-side infrastructure used by the <code>app</code> module: NextAuth configuration and credential verification (<code>auth.ts</code>), the Prisma database client (<code>db.ts</code>), and a helper for resolving the current authenticated user&#39;s id from the session (<code>requireUser.ts</code>).</p>
 <h2>Key Entities</h2>
+<p><code>lib</code> does not own domain entities directly; it configures access to <code>User</code> (via <code>prisma.user</code> lookups in <code>auth.ts</code>) and exposes the Prisma client used elsewhere to read/write <code>Plan</code> and <code>PlannedItem</code>.</p>
 <table>
 <thead>
 <tr>
@@ -29,20 +30,13 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>authOptions</td>
-<td><code>NextAuthOptions</code> object configuring the credentials provider, JWT session strategy, and callbacks (<code>src/lib/auth.ts</code>).</td>
-</tr>
-<tr>
-<td>[NEEDS CLARIFICATION] [REVIEW] completeness: The Key Entities table omits <code>requireUserId</code> (src/lib/requireUser.ts), even though the Purpose section explicitly names it as one of the three things the lib module provides. Only 2 of the 3 promised entities are documented in the table.</td>
-<td></td>
-</tr>
-<tr>
-<td>prisma</td>
-<td>Shared <code>PrismaClient</code> singleton, adapted for PostgreSQL via <code>@prisma/adapter-pg</code> (<code>src/lib/db.ts</code>).</td>
+<td>User</td>
+<td>Looked up by <code>email</code> in <code>src/lib/auth.ts</code>&#39;s <code>authorize()</code> callback (fields used: <code>id</code>, <code>email</code>, <code>password</code>, <code>name</code>).</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] No <code>schema.prisma</code> file is present in inputs.code to confirm the canonical <code>User</code> definition.</p>
 <h2>Data Storage</h2>
-<p><strong>Database:</strong> PostgreSQL, via the <code>PrismaPg</code> driver adapter (<code>@prisma/adapter-pg</code>) configured from the <code>DATABASE_URL</code> environment variable (<code>src/lib/db.ts</code>).</p>
+<p><strong>Database:</strong> PostgreSQL, accessed through <code>PrismaClient</code> configured with a <code>PrismaPg</code> driver adapter (<code>@prisma/adapter-pg</code>), connection string read from <code>DATABASE_URL</code> (<code>src/lib/db.ts</code>). The Prisma Client is imported from a non-default path, <code>@/generated/prisma/client</code>, rather than the standard <code>@prisma/client</code> package.</p>
 <table>
 <thead>
 <tr>
@@ -51,8 +45,8 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>User, Plan, PlannedItem (model accessor names inferred from Prisma Client calls across the codebase — <code>prisma.user</code>, <code>prisma.plan</code>, <code>prisma.plannedItem</code>; exact underlying table/column names are unconfirmed without a <code>schema.prisma</code> file)</td>
-<td>No <code>schema.prisma</code> file was present in inputs.code; table/column definitions could not be confirmed beyond the fields referenced by Prisma calls in the app module (see <code>docs/modules/app/README.md</code>).</td>
+<td>user</td>
+<td>Credentials and profile, queried in <code>src/lib/auth.ts</code>.</td>
 </tr>
 </tbody></table>
 <h2>Dependencies</h2>
@@ -64,8 +58,12 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>types (implicit) — <code>src/types/next-auth.d.ts</code> augments the <code>next-auth</code> module&#39;s <code>Session</code> interface via TypeScript ambient declaration merging (<code>declare module &quot;next-auth&quot;</code>); this mechanism applies automatically to files within the TypeScript compilation scope and does not require an explicit import statement, which is why <code>src/lib/auth.ts</code> can type-safely assign <code>session.user.id = token.sub</code> without importing anything from <code>src/types</code></td>
-<td>No import of the <code>types</code> or <code>app</code> modules was found in <code>src/lib/*</code>. <code>src/lib/auth.ts</code> assigns <code>session.user.id = token.sub</code>, which is only type-safe due to the ambient augmentation in <code>src/types/next-auth.d.ts</code>, but no explicit import statement linking the two files was found.</td>
+<td>app</td>
+<td>Consumes <code>authOptions</code>, <code>prisma</code>, and <code>requireUserId</code> exported from this module. <code>lib</code> does not import from <code>app</code>.</td>
+</tr>
+<tr>
+<td>types</td>
+<td><code>src/lib/auth.ts</code> and <code>src/lib/requireUser.ts</code> both read <code>session.user.id</code>, which is only valid TypeScript because of the <code>Session</code> augmentation declared in <code>src/types/next-auth.d.ts</code>.</td>
 </tr>
 </tbody></table>
 

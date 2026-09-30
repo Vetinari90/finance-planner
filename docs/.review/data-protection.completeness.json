@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/data-protection.md",
   "dimension": "completeness",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/plans/[planId]/ExportCsvButton.tsx implements a client-side CSV export of a plan's items (title, note, amountCents) that builds a Blob and triggers a browser download - a real data-export mechanism for the user's financial data - but this is not mentioned anywhere in data-protection.md.",
+      "locationHint": "[NEEDS CLARIFICATION] No data-protection-specific API conventions (e.g. field-level redaction, a data-export-for-the-user endpoint, or a right-to-erasure endpoint beyond `DELETE /api/plans/{planId}`) were found in inputs.code, beyond the general conventions in [security.md](security.md).",
+      "message": "The doc states no data-export-for-the-user mechanism was found, but src/app/plans/[planId]/ExportCsvButton.tsx implements a client-side CSV export of the plan's financial items to a downloaded file - a data-protection-relevant export path that this document omits entirely."
+    }
+  ]
 }

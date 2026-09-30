@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/standards.md",
   "dimension": "consistency",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "docs/decisions/0004-zod-validation-and-error-envelope.md states: \"The actual error shape (`{ error: string, details?: object }`) is a flatter, string-based envelope than the nested `{ error: { code, message, requestId } }` convention shown in the project's cross-cutting standards document (see [../standards.md](../standards.md)).\" But docs/standards.md's own Error Handling section does not describe any nested `{ error: { code, message, requestId } }` convention - it states the shape is `{ error: string }` (optionally with `details`), i.e. the same flat shape the ADR says is a deviation from this document.",
+      "locationHint": "All observed API routes return JSON of the shape `{ error: string }` (optionally with a `details` object from zod's `flatten()`), using status codes 400/401/404/409 as itemized in [security.md](security.md).",
+      "message": "decisions/0004-zod-validation-and-error-envelope.md claims this document documents a nested `{ error: { code, message, requestId } }` error convention that the implementation deviates from, but this line (and the rest of this document's Error Handling section) actually documents the same flat `{ error: string }` shape as the implementation - no nested convention appears anywhere in this document, contradicting the ADR's characterization of it."
+    }
+  ]
 }

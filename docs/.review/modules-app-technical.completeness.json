@@ -2,5 +2,18 @@
   "schemaVersion": "1",
   "rel": "docs/modules/app/technical.md",
   "dimension": "completeness",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/api/auth/register/route.ts lines 25-31: if a user with the given email already exists, the handler returns NextResponse.json({ error: \"Email already exists\" }, { status: 409 }). The API Endpoints table documents 409 conflict behavior for other endpoints (e.g. the POST /api/plans row: 'Returns 409 if a plan for that user/year/month already exists.') but omits this for the register row.",
+      "locationHint": "| POST | `/api/auth/register` | Create a new user account (email, password, optional name); bcrypt-hashes the password before storage. | `src/app/api/auth/register/route.ts` |",
+      "message": "The register endpoint's row does not mention the 409 'Email already exists' conflict response that the route implements (route.ts lines 25-31), even though sibling rows in the same table document their conflict/not-found status codes."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "src/app/api/plans/route.ts POST handler (lines 26-29) calls requireUserId() and returns 401 Unauthorized if there is no session, identical to the GET handler in the same file. The doc's GET /api/plans row explicitly states 'Requires an authenticated session.' but the POST /api/plans row omits this despite enforcing the same requirement.",
+      "locationHint": "| POST | `/api/plans` | Create a new plan (`year`, `month`, `currency`, optional `title`). Returns 409 if a plan for that user/year/month already exists. | `src/app/api/plans/route.ts` |",
+      "message": "The POST /api/plans row does not state the authentication requirement that the route enforces (401 via requireUserId(), route.ts lines 26-29), even though the sibling GET /api/plans row in the same table explicitly documents this requirement."
+    }
+  ]
 }

@@ -12,25 +12,26 @@
 <h2>type: decision
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/security.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
 generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
 <h1>ADR: Per-User Tenant Isolation</h1>
-<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<p><strong>Status:</strong> Accepted</p>
 <h2>Context</h2>
-<p>Multiple users share the same application and database; each user&#39;s plans and planned items must not be visible or mutable by other users.</p>
+<p>finance-planner is a multi-user application (each user registers their own account, <code>src/app/api/auth/register/route.ts</code>), but no organizational/team entity is present. Every <code>Plan</code> must be isolated to the account that created it.</p>
 <h2>Decision</h2>
-<p>We will scope all plan reads/writes by both the resource id and the authenticated <code>userId</code>. <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> is used in <code>src/app/api/plans/[planId]/route.ts</code> and <code>src/app/api/plans/[planId]/items/route.ts</code>; plan creation in <code>src/app/api/plans/route.ts</code> always sets <code>userId</code> from the session; plan listing filters <code>where: { userId }</code>.</p>
+<p>We will treat each individual <code>User</code> as its own isolation boundary rather than introducing an organization or team entity. [NEEDS CLARIFICATION] No multi-tenant/organization concept was found in inputs.code, so &quot;tenant&quot; here is used to mean a single user account. Every plan-related query filters by the authenticated <code>userId</code>: <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> is used in both the plan detail/delete route (<code>src/app/api/plans/[planId]/route.ts</code>) and the item-creation route (<code>src/app/api/plans/[planId]/items/route.ts</code>) before any item is created, and <code>prisma.plan.findMany({ where: { userId } })</code> scopes the plan list endpoint (<code>src/app/api/plans/route.ts</code>). A plan not owned by the requesting user returns HTTP 404, not 403, so as not to reveal its existence.</p>
 <h2>Consequences</h2>
 <p><strong>Positive:</strong></p>
 <ul>
-<li>A user cannot read, modify, or delete another user&#39;s plan or items, even by guessing another plan&#39;s id, because the ownership filter is part of the query itself.</li>
+<li>Cross-user data leakage is prevented at the data-access layer, not only in the UI.</li>
+<li>Returning 404 instead of 403 avoids confirming whether a given <code>planId</code> exists for another user.</li>
 </ul>
 <p><strong>Negative:</strong></p>
 <ul>
-<li>[NEEDS CLARIFICATION] No database-level row-level-security or authorization audit logging was found in inputs.code; isolation currently relies entirely on application-layer query filtering.</li>
+<li>Every new query against <code>Plan</code>/<code>PlannedItem</code> must remember to add the <code>userId</code> filter manually; no framework-level enforcement (e.g. PostgreSQL row-level security) is observed in inputs.code. [NEEDS CLARIFICATION] whether row-level security policies exist outside inputs.code.</li>
 </ul>
 
   </article>

@@ -12,41 +12,41 @@
 <h2>type: use-cases
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/app/use-cases.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
 <h1>Use Cases</h1>
-<h2>UC-001: Authorize Credentials Login</h2>
-<p><strong>Actor:</strong> NextAuth (Credentials Provider)</p>
+<h2>UC-001: Authorize an incoming request</h2>
+<p><strong>Actor:</strong> <code>app</code> module route handler</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>NextAuth invokes <code>authorize({ email, password })</code> in <code>src/lib/auth.ts</code>.</li>
-<li>The function lowercases/trims the email and looks up the user via <code>prisma.user.findUnique({ where: { email } })</code>.</li>
-<li>If a user is found, <code>bcrypt.compare(password, user.password)</code> verifies the password.</li>
-<li>If either step fails, <code>authorize()</code> returns <code>null</code>.</li>
+<li>Handler calls <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>).</li>
+<li>The function calls <code>getServerSession(authOptions)</code>.</li>
+<li>It returns <code>session.user.id</code>, or <code>null</code> if there is no session.</li>
 </ol>
-<p><strong>Expected Result:</strong> Returns <code>{ id, email, name }</code> on success, or <code>null</code> on any failure, which NextAuth surfaces to the client as a login error (see <code>docs/modules/app/use-cases.md</code>, UC-002).</p>
+<p><strong>Expected Result:</strong> The route handler receives a user id to scope its database queries, or returns HTTP 401 when the result is <code>null</code> (as done in every plan/item route in <code>src/app/api/plans/**</code>).</p>
 <hr>
-<h2>UC-002: Establish JWT Session</h2>
-<p><strong>Actor:</strong> NextAuth (JWT session strategy)</p>
+<h2>UC-002: Verify user credentials during sign-in</h2>
+<p><strong>Actor:</strong> NextAuth <code>CredentialsProvider</code> (invoked via <code>/api/auth/[...nextauth]</code>)</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>On successful <code>authorize()</code>, the <code>jwt</code> callback sets <code>token.sub = user.id</code> (<code>src/lib/auth.ts</code>).</li>
-<li>On each request, the <code>session</code> callback copies <code>token.sub</code> into <code>session.user.id</code>.</li>
+<li><code>authorize()</code> in <code>src/lib/auth.ts</code> receives the submitted <code>email</code>/<code>password</code>.</li>
+<li>It looks up the user via <code>prisma.user.findUnique({ where: { email } })</code>.</li>
+<li>It compares the submitted password with the stored hash via <code>bcrypt.compare</code>.</li>
+<li>It returns <code>{ id, email, name }</code> on a match, or <code>null</code> otherwise.</li>
 </ol>
-<p><strong>Expected Result:</strong> <code>session.user.id</code> is available to every server component and API route without a server-side session store, since <code>session: { strategy: &quot;jwt&quot; }</code> is configured.</p>
+<p><strong>Expected Result:</strong> A session/JWT is only issued when the submitted credentials match a stored, bcrypt-hashed password.</p>
 <hr>
-<h2>UC-003: Resolve Current User Id for a Protected Route</h2>
-<p><strong>Actor:</strong> App module API route or server page</p>
+<h2>UC-003: Obtain a database connection</h2>
+<p><strong>Actor:</strong> Any server-side code needing persistence</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>Caller invokes <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>).</li>
-<li>The function calls <code>getServerSession(authOptions)</code> and reads <code>session?.user?.id</code>.</li>
-<li>If no id is present, it returns <code>null</code>.</li>
+<li>Import <code>prisma</code> from <code>src/lib/db.ts</code>.</li>
+<li>The module constructs (or reuses a <code>globalThis</code>-cached) <code>PrismaClient</code> configured with the <code>PrismaPg</code> adapter and <code>DATABASE_URL</code>.</li>
 </ol>
-<p><strong>Expected Result:</strong> Callers (e.g. <code>src/app/api/plans/route.ts</code>) receive either the authenticated user&#39;s id or <code>null</code>, and respond with 401 Unauthorized when <code>null</code> is returned.</p>
+<p><strong>Expected Result:</strong> A singleton Prisma client is available for queries; outside of production, the client and adapter are cached on <code>globalThis</code> to avoid creating new connection pools on every module reload.</p>
 
   </article>
 </body>

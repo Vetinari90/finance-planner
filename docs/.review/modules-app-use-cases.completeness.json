@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/modules/app/use-cases.md",
   "dimension": "completeness",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/logout/route.ts defines a dedicated GET handler that redirects to /api/auth/signout, and src/app/plans/page.tsx renders an explicit \"Logout\" link (href=\"/api/auth/signout?callbackUrl=/login\"). This is a distinct, input-evident user-facing action (mirroring UC-002 Log in) but has no corresponding use case in the document, which only covers UC-001 through UC-006 (register, login, create plan, add item, export CSV, delete plan).",
+      "locationHint": "# Use Cases",
+      "message": "No use case documents the logout flow, even though src/app/logout/route.ts and the \"Logout\" link in src/app/plans/page.tsx implement a distinct, user-facing logout action analogous to UC-002 (login)."
+    }
+  ]
 }

@@ -2,29 +2,23 @@
 type: technical
 audience: [developer]
 language: en
-links: [docs/modules/types/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
-# Technical: Types (src/types)
+# Technical: types
 
 ## API Endpoints
 
-Not applicable - this module contains only TypeScript type declarations and exposes no runtime API.
+N/A - `src/types/next-auth.d.ts` contains only an ambient type declaration; it exposes no runtime endpoints.
 
 ## Configuration
 
-### Environment Variables
-
-Not applicable - no environment variables are read in `src/types/next-auth.d.ts`.
-
-### Secrets
-
-Not applicable - this module declares no secrets.
+N/A - no environment variables or secrets are declared or consumed by this module.
 
 ## Testing
 
-[NEEDS CLARIFICATION] No test files for `src/types/*` were present in inputs.code; type-only declaration files are typically validated by the TypeScript compiler rather than a dedicated test suite, but this could not be confirmed from inputs.
+No test files or type-level tests (e.g. `tsc --noEmit` checks) covering `src/types/next-auth.d.ts` are present in inputs.code; the module ships without a dedicated test suite.

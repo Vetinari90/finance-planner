@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/modules/lib/README.md",
   "dimension": "accuracy",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/lib/auth.ts line 38 in the session callback is `session.user.id = token.sub;` - an assignment/write to session.user.id, not a read of it. Only src/lib/requireUser.ts line 6 (`const userId = session?.user?.id;`) actually reads the property.",
+      "locationHint": "| types | `src/lib/auth.ts` and `src/lib/requireUser.ts` both read `session.user.id`, which is only valid TypeScript because of the `Session` augmentation declared in `src/types/next-auth.d.ts`. |",
+      "message": "Doc states both auth.ts and requireUser.ts 'read' session.user.id, but auth.ts's session callback writes/assigns to session.user.id (`session.user.id = token.sub`) rather than reading it; only requireUser.ts reads it."
+    }
+  ]
 }

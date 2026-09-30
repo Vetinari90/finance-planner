@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Technical: App (src/app)</title>
+  <title>Technical: app</title>
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
@@ -12,12 +12,12 @@
 <h2>type: technical
 audience: [developer]
 language: en
-links: [docs/modules/app/README.md, docs/modules/lib/technical.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Technical: App (src/app)</h1>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Technical: app</h1>
 <h2>API Endpoints</h2>
 <p><strong>Base Path:</strong> <code>/api</code></p>
 <table>
@@ -26,49 +26,59 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 <th>Method</th>
 <th>Path</th>
 <th>Description</th>
+<th>Source</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>GET, POST</td>
-<td><code>/api/auth/[...nextauth]</code></td>
-<td>NextAuth.js catch-all handler built from <code>authOptions</code> (<code>src/app/api/auth/[...nextauth]/route.ts</code>).</td>
-</tr>
-<tr>
 <td>POST</td>
 <td><code>/api/auth/register</code></td>
-<td>Registers a new user: validates body with <code>RegisterSchema</code> (zod), hashes the password with bcrypt (cost 12), returns <code>{ user }</code> with status 201, or 409 if the email already exists, or 400 on invalid input (<code>src/app/api/auth/register/route.ts</code>).</td>
+<td>Create a new user account (email, password, optional name); bcrypt-hashes the password before storage.</td>
+<td><code>src/app/api/auth/register/route.ts</code></td>
 </tr>
 <tr>
-<td>GET</td>
-<td><code>/api/plans</code></td>
-<td>Lists the authenticated user&#39;s plans, ordered by year desc then month desc. Returns 401 if unauthenticated (<code>src/app/api/plans/route.ts</code>).</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/plans</code></td>
-<td>Creates a plan for the authenticated user; validates body with <code>CreatePlanSchema</code> (zod); returns 201 with <code>{ plan }</code>, 400 on invalid input, or 409 if a plan already exists for that user/year/month (<code>src/app/api/plans/route.ts</code>).</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/plans/{planId}</code></td>
-<td>Returns a single plan owned by the authenticated user, including its items ordered by <code>createdAt</code> ascending; 401 if unauthenticated, 404 if not found or not owned (<code>src/app/api/plans/[planId]/route.ts</code>).</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td><code>/api/plans/{planId}</code></td>
-<td>Deletes a plan owned by the authenticated user; 401 if unauthenticated, 404 if not found or not owned (<code>src/app/api/plans/[planId]/route.ts</code>).</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/plans/{planId}/items</code></td>
-<td>Adds a planned item to a plan owned by the authenticated user; validates body with <code>CreateItemSchema</code> (zod); 401 if unauthenticated, 404 if the plan is not found/owned, 400 on invalid input, 201 with <code>{ item }</code> on success (<code>src/app/api/plans/[planId]/items/route.ts</code>).</td>
+<td>GET / POST</td>
+<td><code>/api/auth/[...nextauth]</code></td>
+<td>NextAuth-managed authentication endpoints (credentials sign-in, session, callback, signout), delegated to the NextAuth handler configured with <code>authOptions</code>.</td>
+<td><code>src/app/api/auth/[...nextauth]/route.ts</code></td>
 </tr>
 <tr>
 <td>GET</td>
 <td><code>/logout</code></td>
-<td>Redirects to NextAuth&#39;s built-in sign-out URL (<code>/api/auth/signout?callbackUrl=/login</code>) against a hardcoded base URL <code>http://localhost:3000</code> (<code>src/app/logout/route.ts</code>).</td>
+<td>Redirects to NextAuth&#39;s built-in signout URL with <code>callbackUrl=/login</code>.</td>
+<td><code>src/app/logout/route.ts</code></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/plans</code></td>
+<td>List the current user&#39;s plans, ordered by year/month descending. Requires an authenticated session.</td>
+<td><code>src/app/api/plans/route.ts</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/plans</code></td>
+<td>Create a new plan (<code>year</code>, <code>month</code>, <code>currency</code>, optional <code>title</code>). Returns 409 if a plan for that user/year/month already exists.</td>
+<td><code>src/app/api/plans/route.ts</code></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/plans/{planId}</code></td>
+<td>Fetch a plan (with its items) owned by the current user. Returns 404 if not owned/found.</td>
+<td><code>src/app/api/plans/[planId]/route.ts</code></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/plans/{planId}</code></td>
+<td>Delete a plan owned by the current user. Returns 404 if not owned/found.</td>
+<td><code>src/app/api/plans/[planId]/route.ts</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/plans/{planId}/items</code></td>
+<td>Add a planned item (<code>title</code>, <code>amountCents</code>, optional <code>categoryId</code>/<code>note</code>) to a plan owned by the current user.</td>
+<td><code>src/app/api/plans/[planId]/items/route.ts</code></td>
 </tr>
 </tbody></table>
+<p>Page routes rendering UI (not JSON APIs): <code>/</code>, <code>/login</code>, <code>/register</code>, <code>/plans</code>, <code>/plans/{planId}</code>.</p>
 <h2>Configuration</h2>
 <h3>Environment Variables</h3>
 <table>
@@ -80,17 +90,12 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>DATABASE_URL</td>
-<td>[NEEDS CLARIFICATION - see <code>docs/modules/lib/technical.md</code>]</td>
-<td>Consumed indirectly via <code>src/lib/db.ts</code>; the app module does not read it directly.</td>
-</tr>
-<tr>
+<td><code>DATABASE_URL</code></td>
 <td>Yes</td>
-<td></td>
-<td></td>
+<td>PostgreSQL connection string; <code>src/lib/db.ts</code> throws at startup if unset.</td>
 </tr>
 </tbody></table>
-<p>[NEEDS CLARIFICATION] No <code>NEXTAUTH_SECRET</code>, <code>NEXTAUTH_URL</code>, or similar NextAuth environment variable read was found in <code>src/app</code> or <code>src/lib/auth.ts</code>; the JWT signing key source could not be confirmed from inputs.code.</p>
+<p>[NEEDS CLARIFICATION] NextAuth typically requires additional configuration (e.g. a signing secret) in production, but no such environment variable is referenced anywhere in inputs.code.</p>
 <h3>Secrets</h3>
 <table>
 <thead>
@@ -100,12 +105,13 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>User password hash</td>
-<td>Stored via <code>bcrypt.hash(password, 12)</code> in <code>src/app/api/auth/register/route.ts</code>; verified via <code>bcrypt.compare</code> in <code>src/lib/auth.ts</code>. Plaintext passwords are never persisted.</td>
+<td><code>DATABASE_URL</code></td>
+<td>Contains database credentials; treated as a secret connection string.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] No other secrets (e.g. a NextAuth signing secret) were found referenced in inputs.code.</p>
 <h2>Testing</h2>
-<p>[NEEDS CLARIFICATION] No test files (e.g. <code>*.test.ts</code>, <code>*.spec.ts</code>) and no <code>package.json</code> test script were present in inputs.code; the testing approach for this module could not be confirmed.</p>
+<p>[NEEDS CLARIFICATION] No test files, test framework configuration, or <code>package.json</code> scripts are present in inputs.code or inputs.references to describe how this module is tested.</p>
 
   </article>
 </body>

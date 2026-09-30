@@ -2,93 +2,93 @@
 type: use-cases
 audience: [developer]
 language: en
-links: [docs/modules/app/README.md, docs/modules/lib/use-cases.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
 # Use Cases
 
-## UC-001: User Registration
+## UC-001: Register a new account
 
-**Actor:** Visitor (unauthenticated)
+**Actor:** New user
 
 **Steps:**
-1. Visitor opens `/register` (`src/app/register/page.tsx`) and enters email, optional name, and password.
-2. Client submits `POST /api/auth/register` with the form data.
-3. The API validates the body against `RegisterSchema` (email format, password min 8 characters, name max 80 characters), returning 400 on failure.
-4. The API checks for an existing user with that email, returning 409 if one exists.
-5. The API hashes the password with bcrypt and creates the user, returning 201 with the new user record.
-6. The client then calls `signIn("credentials", ...)` to log the new user in automatically and redirects to `/plans`.
+1. User opens `/register` (`src/app/register/page.tsx`).
+2. User enters email, optional name, and a password (minimum 8 characters).
+3. Client submits `POST /api/auth/register`.
+4. Server validates input with `RegisterSchema` (zod), rejects if the email already exists (409), otherwise hashes the password with bcrypt and creates the user.
+5. Client automatically calls `signIn("credentials", ...)` with the same email/password.
 
-**Expected Result:** A new user account exists and the visitor is signed in and redirected to `/plans` (`src/app/register/page.tsx`).
+**Expected Result:** Account is created and the user is authenticated and redirected to `/plans`. On registration failure or auto-login failure, an inline error message is shown (`src/app/register/page.tsx`).
 
 ---
 
-## UC-002: User Login
+## UC-002: Log in with email and password
 
-**Actor:** Registered User
+**Actor:** Registered user
 
 **Steps:**
-1. User opens `/login` (`src/app/login/page.tsx` + `LoginClient.tsx`) and enters email and password.
-2. Client calls `signIn("credentials", { email, password, redirect: false, callbackUrl })`.
-3. NextAuth's `authorize()` callback (`src/lib/auth.ts`) verifies the credentials against the stored bcrypt hash.
-4. On success, the client redirects to the `callbackUrl` (default `/plans`); on failure, an "Invalid email or password" message is shown (`src/app/login/LoginClient.tsx`).
+1. User opens `/login` (`src/app/login/page.tsx` + `LoginClient.tsx`).
+2. User enters email and password.
+3. Client calls `signIn("credentials", { email, password, redirect: false, callbackUrl })`.
+4. NextAuth's `CredentialsProvider` validates the credentials via `authorize()` in `src/lib/auth.ts` (`bcrypt.compare`).
 
-**Expected Result:** User is redirected to `/plans` on success, or sees an inline error message on failure.
+**Expected Result:** On success, the user is redirected to `callbackUrl` (default `/plans`). On failure, `LoginClient.tsx` shows "Invalid email or password".
 
 ---
 
-## UC-003: Create a Monthly Plan
+## UC-003: Create a monthly plan
 
-**Actor:** Authenticated User
+**Actor:** Authenticated user
 
 **Steps:**
-1. User opens `/plans` (`src/app/plans/page.tsx`), which lists their existing plans.
-2. User fills in year, month, currency, and optional title in `NewPlanForm` and submits.
-3. Client calls `POST /api/plans`; the API validates the body and creates the plan for `userId` from the session.
-4. If a plan already exists for that user/year/month, the API returns 409 "Plan for this month already exists" (`src/app/api/plans/route.ts`).
+1. On `/plans`, the user fills in `NewPlanForm.tsx` (year, month, currency, optional title).
+2. Client submits `POST /api/plans`.
+3. Server validates via `CreatePlanSchema` and requires an authenticated session (`requireUserId()`).
+4. Server creates the plan; a duplicate plan for the same user/year/month returns HTTP 409.
 
-**Expected Result:** A new plan appears in the user's plan list, or an inline error is shown on conflict/validation failure (`src/app/plans/NewPlanForm.tsx`).
+**Expected Result:** The new plan appears in the "Existing plans" list on `/plans` after `router.refresh()`.
 
 ---
 
-## UC-004: View Plan Detail and Add a Planned Item
+## UC-004: Add a planned item to a plan
 
-**Actor:** Authenticated User
+**Actor:** Authenticated user (plan owner)
 
 **Steps:**
-1. User opens `/plans/{planId}` from the plan list (`src/app/plans/[planId]/page.tsx`); the server loads the plan and its items, scoped to the authenticated `userId`.
-2. User enters a title and an amount (e.g. `1200.50`) in `AddItemForm`; the client converts the decimal string to integer cents via `toCents()` before submitting (`src/app/plans/[planId]/AddItemForm.tsx`).
-3. Client calls `POST /api/plans/{planId}/items`; the API re-verifies plan ownership, validates the body with `CreateItemSchema`, and creates the item.
-4. The page refreshes and shows the updated item list and running total (`totalCents` summed and divided by 100).
+1. User opens a plan detail page `/plans/{planId}` (`src/app/plans/[planId]/page.tsx`).
+2. User fills in `AddItemForm.tsx` with a title and an amount; the client converts the entered decimal amount into integer cents via `toCents()`.
+3. Client submits `POST /api/plans/{planId}/items`.
+4. Server verifies the requesting user owns the plan before creating the `PlannedItem`.
 
-**Expected Result:** The new item appears in the plan's item list and the displayed total updates accordingly.
+**Expected Result:** The item appears in the plan's item list and the displayed total updates after `router.refresh()`.
 
 ---
 
-## UC-005: Delete a Plan
+## UC-005: Export plan items as CSV
 
-**Actor:** Authenticated User
+**Actor:** Authenticated user
 
 **Steps:**
-1. On `/plans/{planId}`, the user clicks "Delete plan" (`DeletePlanButton.tsx`), confirming via a browser `confirm()` dialog.
-2. Client calls `DELETE /api/plans/{planId}`.
-3. The API re-verifies plan ownership before deleting the plan (`src/app/api/plans/[planId]/route.ts`).
-4. On success, the client navigates back to `/plans`.
+1. On the plan detail page, the user clicks "Export CSV" (`ExportCsvButton.tsx`); the button is disabled when the plan has no items.
+2. The client builds an RFC 4180 CSV (Title, Note, Amount columns, plus a Total row) entirely in the browser.
+3. The client triggers a file download named after the plan's title (slugified).
 
-**Expected Result:** The plan is removed and the user is returned to the plan list.
+**Expected Result:** A CSV file downloads locally. No server request is made; the export is generated client-side from data already rendered on the page.
 
 ---
 
-## UC-006: Logout
+## UC-006: Delete a plan
 
-**Actor:** Authenticated User
+**Actor:** Authenticated user (plan owner)
 
 **Steps:**
-1. User clicks "Logout" on `/plans` (`src/app/plans/page.tsx`), which links to `/api/auth/signout?callbackUrl=/login`, or the app's `/logout` route redirects to the same NextAuth sign-out URL (`src/app/logout/route.ts`).
-2. NextAuth clears the session.
+1. User clicks "Delete plan" (`DeletePlanButton.tsx`) on the plan detail page.
+2. User confirms via the browser's `confirm()` dialog.
+3. Client sends `DELETE /api/plans/{planId}`.
+4. Server verifies ownership, then deletes the plan.
 
-**Expected Result:** User's session is cleared and they are redirected to `/login`.
+**Expected Result:** The plan is removed and the user is redirected back to `/plans`.

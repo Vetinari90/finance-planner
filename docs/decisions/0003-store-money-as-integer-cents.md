@@ -2,8 +2,8 @@
 type: decision
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/data-model.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
 generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93
@@ -11,22 +11,22 @@ generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2
 
 # ADR: Store Money as Integer Cents
 
-**Status:** Accepted (inferred from current implementation in code; no separate decision record was present in inputs)
+**Status:** Accepted
 
 ## Context
 
-Planned-item amounts must be stored and summed without floating-point rounding errors.
+Monetary amounts for planned items must be stored and summed without floating-point rounding errors.
 
 ## Decision
 
-We will store planned item amounts as an integer number of cents. `CreateItemSchema` validates `amountCents: z.number().int().min(0)` (`src/app/api/plans/[planId]/items/route.ts`). The client converts a decimal string entered by the user into an integer cents value via regex-based parsing in `toCents()` (`src/app/plans/[planId]/AddItemForm.tsx`) before submission, and totals are computed by summing `amountCents` and dividing by 100 for display (`src/app/plans/[planId]/page.tsx`, `src/app/plans/page.tsx`).
-[NEEDS CLARIFICATION] [REVIEW] accuracy: Document asserts specific code facts (Zod schema shape, a regex-based toCents() parser, and totals logic in named files) that are absent from every input the doc was generated from - the manifest (docs/.expanded-inputs.decisions.json) shows only README.md, a generic Next.js boilerplate readme with no mention of these symbols, was supplied.
+We will store all amounts as integers representing the smallest currency unit ("cents"). The API schema enforces this: `amountCents: z.number().int().min(0)` in `CreateItemSchema` (`src/app/api/plans/[planId]/items/route.ts`). The client converts user-entered decimal text to cents client-side before submitting, via the `toCents()` function in `src/app/plans/[planId]/AddItemForm.tsx`, which parses at most two decimal digits and avoids float multiplication. Totals are computed by summing `amountCents` integers and only converted to a decimal display string at render/export time with `(totalCents / 100).toFixed(2)` (`src/app/plans/[planId]/page.tsx`, `src/app/plans/page.tsx`, `src/app/plans/[planId]/ExportCsvButton.tsx`).
+[NEEDS CLARIFICATION] [REVIEW] accuracy: This paragraph asserts specific, concrete implementation facts (exact schema declaration `amountCents: z.number().int().min(0)`, the `toCents()` function's parsing behavior, and the exact `(totalCents / 100).toFixed(2)` formatting expression) attributed to named files, but none of those code files were provided as input for this review (codeFiles is empty; the only referenced file is the generic README). These facts are unverifiable against any enumerated input and cannot be confirmed as grounded.
 
 ## Consequences
 
 **Positive:**
-- Summation of item amounts (`plan.items.reduce((acc, it) => acc + it.amountCents, 0)`) is exact integer arithmetic with no floating-point drift.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The exact code snippet `plan.items.reduce((acc, it) => acc + it.amountCents, 0)` is quoted as fact but has no grounding in any input available for this doc (manifest lists only README.md, which contains no such code).
+- Summing many items cannot accumulate binary floating-point rounding error.
+- A single, consistent conversion boundary (cents to display string) exists at render/export time.
 
 **Negative:**
-- [NEEDS CLARIFICATION] Currency-specific minor-unit exceptions (e.g. currencies with 0 or 3 decimal places) are not addressed by the fixed 2-decimal `toCents()` conversion in `AddItemForm.tsx`.
+- Every call site that displays or exports an amount repeats the same `(x / 100).toFixed(2)` pattern independently (`plans/[planId]/page.tsx`, `plans/page.tsx`, `ExportCsvButton.tsx`); [NEEDS CLARIFICATION] whether a shared formatting utility exists elsewhere was not confirmed in inputs.code.

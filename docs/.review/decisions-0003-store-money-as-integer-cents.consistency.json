@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/decisions/0003-store-money-as-integer-cents.md",
   "dimension": "consistency",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "Same document, Consequences section: Positive bullet states 'A single, consistent conversion boundary (cents to display string) exists at render/export time.' while the Negative bullet immediately below states 'Every call site that displays or exports an amount repeats the same `(x / 100).toFixed(2)` pattern independently (`plans/[planId]/page.tsx`, `plans/page.tsx`, `ExportCsvButton.tsx`)'.",
+      "locationHint": "- A single, consistent conversion boundary (cents to display string) exists at render/export time.",
+      "message": "Internal tension: the Positive consequence claims a 'single' conversion boundary while the Negative consequence right after it describes the same conversion as duplicated independently across three separate call sites, which reads as contradictory framing of the same fact within one document."
+    }
+  ]
 }

@@ -2,31 +2,27 @@
 type: cross-cutting
 audience: [developer]
 language: en
-links: [docs/modules/lib/technical.md, docs/modules/app/technical.md, docs/decisions/0003-store-money-as-integer-cents.md, docs/decisions/0001-prisma-driver-adapter-postgresql.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/security.md, docs/decisions/0005-per-user-tenant-isolation.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
-# Data Protection
+# Standards
 
 ## Authentication
 
-User passwords are never stored in plaintext: `src/app/api/auth/register/route.ts` hashes the password with `bcrypt.hash(password, 12)` before persisting it via `prisma.user.create`, and `src/lib/auth.ts` verifies logins with `bcrypt.compare` rather than a plaintext comparison.
+Access to personal financial data (plans, planned items) requires an authenticated session; see [security.md](security.md) for the mechanism. Per-user isolation ([decisions/0005-per-user-tenant-isolation.md](decisions/0005-per-user-tenant-isolation.md)) additionally ensures that an authenticated user cannot read or modify another user's data, because every plan query filters by `userId`.
 
 ## API Conventions
 
-No API-level data-classification or PII-tagging convention exists in this codebase. Endpoints return raw Prisma-selected fields directly without redaction or masking — e.g. `src/app/api/auth/register/route.ts` selects and returns `{ id, email, name }` for a newly created user, and `src/app/api/plans/[planId]/route.ts` returns the full `plan` record including its `items` — with no field-level classification metadata applied before serialization.
-
-### HTTP Status Codes
-
-No distinct status code exists for data-access-denied vs. not-found; both cases return a generic `404` `{ error: "Not found" }`. In `src/app/api/plans/[planId]/route.ts` and `src/app/api/plans/[planId]/items/route.ts`, `prisma.plan.findFirst({ where: { id: planId, userId } })` returns `404` whether the plan does not exist or exists but belongs to another user, deliberately avoiding leaking a resource's existence to non-owners via the status code.
+Confirmed: No data-protection-specific API conventions (e.g. field-level redaction, a data-export-for-the-user endpoint, or a right-to-erasure endpoint beyond `DELETE /api/plans/{planId}`) were found in inputs.code, beyond the general conventions in [security.md](security.md).
 
 ## Error Handling
 
-Validation error responses include the raw zod `flatten()` output (`{ error: "Invalid input", details: parsed.error.flatten() }`), which can echo back submitted field values. Zod's `flatten()` output contains only field-scoped validation error MESSAGES (the strings configured on each schema, e.g. the `RegisterSchema` message `"Minimálně 8 znaků"` for `password` in `src/app/api/auth/register/route.ts`), not the submitted field values; the echoed `details` therefore expose field NAMES (`email`, `password`) but never the raw email or password value entered by the user.
+A plan owned by another user returns `{ error: "Not found" }` with HTTP 404, rather than a 403 `Forbidden`, so as not to confirm the resource's existence to a non-owner (`src/app/api/plans/[planId]/route.ts`). This is a data-protection-relevant choice, not merely a generic error-handling convention.
 
 ## Logging
 
-`src/lib/db.ts` restricts Prisma logging to `["error", "warn"]` (not `"query"`), which limits the risk of logging full SQL parameter values (e.g. password hashes) at query level. No explicit PII-redaction or log-scrubbing rule exists for Prisma's error/warn output; `src/lib/db.ts` relies solely on excluding `"query"` from the `log` option (`log: ["error", "warn"]`) to prevent full SQL statements and parameter values (such as password hashes) from being logged at the query level.
+Passwords are hashed with bcrypt before any persistence occurs (`src/app/api/auth/register/route.ts`); the Prisma client logs only `error`/`warn` levels (`src/lib/db.ts`). Confirmed: No explicit statement excluding PII or financial data (plan titles, item amounts, notes) from logs, and no data-retention or deletion policy beyond the single `DELETE /api/plans/{planId}` endpoint, was found in inputs.code or inputs.references.

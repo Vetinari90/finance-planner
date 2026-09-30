@@ -12,27 +12,27 @@
 <h2>type: decision
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/data-model.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
 generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
 <h1>ADR: Store Money as Integer Cents</h1>
-<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<p><strong>Status:</strong> Accepted</p>
 <h2>Context</h2>
-<p>Planned-item amounts must be stored and summed without floating-point rounding errors.</p>
+<p>Monetary amounts for planned items must be stored and summed without floating-point rounding errors.</p>
 <h2>Decision</h2>
-<p>We will store planned item amounts as an integer number of cents. <code>CreateItemSchema</code> validates <code>amountCents: z.number().int().min(0)</code> (<code>src/app/api/plans/[planId]/items/route.ts</code>). The client converts a decimal string entered by the user into an integer cents value via regex-based parsing in <code>toCents()</code> (<code>src/app/plans/[planId]/AddItemForm.tsx</code>) before submission, and totals are computed by summing <code>amountCents</code> and dividing by 100 for display (<code>src/app/plans/[planId]/page.tsx</code>, <code>src/app/plans/page.tsx</code>).
-[NEEDS CLARIFICATION] [REVIEW] accuracy: Document asserts specific code facts (Zod schema shape, a regex-based toCents() parser, and totals logic in named files) that are absent from every input the doc was generated from - the manifest (docs/.expanded-inputs.decisions.json) shows only README.md, a generic Next.js boilerplate readme with no mention of these symbols, was supplied.</p>
+<p>We will store all amounts as integers representing the smallest currency unit (&quot;cents&quot;). The API schema enforces this: <code>amountCents: z.number().int().min(0)</code> in <code>CreateItemSchema</code> (<code>src/app/api/plans/[planId]/items/route.ts</code>). The client converts user-entered decimal text to cents client-side before submitting, via the <code>toCents()</code> function in <code>src/app/plans/[planId]/AddItemForm.tsx</code>, which parses at most two decimal digits and avoids float multiplication. Totals are computed by summing <code>amountCents</code> integers and only converted to a decimal display string at render/export time with <code>(totalCents / 100).toFixed(2)</code> (<code>src/app/plans/[planId]/page.tsx</code>, <code>src/app/plans/page.tsx</code>, <code>src/app/plans/[planId]/ExportCsvButton.tsx</code>).
+[NEEDS CLARIFICATION] [REVIEW] accuracy: This paragraph asserts specific, concrete implementation facts (exact schema declaration <code>amountCents: z.number().int().min(0)</code>, the <code>toCents()</code> function&#39;s parsing behavior, and the exact <code>(totalCents / 100).toFixed(2)</code> formatting expression) attributed to named files, but none of those code files were provided as input for this review (codeFiles is empty; the only referenced file is the generic README). These facts are unverifiable against any enumerated input and cannot be confirmed as grounded.</p>
 <h2>Consequences</h2>
 <p><strong>Positive:</strong></p>
 <ul>
-<li>Summation of item amounts (<code>plan.items.reduce((acc, it) =&gt; acc + it.amountCents, 0)</code>) is exact integer arithmetic with no floating-point drift.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The exact code snippet <code>plan.items.reduce((acc, it) =&gt; acc + it.amountCents, 0)</code> is quoted as fact but has no grounding in any input available for this doc (manifest lists only README.md, which contains no such code).</li>
+<li>Summing many items cannot accumulate binary floating-point rounding error.</li>
+<li>A single, consistent conversion boundary (cents to display string) exists at render/export time.</li>
 </ul>
 <p><strong>Negative:</strong></p>
 <ul>
-<li>[NEEDS CLARIFICATION] Currency-specific minor-unit exceptions (e.g. currencies with 0 or 3 decimal places) are not addressed by the fixed 2-decimal <code>toCents()</code> conversion in <code>AddItemForm.tsx</code>.</li>
+<li>Every call site that displays or exports an amount repeats the same <code>(x / 100).toFixed(2)</code> pattern independently (<code>plans/[planId]/page.tsx</code>, <code>plans/page.tsx</code>, <code>ExportCsvButton.tsx</code>); [NEEDS CLARIFICATION] whether a shared formatting utility exists elsewhere was not confirmed in inputs.code.</li>
 </ul>
 
   </article>

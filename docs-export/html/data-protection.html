@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Data Protection</title>
+  <title>Standards</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,22 +12,20 @@
 <h2>type: cross-cutting
 audience: [developer]
 language: en
-links: [docs/modules/lib/technical.md, docs/modules/app/technical.md, docs/decisions/0003-store-money-as-integer-cents.md, docs/decisions/0001-prisma-driver-adapter-postgresql.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/security.md, docs/decisions/0005-per-user-tenant-isolation.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Data Protection</h1>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Standards</h1>
 <h2>Authentication</h2>
-<p>User passwords are never stored in plaintext: <code>src/app/api/auth/register/route.ts</code> hashes the password with <code>bcrypt.hash(password, 12)</code> before persisting it via <code>prisma.user.create</code>, and <code>src/lib/auth.ts</code> verifies logins with <code>bcrypt.compare</code> rather than a plaintext comparison.</p>
+<p>Access to personal financial data (plans, planned items) requires an authenticated session; see <a href="security.html">security.md</a> for the mechanism. Per-user isolation (<a href="decisions/0005-per-user-tenant-isolation.html">decisions/0005-per-user-tenant-isolation.md</a>) additionally ensures that an authenticated user cannot read or modify another user&#39;s data, because every plan query filters by <code>userId</code>.</p>
 <h2>API Conventions</h2>
-<p>No API-level data-classification or PII-tagging convention exists in this codebase. Endpoints return raw Prisma-selected fields directly without redaction or masking — e.g. <code>src/app/api/auth/register/route.ts</code> selects and returns <code>{ id, email, name }</code> for a newly created user, and <code>src/app/api/plans/[planId]/route.ts</code> returns the full <code>plan</code> record including its <code>items</code> — with no field-level classification metadata applied before serialization.</p>
-<h3>HTTP Status Codes</h3>
-<p>No distinct status code exists for data-access-denied vs. not-found; both cases return a generic <code>404</code> <code>{ error: &quot;Not found&quot; }</code>. In <code>src/app/api/plans/[planId]/route.ts</code> and <code>src/app/api/plans/[planId]/items/route.ts</code>, <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> returns <code>404</code> whether the plan does not exist or exists but belongs to another user, deliberately avoiding leaking a resource&#39;s existence to non-owners via the status code.</p>
+<p>Confirmed: No data-protection-specific API conventions (e.g. field-level redaction, a data-export-for-the-user endpoint, or a right-to-erasure endpoint beyond <code>DELETE /api/plans/{planId}</code>) were found in inputs.code, beyond the general conventions in <a href="security.html">security.md</a>.</p>
 <h2>Error Handling</h2>
-<p>Validation error responses include the raw zod <code>flatten()</code> output (<code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code>), which can echo back submitted field values. Zod&#39;s <code>flatten()</code> output contains only field-scoped validation error MESSAGES (the strings configured on each schema, e.g. the <code>RegisterSchema</code> message <code>&quot;Minimálně 8 znaků&quot;</code> for <code>password</code> in <code>src/app/api/auth/register/route.ts</code>), not the submitted field values; the echoed <code>details</code> therefore expose field NAMES (<code>email</code>, <code>password</code>) but never the raw email or password value entered by the user.</p>
+<p>A plan owned by another user returns <code>{ error: &quot;Not found&quot; }</code> with HTTP 404, rather than a 403 <code>Forbidden</code>, so as not to confirm the resource&#39;s existence to a non-owner (<code>src/app/api/plans/[planId]/route.ts</code>). This is a data-protection-relevant choice, not merely a generic error-handling convention.</p>
 <h2>Logging</h2>
-<p><code>src/lib/db.ts</code> restricts Prisma logging to <code>[&quot;error&quot;, &quot;warn&quot;]</code> (not <code>&quot;query&quot;</code>), which limits the risk of logging full SQL parameter values (e.g. password hashes) at query level. No explicit PII-redaction or log-scrubbing rule exists for Prisma&#39;s error/warn output; <code>src/lib/db.ts</code> relies solely on excluding <code>&quot;query&quot;</code> from the <code>log</code> option (<code>log: [&quot;error&quot;, &quot;warn&quot;]</code>) to prevent full SQL statements and parameter values (such as password hashes) from being logged at the query level.</p>
+<p>Passwords are hashed with bcrypt before any persistence occurs (<code>src/app/api/auth/register/route.ts</code>); the Prisma client logs only <code>error</code>/<code>warn</code> levels (<code>src/lib/db.ts</code>). Confirmed: No explicit statement excluding PII or financial data (plan titles, item amounts, notes) from logs, and no data-retention or deletion policy beyond the single <code>DELETE /api/plans/{planId}</code> endpoint, was found in inputs.code or inputs.references.</p>
 
   </article>
 </body>

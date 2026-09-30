@@ -2,34 +2,35 @@
 type: technical
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/app/technical.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/modules/app/technical.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
-# Technical: Lib (src/lib)
+# Technical: lib
 
 ## API Endpoints
 
-The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module's API routes (see `docs/modules/app/technical.md`). The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module's API routes (see `docs/modules/app/technical.md`).
+The `lib` module exposes no HTTP endpoints of its own. It supplies the `authOptions` object consumed by the NextAuth route handler wired up in the `app` module; see [modules/app/technical.md](../app/technical.md) for the actual routes.
 
 ## Configuration
 
 ### Environment Variables
 
 | Variable | Required | Description |
-|----------|----------|--------------|
-| DATABASE_URL | Yes | PostgreSQL connection string; `src/lib/db.ts` throws `"DATABASE_URL is not set"` at import time if it is missing. |
+|----------|----------|-------------|
+| `DATABASE_URL` | Yes | PostgreSQL connection string used to construct the `PrismaPg` adapter in `src/lib/db.ts`; the module throws `"DATABASE_URL is not set"` if it is missing. |
 
 ### Secrets
 
 | Secret | Description |
 |--------|-------------|
-| DATABASE_URL | Database connection string, read from `process.env.DATABASE_URL` (`src/lib/db.ts`). |
-| [NEEDS CLARIFICATION] | No JWT/session signing secret (e.g. `NEXTAUTH_SECRET`) read was found in `src/lib/auth.ts`. |
+| `DATABASE_URL` | Contains database credentials. |
+
+No signing secret environment variable (e.g. `NEXTAUTH_SECRET`) is referenced anywhere in `src/lib/auth.ts` or the NextAuth route handler (`src/app/api/auth/[...nextauth]/route.ts`); the `authOptions` object passed to `NextAuth()` does not set a `secret` option either. NextAuth will auto-generate an ephemeral secret in development but requires `NEXTAUTH_SECRET` to be set explicitly in production, so this must be provisioned as part of deployment configuration.
 
 ## Testing
 
-No test files for `src/lib/*` were present in inputs.code. No test files for `src/lib/*` were present in inputs.code.
+No test files or test framework configuration (e.g. Jest, Vitest) exist for `auth.ts`, `db.ts`, or `requireUser.ts` in this codebase; these modules currently have no automated test coverage.

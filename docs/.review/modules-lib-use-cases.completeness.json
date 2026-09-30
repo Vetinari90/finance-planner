@@ -2,5 +2,18 @@
   "schemaVersion": "1",
   "rel": "docs/modules/lib/use-cases.md",
   "dimension": "completeness",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/lib/auth.ts lines 31-42 define jwt/session callbacks (token.sub = user.id; session.user.id = token.sub) that establish the session.user.id value UC-001 depends on, but UC-002's Steps only list authorize() (lines 15-28) and never mention these callbacks.",
+      "locationHint": "**Expected Result:** A session/JWT is only issued when the submitted credentials match a stored, bcrypt-hashed password.",
+      "message": "UC-002 documents only the authorize() credential check and omits the jwt/session callbacks in src/lib/auth.ts that actually populate session.user.id, even though UC-001 relies on that value being set."
+    },
+    {
+      "confidence": "medium",
+      "evidence": "src/lib/db.ts lines 9-12 validate DATABASE_URL and throw an Error if it is unset, before the PrismaClient/adapter are constructed; UC-003's Steps (lines 45-47) omit this validation/error-throwing behavior entirely.",
+      "locationHint": "2. The module constructs (or reuses a `globalThis`-cached) `PrismaClient` configured with the `PrismaPg` adapter and `DATABASE_URL`.",
+      "message": "UC-003 does not mention that src/lib/db.ts throws an error when DATABASE_URL is not set (db.ts lines 9-12), leaving out an input-evident failure path of obtaining a database connection."
+    }
+  ]
 }

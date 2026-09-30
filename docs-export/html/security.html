@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Security</title>
+  <title>Standards</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,53 +12,21 @@
 <h2>type: cross-cutting
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/modules/app/technical.md, docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0001-security-baseline.md, docs/decisions/0005-per-user-tenant-isolation.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0001-security-baseline.md, docs/decisions/0004-zod-validation-and-error-envelope.md, docs/modules/app/technical.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Security</h1>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Standards</h1>
 <h2>Authentication</h2>
-<p>The application uses NextAuth&#39;s <code>CredentialsProvider</code> (email + password) with <code>session: { strategy: &quot;jwt&quot; }</code> (<code>src/lib/auth.ts</code>, see <code>docs/modules/lib/technical.md</code>). Passwords are hashed with bcrypt at cost factor 12 on registration and verified with <code>bcrypt.compare</code> on login (<code>src/app/api/auth/register/route.ts</code>, <code>src/lib/auth.ts</code>; see <code>docs/decisions/0002-credentials-auth-with-jwt-sessions.md</code>). No <code>secret</code> option is set explicitly in <code>authOptions</code> (<code>src/lib/auth.ts</code>); NextAuth&#39;s JWT session strategy requires a signing secret, conventionally supplied via the <code>NEXTAUTH_SECRET</code> environment variable at deploy time, which is not part of <code>inputs.code</code>.</p>
+<p>The application uses NextAuth&#39;s <code>CredentialsProvider</code> with JWT-based sessions (<code>session: { strategy: &quot;jwt&quot; }</code>, <code>src/lib/auth.ts</code>). Passwords are hashed with bcrypt (cost factor 12) at registration (<code>src/app/api/auth/register/route.ts</code>) and verified with <code>bcrypt.compare</code> at sign-in. Every plan and item API route resolves the current user via <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>) and returns HTTP 401 when no session is present. See <a href="decisions/0002-credentials-auth-with-jwt-sessions.html">decisions/0002-credentials-auth-with-jwt-sessions.md</a> and <a href="decisions/0001-security-baseline.html">decisions/0001-security-baseline.md</a>.</p>
+<p>No <code>NEXTAUTH_SECRET</code> or token lifetime (JWT <code>maxAge</code>) configuration is set in <code>src/lib/auth.ts</code> or the NextAuth route handler (<code>src/app/api/auth/[...nextauth]/route.ts</code>); NextAuth&#39;s default JWT session settings apply, and <code>NEXTAUTH_SECRET</code> must be supplied via environment variable at deploy time rather than in application code.</p>
 <h2>API Conventions</h2>
-<p>Every protected API route calls <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>) before performing any read or write, and returns HTTP 401 if no authenticated session exists. Plan and item queries are additionally scoped by both resource id and <code>userId</code> (e.g. <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> in <code>src/app/api/plans/[planId]/route.ts</code>), enforcing per-user data isolation (see <code>docs/decisions/0005-per-user-tenant-isolation.md</code>).</p>
-<h3>HTTP Status Codes</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Meaning (as used in this project)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>200</td>
-<td>Successful GET (e.g. <code>src/app/api/plans/route.ts</code>)</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Resource created (register, plan, item)</td>
-</tr>
-<tr>
-<td>400</td>
-<td>zod validation failure (<code>parsed.error.flatten()</code>)</td>
-</tr>
-<tr>
-<td>401</td>
-<td>No authenticated session (<code>requireUserId()</code> returned <code>null</code>)</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Resource not found or not owned by the requesting user</td>
-</tr>
-<tr>
-<td>409</td>
-<td>Conflict (duplicate email on register; duplicate plan for user/year/month)</td>
-</tr>
-</tbody></table>
+<p>Observed routes follow REST-style plural resource naming under <code>/api/plans</code>, with a nested <code>/api/plans/{planId}/items</code> collection, using GET/POST/DELETE per resource (see <a href="modules/app/technical.html">modules/app/technical.md</a>). No API version prefix (e.g. <code>/api/v1/...</code>) is present in the routes found in inputs.code. [NEEDS CLARIFICATION] whether API versioning is planned.</p>
 <h2>Error Handling</h2>
-<p>API routes return errors as JSON with an <code>error</code> field and, for validation failures, a <code>details</code> field containing the zod flattened error (<code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code>, e.g. <code>src/app/api/auth/register/route.ts</code>). The project&#39;s error envelope is limited to <code>{ error: string }</code> (with an additional <code>details</code> field carrying the zod flattened error on validation failures); no <code>code</code> or <code>requestId</code> field appears in any API response (e.g. <code>src/app/api/plans/route.ts</code>, <code>src/app/api/plans/[planId]/route.ts</code>).</p>
+<p>Handlers return <code>NextResponse.json({ error: &quot;&lt;message&gt;&quot; }, { status })</code> with status codes 400 (validation, via zod <code>safeParse</code>), 401 (unauthenticated), 404 (not found / not owned), and 409 (unique-constraint conflicts, e.g. duplicate plan for a month or duplicate registration email); validation failures additionally include <code>details: parsed.error.flatten()</code>. No explicit 5xx handling or a <code>requestId</code> field was observed in inputs.code. See <a href="decisions/0004-zod-validation-and-error-envelope.html">decisions/0004-zod-validation-and-error-envelope.md</a>.</p>
 <h2>Logging</h2>
-<p><code>src/lib/db.ts</code> configures Prisma logging for <code>[&quot;error&quot;, &quot;warn&quot;]</code> only. [NEEDS CLARIFICATION] No explicit statement confirming that passwords, tokens, or PII are excluded from these Prisma error/warn logs was found in inputs.code.</p>
+<p><code>src/lib/db.ts</code> configures the Prisma client with <code>log: [&quot;error&quot;, &quot;warn&quot;]</code>. No application-level logging (INFO/DEBUG) beyond Prisma&#39;s built-in <code>error</code>/<code>warn</code> logs is present in inputs.code: no <code>console.log</code>/<code>console.info</code>/<code>console.debug</code>/<code>console.warn</code>/<code>console.error</code> calls appear anywhere in the application source. Passwords are bcrypt-hashed (<code>src/app/api/auth/register/route.ts</code>) before being persisted via <code>prisma.user.create</code>, so plaintext passwords are never available to be logged; no other explicit PII log-exclusion statement was found.</p>
 
   </article>
 </body>

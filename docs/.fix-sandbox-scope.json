@@ -17,6 +17,7 @@
     "src/app/plans/NewPlanForm.tsx",
     "src/app/plans/[planId]/AddItemForm.tsx",
     "src/app/plans/[planId]/DeletePlanButton.tsx",
+    "src/app/plans/[planId]/ExportCsvButton.tsx",
     "src/app/plans/[planId]/page.tsx",
     "src/app/plans/page.tsx",
     "src/app/register/page.tsx",
@@ -28,5 +29,5 @@
   "writeSet": [
     "docs/.fix"
   ],
-  "manifestPath": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json"
+  "manifestPath": "/opt/asr/workspace/7bd9d008-0352-4b20-9465-957da484cd9e/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner/docs/.expanded-inputs.decisions.json"
 }

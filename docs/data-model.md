@@ -2,38 +2,44 @@
 type: data-model
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/decisions/0001-prisma-driver-adapter-postgresql.md, docs/decisions/0003-store-money-as-integer-cents.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/modules/lib/README.md, docs/modules/app/README.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
 # Module: Data Model
 
 ## Purpose
 
-This document consolidates the data entities inferred from Prisma query call sites across the app module, since no `schema.prisma` file was present in inputs.code.
+This document consolidates the data model implied by the application code across the `lib` and `app` modules: the entities persisted in PostgreSQL via Prisma and how they are used.
 
 ## Key Entities
 
 | Entity | Description |
 |--------|-------------|
-| User | `id`, `email`, `password` (bcrypt hash), `name` (optional) - inferred from `prisma.user.create`/`findUnique` calls in `src/app/api/auth/register/route.ts` and `src/lib/auth.ts`. |
-| Plan | `id`, `userId`, `year`, `month`, `currency`, `title` - inferred from `prisma.plan.create`/`findFirst`/`findMany` calls in `src/app/api/plans/route.ts` and `src/app/api/plans/[planId]/route.ts`. A unique constraint on `(userId, year, month)` is implied by the 409 conflict handling in `src/app/api/plans/route.ts`, but the constraint itself could not be confirmed without `schema.prisma`. |
-| PlannedItem | `id`, `planId`, `title`, `amountCents` (integer), `categoryId` (optional), `note` (optional), `createdAt` - inferred from `prisma.plannedItem.create` in `src/app/api/plans/[planId]/items/route.ts` and the `orderBy: { createdAt: "asc" }` read in `src/app/api/plans/[planId]/route.ts`. |
+| User | Registered account: `id`, `email` (looked up lower-cased/trimmed), `password` (bcrypt hash), optional `name`. Created in `src/app/api/auth/register/route.ts`; looked up by email in `src/lib/auth.ts`. |
+| Plan | A monthly financial plan: `id`, `userId`, `year`, `month`, `currency` (3-letter code, default `"CZK"`), `title`. Appears to be unique per `(userId, year, month)`, inferred from the HTTP 409 conflict handling and an inline comment ("unikát (userId, year, month)") in `src/app/api/plans/route.ts`. |
+| PlannedItem | A line item within a plan: `id`, `planId`, `title`, `amountCents` (non-negative integer), optional `categoryId`, optional `note`, `createdAt`. Created in `src/app/api/plans/[planId]/items/route.ts`. |
+
+[NEEDS CLARIFICATION] No `schema.prisma` file is present in inputs.code; the field list above is inferred from TypeScript usage (Prisma `where`/`data`/`select` clauses) rather than read directly from a schema, so exact column types, nullability, indexes, and foreign-key/cascade behavior could not be confirmed.
 
 ## Data Storage
 
-**Database:** PostgreSQL, accessed through Prisma with the `PrismaPg` driver adapter (`@prisma/adapter-pg`), configured from `DATABASE_URL` (`src/lib/db.ts`; see `docs/decisions/0001-prisma-driver-adapter-postgresql.md`).
+**Database:** PostgreSQL, accessed via `PrismaClient` with the `@prisma/adapter-pg` driver adapter and a `DATABASE_URL` connection string (`src/lib/db.ts`).
 
 | Table/Collection | Stores |
 |------------------|--------|
-| [NEEDS CLARIFICATION] | Exact table names, column types, and constraints require `schema.prisma`, which was not present in inputs.code; the entities above are inferred solely from Prisma client call sites. |
+| user | Account credentials/profile. |
+| plan | One row per user per plan-month. |
+| plannedItem | Line items belonging to a plan. |
+
+[NEEDS CLARIFICATION] Actual table/column names depend on `schema.prisma` (and any `@@map`/`@map` directives), which is not present in inputs.code; the names above reflect the Prisma model accessors used in code (`prisma.user`, `prisma.plan`, `prisma.plannedItem`).
 
 ## Dependencies
 
 | Module | Purpose |
 |--------|---------|
-| app | Every Prisma call site that establishes the data model above lives in `src/app/api/*` (see `docs/modules/app/README.md`). |
-| lib | Provides the shared `prisma` client instance used by all of the above call sites (`src/lib/db.ts`, see `docs/modules/lib/README.md`). |
+| lib | Owns the Prisma client through which all entities above are read/written (`src/lib/db.ts`). |
+| app | Defines the zod schemas (`RegisterSchema`, `CreatePlanSchema`, `CreateItemSchema`) that constrain what values can be written for each entity. |

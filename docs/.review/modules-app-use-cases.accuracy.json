@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/modules/app/use-cases.md",
   "dimension": "accuracy",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/register/page.tsx lines 40-44: on auto-login failure the code does `setErr(\"Registered, but login failed. Try logging in.\"); router.push(\"/login\"); return;` - it immediately navigates away to /login rather than staying on the register page to show the inline message.",
+      "locationHint": "**Expected Result:** Account is created and the user is authenticated and redirected to `/plans`. On registration failure or auto-login failure, an inline error message is shown (`src/app/register/page.tsx`).",
+      "message": "On auto-login failure the code does not just show an inline error and stay on /register; it also immediately calls router.push(\"/login\"), redirecting the user away. The doc's Expected Result only says an inline error message is shown, omitting the redirect to /login on this path."
+    }
+  ]
 }

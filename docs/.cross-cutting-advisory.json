@@ -1,7 +1,7 @@
 {
   "schemaVersion": "cc-advisory-1",
-  "projectRoot": "/opt/asr/workspace/aa0a3e85-8497-42c0-9178-6ce61189bb95/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner",
-  "generatedAt": "2026-09-29T20:10:19.555Z",
+  "projectRoot": "/opt/asr/workspace/7bd9d008-0352-4b20-9465-957da484cd9e/64a10439-b998-4434-9fd0-dcccb8e98fc0/finance-planner",
+  "generatedAt": "2026-09-30T02:01:48.939Z",
   "advisories": [
     {
       "path": "decisions/",

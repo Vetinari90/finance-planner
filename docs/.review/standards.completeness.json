@@ -2,12 +2,5 @@
   "schemaVersion": "1",
   "rel": "docs/standards.md",
   "dimension": "completeness",
-  "findings": [
-    {
-      "confidence": "medium",
-      "evidence": "src/app/api/auth/register/route.ts returns { error: \"Email already exists\" } with status 409, and src/app/api/plans/route.ts returns { error: \"Plan for this month already exists\" } with status 409 - both are 409 conflict error envelopes produced by mutating routes, matching the '409 | Conflict' row in the HTTP Status Codes table directly above the Error Handling section.",
-      "locationHint": "Mutating routes validate input with `zod` `.safeParse()` and return `{ error, details }` JSON with HTTP 400 on failure (see `docs/decisions/0004-zod-validation-and-error-envelope.md`). Ownership/not-found failures return `{ error: \"Not found\" }` with 404; unauthenticated requests return `{ error: \"Unauthorized\" }` with 401.",
-      "message": "The Error Handling section describes the envelope for 400, 404, and 401 responses but does not describe the 409 conflict envelope, even though 409 is listed in the HTTP Status Codes table immediately above and is produced by two mutating routes (register and plan creation)."
-    }
-  ]
+  "findings": []
 }

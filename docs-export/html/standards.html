@@ -12,53 +12,20 @@
 <h2>type: cross-cutting
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/decisions/0004-zod-validation-and-error-envelope.md, docs/security.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/security.md, docs/decisions/0004-zod-validation-and-error-envelope.md, docs/modules/app/technical.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
 <h1>Standards</h1>
 <h2>Authentication</h2>
-<p>Token-based authentication is implemented via NextAuth <code>CredentialsProvider</code> with JWT sessions (<code>src/lib/auth.ts</code>, see <code>docs/modules/lib/technical.md</code>); see <a href="docs/security.html">Security</a> for full detail.</p>
+<p>This codebase&#39;s authentication mechanism (NextAuth <code>CredentialsProvider</code>, JWT sessions, bcrypt password hashing) is detailed in <a href="security.html">security.md</a>. Every route that needs the current user follows the single pattern of calling <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>) before performing any database read/write scoped to the caller.</p>
 <h2>API Conventions</h2>
-<p>API routes are grouped under <code>/api</code> (<code>/api/auth/register</code>, <code>/api/plans</code>, <code>/api/plans/{planId}</code>, <code>/api/plans/{planId}/items</code>, <code>/api/auth/[...nextauth]</code>) - see <code>docs/modules/app/technical.md</code> for the full endpoint table. Note: Routes are not versioned in the URL path (no <code>/api/v1/...</code> prefix); no versioning scheme was found in inputs.code.</p>
-<h3>HTTP Status Codes</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>200</td>
-<td>Success (GET)</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Created (register, plan, item)</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Invalid input (zod validation failure)</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized (no session)</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not found (resource missing or not owned)</td>
-</tr>
-<tr>
-<td>409</td>
-<td>Conflict (duplicate email or duplicate plan)</td>
-</tr>
-</tbody></table>
+<p>Resources are exposed under <code>/api/plans</code> (collection) and <code>/api/plans/{planId}</code> (item), with a nested <code>/api/plans/{planId}/items</code> collection, following REST verb-to-HTTP-method conventions: GET (read), POST (create), DELETE (remove) - see <a href="modules/app/technical.html">modules/app/technical.md</a> for the full endpoint table. No PUT/PATCH update endpoint exists for plans or items in inputs.code. [NEEDS CLARIFICATION] whether plan/item editing is planned; no route implements it in inputs.code.</p>
 <h2>Error Handling</h2>
-<p>Mutating routes validate input with <code>zod</code> <code>.safeParse()</code> and return <code>{ error, details }</code> JSON with HTTP 400 on failure (see <code>docs/decisions/0004-zod-validation-and-error-envelope.md</code>). Ownership/not-found failures return <code>{ error: &quot;Not found&quot; }</code> with 404; unauthenticated requests return <code>{ error: &quot;Unauthorized&quot; }</code> with 401.</p>
+<p>All observed API routes return JSON of the shape <code>{ error: string }</code> (optionally with a <code>details</code> object from zod&#39;s <code>flatten()</code>), using status codes 400/401/404/409 as itemized in <a href="security.html">security.md</a>. See <a href="decisions/0004-zod-validation-and-error-envelope.html">decisions/0004-zod-validation-and-error-envelope.md</a> for the rationale and a noted deviation from a more structured error-code convention.</p>
 <h2>Logging</h2>
-<p><code>src/lib/db.ts</code> configures Prisma client logging for <code>error</code> and <code>warn</code> levels only. Note: No application-level logging framework (beyond Prisma&#39;s own <code>log</code> option) was found in <code>src/app/*</code> or <code>src/lib/*</code>.</p>
+<p>Only the Prisma client&#39;s built-in <code>error</code>/<code>warn</code> log levels are configured (<code>src/lib/db.ts</code>). Only the Prisma client&#39;s built-in <code>error</code>/<code>warn</code> log levels are configured (<code>src/lib/db.ts</code>). No structured application-level logging (INFO/DEBUG) - no <code>console.*</code> calls, and no logging library such as winston or pino - was found anywhere in <code>src/</code> in inputs.code.</p>
 
   </article>
 </body>

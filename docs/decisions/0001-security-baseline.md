@@ -2,31 +2,30 @@
 type: decision
 audience: [developer]
 language: en
-links: [docs/modules/lib/technical.md, docs/modules/app/technical.md, docs/security.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/decisions/0005-per-user-tenant-isolation.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
 generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93
 ---
 
 # ADR: Security Baseline
-[NEEDS CLARIFICATION] [REVIEW] consistency: ADR numbering collision: this decision is numbered 0001, the same number used by docs/decisions/0001-prisma-driver-adapter-postgresql.md. Every other decision in the set (0002-0005) has a unique number, so two ADRs sharing 0001 is an inconsistency in the decision-record numbering scheme.
 
-**Status:** Accepted (inferred from current implementation in code; no separate decision record was present in inputs)
+**Status:** Accepted
 
 ## Context
 
-The application handles user credentials and per-user financial plan data and needs baseline security practices around credential storage and route protection.
+The finance-planner application stores personal financial data (plans and planned items) per user account. It must ensure only the owning user can read or write their own data, that credentials are never stored in plaintext, and that unauthenticated requests are rejected.
 
 ## Decision
 
-We will hash passwords with bcrypt (cost factor 12) before storage (`src/app/api/auth/register/route.ts`) and verify credentials with `bcrypt.compare` on login (`src/lib/auth.ts`). We will require every plan- and item-related API route to call `requireUserId()` (`src/lib/requireUser.ts`) and return HTTP 401 Unauthorized before executing any business logic when no authenticated session exists (see `docs/security.md`).
+We will require a valid NextAuth session for every plan/item API route, resolved via `requireUserId()` (`src/lib/requireUser.ts`); routes return HTTP 401 when no session is present (see `src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`, `src/app/api/plans/[planId]/items/route.ts`). We will hash passwords with bcrypt at a cost factor of 12 before persisting them (`src/app/api/auth/register/route.ts`) and verify with `bcrypt.compare` at sign-in (`src/lib/auth.ts`). We will scope every plan lookup to `{ id: planId, userId }` so a user can never read or modify another user's plan (see [0005-per-user-tenant-isolation.md](0005-per-user-tenant-isolation.md)).
 
 ## Consequences
 
 **Positive:**
-- Plaintext passwords are never persisted.
-- Unauthenticated requests are rejected uniformly across all protected API routes.
+- Every plan-scoped endpoint enforces ownership at the query level, reducing the risk of insecure direct object reference (IDOR) issues.
+- Passwords are never stored or compared in plaintext.
 
 **Negative:**
-- [NEEDS CLARIFICATION] No rate-limiting, CSRF protection, or transport-security (HTTPS enforcement) configuration was found in inputs.code; these baseline hardening measures are unconfirmed.
+- [NEEDS CLARIFICATION] No rate-limiting, account lockout, or explicit CSRF handling beyond NextAuth's defaults was found in inputs.code; these may still need explicit design decisions.

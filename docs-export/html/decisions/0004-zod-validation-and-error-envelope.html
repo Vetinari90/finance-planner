@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ADR: Zod Validation and Error Envelope</title>
+  <title>ADR: Zod Validation with a Common Error Envelope</title>
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -12,25 +12,27 @@
 <h2>type: decision
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/standards.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/standards.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
 generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
-<h1>ADR: Zod Validation and Error Envelope</h1>
-<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<h1>ADR: Zod Validation with a Common Error Envelope</h1>
+<p><strong>Status:</strong> Accepted</p>
 <h2>Context</h2>
-<p>API routes need to validate untrusted request bodies and return a consistent error shape to clients.</p>
+<p>Every API route that accepts a request body needs to validate untrusted input before it reaches the database.</p>
 <h2>Decision</h2>
-<p>We will parse the request body of every mutating API route with a <code>zod</code> schema via <code>.safeParse()</code>: <code>RegisterSchema</code> in <code>src/app/api/auth/register/route.ts</code>, <code>CreatePlanSchema</code> in <code>src/app/api/plans/route.ts</code>, and <code>CreateItemSchema</code> in <code>src/app/api/plans/[planId]/items/route.ts</code>. On failure, the route returns HTTP 400 with <code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code>.</p>
+<p>We will validate all POST bodies with <code>zod</code> schemas defined per route: <code>RegisterSchema</code> (<code>src/app/api/auth/register/route.ts</code>: email, password min 8 characters, optional name max 80), <code>CreatePlanSchema</code> (<code>src/app/api/plans/route.ts</code>: year 2000-2100, month 1-12, 3-letter currency defaulting to <code>&quot;CZK&quot;</code>), and <code>CreateItemSchema</code> (<code>src/app/api/plans/[planId]/items/route.ts</code>: title max 120, non-negative integer <code>amountCents</code>, optional <code>categoryId</code>/<code>note</code>). On validation failure, routes return HTTP 400 with body <code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code>. Other failure cases return a flat <code>{ error: &quot;&lt;message&gt;&quot; }</code> string (e.g. <code>{ error: &quot;Unauthorized&quot; }</code> for 401, <code>{ error: &quot;Not found&quot; }</code> for 404, <code>{ error: &quot;Email already exists&quot; }</code> / <code>{ error: &quot;Plan for this month already exists&quot; }</code> for 409).</p>
 <h2>Consequences</h2>
 <p><strong>Positive:</strong></p>
 <ul>
-<li>Validation logic and error shape are consistent across the register, plans, and items endpoints.</li>
+<li>Input shape is enforced consistently at the API boundary before any database call.</li>
+<li>Validation errors expose field-level detail (<code>parsed.error.flatten()</code>) to help API consumers correct requests.</li>
 </ul>
 <p><strong>Negative:</strong></p>
 <ul>
-<li>[NEEDS CLARIFICATION] No shared/reusable error-envelope helper or centralized validation middleware was found in inputs.code; each route repeats the same <code>safeParse</code>/400-response pattern inline.</li>
+<li>The actual error shape (<code>{ error: string, details?: object }</code>) is a flatter, string-based envelope than the nested <code>{ error: { code, message, requestId } }</code> convention shown in the project&#39;s cross-cutting standards document (see <a href="../standards.html">../standards.md</a>). This is an existing deviation between the documented convention and the current implementation that inputs.code does not reconcile.
+[NEEDS CLARIFICATION] [REVIEW] consistency: This ADR claims the nested <code>{ error: { code, message, requestId } }</code> envelope convention is &#39;shown in the project&#39;s cross-cutting standards document&#39; (docs/standards.md), but docs/standards.md&#39;s own Error Handling section does not state or display any such nested convention - it only describes the same flat <code>{ error: string }</code> shape and refers back to this ADR. The two docs are inconsistent about where this &#39;documented convention&#39; is actually defined.</li>
 </ul>
 
   </article>

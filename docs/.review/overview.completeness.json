@@ -2,12 +2,5 @@
   "schemaVersion": "1",
   "rel": "docs/overview.md",
   "dimension": "completeness",
-  "findings": [
-    {
-      "confidence": "high",
-      "evidence": "docs/modules/app/use-cases.md documents six use cases (UC-001..UC-006), including 'UC-006: Logout' (user clicks Logout, calls /api/auth/signout via src/app/logout/route.ts, session is cleared). The overview's own Modules table row for 'app' already states its role includes 'login/logout'. codeFiles also include src/app/logout/route.ts implementing this flow.",
-      "locationHint": "## Key User Flows",
-      "message": "The Key User Flows section enumerates only 5 flows (register, login, create plan, add item, delete plan) and silently omits the Logout flow (UC-006), even though the source use-cases.md documents it and the doc's own Modules table already credits the app module with 'login/logout'."
-    }
-  ]
+  "findings": []
 }

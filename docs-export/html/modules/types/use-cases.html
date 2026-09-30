@@ -12,21 +12,21 @@
 <h2>type: use-cases
 audience: [developer]
 language: en
-links: [docs/modules/types/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: []
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
 <h1>Use Cases</h1>
-<h2>UC-001: Type-Safe Session User Id Access</h2>
+<h2>UC-001: Developer accesses <code>session.user.id</code> with type safety</h2>
 <p><strong>Actor:</strong> Developer / TypeScript compiler</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>The module augments <code>next-auth</code>&#39;s <code>Session</code> interface via <code>declare module &quot;next-auth&quot;</code> (<code>src/types/next-auth.d.ts</code>), adding <code>user: { id: string; name?: string | null; email?: string | null }</code>.</li>
-<li>Code across the app and lib modules (e.g. <code>src/lib/auth.ts</code>, <code>src/lib/requireUser.ts</code>, <code>src/app/plans/page.tsx</code>) reads <code>session.user.id</code> and <code>session.user.email</code>.</li>
-<li>The TypeScript compiler type-checks these reads against the augmented interface rather than the base <code>next-auth</code> <code>Session</code> type.</li>
+<li>Code calls <code>getServerSession(authOptions)</code>.</li>
+<li>The result&#39;s <code>session.user.id</code> is accessed (e.g. <code>src/lib/requireUser.ts</code>, <code>src/app/plans/page.tsx</code>).</li>
+<li>The TypeScript compiler resolves <code>id</code> against the augmented <code>Session</code> interface declared in <code>src/types/next-auth.d.ts</code>.</li>
 </ol>
-<p><strong>Expected Result:</strong> Any code that reads <code>session.user.id</code> is type-checked at compile time, without needing a manual type assertion or <code>any</code> cast.</p>
+<p><strong>Expected Result:</strong> No TypeScript error is raised for <code>session.user.id</code>. Without this augmentation, the default <code>next-auth</code> <code>Session.user</code> type would not include an <code>id</code> field.</p>
 
   </article>
 </body>

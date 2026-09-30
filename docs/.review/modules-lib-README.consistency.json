@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/modules/lib/README.md",
   "dimension": "consistency",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "The same row explicitly states 'lib does not import from app', i.e. app is not a dependency of lib but rather a consumer of lib. Contrast with the 'types' row directly below it in the same table, which IS a genuine forward dependency (lib reads session.user.id, valid only because of the Session augmentation in src/types/next-auth.d.ts).",
+      "locationHint": "| app | Consumes `authOptions`, `prisma`, and `requireUserId` exported from this module. `lib` does not import from `app`. |",
+      "message": "Internal inconsistency in the 'Dependencies' table: the 'app' row documents a reverse relationship (app depends on lib, not the other way around) while the adjacent 'types' row documents lib's actual forward dependency on types. Mixing 'depends on' and 'depended on by' semantics under one 'Dependencies' heading, within the same table, is self-contradictory."
+    }
+  ]
 }

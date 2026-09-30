@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/decisions/0001-prisma-driver-adapter-postgresql.md",
   "dimension": "consistency",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "The sibling decision doc docs/decisions/0001-security-baseline.md also uses ADR number 0001 (title 'ADR: Security Baseline'), while the rest of the decision set (0002-credentials-auth-with-jwt-sessions.md, 0003-store-money-as-integer-cents.md, 0004-zod-validation-and-error-envelope.md, 0005-per-user-tenant-isolation.md) each use a unique, non-colliding number.",
+      "locationHint": "# ADR: Prisma with PostgreSQL Driver Adapter",
+      "message": "ADR numbering collision: this decision is numbered 0001, the same number used by docs/decisions/0001-security-baseline.md. Every other decision in the set (0002-0005) has a unique number, so two ADRs sharing 0001 is an inconsistency in the decision-record numbering scheme."
+    }
+  ]
 }

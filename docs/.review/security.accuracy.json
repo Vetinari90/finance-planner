@@ -2,5 +2,12 @@
   "schemaVersion": "1",
   "rel": "docs/security.md",
   "dimension": "accuracy",
-  "findings": []
+  "findings": [
+    {
+      "confidence": "medium",
+      "evidence": "src/app/api/plans/[planId]/items/route.ts only exports POST (no GET/DELETE handler); src/app/api/plans/route.ts exports GET/POST (no DELETE); src/app/api/plans/[planId]/route.ts exports GET/DELETE (no POST). No single resource in codeFiles actually supports all of GET/POST/DELETE.",
+      "locationHint": "Observed routes follow REST-style plural resource naming under `/api/plans`, with a nested `/api/plans/{planId}/items` collection, using GET/POST/DELETE per resource (see [modules/app/technical.md](modules/app/technical.md)). No API version prefix (e.g. `/api/v1/...`) is present in the routes found in inputs.code. [NEEDS CLARIFICATION] whether API versioning is planned.",
+      "message": "The claim 'GET/POST/DELETE per resource' overstates what each route file actually implements: the items collection route (src/app/api/plans/[planId]/items/route.ts) exposes only POST, and neither the plans collection nor the plan-detail route exposes all three methods."
+    }
+  ]
 }

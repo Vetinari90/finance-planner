@@ -2,35 +2,37 @@
 type: readme
 audience: [developer]
 language: en
-links: [docs/modules/types/technical.md, docs/modules/types/use-cases.md, docs/modules/lib/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/modules/lib/README.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
-# Module: Types (src/types)
+# Module: types
 
 ## Purpose
 
-The types module contains a single TypeScript ambient declaration file (`src/types/next-auth.d.ts`) that augments the `next-auth` `Session` type so that `session.user.id` is a typed, required `string` field, alongside the existing `name`/`email` fields.
+The `types` module (`src/types`) contains ambient TypeScript declarations that extend third-party library types for use across the application. Currently it augments the `next-auth` module's `Session` type (`src/types/next-auth.d.ts`).
 
 ## Key Entities
 
 | Entity | Description |
 |--------|-------------|
-| Session (augmented) | Module augmentation of `next-auth`'s `Session` interface, adding `user.id: string` alongside the existing `name`/`email` fields (`src/types/next-auth.d.ts`). |
+| Session (augmented) | Adds a required `id: string` (plus optional `name`/`email`) to `Session.user`, matching the id NextAuth's `jwt`/`session` callbacks set in `src/lib/auth.ts`. |
 
 ## Data Storage
 
-**Database:** Not applicable - this module declares only TypeScript compile-time types and performs no data storage.
+**Database:** N/A - this module contains no runtime code or data access; it is a compile-time type declaration only.
 
 | Table/Collection | Stores |
 |------------------|--------|
-| | |
+| N/A | N/A |
 
 ## Dependencies
 
 | Module | Purpose |
 |--------|---------|
-| None | No module imports `src/types/next-auth.d.ts` directly (TypeScript ambient declaration files are picked up automatically by the compiler); its effect is consumed indirectly wherever `session.user.id` is read, e.g. `src/lib/auth.ts` and `src/lib/requireUser.ts`. |
+| lib | `src/lib/auth.ts` and `src/lib/requireUser.ts` rely on `session.user.id`, which is only valid TypeScript because of this module's declaration merging. |
+
+[NEEDS CLARIFICATION] This module's declaration augments the external `next-auth` package's own `Session` interface; no `package.json` is present in inputs.code to confirm the `next-auth` version this augmentation targets.

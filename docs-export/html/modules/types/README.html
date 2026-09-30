@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Module: Types (src/types)</title>
+  <title>Module: types</title>
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
@@ -12,14 +12,14 @@
 <h2>type: readme
 audience: [developer]
 language: en
-links: [docs/modules/types/technical.md, docs/modules/types/use-cases.md, docs/modules/lib/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/modules/lib/README.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Module: Types (src/types)</h1>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Module: types</h1>
 <h2>Purpose</h2>
-<p>The types module contains a single TypeScript ambient declaration file (<code>src/types/next-auth.d.ts</code>) that augments the <code>next-auth</code> <code>Session</code> type so that <code>session.user.id</code> is a typed, required <code>string</code> field, alongside the existing <code>name</code>/<code>email</code> fields.</p>
+<p>The <code>types</code> module (<code>src/types</code>) contains ambient TypeScript declarations that extend third-party library types for use across the application. Currently it augments the <code>next-auth</code> module&#39;s <code>Session</code> type (<code>src/types/next-auth.d.ts</code>).</p>
 <h2>Key Entities</h2>
 <table>
 <thead>
@@ -30,11 +30,11 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </thead>
 <tbody><tr>
 <td>Session (augmented)</td>
-<td>Module augmentation of <code>next-auth</code>&#39;s <code>Session</code> interface, adding <code>user.id: string</code> alongside the existing <code>name</code>/<code>email</code> fields (<code>src/types/next-auth.d.ts</code>).</td>
+<td>Adds a required <code>id: string</code> (plus optional <code>name</code>/<code>email</code>) to <code>Session.user</code>, matching the id NextAuth&#39;s <code>jwt</code>/<code>session</code> callbacks set in <code>src/lib/auth.ts</code>.</td>
 </tr>
 </tbody></table>
 <h2>Data Storage</h2>
-<p><strong>Database:</strong> Not applicable - this module declares only TypeScript compile-time types and performs no data storage.</p>
+<p><strong>Database:</strong> N/A - this module contains no runtime code or data access; it is a compile-time type declaration only.</p>
 <table>
 <thead>
 <tr>
@@ -43,8 +43,8 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td></td>
-<td></td>
+<td>N/A</td>
+<td>N/A</td>
 </tr>
 </tbody></table>
 <h2>Dependencies</h2>
@@ -56,10 +56,11 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>None</td>
-<td>No module imports <code>src/types/next-auth.d.ts</code> directly (TypeScript ambient declaration files are picked up automatically by the compiler); its effect is consumed indirectly wherever <code>session.user.id</code> is read, e.g. <code>src/lib/auth.ts</code> and <code>src/lib/requireUser.ts</code>.</td>
+<td>lib</td>
+<td><code>src/lib/auth.ts</code> and <code>src/lib/requireUser.ts</code> rely on <code>session.user.id</code>, which is only valid TypeScript because of this module&#39;s declaration merging.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] This module&#39;s declaration augments the external <code>next-auth</code> package&#39;s own <code>Session</code> interface; no <code>package.json</code> is present in inputs.code to confirm the <code>next-auth</code> version this augmentation targets.</p>
 
   </article>
 </body>

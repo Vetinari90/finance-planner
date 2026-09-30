@@ -12,14 +12,14 @@
 <h2>type: data-model
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/decisions/0001-prisma-driver-adapter-postgresql.md, docs/decisions/0003-store-money-as-integer-cents.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/modules/lib/README.md, docs/modules/app/README.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
 <h1>Module: Data Model</h1>
 <h2>Purpose</h2>
-<p>This document consolidates the data entities inferred from Prisma query call sites across the app module, since no <code>schema.prisma</code> file was present in inputs.code.</p>
+<p>This document consolidates the data model implied by the application code across the <code>lib</code> and <code>app</code> modules: the entities persisted in PostgreSQL via Prisma and how they are used.</p>
 <h2>Key Entities</h2>
 <table>
 <thead>
@@ -30,19 +30,20 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </thead>
 <tbody><tr>
 <td>User</td>
-<td><code>id</code>, <code>email</code>, <code>password</code> (bcrypt hash), <code>name</code> (optional) - inferred from <code>prisma.user.create</code>/<code>findUnique</code> calls in <code>src/app/api/auth/register/route.ts</code> and <code>src/lib/auth.ts</code>.</td>
+<td>Registered account: <code>id</code>, <code>email</code> (looked up lower-cased/trimmed), <code>password</code> (bcrypt hash), optional <code>name</code>. Created in <code>src/app/api/auth/register/route.ts</code>; looked up by email in <code>src/lib/auth.ts</code>.</td>
 </tr>
 <tr>
 <td>Plan</td>
-<td><code>id</code>, <code>userId</code>, <code>year</code>, <code>month</code>, <code>currency</code>, <code>title</code> - inferred from <code>prisma.plan.create</code>/<code>findFirst</code>/<code>findMany</code> calls in <code>src/app/api/plans/route.ts</code> and <code>src/app/api/plans/[planId]/route.ts</code>. A unique constraint on <code>(userId, year, month)</code> is implied by the 409 conflict handling in <code>src/app/api/plans/route.ts</code>, but the constraint itself could not be confirmed without <code>schema.prisma</code>.</td>
+<td>A monthly financial plan: <code>id</code>, <code>userId</code>, <code>year</code>, <code>month</code>, <code>currency</code> (3-letter code, default <code>&quot;CZK&quot;</code>), <code>title</code>. Appears to be unique per <code>(userId, year, month)</code>, inferred from the HTTP 409 conflict handling and an inline comment (&quot;unikát (userId, year, month)&quot;) in <code>src/app/api/plans/route.ts</code>.</td>
 </tr>
 <tr>
 <td>PlannedItem</td>
-<td><code>id</code>, <code>planId</code>, <code>title</code>, <code>amountCents</code> (integer), <code>categoryId</code> (optional), <code>note</code> (optional), <code>createdAt</code> - inferred from <code>prisma.plannedItem.create</code> in <code>src/app/api/plans/[planId]/items/route.ts</code> and the <code>orderBy: { createdAt: &quot;asc&quot; }</code> read in <code>src/app/api/plans/[planId]/route.ts</code>.</td>
+<td>A line item within a plan: <code>id</code>, <code>planId</code>, <code>title</code>, <code>amountCents</code> (non-negative integer), optional <code>categoryId</code>, optional <code>note</code>, <code>createdAt</code>. Created in <code>src/app/api/plans/[planId]/items/route.ts</code>.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] No <code>schema.prisma</code> file is present in inputs.code; the field list above is inferred from TypeScript usage (Prisma <code>where</code>/<code>data</code>/<code>select</code> clauses) rather than read directly from a schema, so exact column types, nullability, indexes, and foreign-key/cascade behavior could not be confirmed.</p>
 <h2>Data Storage</h2>
-<p><strong>Database:</strong> PostgreSQL, accessed through Prisma with the <code>PrismaPg</code> driver adapter (<code>@prisma/adapter-pg</code>), configured from <code>DATABASE_URL</code> (<code>src/lib/db.ts</code>; see <code>docs/decisions/0001-prisma-driver-adapter-postgresql.md</code>).</p>
+<p><strong>Database:</strong> PostgreSQL, accessed via <code>PrismaClient</code> with the <code>@prisma/adapter-pg</code> driver adapter and a <code>DATABASE_URL</code> connection string (<code>src/lib/db.ts</code>).</p>
 <table>
 <thead>
 <tr>
@@ -51,10 +52,19 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>[NEEDS CLARIFICATION]</td>
-<td>Exact table names, column types, and constraints require <code>schema.prisma</code>, which was not present in inputs.code; the entities above are inferred solely from Prisma client call sites.</td>
+<td>user</td>
+<td>Account credentials/profile.</td>
+</tr>
+<tr>
+<td>plan</td>
+<td>One row per user per plan-month.</td>
+</tr>
+<tr>
+<td>plannedItem</td>
+<td>Line items belonging to a plan.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] Actual table/column names depend on <code>schema.prisma</code> (and any <code>@@map</code>/<code>@map</code> directives), which is not present in inputs.code; the names above reflect the Prisma model accessors used in code (<code>prisma.user</code>, <code>prisma.plan</code>, <code>prisma.plannedItem</code>).</p>
 <h2>Dependencies</h2>
 <table>
 <thead>
@@ -64,12 +74,12 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>app</td>
-<td>Every Prisma call site that establishes the data model above lives in <code>src/app/api/*</code> (see <code>docs/modules/app/README.md</code>).</td>
+<td>lib</td>
+<td>Owns the Prisma client through which all entities above are read/written (<code>src/lib/db.ts</code>).</td>
 </tr>
 <tr>
-<td>lib</td>
-<td>Provides the shared <code>prisma</code> client instance used by all of the above call sites (<code>src/lib/db.ts</code>, see <code>docs/modules/lib/README.md</code>).</td>
+<td>app</td>
+<td>Defines the zod schemas (<code>RegisterSchema</code>, <code>CreatePlanSchema</code>, <code>CreateItemSchema</code>) that constrain what values can be written for each entity.</td>
 </tr>
 </tbody></table>
 

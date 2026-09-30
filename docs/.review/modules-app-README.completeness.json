@@ -2,12 +2,5 @@
   "schemaVersion": "1",
   "rel": "docs/modules/app/README.md",
   "dimension": "completeness",
-  "findings": [
-    {
-      "confidence": "high",
-      "evidence": "src/app/api/auth/register/route.ts calls prisma.user.findUnique({ where: { email } }) and prisma.user.create({ data: { email, password: hash, name } }), reading and writing a User table with email/password/name fields.",
-      "locationHint": "| PlannedItem (via Prisma) | Planned items read/written by `src/app/api/plans/[planId]/items/route.ts` (`title`, `amountCents`, `categoryId`, `note`, `planId`). |",
-      "message": "The Data Storage table lists only Plan and PlannedItem but omits the User table, even though `src/app/api/auth/register/route.ts` (a listed input) directly reads and writes `prisma.user` records (email, password, name)."
-    }
-  ]
+  "findings": []
 }

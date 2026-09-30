@@ -2,38 +2,29 @@
 type: cross-cutting
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/modules/app/technical.md, docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0001-security-baseline.md, docs/decisions/0005-per-user-tenant-isolation.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links: [docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0001-security-baseline.md, docs/decisions/0004-zod-validation-and-error-envelope.md, docs/modules/app/technical.md]
+generated_from: 0b7a27903123c3dfbbd218b19f18de5be68d5d28
 generated_by: sdlc-doc-toolkit@3.89.0
 generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
-# Security
+# Standards
 
 ## Authentication
 
-The application uses NextAuth's `CredentialsProvider` (email + password) with `session: { strategy: "jwt" }` (`src/lib/auth.ts`, see `docs/modules/lib/technical.md`). Passwords are hashed with bcrypt at cost factor 12 on registration and verified with `bcrypt.compare` on login (`src/app/api/auth/register/route.ts`, `src/lib/auth.ts`; see `docs/decisions/0002-credentials-auth-with-jwt-sessions.md`). No `secret` option is set explicitly in `authOptions` (`src/lib/auth.ts`); NextAuth's JWT session strategy requires a signing secret, conventionally supplied via the `NEXTAUTH_SECRET` environment variable at deploy time, which is not part of `inputs.code`.
+The application uses NextAuth's `CredentialsProvider` with JWT-based sessions (`session: { strategy: "jwt" }`, `src/lib/auth.ts`). Passwords are hashed with bcrypt (cost factor 12) at registration (`src/app/api/auth/register/route.ts`) and verified with `bcrypt.compare` at sign-in. Every plan and item API route resolves the current user via `requireUserId()` (`src/lib/requireUser.ts`) and returns HTTP 401 when no session is present. See [decisions/0002-credentials-auth-with-jwt-sessions.md](decisions/0002-credentials-auth-with-jwt-sessions.md) and [decisions/0001-security-baseline.md](decisions/0001-security-baseline.md).
+
+No `NEXTAUTH_SECRET` or token lifetime (JWT `maxAge`) configuration is set in `src/lib/auth.ts` or the NextAuth route handler (`src/app/api/auth/[...nextauth]/route.ts`); NextAuth's default JWT session settings apply, and `NEXTAUTH_SECRET` must be supplied via environment variable at deploy time rather than in application code.
 
 ## API Conventions
 
-Every protected API route calls `requireUserId()` (`src/lib/requireUser.ts`) before performing any read or write, and returns HTTP 401 if no authenticated session exists. Plan and item queries are additionally scoped by both resource id and `userId` (e.g. `prisma.plan.findFirst({ where: { id: planId, userId } })` in `src/app/api/plans/[planId]/route.ts`), enforcing per-user data isolation (see `docs/decisions/0005-per-user-tenant-isolation.md`).
-
-### HTTP Status Codes
-
-| Code | Meaning (as used in this project) |
-|------|-------------|
-| 200 | Successful GET (e.g. `src/app/api/plans/route.ts`) |
-| 201 | Resource created (register, plan, item) |
-| 400 | zod validation failure (`parsed.error.flatten()`) |
-| 401 | No authenticated session (`requireUserId()` returned `null`) |
-| 404 | Resource not found or not owned by the requesting user |
-| 409 | Conflict (duplicate email on register; duplicate plan for user/year/month) |
+Observed routes follow REST-style plural resource naming under `/api/plans`, with a nested `/api/plans/{planId}/items` collection, using GET/POST/DELETE per resource (see [modules/app/technical.md](modules/app/technical.md)). No API version prefix (e.g. `/api/v1/...`) is present in the routes found in inputs.code. [NEEDS CLARIFICATION] whether API versioning is planned.
 
 ## Error Handling
 
-API routes return errors as JSON with an `error` field and, for validation failures, a `details` field containing the zod flattened error (`{ error: "Invalid input", details: parsed.error.flatten() }`, e.g. `src/app/api/auth/register/route.ts`). The project's error envelope is limited to `{ error: string }` (with an additional `details` field carrying the zod flattened error on validation failures); no `code` or `requestId` field appears in any API response (e.g. `src/app/api/plans/route.ts`, `src/app/api/plans/[planId]/route.ts`).
+Handlers return `NextResponse.json({ error: "<message>" }, { status })` with status codes 400 (validation, via zod `safeParse`), 401 (unauthenticated), 404 (not found / not owned), and 409 (unique-constraint conflicts, e.g. duplicate plan for a month or duplicate registration email); validation failures additionally include `details: parsed.error.flatten()`. No explicit 5xx handling or a `requestId` field was observed in inputs.code. See [decisions/0004-zod-validation-and-error-envelope.md](decisions/0004-zod-validation-and-error-envelope.md).
 
 ## Logging
 
-`src/lib/db.ts` configures Prisma logging for `["error", "warn"]` only. [NEEDS CLARIFICATION] No explicit statement confirming that passwords, tokens, or PII are excluded from these Prisma error/warn logs was found in inputs.code.
+`src/lib/db.ts` configures the Prisma client with `log: ["error", "warn"]`. No application-level logging (INFO/DEBUG) beyond Prisma's built-in `error`/`warn` logs is present in inputs.code: no `console.log`/`console.info`/`console.debug`/`console.warn`/`console.error` calls appear anywhere in the application source. Passwords are bcrypt-hashed (`src/app/api/auth/register/route.ts`) before being persisted via `prisma.user.create`, so plaintext passwords are never available to be logged; no other explicit PII log-exclusion statement was found.
