@@ -1,19 +1,22 @@
 ---
 type: technical
+purpose: "Module technical reference - API, configuration, testing"
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/app/technical.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/lib/README.md
+  - docs/modules/lib/use-cases.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: sdlc-doc-toolkit@3.89.0
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
-# Technical: Lib (src/lib)
+# Technical: lib
 
 ## API Endpoints
 
-The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module's API routes (see `docs/modules/app/technical.md`). The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module's API routes (see `docs/modules/app/technical.md`).
+The three files in this module (`src/lib/auth.ts`, `src/lib/db.ts`, `src/lib/requireUser.ts`) do not define any HTTP route handlers. `auth.ts` exports a `NextAuthOptions` configuration object (`authOptions`), `db.ts` exports a Prisma client instance (`prisma`), and `requireUser.ts` exports a plain async function (`requireUserId`). [NEEDS CLARIFICATION] The route handler(s) that mount `authOptions` (typically a NextAuth catch-all API route) are not part of this module's inputs, so the externally exposed path(s) cannot be confirmed from this manifest.
 
 ## Configuration
 
@@ -21,15 +24,12 @@ The lib module exposes no HTTP endpoints of its own; it is consumed internally b
 
 | Variable | Required | Description |
 |----------|----------|--------------|
-| DATABASE_URL | Yes | PostgreSQL connection string; `src/lib/db.ts` throws `"DATABASE_URL is not set"` at import time if it is missing. |
+| `DATABASE_URL` | Yes | PostgreSQL connection string. Read in `src/lib/db.ts`; the module throws `"DATABASE_URL is not set"` at load time if it is missing. |
 
 ### Secrets
 
-| Secret | Description |
-|--------|-------------|
-| DATABASE_URL | Database connection string, read from `process.env.DATABASE_URL` (`src/lib/db.ts`). |
-| [NEEDS CLARIFICATION] | No JWT/session signing secret (e.g. `NEXTAUTH_SECRET`) read was found in `src/lib/auth.ts`. |
+[NEEDS CLARIFICATION] `src/lib/auth.ts` does not reference a NextAuth signing secret (e.g. an env var such as `NEXTAUTH_SECRET`) in the reviewed code, and no secrets configuration file is present in this module's inputs. Whether such a secret is configured elsewhere cannot be confirmed from the files available here.
 
 ## Testing
 
-No test files for `src/lib/*` were present in inputs.code. No test files for `src/lib/*` were present in inputs.code.
+[NEEDS CLARIFICATION] No test files, test scripts, or `package.json` are present in this module's inputs, so the test command and test coverage for `src/lib/auth.ts`, `src/lib/db.ts`, and `src/lib/requireUser.ts` cannot be confirmed.

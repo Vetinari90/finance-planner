@@ -2,37 +2,46 @@
 type: readme
 audience: [developer]
 language: en
-links: [docs/modules/lib/technical.md, docs/modules/lib/use-cases.md, docs/modules/app/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/lib/technical.md
+  - docs/modules/lib/use-cases.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: sdlc-doc-toolkit@3.89.0
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58
 ---
 
-# Module: Lib (src/lib)
+# Module: lib
 
 ## Purpose
 
-The lib module provides the shared infrastructure used by the app module: the NextAuth configuration (`src/lib/auth.ts`), the Prisma database client singleton (`src/lib/db.ts`), and a helper to resolve the current authenticated user's id on the server (`src/lib/requireUser.ts`).
+The `lib` module provides shared server-side infrastructure consumed by the rest of the application: NextAuth credentials-based authentication configuration (`src/lib/auth.ts`), a Prisma-backed PostgreSQL database client (`src/lib/db.ts`), and a helper that resolves the currently authenticated user's id from the session (`src/lib/requireUser.ts`).
 
 ## Key Entities
 
 | Entity | Description |
 |--------|-------------|
-| authOptions | `NextAuthOptions` object configuring the credentials provider, JWT session strategy, and callbacks (`src/lib/auth.ts`). |
-[NEEDS CLARIFICATION] [REVIEW] completeness: The Key Entities table omits `requireUserId` (src/lib/requireUser.ts), even though the Purpose section explicitly names it as one of the three things the lib module provides. Only 2 of the 3 promised entities are documented in the table.
-| prisma | Shared `PrismaClient` singleton, adapted for PostgreSQL via `@prisma/adapter-pg` (`src/lib/db.ts`). |
+| User | Resolved via `prisma.user.findUnique({ where: { email } })` in `src/lib/auth.ts`. Fields observed in code: `id`, `email`, `name`, `password` (the password is a bcrypt hash compared with `bcrypt.compare`). [NEEDS CLARIFICATION] The full `User` model definition (e.g. a Prisma schema file) is not present in this module's inputs, so additional fields/columns cannot be confirmed. |
 
 ## Data Storage
 
-**Database:** PostgreSQL, via the `PrismaPg` driver adapter (`@prisma/adapter-pg`) configured from the `DATABASE_URL` environment variable (`src/lib/db.ts`).
+**Database:** PostgreSQL, accessed through `@prisma/adapter-pg` (`PrismaPg`) and a generated Prisma Client imported from `@/generated/prisma/client` (`src/lib/db.ts`). The connection string is read from the `DATABASE_URL` environment variable; `db.ts` throws at module-load time if it is unset.
 
 | Table/Collection | Stores |
 |------------------|--------|
-| User, Plan, PlannedItem (model accessor names inferred from Prisma Client calls across the codebase — `prisma.user`, `prisma.plan`, `prisma.plannedItem`; exact underlying table/column names are unconfirmed without a `schema.prisma` file) | No `schema.prisma` file was present in inputs.code; table/column definitions could not be confirmed beyond the fields referenced by Prisma calls in the app module (see `docs/modules/app/README.md`). |
+| user (Prisma model, accessed via `prisma.user`) | Email, name, and hashed password used for credentials-based sign-in (`src/lib/auth.ts`). |
+
+[NEEDS CLARIFICATION] No `schema.prisma` or migration files are present in this module's inputs, so the complete set of tables/models managed by this module cannot be enumerated beyond the `user` model referenced in `auth.ts`.
 
 ## Dependencies
 
 | Module | Purpose |
 |--------|---------|
-| types (implicit) — `src/types/next-auth.d.ts` augments the `next-auth` module's `Session` interface via TypeScript ambient declaration merging (`declare module "next-auth"`); this mechanism applies automatically to files within the TypeScript compilation scope and does not require an explicit import statement, which is why `src/lib/auth.ts` can type-safely assign `session.user.id = token.sub` without importing anything from `src/types` | No import of the `types` or `app` modules was found in `src/lib/*`. `src/lib/auth.ts` assigns `session.user.id = token.sub`, which is only type-safe due to the ambient augmentation in `src/types/next-auth.d.ts`, but no explicit import statement linking the two files was found. |
+| `next-auth` (and `next-auth/providers/credentials`) | Supplies `NextAuthOptions` and `CredentialsProvider` used to build `authOptions` in `src/lib/auth.ts`. |
+| `bcryptjs` | Verifies submitted passwords against the stored hash in `authOptions.providers[0].authorize` (`src/lib/auth.ts`). |
+| `@/generated/prisma/client` | Generated Prisma Client type/class instantiated in `src/lib/db.ts`. |
+| `@prisma/adapter-pg` | `PrismaPg` driver adapter used to connect the Prisma Client to PostgreSQL in `src/lib/db.ts`. |
+| `src/lib/db.ts` (internal) | Supplies the shared `prisma` client instance imported by `src/lib/auth.ts`. |
+| `src/lib/auth.ts` (internal) | Supplies `authOptions`, imported by `src/lib/requireUser.ts` to read the current session. |
+
+[NEEDS CLARIFICATION] No `package.json` is present in this module's inputs, so exact declared versions of `next-auth`, `bcryptjs`, and the Prisma/adapter packages cannot be confirmed; the table above lists only the import relationships observed directly in the source files.

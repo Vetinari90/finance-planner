@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1",
+  "entries": [
+    {
+      "outputPath": "docs/data-model.md",
+      "wpId": "wp-data-model",
+      "actionKey": "452e5f5de8e48faf55f371e880cc86b353beeaca29bb9496d04b9a0cffeceb96",
+      "outputSha256": "f6f22ae9720b82cdf925b6a05ad8526bc6b85e0857bac5ee18b256c971c549ea",
+      "inputsSha256": "c9a53573525eb6d150e8093b622f36153cae97de97b99f19821332142c9aad20",
+      "generatedAt": "2026-10-01T20:44:58.734Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/data-protection.md",
+      "wpId": "wp-data-protection",
+      "actionKey": "0c3d77bf6aebd1dd39c4bc2b5598181d4324bd6eb5d5e56556298384387b43b6",
+      "outputSha256": "2a9da76869ecd8f46d4c674e431708790181c5c4e68129b724eca55e6f9bc603",
+      "inputsSha256": "73581206b7030ef814a1f0b465a85972665847cb74b708984720ed6ef592abd8",
+      "generatedAt": "2026-10-01T20:46:57.311Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/decisions/0001-prisma-driver-adapter-postgresql.md",
+      "wpId": "wp-decisions-0001-prisma-driver-adapter-postgresql",
+      "actionKey": "daf72e3f58ab7530d571eb9c182c534b969c5dd22694f6ffdaa34a041fb2e7c5",
+      "outputSha256": "49d33c8b1a18891de1664c522d771ce62dc006a210073ffc7b79551e8ac13470",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T20:49:04.754Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/decisions/0001-security-baseline.md",
+      "wpId": "wp-decisions-0001-security-baseline",
+      "actionKey": "30b52d184d59b7f73fe06081da2fa245742466734877d62ef492df10a827743c",
+      "outputSha256": "9a586f6a918bab1b655827b9bc406f31013fe44afe82b488790bbadf292cd4d2",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T20:51:40.707Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/decisions/0002-credentials-auth-with-jwt-sessions.md",
+      "wpId": "wp-decisions-0002-credentials-auth-with-jwt-sessions",
+      "actionKey": "557712d3eec46db9da73dc85f458794c19dd2b29750a18e3d0f82f42ae79a941",
+      "outputSha256": "78a93dc0b946ca5c3c59d457004f870ec839ea60cd0e94355a7effc9b3019be4",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T20:53:32.253Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/decisions/0003-store-money-as-integer-cents.md",
+      "wpId": "wp-decisions-0003-store-money-as-integer-cents",
+      "actionKey": "4d94ce25238a5a119bd5e3ad613ae7e3aa8ca8d05edce1d5bc6cfa0f0e92bf45",
+      "outputSha256": "44ce02ce2f4209716f27e406db3ecc87045b0c2f19c5f6e1efa83dd27086f824",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T20:55:09.066Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/decisions/0004-zod-validation-and-error-envelope.md",
+      "wpId": "wp-decisions-0004-zod-validation-and-error-envelope",
+      "actionKey": "a68f5d6b4232cd55e73ed4d209934e80aa71a72df40437652dde3aa045780c7c",
+      "outputSha256": "503b097dc3b928fbc2ab49a0f90e8109d913afb0fd007dd8d5f89a45a6b7c981",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T20:57:08.384Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/decisions/0005-per-user-tenant-isolation.md",
+      "wpId": "wp-decisions-0005-per-user-tenant-isolation",
+      "actionKey": "3304d99c3cf2ba134d7f53eacd2a67dda1c7aa0fb1c6fd70361ccd297abaf955",
+      "outputSha256": "013b9ddc3754490a4054ad40b0e427ae34cba2098d9a27f470f20772dd129890",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T20:59:39.623Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/app/README.md",
+      "wpId": "wp-modules-app",
+      "actionKey": "b5ab0b338a864721cd8b73f8622371d4de2e2c369846a67b4cfbeca33532e27a",
+      "outputSha256": "d37ed38b56fa7fb467ea75c53c566acdaee811f53d0e1b11aca66432ca42d2ac",
+      "inputsSha256": "3ccb3dfa82979c9ccff9c158035d7ba97e40f7bc973be5e02c74b4a69586ce0a",
+      "generatedAt": "2026-10-01T20:38:24.937Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/app/technical.md",
+      "wpId": "wp-modules-app",
+      "actionKey": "b5ab0b338a864721cd8b73f8622371d4de2e2c369846a67b4cfbeca33532e27a",
+      "outputSha256": "c8ac4e1fc722bcbf8dd5228de307075d0793d36caa38cae6d49d57db9c349614",
+      "inputsSha256": "3ccb3dfa82979c9ccff9c158035d7ba97e40f7bc973be5e02c74b4a69586ce0a",
+      "generatedAt": "2026-10-01T20:38:24.937Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/app/use-cases.md",
+      "wpId": "wp-modules-app",
+      "actionKey": "b5ab0b338a864721cd8b73f8622371d4de2e2c369846a67b4cfbeca33532e27a",
+      "outputSha256": "e93a1cd2aa7943039661d6162a9bdd64a8edccc0757af257e2e9064a4fc145ff",
+      "inputsSha256": "3ccb3dfa82979c9ccff9c158035d7ba97e40f7bc973be5e02c74b4a69586ce0a",
+      "generatedAt": "2026-10-01T20:38:24.937Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/lib/README.md",
+      "wpId": "wp-modules-lib",
+      "actionKey": "13ce86fff2a01dfbcdf279ab09acea445754237b58acece3ae600742840ffa60",
+      "outputSha256": "571ccc2a1ad360f1684a5ce8c02c47b0f65a5d17b78ab26a9fd8c088a4cf4526",
+      "inputsSha256": "26fcb79dc84bd3b3bf89e214bc4284486ec366cf1b58e56175d5e4e76be215ed",
+      "generatedAt": "2026-10-01T20:40:55.998Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/lib/technical.md",
+      "wpId": "wp-modules-lib",
+      "actionKey": "13ce86fff2a01dfbcdf279ab09acea445754237b58acece3ae600742840ffa60",
+      "outputSha256": "e070203b8363dcd1cdb3c9fcf3677ba37a480022bd1fad81b817bdc75d93c344",
+      "inputsSha256": "26fcb79dc84bd3b3bf89e214bc4284486ec366cf1b58e56175d5e4e76be215ed",
+      "generatedAt": "2026-10-01T20:40:55.998Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/lib/use-cases.md",
+      "wpId": "wp-modules-lib",
+      "actionKey": "13ce86fff2a01dfbcdf279ab09acea445754237b58acece3ae600742840ffa60",
+      "outputSha256": "66ee31de5d95baf887b8f2c0cafe83e8c0d3409341cfb206cb411b919c07f392",
+      "inputsSha256": "26fcb79dc84bd3b3bf89e214bc4284486ec366cf1b58e56175d5e4e76be215ed",
+      "generatedAt": "2026-10-01T20:40:55.998Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/types/README.md",
+      "wpId": "wp-modules-types",
+      "actionKey": "8e0e58de230e58b85ef1d8a3abebf306e7a2166b3c516c42c439cb2f0b4a7d58",
+      "outputSha256": "cfd0f866265c1e74b72b69704b4db6fef9e1e188401fe364a6dd3415ddebd135",
+      "inputsSha256": "5b256851f182489b2db32a9311f4eea080d46fe1224a59675a36413a714c88aa",
+      "generatedAt": "2026-10-01T20:43:06.535Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/types/technical.md",
+      "wpId": "wp-modules-types",
+      "actionKey": "8e0e58de230e58b85ef1d8a3abebf306e7a2166b3c516c42c439cb2f0b4a7d58",
+      "outputSha256": "5fb89a9b1bcc6ad18ab48aaa0cd248ee7b7dd3c26e142f9c0f180881e34adfc9",
+      "inputsSha256": "5b256851f182489b2db32a9311f4eea080d46fe1224a59675a36413a714c88aa",
+      "generatedAt": "2026-10-01T20:43:06.535Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/modules/types/use-cases.md",
+      "wpId": "wp-modules-types",
+      "actionKey": "8e0e58de230e58b85ef1d8a3abebf306e7a2166b3c516c42c439cb2f0b4a7d58",
+      "outputSha256": "5589719015371d874e80f58081a45206b742e8275ecb680dd368fc45bab2d300",
+      "inputsSha256": "5b256851f182489b2db32a9311f4eea080d46fe1224a59675a36413a714c88aa",
+      "generatedAt": "2026-10-01T20:43:06.535Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/overview.md",
+      "wpId": "wp-overview",
+      "actionKey": "32f9ccaec775641c081e3370199224b9d1a67116122da8e8572ed36fd7398d9e",
+      "outputSha256": "13baede39876ca55bf0849b71becd4fdf2af88048a166817915e4e294a791c8e",
+      "inputsSha256": "0c5bd008d88b66d62a68021f1f3ccf0f17d32fdff86cdc07e515d20988455604",
+      "generatedAt": "2026-10-01T21:01:48.206Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/security.md",
+      "wpId": "wp-security",
+      "actionKey": "48bfbf9cf601f833c1058f8609f4ada036b5ea356c4a6824f6275a0a2ad6a82c",
+      "outputSha256": "c23b39134002b116c14030deff98a7ee11249448355382e46c8c518168e7567d",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T21:04:13.710Z",
+      "model": "sonnet"
+    },
+    {
+      "outputPath": "docs/standards.md",
+      "wpId": "wp-standards",
+      "actionKey": "07c717ca87bb5fd8b10a415dfa31692e5ff20cf6c27663e026e41b17da39aa07",
+      "outputSha256": "02507c0c22fb727bc87aecc99c9e19f53339290e067a36451b46c3354d14532b",
+      "inputsSha256": "5467058943b00f7616bf5330c44c401324bf2e8540cfb75fff0e0fc17fe1fa50",
+      "generatedAt": "2026-10-01T21:06:47.435Z",
+      "model": "sonnet"
+    }
+  ]
+}
