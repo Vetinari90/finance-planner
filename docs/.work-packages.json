@@ -1,0 +1,590 @@
+{
+  "planSchemaVersion": "1.5",
+  "generatedAt": "2026-10-01T20:26:58.194Z",
+  "plannerVersion": "3.89.0",
+  "model": "sonnet",
+  "tokenizer": "bytes-v1",
+  "docStrucSha256": "025218d9a70212804efe43f92670aa74ce84ca4d0a6b25b6fc09372e077b175c",
+  "manifestRefs": [
+    "docs/.expanded-inputs.__cross_cutting__.json",
+    "docs/.expanded-inputs.app.json",
+    "docs/.expanded-inputs.decisions.json",
+    "docs/.expanded-inputs.docs.json",
+    "docs/.expanded-inputs.json",
+    "docs/.expanded-inputs.lib.json",
+    "docs/.expanded-inputs.types.json"
+  ],
+  "workPackages": [
+    {
+      "id": "wp-data-model",
+      "kind": "synthesis",
+      "nodePath": "docs/data-model.md",
+      "moduleId": null,
+      "recipe": "docs/modules/_template/README.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/data-model.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "452e5f5de8e48faf55f371e880cc86b353beeaca29bb9496d04b9a0cffeceb96",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (README.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-data-protection",
+      "kind": "synthesis",
+      "nodePath": "docs/data-protection.md",
+      "moduleId": null,
+      "recipe": "docs/standards.md",
+      "readSet": [
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/data-protection.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "0c3d77bf6aebd1dd39c4bc2b5598181d4324bd6eb5d5e56556298384387b43b6",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (standards.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0001-prisma-driver-adapter-postgresql",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0001-prisma-driver-adapter-postgresql.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0001-prisma-driver-adapter-postgresql.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "daf72e3f58ab7530d571eb9c182c534b969c5dd22694f6ffdaa34a041fb2e7c5",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0001-security-baseline",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0001-security-baseline.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0001-security-baseline.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "30b52d184d59b7f73fe06081da2fa245742466734877d62ef492df10a827743c",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0002-credentials-auth-with-jwt-sessions",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0002-credentials-auth-with-jwt-sessions.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0002-credentials-auth-with-jwt-sessions.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "557712d3eec46db9da73dc85f458794c19dd2b29750a18e3d0f82f42ae79a941",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0003-store-money-as-integer-cents",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0003-store-money-as-integer-cents.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0003-store-money-as-integer-cents.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "4d94ce25238a5a119bd5e3ad613ae7e3aa8ca8d05edce1d5bc6cfa0f0e92bf45",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0004-zod-validation-and-error-envelope",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0004-zod-validation-and-error-envelope.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0004-zod-validation-and-error-envelope.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "a68f5d6b4232cd55e73ed4d209934e80aa71a72df40437652dde3aa045780c7c",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-decisions-0005-per-user-tenant-isolation",
+      "kind": "synthesis",
+      "nodePath": "docs/decisions/0005-per-user-tenant-isolation.md",
+      "moduleId": null,
+      "recipe": "docs/decisions/_template.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/decisions/0005-per-user-tenant-isolation.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "3304d99c3cf2ba134d7f53eacd2a67dda1c7aa0fb1c6fd70361ccd297abaf955",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (_template.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-app",
+      "kind": "module",
+      "nodePath": "docs/modules/app/",
+      "moduleId": "app",
+      "recipe": "unknown",
+      "readSet": [
+        "src/app/api/auth/[...nextauth]/route.ts",
+        "src/app/api/auth/register/route.ts",
+        "src/app/api/plans/[planId]/items/route.ts",
+        "src/app/api/plans/[planId]/route.ts",
+        "src/app/api/plans/route.ts",
+        "src/app/globals.css",
+        "src/app/layout.tsx",
+        "src/app/login/LoginClient.tsx",
+        "src/app/login/page.tsx",
+        "src/app/logout/route.ts",
+        "src/app/page.module.css",
+        "src/app/page.tsx",
+        "src/app/plans/[planId]/AddItemForm.tsx",
+        "src/app/plans/[planId]/DeletePlanButton.tsx",
+        "src/app/plans/[planId]/ExportCsvButton.tsx",
+        "src/app/plans/[planId]/page.tsx",
+        "src/app/plans/NewPlanForm.tsx",
+        "src/app/plans/page.tsx",
+        "src/app/register/page.tsx"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/app/use-cases.md"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "b5ab0b338a864721cd8b73f8622371d4de2e2c369846a67b4cfbeca33532e27a",
+      "tokenBudget": {
+        "estimatedInputTokens": 8016,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "README of the app module. (README.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Technical of the app module. (technical.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Use Cases of the app module. (use-cases.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-lib",
+      "kind": "module",
+      "nodePath": "docs/modules/lib/",
+      "moduleId": "lib",
+      "recipe": "unknown",
+      "readSet": [
+        "src/lib/auth.ts",
+        "src/lib/db.ts",
+        "src/lib/requireUser.ts"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md",
+        "docs/modules/lib/use-cases.md"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "13ce86fff2a01dfbcdf279ab09acea445754237b58acece3ae600742840ffa60",
+      "tokenBudget": {
+        "estimatedInputTokens": 559,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "README of the lib module. (README.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Technical of the lib module. (technical.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Use Cases of the lib module. (use-cases.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-modules-types",
+      "kind": "module",
+      "nodePath": "docs/modules/types/",
+      "moduleId": "types",
+      "recipe": "unknown",
+      "readSet": [
+        "src/types/next-auth.d.ts"
+      ],
+      "readSetOrigin": "source-map",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/modules/types/README.md",
+        "docs/modules/types/technical.md",
+        "docs/modules/types/use-cases.md"
+      ],
+      "dependsOn": [],
+      "order": 0,
+      "parallelGroup": 0,
+      "actionKey": "8e0e58de230e58b85ef1d8a3abebf306e7a2166b3c516c42c439cb2f0b4a7d58",
+      "tokenBudget": {
+        "estimatedInputTokens": 47,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "README of the types module. (README.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Technical of the types module. (technical.md)"
+          },
+          {
+            "id": "content",
+            "brief": "Use Cases of the types module. (use-cases.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-overview",
+      "kind": "synthesis",
+      "nodePath": "docs/overview.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/app/use-cases.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md",
+        "docs/modules/types/README.md",
+        "README.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/overview.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib",
+        "wp-modules-types"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "32f9ccaec775641c081e3370199224b9d1a67116122da8e8572ed36fd7398d9e",
+      "tokenBudget": {
+        "estimatedInputTokens": 316,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (overview.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-security",
+      "kind": "synthesis",
+      "nodePath": "docs/security.md",
+      "moduleId": null,
+      "recipe": "docs/standards.md",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/security.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "48bfbf9cf601f833c1058f8609f4ada036b5ea356c4a6824f6275a0a2ad6a82c",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (standards.md)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wp-standards",
+      "kind": "synthesis",
+      "nodePath": "docs/standards.md",
+      "moduleId": null,
+      "recipe": "unknown",
+      "readSet": [
+        "docs/modules/app/README.md",
+        "docs/modules/app/technical.md",
+        "docs/modules/lib/README.md",
+        "docs/modules/lib/technical.md"
+      ],
+      "readSetOrigin": "synthesis-refs",
+      "isBroadReadFallback": false,
+      "writeSet": [
+        "docs/standards.md"
+      ],
+      "dependsOn": [
+        "wp-modules-app",
+        "wp-modules-lib"
+      ],
+      "order": 1,
+      "parallelGroup": 1,
+      "actionKey": "07c717ca87bb5fd8b10a415dfa31692e5ff20cf6c27663e026e41b17da39aa07",
+      "tokenBudget": {
+        "estimatedInputTokens": 0,
+        "budgetCeil": 100000,
+        "withinBudget": true
+      },
+      "skeleton": {
+        "slots": [
+          {
+            "id": "content",
+            "brief": "Document content (standards.md)"
+          }
+        ]
+      }
+    }
+  ],
+  "diagnostics": {
+    "cycleFreeProof": "kahn-ok",
+    "writeSetDisjointProof": "lossless-ok",
+    "warnings": []
+  },
+  "planSelfSha256": "341329aec4d6681a67a9d9a526a62926325efdf333ef98951c398ebf48f14e50"
+}
