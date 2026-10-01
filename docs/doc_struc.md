@@ -7,8 +7,10 @@ inputs:
     - src/app
     - src/lib
     - src/types
+    - prisma
   references:
     - README.md
+    - package.json
 generation:
   ai-mode: autonomous
   audience-default: developer
@@ -20,11 +22,15 @@ generation:
       - src/app/register
       - src/app/logout
       - src/types
+      - prisma
     plans:
       - src/app/api/plans
       - src/app/plans
+      - prisma
     planned-items: src/app/api/plans/[planId]/items
-    persistence: src/lib
+    persistence:
+      - src/lib
+      - prisma
     web-ui: src/app
 recipe-library:
   source: /opt/asr/workspace/45e68690-e3d1-427c-8c97-7edca1d7238c/831187c8-70c2-4406-a502-a4dbe477b170/sdlc-artifact-templates/templates/mid
