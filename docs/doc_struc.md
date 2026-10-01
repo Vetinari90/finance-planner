@@ -70,34 +70,68 @@ tree:
                 recipe: docs/modules/_template/use-cases.md
                 children: []
       - path: decisions/
-        inputs:
-          references:
-            - README.md
-          module-docs:
-            - docs/modules/app/README.md
-            - docs/modules/app/technical.md
-            - docs/modules/lib/README.md
-            - docs/modules/lib/technical.md
         children:
           - path: _template.md
             children: []
           - path: 0001-security-baseline.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references: []
+              module-docs:
+                - docs/modules/app/README.md
+                - docs/modules/app/technical.md
+                - docs/modules/lib/README.md
+                - docs/modules/lib/technical.md
             children: []
           - path: 0005-per-user-tenant-isolation.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references: []
+              module-docs:
+                - docs/modules/app/README.md
+                - docs/modules/app/technical.md
+                - docs/modules/lib/README.md
+                - docs/modules/lib/technical.md
             children: []
           - path: 0003-store-money-as-integer-cents.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references: []
+              module-docs:
+                - docs/modules/app/README.md
+                - docs/modules/app/technical.md
+                - docs/modules/lib/README.md
+                - docs/modules/lib/technical.md
             children: []
           - path: 0001-prisma-driver-adapter-postgresql.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references: []
+              module-docs:
+                - docs/modules/app/README.md
+                - docs/modules/app/technical.md
+                - docs/modules/lib/README.md
+                - docs/modules/lib/technical.md
             children: []
           - path: 0004-zod-validation-and-error-envelope.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references: []
+              module-docs:
+                - docs/modules/app/README.md
+                - docs/modules/app/technical.md
+                - docs/modules/lib/README.md
+                - docs/modules/lib/technical.md
             children: []
           - path: 0002-credentials-auth-with-jwt-sessions.md
             recipe: docs/decisions/_template.md
+            inputs:
+              references: []
+              module-docs:
+                - docs/modules/app/README.md
+                - docs/modules/app/technical.md
+                - docs/modules/lib/README.md
+                - docs/modules/lib/technical.md
             children: []
       - path: overview.md
         inputs:
