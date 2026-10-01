@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Technical: Lib (src/lib)</title>
+  <title>Technical: lib</title>
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
   <article class="markdown-body">
 <hr>
 <h2>type: technical
+purpose: &quot;Module technical reference - API, configuration, testing&quot;
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/app/technical.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/lib/README.md
+  - docs/modules/lib/use-cases.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Technical: Lib (src/lib)</h1>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Technical: lib</h1>
 <h2>API Endpoints</h2>
-<p>The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module&#39;s API routes (see <code>docs/modules/app/technical.md</code>). The lib module exposes no HTTP endpoints of its own; it is consumed internally by the app module&#39;s API routes (see <code>docs/modules/app/technical.md</code>).</p>
+<p>The three files in this module (<code>src/lib/auth.ts</code>, <code>src/lib/db.ts</code>, <code>src/lib/requireUser.ts</code>) do not define any HTTP route handlers. <code>auth.ts</code> exports a <code>NextAuthOptions</code> configuration object (<code>authOptions</code>), <code>db.ts</code> exports a Prisma client instance (<code>prisma</code>), and <code>requireUser.ts</code> exports a plain async function (<code>requireUserId</code>). [NEEDS CLARIFICATION] The route handler(s) that mount <code>authOptions</code> (typically a NextAuth catch-all API route) are not part of this module&#39;s inputs, so the externally exposed path(s) cannot be confirmed from this manifest.</p>
 <h2>Configuration</h2>
 <h3>Environment Variables</h3>
 <table>
@@ -31,30 +34,15 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>DATABASE_URL</td>
+<td><code>DATABASE_URL</code></td>
 <td>Yes</td>
-<td>PostgreSQL connection string; <code>src/lib/db.ts</code> throws <code>&quot;DATABASE_URL is not set&quot;</code> at import time if it is missing.</td>
+<td>PostgreSQL connection string. Read in <code>src/lib/db.ts</code>; the module throws <code>&quot;DATABASE_URL is not set&quot;</code> at load time if it is missing.</td>
 </tr>
 </tbody></table>
 <h3>Secrets</h3>
-<table>
-<thead>
-<tr>
-<th>Secret</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DATABASE_URL</td>
-<td>Database connection string, read from <code>process.env.DATABASE_URL</code> (<code>src/lib/db.ts</code>).</td>
-</tr>
-<tr>
-<td>[NEEDS CLARIFICATION]</td>
-<td>No JWT/session signing secret (e.g. <code>NEXTAUTH_SECRET</code>) read was found in <code>src/lib/auth.ts</code>.</td>
-</tr>
-</tbody></table>
+<p>[NEEDS CLARIFICATION] <code>src/lib/auth.ts</code> does not reference a NextAuth signing secret (e.g. an env var such as <code>NEXTAUTH_SECRET</code>) in the reviewed code, and no secrets configuration file is present in this module&#39;s inputs. Whether such a secret is configured elsewhere cannot be confirmed from the files available here.</p>
 <h2>Testing</h2>
-<p>No test files for <code>src/lib/*</code> were present in inputs.code. No test files for <code>src/lib/*</code> were present in inputs.code.</p>
+<p>[NEEDS CLARIFICATION] No test files, test scripts, or <code>package.json</code> are present in this module&#39;s inputs, so the test command and test coverage for <code>src/lib/auth.ts</code>, <code>src/lib/db.ts</code>, and <code>src/lib/requireUser.ts</code> cannot be confirmed.</p>
 
   </article>
 </body>

@@ -12,16 +12,43 @@
 <h2>type: overview
 audience: [developer]
 language: en
-links: [docs/modules/app/README.md, docs/modules/lib/README.md, docs/modules/types/README.md, docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0003-store-money-as-integer-cents.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/app/README.md
+  - docs/modules/app/technical.md
+  - docs/modules/app/use-cases.md
+  - docs/modules/lib/README.md
+  - docs/modules/lib/technical.md
+  - docs/modules/types/README.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
 <h1>Project Overview</h1>
 <h2>Summary</h2>
-<p>Finance Planner is a Next.js (App Router) web application that lets an authenticated user create monthly financial plans (identified by year, month, and currency) and add planned items (title, amount, optional note/category) to each plan (<code>src/app/plans/*</code>, <code>src/app/api/plans/*</code>; see <code>docs/modules/app/README.md</code>).</p>
+<p>Finance Planner is a Next.js App Router application for personal monthly budget
+tracking. An authenticated individual creates monthly plans (identified by
+year, month, and currency) and records planned items (title, amount in cents,
+optional category/note) inside each plan (<code>docs/modules/app/README.md</code>,
+<code>docs/modules/app/use-cases.md</code>).</p>
 <h2>Purpose</h2>
-<p>Finance Planner is a single-tenant personal budgeting tool: each authenticated individual manages only their own data. A user registers with an email and password (<code>src/app/register/page.tsx</code>) or logs in, then creates monthly plans identified by year, month, and currency, scoped strictly to that user (<code>src/app/api/plans/route.ts</code>, <code>src/lib/requireUser.ts</code>). Within a plan, the user records planned items (title, amount in cents, optional category and note) via <code>src/app/api/plans/[planId]/items/route.ts</code>, and views a running total per plan on <code>src/app/plans/[planId]/page.tsx</code>. There is no cross-user sharing, invitation, or collaboration logic anywhere in the code; the plan currency defaults to CZK (<code>src/app/api/plans/route.ts</code>), indicating the target users are individuals tracking their own monthly budget, primarily in Czech koruna.</p>
+<p>The <code>app</code> module owns the page UI (registration, login, plan list, plan
+detail) and the API route handlers that implement authentication,
+monthly-plan creation, planned-item management, and client-side CSV export;
+it delegates the database client, NextAuth configuration, and the
+session-helper to the <code>lib</code> module (<code>docs/modules/app/README.md</code>). Each user&#39;s
+plans and items are scoped to that user via a session-derived <code>userId</code> check
+on every plan/item route (<code>docs/modules/app/technical.md</code>,
+<code>docs/modules/app/use-cases.md</code>, UC-004 through UC-009). No cross-user
+sharing, invitation, or collaboration feature is documented in the <code>app</code>
+module&#39;s use cases.</p>
+<p>A new monthly plan&#39;s currency defaults to <code>CZK</code>, with <code>EUR</code> and <code>USD</code> also
+selectable in the plan-creation form (<code>docs/modules/app/use-cases.md</code>,
+UC-005). [NEEDS CLARIFICATION] No input establishes the target user base or
+market beyond this currency default; a firmer statement about intended users
+would require product/business reference material, which was not present in
+<code>inputs.references</code> for this node (only the generic project <code>README.md</code> was
+supplied, and it contains no product-purpose content — see &quot;Local
+Development&quot; below).</p>
 <h2>Modules</h2>
 <table>
 <thead>
@@ -31,29 +58,139 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>app (<code>src/app</code>)</td>
-<td>Pages and API routes: registration, login/logout, plan list, plan detail, item creation (see <code>docs/modules/app/README.md</code>).</td>
+<td><code>app</code> (<code>src/app</code>)</td>
+<td>Pages and API route handlers: registration, login/logout, home redirect, plan list, plan detail, planned-item creation, client-side CSV export (<code>docs/modules/app/README.md</code>, <code>docs/modules/app/technical.md</code>).</td>
 </tr>
 <tr>
-<td>lib (<code>src/lib</code>)</td>
-<td>Shared infrastructure: NextAuth configuration, Prisma client, <code>requireUserId()</code> helper (see <code>docs/modules/lib/README.md</code>).</td>
+<td><code>lib</code> (<code>src/lib</code>)</td>
+<td>Shared infrastructure: NextAuth credentials configuration, a PostgreSQL-backed Prisma client, and a <code>requireUserId()</code> session helper (<code>docs/modules/lib/README.md</code>, <code>docs/modules/lib/technical.md</code>).</td>
 </tr>
 <tr>
-<td>types (<code>src/types</code>)</td>
-<td>TypeScript ambient type augmentation for the NextAuth <code>Session</code> type (see <code>docs/modules/types/README.md</code>).</td>
+<td><code>types</code> (<code>src/types</code>)</td>
+<td>TypeScript ambient type augmentation only — extends the <code>next-auth</code> <code>Session</code> interface so <code>session.user.id</code> is typed as <code>string</code> (<code>docs/modules/types/README.md</code>). Contributes no runtime behavior.</td>
 </tr>
 </tbody></table>
 <h2>Key User Flows</h2>
-<p>[NEEDS CLARIFICATION] [REVIEW] completeness: The Key User Flows section enumerates only 5 flows (register, login, create plan, add item, delete plan) and silently omits the Logout flow (UC-006), even though the source use-cases.md documents it and the doc&#39;s own Modules table already credits the app module with &#39;login/logout&#39;.</p>
+<p>The following flows are grounded in <code>docs/modules/app/use-cases.md</code> (UC-001
+through UC-010):</p>
 <ol>
-<li>Register (<code>/register</code>) then auto-login then redirect to <code>/plans</code> (see <code>docs/modules/app/use-cases.md</code>, UC-001).</li>
-<li>Login (<code>/login</code>) then redirect to <code>/plans</code> (see <code>docs/modules/app/use-cases.md</code>, UC-002).</li>
-<li>Create a monthly plan on <code>/plans</code> (see <code>docs/modules/app/use-cases.md</code>, UC-003).</li>
-<li>Open a plan and add planned items on <code>/plans/{planId}</code> (see <code>docs/modules/app/use-cases.md</code>, UC-004).</li>
-<li>Delete a plan (see <code>docs/modules/app/use-cases.md</code>, UC-005).</li>
+<li><strong>Register</strong> (<code>/register</code>) — create an account, then auto-login via
+<code>signIn(&quot;credentials&quot;, ...)</code> and redirect to <code>/plans</code> (UC-001).</li>
+<li><strong>Log in</strong> (<code>/login</code>) — authenticate with credentials and redirect to the
+<code>callbackUrl</code> (default <code>/plans</code>) (UC-002).</li>
+<li><strong>Home routing by session state</strong> (<code>/</code>) — redirects to <code>/plans</code> if a
+session exists, otherwise to <code>/login</code> (UC-003).</li>
+<li><strong>View the list of monthly plans</strong> (<code>/plans</code>) — lists the user&#39;s own
+plans with per-plan item counts and computed totals (UC-004).</li>
+<li><strong>Create a new monthly plan</strong> — via the &quot;Create new plan&quot; form on
+<code>/plans</code>; returns <code>409</code> if a plan already exists for that user/year/month
+(UC-005).</li>
+<li><strong>View a plan&#39;s detail and running total</strong> (<code>/plans/{planId}</code>) — shows
+title, month/year, currency, computed total, and item list (UC-006).</li>
+<li><strong>Add a planned item</strong> to a plan, with client-side amount parsing to
+integer cents (UC-007).</li>
+<li><strong>Export a plan&#39;s items as CSV</strong> — built entirely client-side, no server
+round-trip (UC-008).</li>
+<li><strong>Delete a plan</strong> — confirmation dialog, then <code>DELETE</code> to
+<code>/api/plans/{planId}</code> (UC-009).</li>
+<li><strong>Log out</strong> — via the &quot;Logout&quot; link or a <code>/logout</code> server redirect, both
+resolving to NextAuth&#39;s built-in sign-out flow (UC-010).</li>
 </ol>
+<h2>Key Entities</h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User</td>
+<td>Accessed via <code>prisma.user</code>. Fields observed across modules: <code>email</code>, <code>password</code> (bcrypt hash), <code>name</code> (optional), <code>id</code> (<code>docs/modules/app/README.md</code>, <code>docs/modules/lib/README.md</code>).</td>
+</tr>
+<tr>
+<td>Plan</td>
+<td>Accessed via <code>prisma.plan</code>. Fields: <code>id</code>, <code>userId</code>, <code>year</code>, <code>month</code>, <code>currency</code>, <code>title</code>, and an <code>items</code> relation (<code>docs/modules/app/README.md</code>).</td>
+</tr>
+<tr>
+<td>PlannedItem</td>
+<td>Accessed via <code>prisma.plannedItem</code>. Fields: <code>id</code>, <code>planId</code>, <code>title</code>, <code>amountCents</code>, <code>categoryId</code> (optional), <code>note</code> (optional), <code>createdAt</code> (<code>docs/modules/app/README.md</code>).</td>
+</tr>
+<tr>
+<td>Session (augmented)</td>
+<td>The <code>next-auth</code> <code>Session</code> interface, overridden in <code>src/types/next-auth.d.ts</code> so <code>session.user</code> includes <code>id: string</code> (<code>docs/modules/types/README.md</code>).</td>
+</tr>
+</tbody></table>
+<p>[NEEDS CLARIFICATION] No Prisma schema file (<code>schema.prisma</code>) was present in
+any node&#39;s inputs, so authoritative column types, nullability, indexes, and
+relation/cascade behavior for <code>User</code>, <code>Plan</code>, and <code>PlannedItem</code> cannot be
+confirmed here (both <code>docs/modules/app/README.md</code> and
+<code>docs/modules/lib/README.md</code> flag the same gap).</p>
 <h2>Data Storage</h2>
-<p>PostgreSQL via Prisma with a <code>PrismaPg</code> driver adapter, configured from <code>DATABASE_URL</code> (see <code>docs/modules/lib/technical.md</code>). [NEEDS CLARIFICATION] No <code>schema.prisma</code> was present in inputs.code; the full data model (constraints, indexes, migrations) could not be confirmed (see <code>docs/data-model.md</code>).</p>
+<p>PostgreSQL, accessed through the <code>@prisma/adapter-pg</code> driver adapter and a
+generated Prisma Client imported from <code>@/generated/prisma/client</code>
+(<code>docs/modules/lib/technical.md</code>). The connection string is read from the
+<code>DATABASE_URL</code> environment variable; <code>src/lib/db.ts</code> throws at module-load
+time if it is unset (<code>docs/modules/lib/technical.md</code>).</p>
+<p>[NEEDS CLARIFICATION] No <code>schema.prisma</code> or migration files were present in
+this node&#39;s inputs, so the complete set of tables/models managed by the
+application cannot be enumerated beyond the <code>user</code>, <code>plan</code>, and
+<code>plannedItem</code> models referenced directly in <code>app</code> and <code>lib</code> module code
+(<code>docs/modules/lib/README.md</code>, <code>docs/modules/app/README.md</code>).</p>
+<h2>Dependencies</h2>
+<p>The following third-party packages are referenced via <code>import</code> statements in
+the <code>app</code> and <code>lib</code> modules (<code>docs/modules/app/README.md</code>,
+<code>docs/modules/lib/README.md</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>next-auth</code> / <code>next-auth/react</code></td>
+<td>Credentials-based authentication: <code>signIn</code>, <code>getServerSession</code>, <code>NextAuthOptions</code>, <code>CredentialsProvider</code> (<code>app</code>, <code>lib</code>).</td>
+</tr>
+<tr>
+<td><code>zod</code></td>
+<td>Request-body validation schemas (<code>RegisterSchema</code>, <code>CreatePlanSchema</code>, <code>CreateItemSchema</code>) in <code>app</code> route handlers.</td>
+</tr>
+<tr>
+<td><code>bcryptjs</code></td>
+<td>Password hashing (registration) and verification (credentials <code>authorize</code>) in <code>app</code> and <code>lib</code>.</td>
+</tr>
+<tr>
+<td><code>@prisma/adapter-pg</code></td>
+<td>PostgreSQL driver adapter wiring the generated Prisma Client (<code>lib</code>).</td>
+</tr>
+<tr>
+<td><code>@/generated/prisma/client</code></td>
+<td>Generated Prisma Client type/class (<code>lib</code>).</td>
+</tr>
+</tbody></table>
+<p>[NEEDS CLARIFICATION] No <code>package.json</code> or lockfile was present in any
+node&#39;s inputs, so exact installed version numbers for the packages above
+cannot be confirmed (both <code>docs/modules/app/README.md</code> and
+<code>docs/modules/lib/README.md</code> flag the same gap). Per the dependency-grounding
+rule, no build-manifest-backed call graph between <code>app</code>, <code>lib</code>, and <code>types</code>
+beyond these import-level observations can be asserted here.</p>
+<h2>Local Development</h2>
+<p>The project root <code>README.md</code> is the unmodified scaffold generated by
+<code>create-next-app</code> and contains only generic Next.js tooling instructions, not
+project-specific facts: it documents starting a development server with
+<code>npm run dev</code> / <code>yarn dev</code> / <code>pnpm dev</code> / <code>bun dev</code> and viewing the result at
+<code>http://localhost:3000</code> (<code>README.md</code>). It also references the generic Vercel
+deployment path used by the <code>create-next-app</code> template.</p>
+<p>[NEEDS CLARIFICATION] Whether this project is actually deployed to Vercel (or
+any other platform), and any project-specific environment/CI configuration,
+is not established by this generic scaffold README or by any other input
+available to this node; a deployment-specific reference document would be
+needed to confirm.</p>
+<p>[NEEDS CLARIFICATION] No test files, test scripts, or <code>package.json</code> were
+present in the <code>app</code> or <code>lib</code> module inputs, so no project-wide test command
+or coverage figure can be stated here (<code>docs/modules/app/technical.md</code>,
+<code>docs/modules/lib/technical.md</code>).</p>
 
   </article>
 </body>

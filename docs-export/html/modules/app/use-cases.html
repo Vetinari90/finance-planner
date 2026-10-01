@@ -12,77 +12,119 @@
 <h2>type: use-cases
 audience: [developer]
 language: en
-links: [docs/modules/app/README.md, docs/modules/lib/use-cases.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/app/README.md
+  - docs/modules/app/technical.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
 <h1>Use Cases</h1>
-<h2>UC-001: User Registration</h2>
-<p><strong>Actor:</strong> Visitor (unauthenticated)</p>
+<p>Each use case below is grounded in a specific page/component and, where
+applicable, the route handler it calls. File paths are given for traceability.</p>
+<h2>UC-001: Register a new account</h2>
+<p><strong>Actor:</strong> Unauthenticated visitor</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>Visitor opens <code>/register</code> (<code>src/app/register/page.tsx</code>) and enters email, optional name, and password.</li>
-<li>Client submits <code>POST /api/auth/register</code> with the form data.</li>
-<li>The API validates the body against <code>RegisterSchema</code> (email format, password min 8 characters, name max 80 characters), returning 400 on failure.</li>
-<li>The API checks for an existing user with that email, returning 409 if one exists.</li>
-<li>The API hashes the password with bcrypt and creates the user, returning 201 with the new user record.</li>
-<li>The client then calls <code>signIn(&quot;credentials&quot;, ...)</code> to log the new user in automatically and redirects to <code>/plans</code>.</li>
+<li>Visitor opens <code>/register</code> (<code>src/app/register/page.tsx</code>).</li>
+<li>Visitor enters email, optional name, and password (min 8 characters, enforced client-side via <code>minLength={8}</code> and server-side via <code>RegisterSchema</code>).</li>
+<li>Visitor submits the form, which <code>POST</code>s to <code>/api/auth/register</code> (<code>src/app/api/auth/register/route.ts</code>).</li>
+<li>On success, the page immediately calls <code>signIn(&quot;credentials&quot;, ...)</code> to auto-login, then routes to <code>/plans</code>.</li>
 </ol>
-<p><strong>Expected Result:</strong> A new user account exists and the visitor is signed in and redirected to <code>/plans</code> (<code>src/app/register/page.tsx</code>).</p>
+<p><strong>Expected Result:</strong> A new <code>User</code> row is created with a bcrypt-hashed password; on successful auto-login the visitor lands on <code>/plans</code>. If registration fails, the page shows the server&#39;s <code>error</code> message; if the auto-login step fails, the page shows &quot;Registered, but login failed. Try logging in.&quot; and routes to <code>/login</code> instead (<code>src/app/register/page.tsx</code>).</p>
 <hr>
-<h2>UC-002: User Login</h2>
-<p><strong>Actor:</strong> Registered User</p>
+<h2>UC-002: Log in with credentials</h2>
+<p><strong>Actor:</strong> Registered user</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>User opens <code>/login</code> (<code>src/app/login/page.tsx</code> + <code>LoginClient.tsx</code>) and enters email and password.</li>
-<li>Client calls <code>signIn(&quot;credentials&quot;, { email, password, redirect: false, callbackUrl })</code>.</li>
-<li>NextAuth&#39;s <code>authorize()</code> callback (<code>src/lib/auth.ts</code>) verifies the credentials against the stored bcrypt hash.</li>
-<li>On success, the client redirects to the <code>callbackUrl</code> (default <code>/plans</code>); on failure, an &quot;Invalid email or password&quot; message is shown (<code>src/app/login/LoginClient.tsx</code>).</li>
+<li>User opens <code>/login</code> (<code>src/app/login/page.tsx</code>, rendered inside a <code>Suspense</code> boundary wrapping <code>src/app/login/LoginClient.tsx</code>).</li>
+<li>User enters email and password.</li>
+<li>User submits the form, which calls <code>signIn(&quot;credentials&quot;, { email, password, redirect: false, callbackUrl })</code> (<code>src/app/login/LoginClient.tsx</code>).</li>
+<li>On success the client routes to <code>callbackUrl</code> (read from the <code>callbackUrl</code> query parameter, defaulting to <code>/plans</code>).</li>
 </ol>
-<p><strong>Expected Result:</strong> User is redirected to <code>/plans</code> on success, or sees an inline error message on failure.</p>
+<p><strong>Expected Result:</strong> On success, the user is redirected to <code>callbackUrl</code> (default <code>/plans</code>). On failure, the message &quot;Invalid email or password&quot; is shown and the user stays on <code>/login</code> (<code>src/app/login/LoginClient.tsx</code>).</p>
 <hr>
-<h2>UC-003: Create a Monthly Plan</h2>
-<p><strong>Actor:</strong> Authenticated User</p>
+<h2>UC-003: Land on the home route based on session state</h2>
+<p><strong>Actor:</strong> Any visitor</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>User opens <code>/plans</code> (<code>src/app/plans/page.tsx</code>), which lists their existing plans.</li>
-<li>User fills in year, month, currency, and optional title in <code>NewPlanForm</code> and submits.</li>
-<li>Client calls <code>POST /api/plans</code>; the API validates the body and creates the plan for <code>userId</code> from the session.</li>
-<li>If a plan already exists for that user/year/month, the API returns 409 &quot;Plan for this month already exists&quot; (<code>src/app/api/plans/route.ts</code>).</li>
+<li>Visitor opens <code>/</code> (<code>src/app/page.tsx</code>).</li>
+<li>The server component calls <code>getServerSession(authOptions)</code>.</li>
+<li>The component redirects to <code>/plans</code> if a session exists, otherwise to <code>/login</code>.</li>
 </ol>
-<p><strong>Expected Result:</strong> A new plan appears in the user&#39;s plan list, or an inline error is shown on conflict/validation failure (<code>src/app/plans/NewPlanForm.tsx</code>).</p>
+<p><strong>Expected Result:</strong> Authenticated visitors are sent to <code>/plans</code>; unauthenticated visitors are sent to <code>/login</code> (<code>src/app/page.tsx</code>).</p>
 <hr>
-<h2>UC-004: View Plan Detail and Add a Planned Item</h2>
-<p><strong>Actor:</strong> Authenticated User</p>
+<h2>UC-004: View the list of monthly plans</h2>
+<p><strong>Actor:</strong> Authenticated user</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>User opens <code>/plans/{planId}</code> from the plan list (<code>src/app/plans/[planId]/page.tsx</code>); the server loads the plan and its items, scoped to the authenticated <code>userId</code>.</li>
-<li>User enters a title and an amount (e.g. <code>1200.50</code>) in <code>AddItemForm</code>; the client converts the decimal string to integer cents via <code>toCents()</code> before submitting (<code>src/app/plans/[planId]/AddItemForm.tsx</code>).</li>
-<li>Client calls <code>POST /api/plans/{planId}/items</code>; the API re-verifies plan ownership, validates the body with <code>CreateItemSchema</code>, and creates the item.</li>
-<li>The page refreshes and shows the updated item list and running total (<code>totalCents</code> summed and divided by 100).</li>
+<li>User opens <code>/plans</code> (<code>src/app/plans/page.tsx</code>).</li>
+<li>The server component verifies the session (redirects to <code>/login</code> if absent) and queries <code>prisma.plan.findMany</code> scoped to the current <code>userId</code>, ordered by <code>year</code> desc then <code>month</code> desc, including <code>items</code>.</li>
+<li>Each listed plan shows its title, <code>month.year</code>, currency, item count, and the sum of <code>amountCents</code> for its items (computed in the page, divided by 100 and formatted to two decimals).</li>
 </ol>
-<p><strong>Expected Result:</strong> The new item appears in the plan&#39;s item list and the displayed total updates accordingly.</p>
+<p><strong>Expected Result:</strong> The user sees all of their own plans with computed per-plan totals, plus a &quot;No plans yet. Create one above.&quot; message when the list is empty (<code>src/app/plans/page.tsx</code>).</p>
 <hr>
-<h2>UC-005: Delete a Plan</h2>
-<p><strong>Actor:</strong> Authenticated User</p>
+<h2>UC-005: Create a new monthly plan</h2>
+<p><strong>Actor:</strong> Authenticated user</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>On <code>/plans/{planId}</code>, the user clicks &quot;Delete plan&quot; (<code>DeletePlanButton.tsx</code>), confirming via a browser <code>confirm()</code> dialog.</li>
-<li>Client calls <code>DELETE /api/plans/{planId}</code>.</li>
-<li>The API re-verifies plan ownership before deleting the plan (<code>src/app/api/plans/[planId]/route.ts</code>).</li>
-<li>On success, the client navigates back to <code>/plans</code>.</li>
+<li>On <code>/plans</code>, the user fills in the &quot;Create new plan&quot; form (<code>src/app/plans/NewPlanForm.tsx</code>): optional title, year, month, and currency (select of <code>CZK</code>/<code>EUR</code>/<code>USD</code>, defaulting to <code>CZK</code>).</li>
+<li>The form <code>POST</code>s to <code>/api/plans</code> (<code>src/app/api/plans/route.ts</code>).</li>
+<li>On success, the form clears its title field and calls <code>router.refresh()</code> so the server component re-fetches the plan list.</li>
 </ol>
-<p><strong>Expected Result:</strong> The plan is removed and the user is returned to the plan list.</p>
+<p><strong>Expected Result:</strong> A new <code>Plan</code> is created for the user&#39;s <code>(year, month)</code>. If a plan for that user/year/month already exists, the API returns <code>409</code> and the form shows &quot;Plan for this month already exists&quot; (<code>src/app/plans/NewPlanForm.tsx</code>, <code>src/app/api/plans/route.ts</code>).</p>
 <hr>
-<h2>UC-006: Logout</h2>
-<p><strong>Actor:</strong> Authenticated User</p>
+<h2>UC-006: View a single plan&#39;s detail and running total</h2>
+<p><strong>Actor:</strong> Authenticated user</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>User clicks &quot;Logout&quot; on <code>/plans</code> (<code>src/app/plans/page.tsx</code>), which links to <code>/api/auth/signout?callbackUrl=/login</code>, or the app&#39;s <code>/logout</code> route redirects to the same NextAuth sign-out URL (<code>src/app/logout/route.ts</code>).</li>
-<li>NextAuth clears the session.</li>
+<li>User opens <code>/plans/{planId}</code> (<code>src/app/plans/[planId]/page.tsx</code>).</li>
+<li>The server component verifies the session (redirects to <code>/login</code> if absent), then queries <code>prisma.plan.findFirst</code> scoped to <code>userId</code>, including <code>items</code> ordered by <code>createdAt</code> asc; calls Next.js <code>notFound()</code> if the plan does not exist or is not owned by the user.</li>
+<li>The page computes and displays the total of all items&#39; <code>amountCents</code> (divided by 100, formatted to two decimals) alongside the item count.</li>
 </ol>
-<p><strong>Expected Result:</strong> User&#39;s session is cleared and they are redirected to <code>/login</code>.</p>
+<p><strong>Expected Result:</strong> The authenticated owner sees the plan&#39;s title, month/year, currency, computed total, and its list of items (or &quot;No items yet.&quot; when empty) (<code>src/app/plans/[planId]/page.tsx</code>).</p>
+<hr>
+<h2>UC-007: Add a planned item to a plan</h2>
+<p><strong>Actor:</strong> Authenticated user (plan owner)</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>On a plan&#39;s detail page, the user fills in the &quot;Add item&quot; form (<code>src/app/plans/[planId]/AddItemForm.tsx</code>): title, amount (free-text, e.g. <code>1200</code> or <code>1200.50</code>, accepting <code>,</code> as a decimal separator), and an optional note.</li>
+<li>The client converts the amount text to integer cents via its own <code>toCents()</code> parser (matches <code>^(\d+)(\.(\d{1,2}))?$</code> after normalizing <code>,</code> to <code>.</code>); if parsing fails, the form shows &quot;Amount must be a number with max 2 decimals (e.g. 1200 or 1200.50)&quot; without calling the API.</li>
+<li>On successful parse, the form <code>POST</code>s <code>{ title, amountCents, note, categoryId: null }</code> to <code>/api/plans/{planId}/items</code> (<code>src/app/api/plans/[planId]/items/route.ts</code>).</li>
+<li>On success, the form clears its fields and calls <code>router.refresh()</code>.</li>
+</ol>
+<p><strong>Expected Result:</strong> A new <code>PlannedItem</code> is created under the plan (after the API re-verifies plan ownership), and the refreshed plan detail page shows it in the items list and in the running total. Server-side validation errors or ownership failures surface via the API&#39;s <code>400</code>/<code>404</code> responses and are shown in the form.</p>
+<hr>
+<h2>UC-008: Export a plan&#39;s items as CSV</h2>
+<p><strong>Actor:</strong> Authenticated user (plan owner)</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>On the plan detail page, the user clicks &quot;Export CSV&quot; (<code>src/app/plans/[planId]/ExportCsvButton.tsx</code>). The button is disabled when the plan has zero items.</li>
+<li>The client builds a CSV in-browser (<code>buildCsv</code>): header row <code>Title, Note, Amount (&lt;currency&gt;)</code>, one row per item (values quoted per RFC 4180, amounts divided by 100 and fixed to two decimals), plus a trailing <code>Total</code> row summing all <code>amountCents</code>. A UTF-8 BOM is prefixed so non-ASCII titles render correctly in Excel.</li>
+<li>The client creates a <code>Blob</code>, generates an object URL, and triggers a browser download named from a slugified plan title (e.g. <code>fileNameFor</code> lower-cases, replaces non-alphanumerics with <code>-</code>, trims leading/trailing <code>-</code>, defaulting to <code>plan</code> if the slug is empty).</li>
+</ol>
+<p><strong>Expected Result:</strong> A <code>.csv</code> file download is triggered client-side with no server round-trip; the button briefly shows &quot;Exported ✓&quot; for 2 seconds after the click (<code>src/app/plans/[planId]/ExportCsvButton.tsx</code>).</p>
+<hr>
+<h2>UC-009: Delete a plan</h2>
+<p><strong>Actor:</strong> Authenticated user (plan owner)</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>On the plan detail page, the user clicks &quot;Delete plan&quot; (<code>src/app/plans/[planId]/DeletePlanButton.tsx</code>).</li>
+<li>The browser&#39;s native <code>confirm(&quot;Delete this plan? This cannot be undone.&quot;)</code> dialog must be accepted to proceed.</li>
+<li>The client sends <code>DELETE</code> to <code>/api/plans/{planId}</code> (<code>src/app/api/plans/[planId]/route.ts</code>).</li>
+<li>On success, the client routes to <code>/plans</code> and calls <code>router.refresh()</code>. On failure, it shows a native <code>alert(&quot;Delete failed&quot;)</code>.</li>
+</ol>
+<p><strong>Expected Result:</strong> The plan is removed via <code>prisma.plan.delete</code>, and the user returns to the <code>/plans</code> list.
+[NEEDS CLARIFICATION] Whether the plan&#39;s <code>PlannedItem</code> rows are cascade-deleted or must be removed separately is defined by the Prisma schema&#39;s relation configuration, which was not part of this module&#39;s inputs.</p>
+<hr>
+<h2>UC-010: Log out</h2>
+<p><strong>Actor:</strong> Authenticated user</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>From <code>/plans</code>, the user clicks the &quot;Logout&quot; link, which points to <code>/api/auth/signout?callbackUrl=/login</code> (<code>src/app/plans/page.tsx</code>).</li>
+<li>Alternatively, a request to <code>/logout</code> (<code>src/app/logout/route.ts</code>) issues a server-side redirect to the same <code>/api/auth/signout?callbackUrl=/login</code> URL (built against a hard-coded <code>http://localhost:3000</code> base).</li>
+</ol>
+<p><strong>Expected Result:</strong> The user&#39;s session is ended via NextAuth&#39;s built-in sign-out flow and they are returned to <code>/login</code>.</p>
 
   </article>
 </body>

@@ -12,21 +12,31 @@
 <h2>type: use-cases
 audience: [developer]
 language: en
-links: [docs/modules/types/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/types/README.md
+  - docs/modules/types/technical.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
 <h1>Use Cases</h1>
-<h2>UC-001: Type-Safe Session User Id Access</h2>
-<p><strong>Actor:</strong> Developer / TypeScript compiler</p>
-<p><strong>Steps:</strong></p>
-<ol>
-<li>The module augments <code>next-auth</code>&#39;s <code>Session</code> interface via <code>declare module &quot;next-auth&quot;</code> (<code>src/types/next-auth.d.ts</code>), adding <code>user: { id: string; name?: string | null; email?: string | null }</code>.</li>
-<li>Code across the app and lib modules (e.g. <code>src/lib/auth.ts</code>, <code>src/lib/requireUser.ts</code>, <code>src/app/plans/page.tsx</code>) reads <code>session.user.id</code> and <code>session.user.email</code>.</li>
-<li>The TypeScript compiler type-checks these reads against the augmented interface rather than the base <code>next-auth</code> <code>Session</code> type.</li>
-</ol>
-<p><strong>Expected Result:</strong> Any code that reads <code>session.user.id</code> is type-checked at compile time, without needing a manual type assertion or <code>any</code> cast.</p>
+<h2>UC-001: [Use Case Name]</h2>
+<p>[NEEDS CLARIFICATION] The <code>types</code> module&#39;s only in-scope file,
+<code>src/types/next-auth.d.ts</code>, is a compile-time-only TypeScript ambient
+declaration (<code>declare module &quot;next-auth&quot;</code> augmenting the <code>Session.user</code> shape
+with an <code>id: string</code> field). It defines no user-invocable action, UI flow, or
+API call, so no actor-driven use case can be grounded from this module&#39;s
+inputs alone. Confirming an actual end-to-end use case that depends on this
+type augmentation (e.g. a feature reading <code>session.user.id</code>) would require
+visibility into the consuming <code>app</code> and/or <code>lib</code> module code, which is outside
+this dispatch&#39;s input scope (<code>src/types</code> only).</p>
+<hr>
+<h2>Example: User Login</h2>
+<p>[NEEDS CLARIFICATION] No login flow, form, or authentication handler is present
+in <code>src/types/next-auth.d.ts</code>; the file only augments the <code>next-auth</code> <code>Session</code>
+type. A concrete login use case would need to be grounded in the modules that
+implement the authentication flow (out of scope for this <code>types</code>-module
+dispatch).</p>
 
   </article>
 </body>

@@ -9,28 +9,106 @@
 <body>
   <article class="markdown-body">
 <hr>
-<h2>type: decision
+<h2>type: adr
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/security.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
-generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
+links:
+  - docs/modules/app/README.md
+  - docs/modules/app/technical.md
+  - docs/modules/lib/README.md
+  - docs/modules/lib/technical.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
+generated_branch: sdlc/20261001-2017</h2>
 <h1>ADR: Per-User Tenant Isolation</h1>
-<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<p><strong>Status:</strong> Accepted (observed as implemented across the <code>app</code> module&#39;s route handlers; no separate decision log or status record was present in this node&#39;s inputs, so this status reflects the current, in-force implementation rather than a confirmed ADR status field).</p>
 <h2>Context</h2>
-<p>Multiple users share the same application and database; each user&#39;s plans and planned items must not be visible or mutable by other users.</p>
+<p>finance-planner stores per-user financial data (<code>Plan</code> and <code>PlannedItem</code> records,
+per <code>docs/modules/app/README.md</code>). There is no organization/tenant entity
+documented anywhere in the <code>app</code> or <code>lib</code> module docs — each authenticated
+<code>User</code> is effectively its own tenant. A decision was needed on how to prevent
+one authenticated user from reading or modifying another user&#39;s <code>Plan</code> /
+<code>PlannedItem</code> records.</p>
+<p>The module-level docs show the data-access pattern that exists in the
+codebase today:</p>
+<ul>
+<li>Every <code>/api/plans/**</code> route handler resolves the caller&#39;s identity via
+<code>requireUserId()</code> (supplied by the <code>lib</code> module and consumed throughout
+<code>src/app/api/plans/**/route.ts</code>, per <code>docs/modules/app/README.md</code>) and
+returns <code>401</code> if no session is present (<code>docs/modules/app/technical.md</code>,
+<code>GET /api/plans</code> entry).</li>
+<li><code>GET /api/plans</code> returns only <code>{ plans }</code> for the current user
+(<code>docs/modules/app/technical.md</code>).</li>
+<li><code>GET /api/plans/{planId}</code> and <code>DELETE /api/plans/{planId}</code> look the plan up
+with <code>findFirst</code> scoped to <code>userId</code>, returning <code>404</code> &quot;if not found or not
+owned by the caller&quot; (<code>docs/modules/app/technical.md</code>).</li>
+<li><code>POST /api/plans/{planId}/items</code> first confirms &quot;the plan exists and
+belongs to the caller (<code>404</code> otherwise)&quot; before creating a <code>PlannedItem</code>
+(<code>docs/modules/app/technical.md</code>).</li>
+<li><code>POST /api/plans</code> relies on an in-code comment indicating &quot;a unique
+constraint on <code>(userId, year, month)</code>&quot;; per <code>docs/modules/app/technical.md</code>
+itself, &quot;the constraint itself is defined in the Prisma schema, not in this
+file,&quot; so this constraint is not independently confirmed from the inputs
+available to this node.</li>
+</ul>
+<p>[NEEDS CLARIFICATION] No <code>schema.prisma</code> file, migration file, or
+database-level policy configuration (e.g. PostgreSQL row-level security) was
+present in either the <code>app</code> or <code>lib</code> module&#39;s inputs (per
+<code>docs/modules/lib/README.md</code> and <code>docs/modules/lib/technical.md</code>), so it
+cannot be confirmed whether isolation is enforced only in application code or
+also at the database layer.</p>
 <h2>Decision</h2>
-<p>We will scope all plan reads/writes by both the resource id and the authenticated <code>userId</code>. <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> is used in <code>src/app/api/plans/[planId]/route.ts</code> and <code>src/app/api/plans/[planId]/items/route.ts</code>; plan creation in <code>src/app/api/plans/route.ts</code> always sets <code>userId</code> from the session; plan listing filters <code>where: { userId }</code>.</p>
+<p>Based on the pattern observed consistently across every <code>/api/plans/**</code>
+route handler (see Context above), the decision in force is: enforce
+per-user data isolation at the <strong>application layer</strong>, not via separate
+tenant schemas, separate databases, or (as far as the available inputs show)
+database-level row-level security.</p>
+<p>Concretely, every handler that reads or mutates a <code>Plan</code> or <code>PlannedItem</code>:</p>
+<ol>
+<li>Resolves the authenticated user&#39;s id via <code>requireUserId()</code>
+(<code>@/lib/requireUser</code>, per <code>docs/modules/app/README.md</code>).</li>
+<li>Scopes the corresponding Prisma query by that <code>userId</code> — <code>findFirst</code>
+lookups include <code>userId</code> in the <code>where</code> clause, and list/create operations
+are filtered or associated by the same id (<code>docs/modules/app/technical.md</code>).</li>
+<li>Returns <code>401</code> when no session exists, and <code>404</code> (rather than <code>403</code>) when a
+resource exists but is not owned by the caller, per the <code>GET</code>/<code>DELETE /api/plans/{planId}</code> and <code>POST /api/plans/{planId}/items</code> entries in
+<code>docs/modules/app/technical.md</code>.</li>
+</ol>
+<p>Authentication identity itself is supplied by NextAuth credentials-based
+sessions configured in <code>authOptions</code> (<code>src/lib/auth.ts</code>, per
+<code>docs/modules/lib/README.md</code>), which resolves a <code>User</code> via
+<code>prisma.user.findUnique({ where: { email } })</code> and verifies the password hash
+with <code>bcrypt.compare</code>.</p>
+<p>[NEEDS CLARIFICATION] No reference document or design note describing the
+rationale for choosing application-level scoping over an alternative (e.g.
+database-level row-level security, or a separate-schema-per-tenant model) was
+present in this node&#39;s inputs (<code>inputs.references</code> was empty); the
+alternatives-considered rationale cannot be grounded here.</p>
 <h2>Consequences</h2>
 <p><strong>Positive:</strong></p>
 <ul>
-<li>A user cannot read, modify, or delete another user&#39;s plan or items, even by guessing another plan&#39;s id, because the ownership filter is part of the query itself.</li>
+<li>A single, consistent enforcement pattern (<code>requireUserId()</code> + a <code>userId</code>
+predicate on every <code>Plan</code>/<code>PlannedItem</code> query) is applied uniformly across
+all <code>/api/plans/**</code> handlers (<code>docs/modules/app/technical.md</code>), which keeps
+the isolation logic co-located with each handler rather than spread across
+a separate infrastructure layer.</li>
+<li>No per-tenant schema or database provisioning is required, since isolation
+keys off the existing <code>User</code>/<code>userId</code> relationship already modeled by
+<code>Plan</code> and <code>PlannedItem</code> (<code>docs/modules/app/README.md</code>).</li>
 </ul>
 <p><strong>Negative:</strong></p>
 <ul>
-<li>[NEEDS CLARIFICATION] No database-level row-level-security or authorization audit logging was found in inputs.code; isolation currently relies entirely on application-layer query filtering.</li>
+<li>Because isolation is enforced in application code rather than (as far as
+the available inputs show) at the database layer, correctness depends on
+every current and future handler remembering to add the <code>userId</code> scope; a
+handler that omits this check would not be caught by a schema-level
+constraint. [NEEDS CLARIFICATION] Whether any database-level safeguard
+(e.g. row-level security) exists as a backstop cannot be confirmed, since
+no <code>schema.prisma</code> or database policy file was present in the <code>lib</code>
+module&#39;s inputs.</li>
+<li>No test files were present in the <code>app</code> module&#39;s inputs
+(<code>docs/modules/app/technical.md</code>, Testing section), so the correctness of
+this per-user scoping cannot be verified against an automated test suite
+from the inputs available to this node.</li>
 </ul>
 
   </article>

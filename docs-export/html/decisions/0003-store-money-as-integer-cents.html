@@ -9,30 +9,84 @@
 <body>
   <article class="markdown-body">
 <hr>
-<h2>type: decision
+<h2>type: adr
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/data-model.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/app/README.md
+  - docs/modules/app/technical.md
+  - docs/modules/lib/README.md
+  - docs/modules/lib/technical.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:841bd03d226462c2e1b23b2527b2808a82ede46377b7f3ac2dc7f4da6f211206</h2>
 <h1>ADR: Store Money as Integer Cents</h1>
-<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<p><strong>Status:</strong> [NEEDS CLARIFICATION] No decision-record reference (date, author, or explicit &quot;Proposed&quot;/&quot;Accepted&quot;/&quot;Deprecated&quot; status) was part of this node&#39;s inputs (<code>inputs.references</code> is empty for this node). The status below is inferred solely from the fact that the described representation is present in the generated module documentation; it has not been confirmed against an authoritative decision log.</p>
 <h2>Context</h2>
-<p>Planned-item amounts must be stored and summed without floating-point rounding errors.</p>
+<p><code>docs/modules/app/technical.md</code> documents the <code>PlannedItem</code> creation endpoint
+(<code>POST /api/plans/{planId}/items</code>, <code>src/app/api/plans/[planId]/items/route.ts</code>):
+the request body is validated by <code>CreateItemSchema</code>, whose <code>amountCents</code> field is
+described as &quot;non-negative int&quot;. <code>docs/modules/app/README.md</code> corroborates this,
+listing <code>amountCents</code> as a field read/written on the <code>PlannedItem</code> entity
+(<code>prisma.plannedItem</code>, observed in the same route file and rendered in
+<code>src/app/plans/[planId]/page.tsx</code>).</p>
+<p>Representing a monetary value as a field literally named <code>amountCents</code> — and
+validating it as an integer rather than a decimal/float — indicates the planned
+item&#39;s monetary value is stored in the smallest currency subunit (cents) rather
+than as a floating-point major-unit amount. Storing money as a float is a
+well-known source of binary floating-point rounding error in arithmetic
+(summation, splitting, comparison); representing it as an integer count of the
+minor unit avoids that class of error. Neither <code>docs/modules/app/README.md</code> nor
+<code>docs/modules/app/technical.md</code> states this rationale explicitly in prose — it is
+inferred from the field name and type constraint, consistent with the
+implementation-over-comment precedence rule when no comment exists to contradict
+it.</p>
+<p>[NEEDS CLARIFICATION] Neither <code>docs/modules/lib/README.md</code> nor
+<code>docs/modules/lib/technical.md</code> (the other module docs available to this node)
+documents a <code>Plan</code> or <code>PlannedItem</code> schema definition, a currency-handling
+utility, or any amount-formatting/conversion code, so the full problem statement
+(e.g. whether the team evaluated and rejected a decimal/<code>Money</code>-object
+alternative) cannot be grounded further from this node&#39;s inputs.</p>
 <h2>Decision</h2>
-<p>We will store planned item amounts as an integer number of cents. <code>CreateItemSchema</code> validates <code>amountCents: z.number().int().min(0)</code> (<code>src/app/api/plans/[planId]/items/route.ts</code>). The client converts a decimal string entered by the user into an integer cents value via regex-based parsing in <code>toCents()</code> (<code>src/app/plans/[planId]/AddItemForm.tsx</code>) before submission, and totals are computed by summing <code>amountCents</code> and dividing by 100 for display (<code>src/app/plans/[planId]/page.tsx</code>, <code>src/app/plans/page.tsx</code>).
-[NEEDS CLARIFICATION] [REVIEW] accuracy: Document asserts specific code facts (Zod schema shape, a regex-based toCents() parser, and totals logic in named files) that are absent from every input the doc was generated from - the manifest (docs/.expanded-inputs.decisions.json) shows only README.md, a generic Next.js boilerplate readme with no mention of these symbols, was supplied.</p>
+<p>Based on the evidence above, the system stores monetary amounts as integer cents:
+the <code>PlannedItem.amountCents</code> field (validated as a non-negative integer by
+<code>CreateItemSchema</code> in <code>src/app/api/plans/[planId]/items/route.ts</code>, per
+<code>docs/modules/app/technical.md</code>) holds the amount in the minor currency unit
+rather than as a floating-point decimal in the major unit.</p>
+<p><code>docs/modules/app/technical.md</code> also documents that a <code>Plan</code> carries its own
+<code>currency</code> field (3 characters, defaulting to <code>&quot;CZK&quot;</code>, validated by
+<code>CreatePlanSchema</code> in <code>src/app/api/plans/route.ts</code>). [NEEDS CLARIFICATION]
+Whether the &quot;cents&quot; minor-unit assumption is applied uniformly across all
+supported currency codes, including ones whose minor unit is not two decimal
+places (e.g. zero-decimal currencies), is not addressed in any of this node&#39;s
+inputs.</p>
 <h2>Consequences</h2>
 <p><strong>Positive:</strong></p>
 <ul>
-<li>Summation of item amounts (<code>plan.items.reduce((acc, it) =&gt; acc + it.amountCents, 0)</code>) is exact integer arithmetic with no floating-point drift.
-[NEEDS CLARIFICATION] [REVIEW] accuracy: The exact code snippet <code>plan.items.reduce((acc, it) =&gt; acc + it.amountCents, 0)</code> is quoted as fact but has no grounding in any input available for this doc (manifest lists only README.md, which contains no such code).</li>
+<li>Arithmetic on <code>amountCents</code> (summation of <code>PlannedItem</code> amounts, comparisons)
+is exact integer arithmetic, avoiding binary floating-point rounding error
+that a decimal/float representation of a major-unit amount would be
+susceptible to.</li>
+<li>The validation rule observed in <code>docs/modules/app/technical.md</code>
+(<code>amountCents</code> must be a non-negative integer) is enforceable directly by the
+existing <code>CreateItemSchema</code> zod schema without an additional decimal-precision
+check.</li>
 </ul>
 <p><strong>Negative:</strong></p>
 <ul>
-<li>[NEEDS CLARIFICATION] Currency-specific minor-unit exceptions (e.g. currencies with 0 or 3 decimal places) are not addressed by the fixed 2-decimal <code>toCents()</code> conversion in <code>AddItemForm.tsx</code>.</li>
+<li>[NEEDS CLARIFICATION] The conversion/formatting logic that renders
+<code>amountCents</code> back into a human-readable major-unit amount (for on-screen
+display or CSV export) is not present in any of this node&#39;s inputs
+(<code>docs/modules/app/README.md</code>, <code>docs/modules/app/technical.md</code>,
+<code>docs/modules/lib/README.md</code>, <code>docs/modules/lib/technical.md</code>), so its
+location and correctness (including rounding behavior and handling of
+non-two-decimal currencies) cannot be confirmed here.</li>
+<li>[NEEDS CLARIFICATION] No input available to this node states whether every
+write path to <code>PlannedItem.amountCents</code> (beyond the one <code>POST</code> endpoint
+documented in <code>docs/modules/app/technical.md</code>) consistently treats the value
+as cents, so a latent unit-mismatch risk (a future code path writing a
+major-unit float) cannot be ruled out from this node&#39;s inputs alone.</li>
 </ul>
 
   </article>

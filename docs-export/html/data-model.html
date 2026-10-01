@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Module: Data Model</title>
+  <title>Data Model</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,14 +12,26 @@
 <h2>type: data-model
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/decisions/0001-prisma-driver-adapter-postgresql.md, docs/decisions/0003-store-money-as-integer-cents.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
-generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Module: Data Model</h1>
+links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md]
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
+generated_branch: sdlc/20261001-2017</h2>
+<h1>Data Model</h1>
 <h2>Purpose</h2>
-<p>This document consolidates the data entities inferred from Prisma query call sites across the app module, since no <code>schema.prisma</code> file was present in inputs.code.</p>
+<p>This document consolidates the data entities, storage, and cross-module
+dependencies of finance-planner, synthesized from the already-generated module
+documentation for <code>lib</code> (<a href="modules/lib/README.html">docs/modules/lib/README.md</a>,
+<a href="modules/lib/technical.html">docs/modules/lib/technical.md</a>) and <code>app</code>
+(<a href="modules/app/README.html">docs/modules/app/README.md</a>). No source code or
+build manifest was read directly for this node; every claim below is grounded in
+those module documents. Both source module documents cite record-level data
+access through a Prisma client (<code>@/lib/db</code>) but note that no <code>schema.prisma</code>
+file was present in their own inputs, so the authoritative schema (column
+types, nullability, constraints, migrations) could not be confirmed there
+either.</p>
+<p>[NEEDS CLARIFICATION] No <code>schema.prisma</code> or migration file is available in the
+module documentation this node is synthesized from, so the entity descriptions
+below reflect only the fields observed by the <code>lib</code> and <code>app</code> module docs at
+their respective Prisma client call sites, not an authoritative schema.</p>
 <h2>Key Entities</h2>
 <table>
 <thead>
@@ -30,19 +42,35 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </thead>
 <tbody><tr>
 <td>User</td>
-<td><code>id</code>, <code>email</code>, <code>password</code> (bcrypt hash), <code>name</code> (optional) - inferred from <code>prisma.user.create</code>/<code>findUnique</code> calls in <code>src/app/api/auth/register/route.ts</code> and <code>src/lib/auth.ts</code>.</td>
+<td>Per <code>docs/modules/lib/README.md</code>: resolved via <code>prisma.user.findUnique({ where: { email } })</code> in <code>src/lib/auth.ts</code>; observed fields are <code>id</code>, <code>email</code>, <code>name</code>, and <code>password</code> (a bcrypt hash compared with <code>bcrypt.compare</code>). Per <code>docs/modules/app/README.md</code>: also accessed via <code>prisma.user</code> in <code>src/app/api/auth/register/route.ts</code> with fields <code>email</code>, <code>password</code> (bcrypt hash), and <code>name</code> (optional); the session shape <code>session.user.id</code> / <code>session.user.email</code> is read in <code>src/app/plans/page.tsx</code> and <code>src/app/plans/[planId]/page.tsx</code>.</td>
 </tr>
 <tr>
 <td>Plan</td>
-<td><code>id</code>, <code>userId</code>, <code>year</code>, <code>month</code>, <code>currency</code>, <code>title</code> - inferred from <code>prisma.plan.create</code>/<code>findFirst</code>/<code>findMany</code> calls in <code>src/app/api/plans/route.ts</code> and <code>src/app/api/plans/[planId]/route.ts</code>. A unique constraint on <code>(userId, year, month)</code> is implied by the 409 conflict handling in <code>src/app/api/plans/route.ts</code>, but the constraint itself could not be confirmed without <code>schema.prisma</code>.</td>
+<td>Per <code>docs/modules/app/README.md</code>: accessed via <code>prisma.plan</code> in <code>src/app/api/plans/route.ts</code> and <code>src/app/api/plans/[planId]/route.ts</code>; observed fields are <code>id</code>, <code>userId</code>, <code>year</code>, <code>month</code>, <code>currency</code>, <code>title</code>, and an <code>items</code> relation. Not documented in the <code>lib</code> module docs.</td>
 </tr>
 <tr>
 <td>PlannedItem</td>
-<td><code>id</code>, <code>planId</code>, <code>title</code>, <code>amountCents</code> (integer), <code>categoryId</code> (optional), <code>note</code> (optional), <code>createdAt</code> - inferred from <code>prisma.plannedItem.create</code> in <code>src/app/api/plans/[planId]/items/route.ts</code> and the <code>orderBy: { createdAt: &quot;asc&quot; }</code> read in <code>src/app/api/plans/[planId]/route.ts</code>.</td>
+<td>Per <code>docs/modules/app/README.md</code>: accessed via <code>prisma.plannedItem</code> in <code>src/app/api/plans/[planId]/items/route.ts</code> and rendered in <code>src/app/plans/[planId]/page.tsx</code>; observed fields are <code>id</code>, <code>planId</code>, <code>title</code>, <code>amountCents</code>, <code>categoryId</code> (optional), <code>note</code> (optional), and <code>createdAt</code>. Not documented in the <code>lib</code> module docs.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] <code>docs/modules/app/README.md</code> itself states that exact
+column types, nullability, and any <code>@@map</code>/<code>@@unique</code> directives are defined by
+a Prisma schema that was not part of its own inputs, and <code>docs/modules/lib/README.md</code>
+makes the equivalent statement for the <code>User</code> entity. Neither source document
+could confirm whether <code>Plan</code> or <code>PlannedItem</code> carry any uniqueness constraint
+(for example, on a <code>(userId, year, month)</code> combination for <code>Plan</code>).</p>
 <h2>Data Storage</h2>
-<p><strong>Database:</strong> PostgreSQL, accessed through Prisma with the <code>PrismaPg</code> driver adapter (<code>@prisma/adapter-pg</code>), configured from <code>DATABASE_URL</code> (<code>src/lib/db.ts</code>; see <code>docs/decisions/0001-prisma-driver-adapter-postgresql.md</code>).</p>
+<p><strong>Database:</strong> Per <code>docs/modules/lib/README.md</code> and <code>docs/modules/lib/technical.md</code>:
+PostgreSQL, accessed through a generated Prisma Client (imported from
+<code>@/generated/prisma/client</code>) and the <code>@prisma/adapter-pg</code> driver adapter
+(<code>PrismaPg</code>) in <code>src/lib/db.ts</code>. The connection string is read from the
+<code>DATABASE_URL</code> environment variable; <code>src/lib/technical.md</code> records that
+<code>src/lib/db.ts</code> throws <code>&quot;DATABASE_URL is not set&quot;</code> at module-load time if it is
+missing.</p>
+<p><code>docs/modules/app/README.md</code> states that the <code>app</code> module accesses storage
+exclusively through the <code>prisma</code> client imported from <code>@/lib/db</code>, and that the
+underlying database engine and schema file were not part of its own inputs
+(it relies on the <code>lib</code> module for that information).</p>
 <table>
 <thead>
 <tr>
@@ -51,10 +79,23 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>[NEEDS CLARIFICATION]</td>
-<td>Exact table names, column types, and constraints require <code>schema.prisma</code>, which was not present in inputs.code; the entities above are inferred solely from Prisma client call sites.</td>
+<td>User (<code>prisma.user</code>)</td>
+<td>Per <code>docs/modules/lib/README.md</code>: email, name, and hashed password used for credentials-based sign-in. Per <code>docs/modules/app/README.md</code>: account records created during registration and read for session identity.</td>
+</tr>
+<tr>
+<td>Plan (<code>prisma.plan</code>)</td>
+<td>Per <code>docs/modules/app/README.md</code>: one record per user/year/month monthly plan; created and listed in <code>src/app/api/plans/route.ts</code>, read/deleted in <code>src/app/api/plans/[planId]/route.ts</code>.</td>
+</tr>
+<tr>
+<td>PlannedItem (<code>prisma.plannedItem</code>)</td>
+<td>Per <code>docs/modules/app/README.md</code>: line items belonging to a plan, created in <code>src/app/api/plans/[planId]/items/route.ts</code> and displayed/exported in <code>src/app/plans/[planId]/page.tsx</code> and its CSV export button.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] Neither <code>docs/modules/lib/README.md</code> nor
+<code>docs/modules/lib/technical.md</code> lists a <code>schema.prisma</code> or migration file among
+their inputs, so the complete set of tables/models (including any beyond
+<code>user</code>, <code>plan</code>, and <code>plannedItem</code>) cannot be enumerated from the documentation
+available to this synthesis step.</p>
 <h2>Dependencies</h2>
 <table>
 <thead>
@@ -64,14 +105,19 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>app</td>
-<td>Every Prisma call site that establishes the data model above lives in <code>src/app/api/*</code> (see <code>docs/modules/app/README.md</code>).</td>
+<td>lib</td>
+<td>Per <code>docs/modules/lib/README.md</code>: supplies the shared Prisma client instance (<code>src/lib/db.ts</code>) and the NextAuth credentials configuration (<code>src/lib/auth.ts</code>) that together back every data-model entity above (<code>User</code> via <code>auth.ts</code>/<code>db.ts</code>; <code>Plan</code> and <code>PlannedItem</code> indirectly via the shared <code>prisma</code> client re-exported to <code>app</code>).</td>
 </tr>
 <tr>
-<td>lib</td>
-<td>Provides the shared <code>prisma</code> client instance used by all of the above call sites (<code>src/lib/db.ts</code>, see <code>docs/modules/lib/README.md</code>).</td>
+<td>app</td>
+<td>Per <code>docs/modules/app/README.md</code>: every <code>Plan</code> and <code>PlannedItem</code> read/write observed above originates in <code>src/app/api/plans/**/route.ts</code>, which imports the <code>prisma</code> client via <code>@/lib/db</code>.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] <code>docs/modules/lib/technical.md</code> notes that no
+<code>package.json</code> was present among its own module&#39;s inputs, so the declared
+versions of <code>next-auth</code>, <code>bcryptjs</code>, <code>@prisma/adapter-pg</code>, and the generated
+Prisma Client package cannot be confirmed from the documentation this node was
+synthesized from.</p>
 
   </article>
 </body>

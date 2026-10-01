@@ -12,25 +12,84 @@
 <h2>type: decision
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/standards.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
-generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:9f30162e9152d4b52e2413d4ede872778c281c3fb6b2a6184348cb2c223bfa93</h2>
+links:
+  - docs/modules/app/README.md
+  - docs/modules/app/technical.md
+  - docs/modules/lib/README.md
+  - docs/modules/lib/technical.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
+generated_branch: sdlc/20261001-2017</h2>
 <h1>ADR: Zod Validation and Error Envelope</h1>
-<p><strong>Status:</strong> Accepted (inferred from current implementation in code; no separate decision record was present in inputs)</p>
+<p><strong>Status:</strong> Accepted (inferred from the implementation described in docs/modules/app/technical.md; no separate decision record was present in this node&#39;s declared inputs.references, which is empty)</p>
 <h2>Context</h2>
-<p>API routes need to validate untrusted request bodies and return a consistent error shape to clients.</p>
+<p>Per docs/modules/app/technical.md, the app module&#39;s route handlers accept
+untrusted JSON request bodies on several mutating endpoints: <code>POST /api/auth/register</code>, <code>POST /api/plans</code>, and <code>POST /api/plans/{planId}/items</code>.
+Each of these needs to validate the incoming body before using it, and each
+needs to communicate validation and other request failures to the client in
+some response shape. docs/modules/app/README.md additionally lists <code>zod</code> as a
+directly-imported third-party package used for &quot;request body validation&quot;
+across these same three handlers (<code>RegisterSchema</code>, <code>CreatePlanSchema</code>,
+<code>CreateItemSchema</code>).</p>
+<p>[NEEDS CLARIFICATION] Neither docs/modules/lib/README.md nor
+docs/modules/lib/technical.md describes any request-body validation or error
+envelope — the <code>lib</code> module&#39;s documented surface (<code>src/lib/auth.ts</code>,
+<code>src/lib/db.ts</code>, <code>src/lib/requireUser.ts</code>) is session/credentials and
+database-client plumbing, not route handling. The context below is therefore
+grounded in the <code>app</code> module&#39;s documentation only.</p>
 <h2>Decision</h2>
-<p>We will parse the request body of every mutating API route with a <code>zod</code> schema via <code>.safeParse()</code>: <code>RegisterSchema</code> in <code>src/app/api/auth/register/route.ts</code>, <code>CreatePlanSchema</code> in <code>src/app/api/plans/route.ts</code>, and <code>CreateItemSchema</code> in <code>src/app/api/plans/[planId]/items/route.ts</code>. On failure, the route returns HTTP 400 with <code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code>.</p>
+<p>Per docs/modules/app/technical.md, each of the following <code>app</code>-module route
+handlers validates its JSON request body against a dedicated Zod schema before
+proceeding:</p>
+<ul>
+<li><code>POST /api/auth/register</code> (<code>src/app/api/auth/register/route.ts</code>) — validated
+with <code>RegisterSchema</code> (email format; password minimum length 8; optional
+<code>name</code> up to 80 characters).</li>
+<li><code>POST /api/plans</code> (<code>src/app/api/plans/route.ts</code>) — validated with
+<code>CreatePlanSchema</code> (optional <code>title</code> up to 80 characters; integer <code>year</code>
+2000-2100; integer <code>month</code> 1-12; 3-character <code>currency</code>, defaulting to
+<code>&quot;CZK&quot;</code>).</li>
+<li><code>POST /api/plans/{planId}/items</code> (<code>src/app/api/plans/[planId]/items/route.ts</code>)
+— validated with <code>CreateItemSchema</code> (<code>title</code> 1-120 characters;
+non-negative integer <code>amountCents</code>; optional/nullable <code>categoryId</code>; optional
+<code>note</code> up to 400 characters, nullable).</li>
+</ul>
+<p>For the register and plans-creation endpoints, docs/modules/app/technical.md
+states that a validation failure returns HTTP 400 with a body containing an
+<code>error</code> field and a <code>details</code> field built from Zod&#39;s <code>flatten()</code> output.
+[NEEDS CLARIFICATION] docs/modules/app/technical.md does not quote the literal
+<code>error</code> string returned on a 400, so the exact message text cannot be
+confirmed from this node&#39;s inputs. [NEEDS CLARIFICATION]
+docs/modules/app/technical.md describes the <code>CreateItemSchema</code> validation
+itself but does not separately restate the response shape on a validation
+failure for <code>POST /api/plans/{planId}/items</code>; whether it follows the same
+<code>{ error, details }</code> shape as the other two endpoints is not confirmed by this
+node&#39;s inputs.</p>
+<p>Beyond validation failures, docs/modules/app/technical.md documents other
+non-2xx responses on the same and adjacent endpoints as a plain object with an
+<code>error</code> field (no <code>details</code>): <code>POST /api/plans</code> returns HTTP 409 with
+<code>{ error: &quot;Plan for this month already exists&quot; }</code> when a create throws; <code>GET /api/plans/{planId}</code> and <code>DELETE /api/plans/{planId}</code> return HTTP 404 when the
+plan is not found or not owned by the caller; and the plans endpoints return
+HTTP 401 when <code>requireUserId()</code> finds no session. [NEEDS CLARIFICATION] The
+exact JSON body returned for the 404 and 401 cases is not quoted verbatim in
+docs/modules/app/technical.md (only the status code and condition are
+stated), so only the 400 and 409 bodies above can be confirmed literally.</p>
 <h2>Consequences</h2>
 <p><strong>Positive:</strong></p>
 <ul>
-<li>Validation logic and error shape are consistent across the register, plans, and items endpoints.</li>
+<li>Per docs/modules/app/technical.md, the register and plans-creation endpoints
+share a consistent <code>{ error, details }</code> shape on validation failure (HTTP
+400), and non-validation failures across the documented plans endpoints
+consistently use a plain <code>{ error }</code> shape.</li>
 </ul>
 <p><strong>Negative:</strong></p>
 <ul>
-<li>[NEEDS CLARIFICATION] No shared/reusable error-envelope helper or centralized validation middleware was found in inputs.code; each route repeats the same <code>safeParse</code>/400-response pattern inline.</li>
+<li>[NEEDS CLARIFICATION] Neither docs/modules/app/README.md nor
+docs/modules/app/technical.md describes a shared validation helper or
+centralized error-envelope middleware; the technical doc describes the Zod
+parse and the error response as occurring inline in each of the three route
+handlers. Whether a shared helper exists elsewhere is not established by
+this node&#39;s declared inputs (inputs.references is empty, and no such helper
+is named in the four module docs read for this node).</li>
 </ul>
 
   </article>

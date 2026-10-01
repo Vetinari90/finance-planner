@@ -3,23 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Module: Types (src/types)</title>
+  <title>Module: types</title>
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
   <article class="markdown-body">
 <hr>
-<h2>type: readme
+<h2>type: module-readme
 audience: [developer]
 language: en
-links: [docs/modules/types/technical.md, docs/modules/types/use-cases.md, docs/modules/lib/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/types/technical.md
+  - docs/modules/types/use-cases.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Module: Types (src/types)</h1>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Module: types</h1>
 <h2>Purpose</h2>
-<p>The types module contains a single TypeScript ambient declaration file (<code>src/types/next-auth.d.ts</code>) that augments the <code>next-auth</code> <code>Session</code> type so that <code>session.user.id</code> is a typed, required <code>string</code> field, alongside the existing <code>name</code>/<code>email</code> fields.</p>
+<p>The <code>types</code> module (<code>src/types/</code>) holds project-wide TypeScript ambient type
+declarations. The only file in scope for this module, <code>src/types/next-auth.d.ts</code>,
+augments the third-party <code>next-auth</code> package&#39;s module types via a <code>declare module &quot;next-auth&quot;</code> block. It overrides the <code>Session</code> interface so that <code>session.user</code>
+is typed with an <code>id: string</code> field in addition to the optional <code>name</code> and
+<code>email</code> fields. This module contributes no runtime behavior of its own; it
+exists purely to give the rest of the codebase compile-time type safety when
+reading <code>session.user.id</code> from NextAuth sessions.</p>
+<p>[NEEDS CLARIFICATION] No other files were present in the <code>types</code> module&#39;s
+input scope (<code>src/types</code>) besides <code>next-auth.d.ts</code>, so no broader &quot;business
+capability&quot; beyond this type augmentation can be grounded.</p>
 <h2>Key Entities</h2>
 <table>
 <thead>
@@ -29,24 +40,17 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>Session (augmented)</td>
-<td>Module augmentation of <code>next-auth</code>&#39;s <code>Session</code> interface, adding <code>user.id: string</code> alongside the existing <code>name</code>/<code>email</code> fields (<code>src/types/next-auth.d.ts</code>).</td>
+<td><code>Session</code> (augmented)</td>
+<td>The <code>next-auth</code> <code>Session</code> interface, overridden in <code>src/types/next-auth.d.ts</code> to declare <code>user: { id: string; name?: string | null; email?: string | null }</code>. This is a type-only declaration, not a class or runtime object defined by this module.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] No other domain entities are declared in the files available
+to this module&#39;s scope.</p>
 <h2>Data Storage</h2>
-<p><strong>Database:</strong> Not applicable - this module declares only TypeScript compile-time types and performs no data storage.</p>
-<table>
-<thead>
-<tr>
-<th>Table/Collection</th>
-<th>Stores</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
+<p>[NEEDS CLARIFICATION] <code>src/types/next-auth.d.ts</code> contains only TypeScript ambient
+type declarations (no runtime code, no schema, no query logic). No database or
+collection is referenced in this module&#39;s inputs, so no data-storage facts can be
+grounded here.</p>
 <h2>Dependencies</h2>
 <table>
 <thead>
@@ -56,10 +60,14 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>None</td>
-<td>No module imports <code>src/types/next-auth.d.ts</code> directly (TypeScript ambient declaration files are picked up automatically by the compiler); its effect is consumed indirectly wherever <code>session.user.id</code> is read, e.g. <code>src/lib/auth.ts</code> and <code>src/lib/requireUser.ts</code>.</td>
+<td><code>next-auth</code> (external package)</td>
+<td><code>src/types/next-auth.d.ts</code> contains <code>import NextAuth from &quot;next-auth&quot;;</code> and a <code>declare module &quot;next-auth&quot;</code> augmentation block, so the file is directly coupled to the <code>next-auth</code> package&#39;s type surface.</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] No <code>package.json</code> was present in this module&#39;s input scope
+(<code>src/types</code>), so the <code>next-auth</code> package version cannot be confirmed, and no
+internal (<code>app</code>/<code>lib</code>) module dependency edges can be grounded here per the
+dependency/call-graph grounding rule (requires a build manifest, not prose).</p>
 
   </article>
 </body>

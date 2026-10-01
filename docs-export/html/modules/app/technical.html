@@ -3,74 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Technical: App (src/app)</title>
+  <title>Technical: app</title>
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
   <article class="markdown-body">
 <hr>
 <h2>type: technical
+purpose: &quot;Module technical reference - API, configuration, testing&quot;
 audience: [developer]
 language: en
-links: [docs/modules/app/README.md, docs/modules/lib/technical.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/app/README.md
+  - docs/modules/app/use-cases.md
+  - docs/modules/lib/technical.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Technical: App (src/app)</h1>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Technical: app</h1>
 <h2>API Endpoints</h2>
-<p><strong>Base Path:</strong> <code>/api</code></p>
+<p>All endpoints below are Next.js App Router route handlers found under
+<code>src/app/</code>. There is no single declared base path (e.g. no <code>/api/v1</code> prefix) —
+each path is the literal file-system route.</p>
 <table>
 <thead>
 <tr>
 <th>Method</th>
 <th>Path</th>
+<th>Handler file</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>GET, POST</td>
 <td><code>/api/auth/[...nextauth]</code></td>
-<td>NextAuth.js catch-all handler built from <code>authOptions</code> (<code>src/app/api/auth/[...nextauth]/route.ts</code>).</td>
+<td><code>src/app/api/auth/[...nextauth]/route.ts</code></td>
+<td>Delegates entirely to the <code>NextAuth(authOptions)</code> handler from <code>@/lib/auth</code>; the module re-exports it as <code>GET</code> and <code>POST</code>.</td>
 </tr>
 <tr>
 <td>POST</td>
 <td><code>/api/auth/register</code></td>
-<td>Registers a new user: validates body with <code>RegisterSchema</code> (zod), hashes the password with bcrypt (cost 12), returns <code>{ user }</code> with status 201, or 409 if the email already exists, or 400 on invalid input (<code>src/app/api/auth/register/route.ts</code>).</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/plans</code></td>
-<td>Lists the authenticated user&#39;s plans, ordered by year desc then month desc. Returns 401 if unauthenticated (<code>src/app/api/plans/route.ts</code>).</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/plans</code></td>
-<td>Creates a plan for the authenticated user; validates body with <code>CreatePlanSchema</code> (zod); returns 201 with <code>{ plan }</code>, 400 on invalid input, or 409 if a plan already exists for that user/year/month (<code>src/app/api/plans/route.ts</code>).</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/plans/{planId}</code></td>
-<td>Returns a single plan owned by the authenticated user, including its items ordered by <code>createdAt</code> ascending; 401 if unauthenticated, 404 if not found or not owned (<code>src/app/api/plans/[planId]/route.ts</code>).</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td><code>/api/plans/{planId}</code></td>
-<td>Deletes a plan owned by the authenticated user; 401 if unauthenticated, 404 if not found or not owned (<code>src/app/api/plans/[planId]/route.ts</code>).</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/plans/{planId}/items</code></td>
-<td>Adds a planned item to a plan owned by the authenticated user; validates body with <code>CreateItemSchema</code> (zod); 401 if unauthenticated, 404 if the plan is not found/owned, 400 on invalid input, 201 with <code>{ item }</code> on success (<code>src/app/api/plans/[planId]/items/route.ts</code>).</td>
+<td><code>src/app/api/auth/register/route.ts</code></td>
+<td>Validates body with <code>RegisterSchema</code> (<code>email</code> must be a valid email, <code>password</code> min length 8, <code>name</code> optional, max 80 chars). Lower-cases/trims the email, returns <code>409</code> if a user with that email already exists, hashes the password with <code>bcrypt.hash(..., 12)</code>, creates the user via <code>prisma.user.create</code>, returns <code>201</code> with <code>{ user: { id, email, name } }</code>. Returns <code>400</code> with <code>{ error, details }</code> (zod <code>flatten()</code>) on invalid input.</td>
 </tr>
 <tr>
 <td>GET</td>
 <td><code>/logout</code></td>
-<td>Redirects to NextAuth&#39;s built-in sign-out URL (<code>/api/auth/signout?callbackUrl=/login</code>) against a hardcoded base URL <code>http://localhost:3000</code> (<code>src/app/logout/route.ts</code>).</td>
+<td><code>src/app/logout/route.ts</code></td>
+<td>Redirects (HTTP redirect) to <code>/api/auth/signout?callbackUrl=/login</code> against a hard-coded base URL <code>http://localhost:3000</code>. The in-code comment notes that NextAuth&#39;s <code>signOut</code> is a client-side function, so a server redirect to the built-in sign-out URL is used instead.</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/plans</code></td>
+<td><code>src/app/api/plans/route.ts</code></td>
+<td>Requires a session (<code>requireUserId()</code>); returns <code>401</code> if absent. Returns <code>{ plans }</code> for the current user, ordered by <code>year</code> desc then <code>month</code> desc.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/plans</code></td>
+<td><code>src/app/api/plans/route.ts</code></td>
+<td>Requires a session; validates body with <code>CreatePlanSchema</code> (<code>title</code> optional max 80, <code>year</code> int 2000-2100, <code>month</code> int 1-12, <code>currency</code> 3 chars, default <code>&quot;CZK&quot;</code>). Falls back to a <code>${month}.${year}</code> title when none is given. Returns <code>201</code> with <code>{ plan }</code>, or <code>409</code> <code>{ error: &quot;Plan for this month already exists&quot; }</code> when the create throws (the in-code comment indicates a unique constraint on <code>(userId, year, month)</code>; the constraint itself is defined in the Prisma schema, not in this file).</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/plans/{planId}</code></td>
+<td><code>src/app/api/plans/[planId]/route.ts</code></td>
+<td>Requires a session; looks the plan up scoped to <code>userId</code> via <code>findFirst</code>, includes <code>items</code> ordered by <code>createdAt</code> asc. Returns <code>404</code> if not found or not owned by the caller, else <code>{ plan }</code>.</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/plans/{planId}</code></td>
+<td><code>src/app/api/plans/[planId]/route.ts</code></td>
+<td>Requires a session; confirms ownership via <code>findFirst</code>, returns <code>404</code> if absent, otherwise deletes via <code>prisma.plan.delete</code> and returns <code>{ ok: true }</code>. [NEEDS CLARIFICATION] Whether child <code>PlannedItem</code> rows are cascade-deleted is determined by the Prisma schema&#39;s relation definition, which is outside this module&#39;s inputs.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/plans/{planId}/items</code></td>
+<td><code>src/app/api/plans/[planId]/items/route.ts</code></td>
+<td>Requires a session; confirms the plan exists and belongs to the caller (<code>404</code> otherwise); validates body with <code>CreateItemSchema</code> (<code>title</code> 1-120 chars, <code>amountCents</code> non-negative int, <code>categoryId</code> optional/nullable, <code>note</code> optional/nullable max 400 chars); creates the item via <code>prisma.plannedItem.create</code> and returns <code>201</code> with <code>{ item }</code>.</td>
 </tr>
 </tbody></table>
 <h2>Configuration</h2>
 <h3>Environment Variables</h3>
+<p>[NEEDS CLARIFICATION] No <code>process.env</code> reads appear in any file in this module&#39;s inputs. Environment configuration (database connection string, NextAuth secret/providers, etc.) is referenced only indirectly through <code>@/lib/auth</code> and <code>@/lib/db</code>, both defined in the <code>lib</code> module, which is outside this module&#39;s input set.</p>
 <table>
 <thead>
 <tr>
@@ -80,18 +96,13 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>DATABASE_URL</td>
-<td>[NEEDS CLARIFICATION - see <code>docs/modules/lib/technical.md</code>]</td>
-<td>Consumed indirectly via <code>src/lib/db.ts</code>; the app module does not read it directly.</td>
-</tr>
-<tr>
-<td>Yes</td>
-<td></td>
-<td></td>
+<td>[NEEDS CLARIFICATION]</td>
+<td>—</td>
+<td>Not observable from <code>src/app</code> inputs; see the <code>lib</code> module&#39;s own technical documentation.</td>
 </tr>
 </tbody></table>
-<p>[NEEDS CLARIFICATION] No <code>NEXTAUTH_SECRET</code>, <code>NEXTAUTH_URL</code>, or similar NextAuth environment variable read was found in <code>src/app</code> or <code>src/lib/auth.ts</code>; the JWT signing key source could not be confirmed from inputs.code.</p>
 <h3>Secrets</h3>
+<p>[NEEDS CLARIFICATION] No secret handling is present in <code>src/app</code> inputs beyond consuming the <code>authOptions</code> object from <code>@/lib/auth</code>.</p>
 <table>
 <thead>
 <tr>
@@ -100,12 +111,18 @@ generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d0872
 </tr>
 </thead>
 <tbody><tr>
-<td>User password hash</td>
-<td>Stored via <code>bcrypt.hash(password, 12)</code> in <code>src/app/api/auth/register/route.ts</code>; verified via <code>bcrypt.compare</code> in <code>src/lib/auth.ts</code>. Plaintext passwords are never persisted.</td>
+<td>[NEEDS CLARIFICATION]</td>
+<td>Not observable from <code>src/app</code> inputs.</td>
 </tr>
 </tbody></table>
+<h3>Notable hard-coded value</h3>
+<p><code>src/app/logout/route.ts</code> builds its redirect URL with a literal base of
+<code>http://localhost:3000</code> (<code>new URL(&quot;/api/auth/signout?callbackUrl=/login&quot;, &quot;http://localhost:3000&quot;)</code>) rather than reading a configured host/env variable.
+This is a direct reading of the implementation, not an inference — flagging it
+because a hard-coded localhost base would not resolve correctly outside local
+development.</p>
 <h2>Testing</h2>
-<p>[NEEDS CLARIFICATION] No test files (e.g. <code>*.test.ts</code>, <code>*.spec.ts</code>) and no <code>package.json</code> test script were present in inputs.code; the testing approach for this module could not be confirmed.</p>
+<p>[NEEDS CLARIFICATION] No test files (e.g. <code>*.test.ts</code>, <code>*.spec.ts</code>, <code>__tests__/</code>) and no <code>package.json</code> test script were present in this module&#39;s inputs, so the test command, framework, and current test coverage for the <code>app</code> module cannot be grounded here.</p>
 
   </article>
 </body>

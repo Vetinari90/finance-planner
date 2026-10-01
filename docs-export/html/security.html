@@ -12,53 +12,113 @@
 <h2>type: cross-cutting
 audience: [developer]
 language: en
-links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/modules/app/technical.md, docs/decisions/0002-credentials-auth-with-jwt-sessions.md, docs/decisions/0001-security-baseline.md, docs/decisions/0005-per-user-tenant-isolation.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
-generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+links: [docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/modules/app/technical.md]
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
+generated_branch: sdlc/20261001-2017</h2>
 <h1>Security</h1>
+<p>This document synthesizes security-relevant facts already recorded in the <code>app</code>
+and <code>lib</code> module docs (<code>docs/modules/lib/README.md</code>, <code>docs/modules/lib/technical.md</code>,
+<code>docs/modules/app/README.md</code>, <code>docs/modules/app/technical.md</code>). It does not re-read
+source code; every statement below is grounded in those four files.</p>
 <h2>Authentication</h2>
-<p>The application uses NextAuth&#39;s <code>CredentialsProvider</code> (email + password) with <code>session: { strategy: &quot;jwt&quot; }</code> (<code>src/lib/auth.ts</code>, see <code>docs/modules/lib/technical.md</code>). Passwords are hashed with bcrypt at cost factor 12 on registration and verified with <code>bcrypt.compare</code> on login (<code>src/app/api/auth/register/route.ts</code>, <code>src/lib/auth.ts</code>; see <code>docs/decisions/0002-credentials-auth-with-jwt-sessions.md</code>). No <code>secret</code> option is set explicitly in <code>authOptions</code> (<code>src/lib/auth.ts</code>); NextAuth&#39;s JWT session strategy requires a signing secret, conventionally supplied via the <code>NEXTAUTH_SECRET</code> environment variable at deploy time, which is not part of <code>inputs.code</code>.</p>
+<p>Authentication is credentials-based, implemented with NextAuth&#39;s
+<code>CredentialsProvider</code> and configured as <code>authOptions</code> in <code>src/lib/auth.ts</code>
+(<code>docs/modules/lib/README.md</code>). Sign-in resolves the user with
+<code>prisma.user.findUnique({ where: { email } })</code> and verifies the submitted
+password against the stored bcrypt hash with <code>bcrypt.compare</code>
+(<code>docs/modules/lib/README.md</code>). The NextAuth route handler that mounts
+<code>authOptions</code> is <code>GET, POST /api/auth/[...nextauth]</code>
+(<code>src/app/api/auth/[...nextauth]/route.ts</code>), which re-exports the
+<code>NextAuth(authOptions)</code> handler directly (<code>docs/modules/app/technical.md</code>).</p>
+<p>Registration (<code>POST /api/auth/register</code>, <code>src/app/api/auth/register/route.ts</code>)
+validates the request body with a <code>RegisterSchema</code> (email format, password
+minimum length 8, optional name up to 80 chars), lower-cases/trims the email,
+rejects duplicate emails with <code>409</code>, hashes the password with
+<code>bcrypt.hash(..., 12)</code>, and creates the user via <code>prisma.user.create</code>
+(<code>docs/modules/app/technical.md</code>).</p>
+<p>Every protected <code>app</code>-module route handler requires an authenticated session
+via the <code>requireUserId()</code> helper (<code>src/lib/requireUser.ts</code>), which resolves the
+current user id from the session and is consumed across every
+<code>src/app/api/plans/**/route.ts</code> handler; absence of a session yields <code>401</code>
+(<code>docs/modules/lib/README.md</code>, <code>docs/modules/app/technical.md</code>).</p>
+<p>[NEEDS CLARIFICATION] <code>docs/modules/lib/technical.md</code> states that
+<code>src/lib/auth.ts</code> does not reference a NextAuth signing secret (e.g. an env var
+such as <code>NEXTAUTH_SECRET</code>) and that no secrets configuration file was present
+in the <code>lib</code> module&#39;s inputs; whether such a secret is configured elsewhere in
+the project could not be confirmed from the module docs available to this
+synthesis node.</p>
+<p>[NEEDS CLARIFICATION] Session strategy (JWT vs. database-backed sessions),
+session/token lifetime, and refresh-token handling are not described in
+<code>docs/modules/lib/README.md</code> or <code>docs/modules/lib/technical.md</code>.</p>
 <h2>API Conventions</h2>
-<p>Every protected API route calls <code>requireUserId()</code> (<code>src/lib/requireUser.ts</code>) before performing any read or write, and returns HTTP 401 if no authenticated session exists. Plan and item queries are additionally scoped by both resource id and <code>userId</code> (e.g. <code>prisma.plan.findFirst({ where: { id: planId, userId } })</code> in <code>src/app/api/plans/[planId]/route.ts</code>), enforcing per-user data isolation (see <code>docs/decisions/0005-per-user-tenant-isolation.md</code>).</p>
+<p>The API surface is the set of Next.js App Router route handlers documented in
+<code>docs/modules/app/technical.md</code>: <code>GET, POST /api/auth/[...nextauth]</code>,
+<code>POST /api/auth/register</code>, <code>GET /logout</code>, <code>GET, POST /api/plans</code>,
+<code>GET, DELETE /api/plans/{planId}</code>, and <code>POST /api/plans/{planId}/items</code>. No
+version prefix (e.g. <code>/api/v1</code>) appears in any of these paths
+(<code>docs/modules/app/technical.md</code>).</p>
+<p>Ownership scoping is applied consistently on the plan-scoped endpoints: both
+<code>GET /api/plans/{planId}</code> and <code>DELETE /api/plans/{planId}</code> look the plan up
+with <code>findFirst</code> scoped to the caller&#39;s <code>userId</code>, returning <code>404</code> when the plan
+does not exist or is not owned by the requesting user
+(<code>docs/modules/app/technical.md</code>). <code>POST /api/plans/{planId}/items</code> likewise
+confirms the plan exists and belongs to the caller before creating a
+<code>PlannedItem</code>, returning <code>404</code> otherwise (<code>docs/modules/app/technical.md</code>).</p>
 <h3>HTTP Status Codes</h3>
+<p>Only the statuses explicitly described in <code>docs/modules/app/technical.md</code> and
+<code>docs/modules/app/README.md</code> are listed; no other status codes are documented
+there.</p>
 <table>
 <thead>
 <tr>
 <th>Code</th>
-<th>Meaning (as used in this project)</th>
+<th>Where observed (per <code>docs/modules/app/technical.md</code>)</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>200</td>
-<td>Successful GET (e.g. <code>src/app/api/plans/route.ts</code>)</td>
-</tr>
-<tr>
 <td>201</td>
-<td>Resource created (register, plan, item)</td>
+<td><code>POST /api/auth/register</code> (user created); <code>POST /api/plans</code> (plan created); <code>POST /api/plans/{planId}/items</code> (item created)</td>
 </tr>
 <tr>
 <td>400</td>
-<td>zod validation failure (<code>parsed.error.flatten()</code>)</td>
+<td><code>POST /api/auth/register</code> — invalid input, body <code>{ error, details }</code> from zod <code>flatten()</code></td>
 </tr>
 <tr>
 <td>401</td>
-<td>No authenticated session (<code>requireUserId()</code> returned <code>null</code>)</td>
+<td>Any <code>app</code>-module route guarded by <code>requireUserId()</code> when no session is present</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Resource not found or not owned by the requesting user</td>
+<td><code>GET</code>/<code>DELETE /api/plans/{planId}</code> — plan not found or not owned; <code>POST /api/plans/{planId}/items</code> — plan not found or not owned</td>
 </tr>
 <tr>
 <td>409</td>
-<td>Conflict (duplicate email on register; duplicate plan for user/year/month)</td>
+<td><code>POST /api/auth/register</code> — duplicate email; <code>POST /api/plans</code> — plan already exists for that user/year/month</td>
 </tr>
 </tbody></table>
+<p>[NEEDS CLARIFICATION] No explicit <code>403 Forbidden</code> usage is described in the
+module docs (ownership failures are reported as <code>404</code>, not <code>403</code>); whether a
+distinct <code>403</code> path exists elsewhere could not be confirmed from the inputs
+available to this node.</p>
 <h2>Error Handling</h2>
-<p>API routes return errors as JSON with an <code>error</code> field and, for validation failures, a <code>details</code> field containing the zod flattened error (<code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code>, e.g. <code>src/app/api/auth/register/route.ts</code>). The project&#39;s error envelope is limited to <code>{ error: string }</code> (with an additional <code>details</code> field carrying the zod flattened error on validation failures); no <code>code</code> or <code>requestId</code> field appears in any API response (e.g. <code>src/app/api/plans/route.ts</code>, <code>src/app/api/plans/[planId]/route.ts</code>).</p>
+<p>Validation failures are returned as JSON with an <code>error</code> field and a <code>details</code>
+field carrying the zod <code>flatten()</code> output, e.g.
+<code>{ error: &quot;Invalid input&quot;, details: parsed.error.flatten() }</code> on
+<code>POST /api/auth/register</code> (<code>docs/modules/app/technical.md</code>). Conflict
+responses are returned as a plain <code>{ error: &quot;...&quot; }</code> object, e.g.
+<code>{ error: &quot;Plan for this month already exists&quot; }</code> on <code>POST /api/plans</code>
+(<code>docs/modules/app/technical.md</code>).</p>
+<p>[NEEDS CLARIFICATION] <code>docs/modules/app/technical.md</code> and
+<code>docs/modules/app/README.md</code> do not describe a <code>code</code> field or a <code>requestId</code>
+field in any API response shape; whether a consistent machine-readable error
+code or request-correlation id convention exists elsewhere in the project
+could not be confirmed from the module docs available to this synthesis node.</p>
 <h2>Logging</h2>
-<p><code>src/lib/db.ts</code> configures Prisma logging for <code>[&quot;error&quot;, &quot;warn&quot;]</code> only. [NEEDS CLARIFICATION] No explicit statement confirming that passwords, tokens, or PII are excluded from these Prisma error/warn logs was found in inputs.code.</p>
+<p>[NEEDS CLARIFICATION] None of the four module docs synthesized for this node
+(<code>docs/modules/lib/README.md</code>, <code>docs/modules/lib/technical.md</code>,
+<code>docs/modules/app/README.md</code>, <code>docs/modules/app/technical.md</code>) describe any
+logging practice — no log levels, no structured-logging library, and no
+statement about whether passwords, tokens, or PII are excluded from logs.</p>
 
   </article>
 </body>

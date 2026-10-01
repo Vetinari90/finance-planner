@@ -12,53 +12,159 @@
 <h2>type: cross-cutting
 audience: [developer]
 language: en
-links: [docs/modules/app/technical.md, docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/decisions/0004-zod-validation-and-error-envelope.md, docs/security.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
-generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
+links: [docs/modules/app/technical.md, docs/modules/lib/README.md, docs/modules/lib/technical.md, docs/modules/app/README.md, docs/security.md, docs/decisions/0004-zod-validation-and-error-envelope.md]
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
+generated_branch: sdlc/20261001-2017</h2>
 <h1>Standards</h1>
+<h2>Summary</h2>
+<p>This document synthesizes engineering conventions observed across the <code>app</code> and
+<code>lib</code> modules of finance-planner: how authentication is implemented, how API
+requests are validated and errors are shaped, and what configuration the
+modules require. It is derived entirely from <code>docs/modules/app/technical.md</code>,
+<code>docs/modules/app/README.md</code>, <code>docs/modules/lib/technical.md</code>, and
+<code>docs/modules/lib/README.md</code>; no project-level style guide, linter
+configuration, or contributing guide was supplied as an input to this node.</p>
 <h2>Authentication</h2>
-<p>Token-based authentication is implemented via NextAuth <code>CredentialsProvider</code> with JWT sessions (<code>src/lib/auth.ts</code>, see <code>docs/modules/lib/technical.md</code>); see <a href="docs/security.html">Security</a> for full detail.</p>
+<p>Authentication is implemented via NextAuth&#39;s <code>CredentialsProvider</code>, configured
+as <code>authOptions</code> in <code>src/lib/auth.ts</code> (see <code>docs/modules/lib/README.md</code> and
+<code>docs/modules/lib/technical.md</code>). Credential verification resolves the user via
+<code>prisma.user.findUnique({ where: { email } })</code> and compares the submitted
+password against the stored hash with <code>bcrypt.compare</code>. New-user registration
+(<code>POST /api/auth/register</code> in <code>src/app/api/auth/register/route.ts</code>, see
+<code>docs/modules/app/technical.md</code>) hashes passwords with <code>bcrypt.hash(..., 12)</code>
+before storing them. The <code>app</code> module reads session identity via
+<code>session.user.id</code> / <code>session.user.email</code> (<code>docs/modules/app/README.md</code>) and via
+the <code>requireUserId()</code> helper on API routes. Further authentication/session
+detail, if documented separately, would live in <code>docs/security.md</code>.</p>
+<p>[NEEDS CLARIFICATION] Neither <code>docs/modules/lib/technical.md</code> nor
+<code>docs/modules/lib/README.md</code> records a NextAuth signing secret (e.g. a
+<code>NEXTAUTH_SECRET</code>-style environment variable) being read in <code>src/lib/auth.ts</code>;
+whether one is configured elsewhere cannot be confirmed from these inputs.</p>
 <h2>API Conventions</h2>
-<p>API routes are grouped under <code>/api</code> (<code>/api/auth/register</code>, <code>/api/plans</code>, <code>/api/plans/{planId}</code>, <code>/api/plans/{planId}/items</code>, <code>/api/auth/[...nextauth]</code>) - see <code>docs/modules/app/technical.md</code> for the full endpoint table. Note: Routes are not versioned in the URL path (no <code>/api/v1/...</code> prefix); no versioning scheme was found in inputs.code.</p>
-<h3>HTTP Status Codes</h3>
+<p>Route handlers are Next.js App Router files under <code>src/app/</code>, with no declared
+base path prefix such as <code>/api/v1</code> (<code>docs/modules/app/technical.md</code>). The
+observed routes are:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET, POST</td>
+<td><code>/api/auth/[...nextauth]</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/auth/register</code></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/logout</code></td>
+</tr>
+<tr>
+<td>GET, POST</td>
+<td><code>/api/plans</code></td>
+</tr>
+<tr>
+<td>GET, DELETE</td>
+<td><code>/api/plans/{planId}</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/plans/{planId}/items</code></td>
+</tr>
+</tbody></table>
+<p>(Full handler-level detail is in <code>docs/modules/app/technical.md</code>.)</p>
+<p>[NEEDS CLARIFICATION] No URL versioning scheme is present in either module&#39;s
+documented endpoints.</p>
+<h3>HTTP status codes</h3>
 <table>
 <thead>
 <tr>
 <th>Code</th>
 <th>Meaning</th>
+<th>Source</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>200</td>
-<td>Success (GET)</td>
+<td>Successful GET</td>
+<td><code>/api/plans</code>, <code>/api/plans/{planId}</code></td>
 </tr>
 <tr>
 <td>201</td>
-<td>Created (register, plan, item)</td>
+<td>Resource created</td>
+<td><code>POST /api/auth/register</code>, <code>POST /api/plans</code>, <code>POST /api/plans/{planId}/items</code></td>
 </tr>
 <tr>
 <td>400</td>
 <td>Invalid input (zod validation failure)</td>
+<td><code>POST /api/auth/register</code>, <code>POST /api/plans</code>, <code>POST /api/plans/{planId}/items</code></td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized (no session)</td>
+<td>No session (<code>requireUserId()</code> fails)</td>
+<td><code>/api/plans</code>, <code>/api/plans/{planId}</code>, <code>/api/plans/{planId}/items</code></td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not found (resource missing or not owned)</td>
+<td>Resource not found or not owned by caller</td>
+<td><code>/api/plans/{planId}</code>, <code>/api/plans/{planId}/items</code></td>
 </tr>
 <tr>
 <td>409</td>
-<td>Conflict (duplicate email or duplicate plan)</td>
+<td>Conflict (duplicate email at registration, or duplicate <code>(userId, year, month)</code> plan)</td>
+<td><code>POST /api/auth/register</code>, <code>POST /api/plans</code></td>
 </tr>
 </tbody></table>
-<h2>Error Handling</h2>
-<p>Mutating routes validate input with <code>zod</code> <code>.safeParse()</code> and return <code>{ error, details }</code> JSON with HTTP 400 on failure (see <code>docs/decisions/0004-zod-validation-and-error-envelope.md</code>). Ownership/not-found failures return <code>{ error: &quot;Not found&quot; }</code> with 404; unauthenticated requests return <code>{ error: &quot;Unauthorized&quot; }</code> with 401.</p>
-<h2>Logging</h2>
-<p><code>src/lib/db.ts</code> configures Prisma client logging for <code>error</code> and <code>warn</code> levels only. Note: No application-level logging framework (beyond Prisma&#39;s own <code>log</code> option) was found in <code>src/app/*</code> or <code>src/lib/*</code>.</p>
+<h2>Validation &amp; Error Handling</h2>
+<p>Mutating routes validate request bodies with <code>zod</code> schemas before touching the
+database: <code>RegisterSchema</code> (<code>email</code>, <code>password</code> min length 8, optional <code>name</code>
+max 80 chars), <code>CreatePlanSchema</code> (<code>title</code> optional max 80, <code>year</code> int
+2000-2100, <code>month</code> int 1-12, <code>currency</code> 3 chars default <code>&quot;CZK&quot;</code>), and
+<code>CreateItemSchema</code> (<code>title</code> 1-120 chars, <code>amountCents</code> non-negative int,
+optional/nullable <code>categoryId</code>, optional/nullable <code>note</code> max 400 chars) — all
+per <code>docs/modules/app/technical.md</code>. On validation failure, routes return HTTP
+400 with a <code>{ error, details }</code> body, where <code>details</code> is the zod <code>flatten()</code>
+output of the failed schema. Ownership/not-found conditions return
+<code>{ error: &quot;Not found&quot; }</code>-style bodies with HTTP 404; unauthenticated requests
+return <code>{ error: &quot;Unauthorized&quot; }</code>-style bodies with HTTP 401. See
+<code>docs/decisions/0004-zod-validation-and-error-envelope.md</code> for the decision
+record behind this pattern, if present.</p>
+<h2>Configuration</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Module</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DATABASE_URL</code></td>
+<td>Yes</td>
+<td><code>lib</code></td>
+<td>PostgreSQL connection string read in <code>src/lib/db.ts</code>; the module throws at load time (<code>&quot;DATABASE_URL is not set&quot;</code>) if it is missing (<code>docs/modules/lib/technical.md</code>).</td>
+</tr>
+</tbody></table>
+<p>[NEEDS CLARIFICATION] <code>docs/modules/app/technical.md</code> reports no <code>process.env</code>
+reads in the <code>app</code> module&#39;s own files; any additional environment
+configuration (e.g. NextAuth providers/secret) is not observable from the
+inputs available to this node.</p>
+<p><code>src/app/logout/route.ts</code> builds its redirect with a literal hard-coded base
+URL <code>http://localhost:3000</code> rather than a configured host
+(<code>docs/modules/app/technical.md</code>); this is flagged there as unlikely to
+resolve correctly outside local development.</p>
+<h2>Testing Standards</h2>
+<p>[NEEDS CLARIFICATION] <code>docs/modules/app/technical.md</code> and
+<code>docs/modules/lib/technical.md</code> both report that no test files (e.g.
+<code>*.test.ts</code>, <code>*.spec.ts</code>, <code>__tests__/</code>) and no <code>package.json</code> test script were
+present in their respective module inputs. No test framework, test command, or
+coverage figure can be grounded for either module from the inputs available to
+this node.</p>
 
   </article>
 </body>

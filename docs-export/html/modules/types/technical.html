@@ -3,30 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Technical: Types (src/types)</title>
+  <title>Technical: types</title>
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
   <article class="markdown-body">
 <hr>
 <h2>type: technical
+purpose: &quot;Module technical reference - API, configuration, testing&quot;
 audience: [developer]
 language: en
-links: [docs/modules/types/README.md]
-generated_from: c0f516fbb011babec018d5dc5191924f7ca3fed2
+links:
+  - docs/modules/types/README.md
+  - docs/modules/types/use-cases.md
+generated_from: 3c4d318aadaba596a8df2151c7cdc717b8515f22
 generated_by: <a href="mailto:sdlc-doc-toolkit@3.89.0">sdlc-doc-toolkit@3.89.0</a>
-generated_branch: main
-generated_inputs: sha256:68be7ab88910ec0e327eb9a9a2cf9f641568123d13e77fa409d08720e56f824d</h2>
-<h1>Technical: Types (src/types)</h1>
+generated_branch: sdlc/20261001-2017
+generated_inputs: sha256:458bf88c80431f3d037bd6cc625590bac268ac93527295dbdd7f2b62ac372b58</h2>
+<h1>Technical: types</h1>
 <h2>API Endpoints</h2>
-<p>Not applicable - this module contains only TypeScript type declarations and exposes no runtime API.</p>
+<p>[NEEDS CLARIFICATION] The <code>types</code> module&#39;s only in-scope file,
+<code>src/types/next-auth.d.ts</code>, is a TypeScript ambient declaration file (a
+<code>declare module &quot;next-auth&quot;</code> augmentation of the <code>Session</code> interface). It
+defines no HTTP routes, controllers, or handlers, so there are no API endpoints
+to document for this module.</p>
 <h2>Configuration</h2>
 <h3>Environment Variables</h3>
-<p>Not applicable - no environment variables are read in <code>src/types/next-auth.d.ts</code>.</p>
+<p>[NEEDS CLARIFICATION] No environment variables are referenced in
+<code>src/types/next-auth.d.ts</code>.</p>
 <h3>Secrets</h3>
-<p>Not applicable - this module declares no secrets.</p>
+<p>[NEEDS CLARIFICATION] No secrets are referenced in <code>src/types/next-auth.d.ts</code>.</p>
 <h2>Testing</h2>
-<p>[NEEDS CLARIFICATION] No test files for <code>src/types/*</code> were present in inputs.code; type-only declaration files are typically validated by the TypeScript compiler rather than a dedicated test suite, but this could not be confirmed from inputs.</p>
+<p>[NEEDS CLARIFICATION] No test files were present in this module&#39;s input scope
+(<code>src/types</code>), so no test command or testing approach can be grounded for this
+module. <code>src/types/next-auth.d.ts</code> contains only a type declaration (no runtime
+logic to unit test).</p>
 
   </article>
 </body>
